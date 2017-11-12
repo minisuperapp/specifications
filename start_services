@@ -1,0 +1,3 @@
+#!/bin/bash
+open -a Terminal ../database-service/start
+open -a Terminal ../requests-service/start
