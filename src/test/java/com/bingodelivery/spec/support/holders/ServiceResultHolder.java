@@ -1,4 +1,4 @@
-package com.bingodelivery.spec.support.domain_holders;
+package com.bingodelivery.spec.support.holders;
 
 import com.bingodelivery.api.client.requests.ResultListener;
 import org.json.JSONArray;

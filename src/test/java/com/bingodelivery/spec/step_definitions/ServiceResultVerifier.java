@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import com.bingodelivery.spec.support.domain_holders.ServiceResultHolder;
+import com.bingodelivery.spec.support.holders.ServiceResultHolder;
 import cucumber.api.java8.En;
 import org.json.JSONArray;
 

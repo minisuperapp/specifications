@@ -1,10 +1,8 @@
 package com.bingodelivery.spec.step_definitions;
 
 import com.bingodelivery.api.client.requests.api.deliveryRequest.DeliveryRequestRQ;
-import com.bingodelivery.spec.support.domain_holders.ServiceResultHolder;
+import com.bingodelivery.spec.support.holders.ServiceResultHolder;
 import cucumber.api.java8.En;
-
-import static org.junit.Assert.assertTrue;
 
 public class DeliveryRequestCreation implements En {
     public DeliveryRequestCreation(
