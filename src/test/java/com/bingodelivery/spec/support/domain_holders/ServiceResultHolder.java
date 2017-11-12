@@ -1,4 +1,4 @@
-package xyz.greatapp.step_definitions.domain_holders;
+package com.bingodelivery.spec.support.domain_holders;
 
 import com.bingodelivery.api.client.requests.ResultListener;
 import org.json.JSONArray;

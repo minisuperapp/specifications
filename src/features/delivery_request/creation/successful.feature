@@ -1,9 +1,6 @@
-Feature: Successful Jogging Time Creation
-  Background:
-    Given User sends registration request
-    And User sends login request
+Feature: Successful Delivery Request Creation
 
-  Scenario: User provides correct jogging time information
-    Given User provides correct jogging time information
-    When User sends create jogging time request
-    Then The response should be successful
+  Scenario: User provides correct delivery request information
+    Given user provides correct delivery request information
+    When user sends delivery request request
+    Then the response should be successful

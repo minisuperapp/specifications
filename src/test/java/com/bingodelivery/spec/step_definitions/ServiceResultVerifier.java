@@ -1,5 +1,5 @@
 
-package xyz.greatapp.step_definitions.domain_verifiers;
+package com.bingodelivery.spec.step_definitions;
 
 import static com.jayway.jsonpath.JsonPath.parse;
 import static java.lang.Integer.valueOf;
@@ -7,16 +7,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import com.bingodelivery.spec.support.domain_holders.ServiceResultHolder;
 import cucumber.api.java8.En;
 import org.json.JSONArray;
-import xyz.greatapp.step_definitions.domain_holders.ServiceResultHolder;
 
 public class ServiceResultVerifier implements En
 {
-
     public ServiceResultVerifier(ServiceResultHolder serviceResult)
     {
-        Then("^The response should be successful$", () -> assertTrue(serviceResult.get().isSuccess()));
+        Then("^the response should be successful$", () -> assertTrue(serviceResult.get().isSuccess()));
 
         Then("^The response should NOT be successful$", () -> assertFalse(serviceResult.get().isSuccess()));
 

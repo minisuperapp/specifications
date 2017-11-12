@@ -46,7 +46,7 @@ public abstract class ApiRequest
                 .setBody(getRequestBody())
                 .setUrlPath(getUrlPath())
                 .setContentType("application/json")
-                .setApiUrl("http://test.localhost:9090/");
+                .setApiUrl(getApiUrl());
         if (apiUser != ApiUser.NULL && nonNull(apiUser.getAccessToken()) && apiUser.getAccessToken().length() > 0)
         {
             httpRequestData.setAuthorization("Bearer " + httpRequestData.getApiUser().getAccessToken());
@@ -56,6 +56,10 @@ public abstract class ApiRequest
             httpRequestData.setCsrfToken(csrfToken.getToken());
         }
         return httpRequestData;
+    }
+
+    protected String getApiUrl() {
+        return "http://test.localhost:9090/";
     }
 
     public ApiUser getApiUser()
