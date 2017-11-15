@@ -12,8 +12,8 @@ public class DeliveryRequestCreation implements En {
         Given("^user provides correct delivery request information$", () -> {
 
             deliveryRequestRQ
-                    .withLatitud("32.9446771")
-                    .withLongitud("-97.0650398,14z");
+                    .withLatitude("32.9446771")
+                    .withLongitude("-97.0650398,14z");
         });
 
         When("^user sends delivery request request$", deliveryRequestRQ::send);

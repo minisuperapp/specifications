@@ -11,8 +11,8 @@ import org.springframework.http.HttpMethod;
 
 public class DeliveryRequestRQ extends ApiRequest
 {
-    private String latitud = "";
-    private String longitud = "";
+    private String latitude = "";
+    private String longitude = "";
 
     public DeliveryRequestRQ(ApiUser apiUser, ResultListener resultListener, CsrfToken csrfToken) {
         super(apiUser, resultListener, csrfToken);
@@ -21,8 +21,8 @@ public class DeliveryRequestRQ extends ApiRequest
     @Override
     protected String getRequestBody() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("latitud", latitud);
-        jsonObject.put("longitud", longitud);
+        jsonObject.put("latitude", latitude);
+        jsonObject.put("longitude", longitude);
         return jsonObject.toString();
     }
 
@@ -36,13 +36,13 @@ public class DeliveryRequestRQ extends ApiRequest
         return "request";
     }
 
-    public DeliveryRequestRQ withLatitud(String latitud) {
-        this.latitud = latitud;
+    public DeliveryRequestRQ withLatitude(String latitude) {
+        this.latitude = latitude;
         return this;
     }
 
-    public DeliveryRequestRQ withLongitud(String longitud) {
-        this.longitud = longitud;
+    public DeliveryRequestRQ withLongitude(String longitude) {
+        this.longitude = longitude;
         return this;
     }
 }
