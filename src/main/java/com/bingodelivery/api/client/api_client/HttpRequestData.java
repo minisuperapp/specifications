@@ -86,4 +86,18 @@ public class HttpRequestData {
         this.csrfToken = csrfToken;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "HttpRequestData{" +
+                "apiUrl='" + apiUrl + '\'' +
+                ", httpMethod=" + httpMethod +
+                ", body='" + body + '\'' +
+                ", urlPath='" + urlPath + '\'' +
+                ", apiUser=" + apiUser +
+                ", contentType='" + contentType + '\'' +
+                ", authorization='" + authorization + '\'' +
+                ", csrfToken='" + csrfToken + '\'' +
+                '}';
+    }
 }

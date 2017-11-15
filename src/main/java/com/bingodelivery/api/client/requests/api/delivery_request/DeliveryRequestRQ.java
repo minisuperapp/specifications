@@ -1,4 +1,4 @@
-package com.bingodelivery.api.client.requests.api.deliveryRequest;
+package com.bingodelivery.api.client.requests.api.delivery_request;
 
 import static org.springframework.http.HttpMethod.POST;
 
@@ -34,11 +34,6 @@ public class DeliveryRequestRQ extends ApiRequest
     @Override
     protected String getUrlPath() {
         return "request";
-    }
-
-    @Override
-    protected String getApiUrl() {
-        return "http://test.localhost:3000/";
     }
 
     public DeliveryRequestRQ withLatitud(String latitud) {

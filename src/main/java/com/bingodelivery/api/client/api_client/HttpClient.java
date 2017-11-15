@@ -21,22 +21,18 @@ public class HttpClient
     {
         HttpEntity<String> entity = new HttpEntity<>(httpRequestData.getBody(), getHttpHeaders(httpRequestData));
         ResponseEntity<String> responseEntity;
-        try
-        {
+        try {
             responseEntity = getRestTemplate().exchange(
                     httpRequestData.getUrlPath(),
                     httpRequestData.getHttpMethod(),
                     entity,
                     String.class);
-        }
-        catch (HttpClientErrorException e)
-        {
-            if(httpRequestData.getHttpMethod() == HEAD)
-            {
+        } catch (HttpClientErrorException e) {
+            System.out.println(httpRequestData);
+            if (httpRequestData.getHttpMethod() == HEAD) {
                 return getXSRFToken(e);
             }
-            if(e.getRawStatusCode() == 403)
-            {
+            if (e.getRawStatusCode() == 403) {
                 return createServiceResult(false, "");
             }
             throw e;
