@@ -1,7 +1,7 @@
 package com.bingodelivery.api.client.requests.api.transactions;
 
-import com.bingodelivery.api.client.api_client.ApiUser;
-import com.bingodelivery.api.client.api_client.CsrfToken;
+import com.bingodelivery.api.client.request_data.ApiUser;
+import com.bingodelivery.api.client.request_data.CsrfToken;
 import com.bingodelivery.api.client.requests.ResultListener;
 import com.bingodelivery.api.client.requests.api.ApiRequest;
 import org.springframework.http.HttpMethod;
@@ -27,7 +27,7 @@ public class RollbackTransactionRequest extends ApiRequest
     }
 
     @Override
-    protected String getUrlPath() {
+    protected String getPath() {
         return "acceptance_test/transaction/rollback";
     }
 }

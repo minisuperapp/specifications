@@ -1,7 +1,7 @@
 package com.bingodelivery.spec.support.hooks;
 
-import com.bingodelivery.api.client.api_client.ApiUser;
-import com.bingodelivery.api.client.api_client.CsrfToken;
+import com.bingodelivery.api.client.request_data.ApiUser;
+import com.bingodelivery.api.client.request_data.CsrfToken;
 import com.bingodelivery.api.client.requests.api.csrf.CSRFRequest;
 import cucumber.api.java.Before;
 import xyz.greatapp.libs.service.ServiceResult;

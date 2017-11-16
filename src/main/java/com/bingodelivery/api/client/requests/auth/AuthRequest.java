@@ -1,11 +1,11 @@
 package com.bingodelivery.api.client.requests.auth;
 
-import com.bingodelivery.api.client.api_client.HttpClient;
+import com.bingodelivery.api.client.request_data.HttpClient;
 import com.bingodelivery.api.client.requests.ResultListener;
 import org.json.JSONObject;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.HttpClientErrorException;
-import com.bingodelivery.api.client.api_client.HttpRequestData;
+import com.bingodelivery.api.client.request_data.HttpRequestData;
 
 import com.bingodelivery.api.client.requests.auth.login.GetTokenRequest;
 import com.bingodelivery.api.client.requests.auth.login.RefreshTokenRequest;

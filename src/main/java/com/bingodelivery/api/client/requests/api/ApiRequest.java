@@ -5,10 +5,10 @@ import static com.bingodelivery.api.client.util.ParserUtil.toServiceResult;
 
 import com.bingodelivery.api.client.requests.ResultListener;
 import org.springframework.http.HttpMethod;
-import com.bingodelivery.api.client.api_client.HttpClient;
-import com.bingodelivery.api.client.api_client.ApiUser;
-import com.bingodelivery.api.client.api_client.CsrfToken;
-import com.bingodelivery.api.client.api_client.HttpRequestData;
+import com.bingodelivery.api.client.request_data.HttpClient;
+import com.bingodelivery.api.client.request_data.ApiUser;
+import com.bingodelivery.api.client.request_data.CsrfToken;
+import com.bingodelivery.api.client.request_data.HttpRequestData;
 import xyz.greatapp.libs.service.ServiceResult;
 
 public abstract class ApiRequest
@@ -44,9 +44,9 @@ public abstract class ApiRequest
                 .setHttpMethod(getHttpMethod())
                 .setApiUser(apiUser)
                 .setBody(getRequestBody())
-                .setUrlPath(getUrlPath())
+                .setUrlPath(getPath())
                 .setContentType("application/json")
-                .setApiUrl(getApiUrl());
+                .setApiUrl(getHost());
         if (apiUser != ApiUser.NULL && nonNull(apiUser.getAccessToken()) && apiUser.getAccessToken().length() > 0)
         {
             httpRequestData.setAuthorization("Bearer " + httpRequestData.getApiUser().getAccessToken());
@@ -58,7 +58,7 @@ public abstract class ApiRequest
         return httpRequestData;
     }
 
-    protected String getApiUrl() {
+    protected String getHost() {
         return "http://test.localhost:9090/";
     }
 
@@ -71,5 +71,5 @@ public abstract class ApiRequest
 
     protected abstract HttpMethod getHttpMethod();
 
-    protected abstract String getUrlPath();
+    protected abstract String getPath();
 }

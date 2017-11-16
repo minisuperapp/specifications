@@ -1,4 +1,4 @@
-package com.bingodelivery.api.client.api_client;
+package com.bingodelivery.api.client.request_data;
 
 import static java.util.Objects.nonNull;
 import static org.springframework.http.HttpMethod.HEAD;

@@ -4,9 +4,9 @@ import static org.springframework.http.HttpMethod.HEAD;
 
 import com.bingodelivery.api.client.requests.ResultListener;
 import org.springframework.http.HttpMethod;
-import com.bingodelivery.api.client.api_client.ApiUser;
-import com.bingodelivery.api.client.api_client.CsrfToken;
-import com.bingodelivery.api.client.api_client.HttpClient;
+import com.bingodelivery.api.client.request_data.ApiUser;
+import com.bingodelivery.api.client.request_data.CsrfToken;
+import com.bingodelivery.api.client.request_data.HttpClient;
 import com.bingodelivery.api.client.requests.api.ApiRequest;
 
 public class CSRFRequest extends ApiRequest
@@ -31,7 +31,7 @@ public class CSRFRequest extends ApiRequest
     }
 
     @Override
-    protected String getUrlPath()
+    protected String getPath()
     {
         return "";
     }

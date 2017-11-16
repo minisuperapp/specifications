@@ -1,4 +1,4 @@
-package com.bingodelivery.api.client.api_client;
+package com.bingodelivery.api.client.request_data;
 
 public class ApiUser {
     public static ApiUser NULL = new ApiUser();

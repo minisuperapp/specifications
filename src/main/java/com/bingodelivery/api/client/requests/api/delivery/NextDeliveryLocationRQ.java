@@ -1,4 +1,4 @@
-package com.bingodelivery.api.client.requests.api.transactions;
+package com.bingodelivery.api.client.requests.api.delivery;
 
 import com.bingodelivery.api.client.request_data.ApiUser;
 import com.bingodelivery.api.client.request_data.CsrfToken;
@@ -8,28 +8,24 @@ import org.springframework.http.HttpMethod;
 
 import static org.springframework.http.HttpMethod.GET;
 
-public class BeginTransactionRequest extends ApiRequest
-{
-    public BeginTransactionRequest(ApiUser apiUser, ResultListener resultListener, CsrfToken csrfToken)
-    {
+public class NextDeliveryLocationRQ extends ApiRequest {
+
+    public NextDeliveryLocationRQ(ApiUser apiUser, ResultListener resultListener, CsrfToken csrfToken) {
         super(apiUser, resultListener, csrfToken);
     }
 
     @Override
-    protected String getRequestBody()
-    {
-        return null;
+    protected String getRequestBody() {
+        return "";
     }
 
     @Override
-    protected HttpMethod getHttpMethod()
-    {
+    protected HttpMethod getHttpMethod() {
         return GET;
     }
 
     @Override
-    protected String getPath()
-    {
-        return "acceptance_test/transaction/begin";
+    protected String getPath() {
+        return "delivery_location/next";
     }
 }

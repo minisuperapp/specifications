@@ -1,6 +1,6 @@
-Feature: Successful Delivery Request Creation
+Feature: Request a delivery
 
-  Scenario: User provides correct delivery request information
+  Scenario: Customer provides correct delivery request
     Given user provides correct delivery request information
     When user sends delivery request request
     Then the response should be successful
