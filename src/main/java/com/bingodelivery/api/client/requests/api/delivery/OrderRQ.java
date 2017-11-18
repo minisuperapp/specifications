@@ -9,12 +9,12 @@ import com.bingodelivery.api.client.requests.api.ApiRequest;
 import org.json.JSONObject;
 import org.springframework.http.HttpMethod;
 
-public class DeliveryRequestRQ extends ApiRequest
+public class OrderRQ extends ApiRequest
 {
     private String latitude = "";
     private String longitude = "";
 
-    public DeliveryRequestRQ(ApiUser apiUser, ResultListener resultListener, CsrfToken csrfToken) {
+    public OrderRQ(ApiUser apiUser, ResultListener resultListener, CsrfToken csrfToken) {
         super(apiUser, resultListener, csrfToken);
     }
 
@@ -33,15 +33,15 @@ public class DeliveryRequestRQ extends ApiRequest
 
     @Override
     protected String getPath() {
-        return "request";
+        return "order";
     }
 
-    public DeliveryRequestRQ withLatitude(String latitude) {
+    public OrderRQ withLatitude(String latitude) {
         this.latitude = latitude;
         return this;
     }
 
-    public DeliveryRequestRQ withLongitude(String longitude) {
+    public OrderRQ withLongitude(String longitude) {
         this.longitude = longitude;
         return this;
     }

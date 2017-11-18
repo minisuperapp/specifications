@@ -5,6 +5,6 @@ import cucumber.api.java8.En;
 
 public class DeliveryLocation implements En {
     public DeliveryLocation(NextDeliveryLocationRQ rq) {
-        When("^deliverer sends request to get next delivery location$", rq::send);
+        When("^deliverer gets to get next delivery location$", rq::send);
     }
 }
