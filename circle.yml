@@ -1,4 +1,4 @@
 test:
   override:
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
-    - mvn clean test -Dcucumber.options="src/features --plugin junit:$CIRCLE_TEST_REPORTS/cucumber/junit.xml" > /dev/null 2>&1
+    - mvn clean test -Dcucumber.options="src/features --plugin junit:$CIRCLE_TEST_REPORTS/cucumber/junit.xml" || true
