@@ -8,8 +8,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        plugin = { "pretty" ,
-          "json:cucumber/results.json"},
+        plugin = { "pretty" },
         snippets = CAMELCASE,
         glue = { "com.bingodelivery.spec" },
         features = { "src/features/" },
