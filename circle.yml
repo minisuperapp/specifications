@@ -1,4 +1,4 @@
 test:
   override:
     - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
-    - bundle exec cucumber --format junit --out $CIRCLE_TEST_REPORTS/cucumber/junit.xml
+    - mvn clean test -Dcucumber.options="src/features --plugin junit:$CIRCLE_TEST_REPORTS/cucumber/junit.xml"
