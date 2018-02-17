@@ -29,17 +29,15 @@ public class HttpClient {
               httpRequestData.getHttpMethod(),
               entity,
               String.class);
+            return responseEntity.getBody();
         } catch (HttpClientErrorException e) {
-            logger.debug("Error sending request {}", httpRequestData.getUrlPath());
             if (httpRequestData.getHttpMethod() == HEAD) {
                 return getXSRFToken(e);
+            } else {
+                logger.error("\nError sending request {}. \nError: {}", httpRequestData.getUrlPath(), e.getMessage());
+                return createServiceResult(false, e.getMessage());
             }
-            if (e.getRawStatusCode() == 403) {
-                return createServiceResult(false, "");
-            }
-            throw e;
         }
-        return responseEntity.getBody();
     }
 
     private String getXSRFToken(HttpClientErrorException e) {
