@@ -1,0 +1,8 @@
+machine:
+    node:
+        version: 9.2.0
+test:
+  override:
+    - mkdir -p results
+    - NODE_PATH=. cucumber-js -r support -f json:results/cucumber_report.json || true
+    - node report-generator
