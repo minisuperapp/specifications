@@ -6,7 +6,10 @@ var options = {
     output: 'results/cucumber_report.html',
     reportSuiteAsScenarios: true,
     launchReport: false,
-    metadata: {}
+    metadata: {
+      build: process.env.CIRCLE_BUILD_URL,
+      buildNum: process.env.CIRCLE_BUILD_NUM
+    }
 };
 
 reporter.generate(options);
