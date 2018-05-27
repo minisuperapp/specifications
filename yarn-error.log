@@ -1,0 +1,66 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn install -g cucumber-js
+
+PATH: 
+  /Users/alayor/.rvm/gems/ruby-2.4.1/bin:/Users/alayor/.rvm/gems/ruby-2.4.1@global/bin:/Users/alayor/.rvm/rubies/ruby-2.4.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin:/opt/X11/bin:/Users/alayor/.rvm/gems/ruby-2.4.1/bin:/Users/alayor/.rvm/gems/ruby-2.4.1@global/bin:/Users/alayor/.rvm/rubies/ruby-2.4.1/bin:/usr/local/apache-maven-3.5.0/bin/:usr/local/bin:/Library/PostgreSQL/9.6/bin/:/usr/local/gradle/gradle-4.3.1/bin:/Users/alayor/.rvm/bin:/usr/local/apache-maven-3.5.0/bin/:usr/local/bin:/Library/PostgreSQL/9.6/bin/:/usr/local/gradle/gradle-4.3.1/bin
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  9.2.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "specifications",
+    "version": "1.0.0",
+    "description": "E2E Testing Framework",
+    "main": "index.js",
+    "scripts": {
+      "test": "NODE_PATH=. cucumber-js -r support -f json:results/cucumber_report.json"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/WeGoFoods/specifications.git"
+    },
+    "keywords": [
+      "e2e",
+      "cucumber",
+      "testing"
+    ],
+    "author": "Alonso A. Ortega",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/WeGoFoods/specifications/issues"
+    },
+    "homepage": "https://github.com/WeGoFoods/specifications/issues#readme",
+    "dependencies": {
+      "chai": "^4.1.2",
+      "cucumber": "^4.2.1",
+      "es6-promise": "^4.2.4",
+      "isomorphic-fetch": "^2.2.1",
+      "moment": "^2.22.1",
+      "ramda": "^0.25.0"
+    },
+    "devDependencies": {
+      "cucumber-html-reporter": "^4.0.2"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: `--global` has been deprecated. Please run "yarn global add cucumber-js" instead.
+      at new MessageError (/usr/local/lib/node_modules/yarn/lib/cli.js:186:110)
+      at Object.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:21987:13)
+      at Generator.next (<anonymous>)
+      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:98:30)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:109:13
+      at <anonymous>

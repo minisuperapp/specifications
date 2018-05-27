@@ -23,6 +23,7 @@ jobs:
           - v1-dependencies-
 
       - run: yarn install
+      - run: yarn global add cucumber-js
 
       - save_cache:
           paths:
