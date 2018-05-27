@@ -1,0 +1,35 @@
+{
+  "name": "specifications",
+  "version": "1.0.0",
+  "description": "E2E Testing Framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_PATH=. cucumber-js -r support -f json:results/cucumber_report.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WeGoFoods/specifications.git"
+  },
+  "keywords": [
+    "e2e",
+    "cucumber",
+    "testing"
+  ],
+  "author": "Alonso A. Ortega",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WeGoFoods/specifications/issues"
+  },
+  "homepage": "https://github.com/WeGoFoods/specifications/issues#readme",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "cucumber": "^4.2.1",
+    "es6-promise": "^4.2.4",
+    "isomorphic-fetch": "^2.2.1",
+    "moment": "^2.22.1",
+    "ramda": "^0.25.0"
+  },
+  "devDependencies": {
+    "cucumber-html-reporter": "^4.0.2"
+  }
+}
