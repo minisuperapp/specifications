@@ -9,6 +9,7 @@ class Context {
 
   async send(request) {
     this.lastResponse = await apiRequester.send(request, this.sessionToken)
+    console.log(this.lastResponse)
     return this.lastResponse
   }
 

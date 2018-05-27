@@ -3,7 +3,7 @@ require('isomorphic-fetch')
 const api_requester = {}
 
 api_requester.send = async (request, sessionToken) => {
-  const uri = `http://${process.env.SUT_HOST || 'localhost:3000'}/api/`
+  const uri = `http://${process.env.SUT_HOST || 'localhost:3000'}/api`
   const info = {
     method: request.method,
     body: request.method === 'GET' ? undefined : JSON.stringify(request.body),
