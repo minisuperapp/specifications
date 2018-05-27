@@ -1,7 +1,0 @@
-#!/bin/bash
-open -a Terminal ../discovery-service/start
-sleep 20s
-open -a Terminal ../database-service/start
-open -a Terminal ../ordering-service/start
-open -a Terminal ../delivery-service/start
-open -a Terminal ../api-services/start
