@@ -23,7 +23,6 @@ jobs:
           - v1-dependencies-
 
       - run: yarn install
-      - run: yarn global add cucumber-js
 
       - save_cache:
           paths:
@@ -32,5 +31,5 @@ jobs:
 
       # run tests!
       - run: mkdir -p results
-      - run: NODE_PATH=. cucumber-js -r support -f json:results/cucumber_report.json || true
+      - run: NODE_PATH=. ./node_modules/.bin/cucumber-js -r support -f json:results/cucumber_report.json || true
       - run: node report-generator
