@@ -24,11 +24,10 @@
   "dependencies": {
     "chai": "^4.1.2",
     "cucumber": "^4.2.1",
-    "cucumber-html-reporter": "file:../tools/cucumber-html-reporter/cucumber-html-reporter-4.0.3.tgz",
+    "cucumber-html-reporter": "^4.0.2",
     "es6-promise": "^4.2.4",
     "isomorphic-fetch": "^2.2.1",
     "moment": "^2.22.1",
     "ramda": "^0.25.0"
-  },
-  "devDependencies": {}
+  }
 }
