@@ -2,20 +2,20 @@ const { setWorldConstructor } = require('cucumber')
 const apiRequester = require('support/apiRequester')
 
 class Context {
-  constructor(attach) {
-    this.attach = attach
+  constructor(params) {
+    this.attach = params.attach
     this.lastResponse = {}
     this.currentRequest = {}
   }
 
   async send(request) {
-    this.attach.attach(`${request.method} /${request.path}`)
-    this.attach.attach(`request
+    this.attach(`${request.method} /${request.path}`)
+    this.attach(`request
 ${JSON.stringify(request.body)}`, 'text/plain')
 
     this.lastResponse = await apiRequester.send(request, this.sessionToken)
 
-    this.attach.attach(`response
+    this.attach(`response
 ${JSON.stringify(this.lastResponse)}`, 'text/plain')
 
     return this.lastResponse
