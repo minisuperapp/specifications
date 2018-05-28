@@ -10,9 +10,13 @@ class Context {
 
   async send(request) {
     this.attach.attach(`${request.method} /${request.path}`)
-    this.attach.attach(JSON.stringify(request.body), 'application/json')
+    this.attach.attach(`request
+${JSON.stringify(request.body)}`, 'text/plain')
+
     this.lastResponse = await apiRequester.send(request, this.sessionToken)
-    this.attach.attach(JSON.stringify(this.lastResponse), 'application/json')
+
+    this.attach.attach(`response
+${JSON.stringify(this.lastResponse)}`, 'text/plain')
 
     return this.lastResponse
   }
