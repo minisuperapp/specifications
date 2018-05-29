@@ -1,4 +1,4 @@
-Feature: Product Offers
+Feature: Product Offers Listing
 
 Scenario: Get Product Offers Information
   When I send request to get product offers
