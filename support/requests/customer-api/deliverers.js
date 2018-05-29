@@ -1,4 +1,4 @@
-class DelivererRequest {
+class DeliverersRequest {
   constructor(build) {
 
   }
@@ -6,7 +6,7 @@ class DelivererRequest {
     return 'POST'
   }
   get path() {
-    return 'deliverer'
+    return 'deliverers'
   }
   get body() {
     return {
@@ -24,11 +24,11 @@ class DelivererRequest {
 
          }
          build() {
-            return new DelivererRequest(this)
+            return new DeliverersRequest(this)
          }
       }
       return Builder
   }
 }
 
-module.exports = DelivererRequest
+module.exports = DeliverersRequest
