@@ -9,6 +9,12 @@ When('I send request to get product offers', async function () {
   await this.send(request)
 })
 
+Then('all offers should have an id', function () {
+  const offersWithNoEstimatedPrice = R.filter(o => !o.id, this.lastResponse.data)
+
+  expect(offersWithNoEstimatedPrice).to.be.empty
+})
+
 Then('all offers should have a name', function () {
   const offersWithNoEstimatedPrice = R.filter(o => !o.name, this.lastResponse.data)
 
