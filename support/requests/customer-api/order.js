@@ -10,13 +10,8 @@ class OrderRequest {
   }
   get body() {
     return {
-    	"items": [{
-    	    "productId": "2",
-    	    "quantity": "2"
-    	},{
-    	    "productId": "1",
-    	    "quantity": "2"
-    	}],
+        "offerId": "2",
+        "quantity": "2",
     	"deliveryPoint": {
     		"latitude": "27.670799",
     		"longitude": "105.1599679,16"
