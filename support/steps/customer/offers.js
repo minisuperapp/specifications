@@ -26,3 +26,9 @@ Then('all offers should have an estimated delivery time', function () {
 
   expect(offersWithNoEstimatedPrice).to.be.empty
 })
+
+Then('all offers should have an image url', function () {
+  const offersWithNoEstimatedPrice = R.filter(o => !o.image_url, this.lastResponse.data)
+
+  expect(offersWithNoEstimatedPrice).to.be.empty
+})

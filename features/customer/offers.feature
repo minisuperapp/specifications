@@ -5,3 +5,4 @@ Scenario: Get Product Offers Information
   Then all offers should have a name
   And all offers should have an estimated price
   And all offers should have an estimated delivery time
+  And all offers should have an image url
