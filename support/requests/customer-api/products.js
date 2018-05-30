@@ -1,4 +1,4 @@
-class OffersRequest {
+class ProductsRequest {
   constructor(build) {
 
   }
@@ -6,7 +6,7 @@ class OffersRequest {
     return 'POST'
   }
   get path() {
-    return 'offers'
+    return 'products'
   }
   get body() {
     return {}
@@ -17,11 +17,11 @@ class OffersRequest {
 
          }
          build() {
-            return new OffersRequest(this)
+            return new ProductsRequest(this)
          }
       }
       return Builder
   }
 }
 
-module.exports = OffersRequest
+module.exports = ProductsRequest

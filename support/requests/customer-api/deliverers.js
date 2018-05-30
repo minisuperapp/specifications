@@ -10,7 +10,7 @@ class DeliverersRequest {
   }
   get body() {
     return {
-        "offerId": "2",
+        "productId": "2",
         "quantity": "2",
       	"deliveryPoint": {
       		"latitude": "27.670799",
