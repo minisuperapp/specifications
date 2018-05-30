@@ -7,5 +7,6 @@ Scenario: Get Offers
   And all offers should have an id
   And all offers should have a price
   And all offers should have an estimated arrival time
-  And all offers should have the deliverer name
   And offers should be ordered by estimated arrival time
+  And all offers should have the deliverer name
+  And all offers should have the deliverer reputation

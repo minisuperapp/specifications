@@ -39,3 +39,8 @@ Then('offers should be ordered by estimated arrival time', function () {
 
   expect(arrivalTimes).to.deep.equal(sortedArrivalTimes)
 })
+
+Then('all offers should have the deliverer reputation', function () {
+  const offersWithNoDelivererName = R.filter(o => !o.deliverer.reputation, this.lastResponse.data)
+  expect(offersWithNoDelivererName).to.be.empty
+});
