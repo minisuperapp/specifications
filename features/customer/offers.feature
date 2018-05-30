@@ -10,3 +10,4 @@ Scenario: Get Offers
   And offers should be ordered by estimated arrival time
   And all offers should have the deliverer name
   And all offers should have the deliverer reputation
+  And all offers should have the deliverer last rating

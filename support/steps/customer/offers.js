@@ -43,4 +43,9 @@ Then('offers should be ordered by estimated arrival time', function () {
 Then('all offers should have the deliverer reputation', function () {
   const offersWithNoDelivererName = R.filter(o => !o.deliverer.reputation, this.lastResponse.data)
   expect(offersWithNoDelivererName).to.be.empty
-});
+})
+
+Then('all offers should have the deliverer last rating', function () {
+  const offersWithNoDelivererName = R.filter(o => !o.deliverer.last_rating, this.lastResponse.data)
+  expect(offersWithNoDelivererName).to.be.empty
+})
