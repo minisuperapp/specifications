@@ -6,7 +6,7 @@ class DeliverersRequest {
     return 'POST'
   }
   get path() {
-    return 'deliverers'
+    return 'offers'
   }
   get body() {
     return {
