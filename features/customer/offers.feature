@@ -6,4 +6,5 @@ Scenario: Get Offers
   And I should receive at least one offer
   And all offers should have an id
   And all offers should have a price
+  And all offers should have an estimated arrival time
   And all offers should have the deliverer name

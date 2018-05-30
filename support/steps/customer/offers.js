@@ -23,6 +23,11 @@ Then('all offers should have a price', function () {
   expect(offersWithNoPrice).to.be.empty
 })
 
+Then('all offers should have an estimated arrival time', function () {
+  const offersWithNoPrice = R.filter(o => !o.estimated_arrival_time, this.lastResponse.data)
+  expect(offersWithNoPrice).to.be.empty
+})
+
 Then('all offers should have the deliverer name', function () {
   const offersWithNoDelivererName = R.filter(o => !o.deliverer.name, this.lastResponse.data)
   expect(offersWithNoDelivererName).to.be.empty
