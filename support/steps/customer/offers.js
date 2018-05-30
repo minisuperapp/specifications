@@ -8,3 +8,9 @@ When('I send request to get offers', async function () {
     .build()
   await this.send(request)
 })
+
+Then('all offers should have an id', function () {
+  const offersWithNoId = R.filter(o => !o.id, this.lastResponse.data)
+
+  expect(offersWithNoId).to.be.empty
+})
