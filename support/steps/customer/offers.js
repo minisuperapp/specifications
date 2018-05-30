@@ -32,3 +32,10 @@ Then('all offers should have the deliverer name', function () {
   const offersWithNoDelivererName = R.filter(o => !o.deliverer.name, this.lastResponse.data)
   expect(offersWithNoDelivererName).to.be.empty
 })
+
+Then('offers should be ordered by estimated arrival time', function () {
+  const arrivalTimes = R.map(o => o.estimated_arrival_time, this.lastResponse.data)
+  const sortedArrivalTimes = R.sort((a, b) => a - b, arrivalTimes)
+
+  expect(arrivalTimes).to.deep.equal(sortedArrivalTimes)
+})
