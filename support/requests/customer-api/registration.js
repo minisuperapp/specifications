@@ -1,5 +1,8 @@
-class CustomerRegistrationRequest {
+const Base = require('./$base')
+
+class CustomerRegistrationRequest extends Base {
   constructor(build) {
+    super()
     this.phoneNumber = build.phoneNumber
   }
   get method() {

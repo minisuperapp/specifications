@@ -1,6 +1,8 @@
-class OrderRequest {
-  constructor(build) {
+const Base = require('./$base')
 
+class OrderRequest extends Base {
+  constructor(build) {
+    super()
   }
   get method() {
     return 'POST'

@@ -1,6 +1,8 @@
-class AddOfferRequest {
-  constructor(build) {
+const Base = require('../$base')
 
+class AddOfferRequest extends Base {
+  constructor(build) {
+    super()
   }
   get method() {
     return 'POST'

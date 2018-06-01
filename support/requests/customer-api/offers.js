@@ -1,6 +1,8 @@
-class DeliverersRequest {
-  constructor(build) {
+const Base = require('./$base')
 
+class DeliverersRequest extends Base {
+  constructor(build) {
+    super()
   }
   get method() {
     return 'POST'
