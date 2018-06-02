@@ -1,6 +1,7 @@
 Feature: Offers
 
-Scenario: Get Offers
+Scenario: Deliverer Adds An Offer And Customer Gets The Offer
+  Given Deliverer adds a new offer for product 1
   When I send request to get offers
   Then I should receive successful response
   And I should receive at least one offer
