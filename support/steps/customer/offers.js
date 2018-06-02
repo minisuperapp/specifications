@@ -3,13 +3,15 @@ const OffersRequest = require("support/requests/customer-api/offers")
 const { expect } = require("chai")
 const R = require("ramda")
 
-When("I send request to get offers", async function() {
-  const request = new OffersRequest.Builder().build()
+When("I send request to get offers for product {int}", async function(productId) {
+  const request = new OffersRequest.Builder()
+    .withProductId()
+    .build()
   await this.send(request)
 })
 
-Then("I should receive at least one offer", function() {
-  expect(this.lastResponse.data).not.to.be.empty
+Then("I should receive one offer", function() {
+  expect(this.lastResponse.data.length).to.equal(1)
 })
 
 Then("all offers should have an id, price, and estimated arrival time", function() {

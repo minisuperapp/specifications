@@ -1,36 +1,41 @@
-const Base = require('./$base')
+const Base = require("./$base");
 
 class DeliverersRequest extends Base {
   constructor(build) {
-    super()
+    super();
+    this.productId = build.productId;
   }
   get method() {
-    return 'POST'
+    return "POST";
   }
   get path() {
-    return 'offers'
+    return "offers";
   }
   get body() {
     return {
-        "productId": "2",
-        "quantity": "2",
-      	"deliveryPoint": {
-      		"latitude": "27.670799",
-      		"longitude": "105.1599679,16"
-      	}
-    }
+      productId: this.productId,
+      quantity: "2",
+      deliveryPoint: {
+        latitude: "27.670799",
+        longitude: "105.1599679,16"
+      }
+    };
   }
   static get Builder() {
     class Builder {
-         constructor() {
-
-         }
-         build() {
-            return new DeliverersRequest(this)
-         }
+      constructor() {
+        this.productId = "1"
       }
-      return Builder
+      withProductId(productId) {
+        this.productId = productId
+        return this
+      }
+      build() {
+        return new DeliverersRequest(this);
+      }
+    }
+    return Builder;
   }
 }
 
-module.exports = DeliverersRequest
+module.exports = DeliverersRequest;
