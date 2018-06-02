@@ -1,6 +1,6 @@
-Feature: Offers
+Feature: Get Available Offers as Customer
 
-Scenario: Deliverer Adds An Offer And Customer Gets The Offer
+Scenario: Get Available Offer for 1 product
   Given Deliverer adds a new offer for product 1
   When I send request to get offers
   Then I should receive successful response
