@@ -4,7 +4,9 @@ const { expect } = require('chai')
 const R = require('ramda')
 
 When('I send request to get offers for product {int}', async function(productId) {
-  const request = new OffersRequest.Builder().withProductId().build()
+  const request = new OffersRequest.Builder()
+    .withProductId(productId)
+    .build()
   await this.send(request)
 })
 
