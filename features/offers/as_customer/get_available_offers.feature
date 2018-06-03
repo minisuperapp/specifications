@@ -20,3 +20,9 @@ Scenario: Get No Offers From Deliverers Outside Geo-Radius
   When Customer send request to get offers for product 1 with location '28.2007644', '-105.4870049'
   Then Customer should receive successful response
   And Customer should receive zero offers
+
+Scenario: Get Offers From Deliverers Within Geo-Radius
+  Given Deliverer adds a new offer for product 1 with location '28.1924005', '-105.4676839' and delivery radius of 3 KM
+  When Customer send request to get offers for product 1 with location '28.2007644', '-105.4870049'
+  Then Customer should receive successful response
+  And Customer should receive one offer
