@@ -8,6 +8,14 @@ When('Customer send request to get offers for product {int}', async function(pro
   await this.send(request)
 })
 
+When(
+  'Customer send request to get offers for product {int} with location {string}, {string}',
+  async function(productId, latitude, longitude) {
+    const request = new OffersRequest.Builder().withProductId(productId).build()
+    await this.send(request)
+  },
+)
+
 Then('Customer should receive one offer', function() {
   expect(this.lastResponse.data.length).to.equal(1)
 })
