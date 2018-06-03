@@ -3,12 +3,12 @@ const OffersRequest = require('support/requests/customer-api/offers')
 const { expect } = require('chai')
 const R = require('ramda')
 
-When('I send request to get offers for product {int}', async function(productId) {
+When('Customer send request to get offers for product {int}', async function(productId) {
   const request = new OffersRequest.Builder().withProductId(productId).build()
   await this.send(request)
 })
 
-Then('I should receive one offer', function() {
+Then('Customer should receive one offer', function() {
   expect(this.lastResponse.data.length).to.equal(1)
 })
 
@@ -37,6 +37,6 @@ Then('offers should be ordered by estimated arrival time', function() {
   expect(arrivalTimes).to.deep.equal(sortedArrivalTimes)
 })
 
-Then('I should receive zero offers', function() {
+Then('Customer should receive zero offers', function() {
   expect(this.lastResponse.data.length).to.equal(0)
 })
