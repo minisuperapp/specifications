@@ -4,9 +4,7 @@ const { expect } = require('chai')
 const R = require('ramda')
 
 When('I send request to get offers for product {int}', async function(productId) {
-  const request = new OffersRequest.Builder()
-    .withProductId(productId)
-    .build()
+  const request = new OffersRequest.Builder().withProductId(productId).build()
   await this.send(request)
 })
 
@@ -39,6 +37,6 @@ Then('offers should be ordered by estimated arrival time', function() {
   expect(arrivalTimes).to.deep.equal(sortedArrivalTimes)
 })
 
-Then('I should receive zero offers', function () {
+Then('I should receive zero offers', function() {
   expect(this.lastResponse.data.length).to.equal(0)
-});
+})
