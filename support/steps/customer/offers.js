@@ -36,3 +36,7 @@ Then('offers should be ordered by estimated arrival time', function() {
 
   expect(arrivalTimes).to.deep.equal(sortedArrivalTimes)
 })
+
+Then('I should receive zero offers', function () {
+  expect(this.lastResponse.data.length).to.equal(0)
+});

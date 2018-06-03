@@ -1,6 +1,6 @@
 const config = require('../config')
 const redis = require('thunk-redis')
-const { Before } = require('cucumber')
+const { Before, AfterAll } = require('cucumber')
 const Bluebird = require('bluebird')
 const redisClient = redis.createClient(config.redis_host, {
   usePromise: Bluebird,
@@ -11,6 +11,9 @@ const redisClient = redis.createClient(config.redis_host, {
 })
 
 Before(async function (testCase) {
-  var world = this
   return await redisClient.flushall()
+})
+
+AfterAll(async function () {
+  return await redisClient.quit()
 })
