@@ -1,9 +1,11 @@
 const Base = require('./$base')
 
-class DeliverersRequest extends Base {
+class OffersRequest extends Base {
   constructor(build) {
     super()
     this.productId = build.productId
+    this.customerLocationLatitude = build.customerLocationLatitude
+    this.customerLocationLongitude = build.customerLocationLongitude
   }
   get method() {
     return 'POST'
@@ -15,9 +17,9 @@ class DeliverersRequest extends Base {
     return {
       productId: this.productId,
       quantity: '2',
-      deliveryPoint: {
-        latitude: '27.670799',
-        longitude: '105.1599679,16',
+      customerLocation: {
+        latitude: this.customerLocationLatitude,
+        longitude: this.customerLocationLongitude,
       },
     }
   }
@@ -25,17 +27,27 @@ class DeliverersRequest extends Base {
     class Builder {
       constructor() {
         this.productId = '1'
+        this.customerLocationLatitude = '28.1867048'
+        this.customerLocationLongitude = '-105.4600849'
       }
       withProductId(productId) {
         this.productId = productId
         return this
       }
+      withCustomerLocationLatitude(customerLocationLatitude) {
+        this.customerLocationLatitude = customerLocationLatitude
+        return this
+      }
+      withCustomerLocationLongitude(customerLocationLongitude) {
+        this.customerLocationLongitude = customerLocationLongitude
+        return this
+      }
       build() {
-        return new DeliverersRequest(this)
+        return new OffersRequest(this)
       }
     }
     return Builder
   }
 }
 
-module.exports = DeliverersRequest
+module.exports = OffersRequest

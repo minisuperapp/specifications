@@ -11,7 +11,11 @@ When('Customer send request to get offers for product {int}', async function(pro
 When(
   'Customer send request to get offers for product {int} with location {string}, {string}',
   async function(productId, latitude, longitude) {
-    const request = new OffersRequest.Builder().withProductId(productId).build()
+    const request = new OffersRequest.Builder()
+      .withProductId(productId)
+      .withCustomerLocationLatitude(latitude)
+      .withCustomerLocationLongitude(longitude)
+      .build()
     await this.send(request)
   },
 )
