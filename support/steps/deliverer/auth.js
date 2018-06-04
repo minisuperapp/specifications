@@ -2,11 +2,12 @@ const { Given, When, Then } = require('cucumber')
 const DelivererLoginRequest = require('support/requests/deliverer-api/login')
 const { expect } = require('chai')
 
-When('Deliverer logs in with phone number {string} and password {string}', async function(
+When('Deliverer {string} logs in with phone number {string} and password {string}', async function(
+  deliverer,
   phoneNumber,
   password,
 ) {
-  const request = new DelivererLoginRequest.Builder()
+  const request = new DelivererLoginRequest.Builder(deliverer)
     .withPhoneNumber(phoneNumber)
     .withPassword(password)
     .build()

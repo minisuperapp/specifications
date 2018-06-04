@@ -2,7 +2,7 @@ const Base = require('../$base')
 
 class AddOfferRequest extends Base {
   constructor(build) {
-    super()
+    super(build.deliverer)
     this.productId = build.productId
     this.delivererLocationLatitude = build.delivererLocationLatitude
     this.delivererLocationLongitude = build.delivererLocationLongitude
@@ -29,7 +29,8 @@ class AddOfferRequest extends Base {
   }
   static get Builder() {
     class Builder {
-      constructor() {
+      constructor(deliverer) {
+        this.deliverer = deliverer
         this.productId = '1'
         this.delivererLocationLatitude = '28.1867348'
         this.delivererLocationLongitude = '-105.4608849'
