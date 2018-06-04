@@ -14,7 +14,7 @@ class DelivererLoginRequest extends Base {
   }
   get body() {
     return {
-      phone: this.phoneNumber,
+      phoneNumber: this.phoneNumber,
       password: this.password,
     }
   }
