@@ -3,6 +3,7 @@ const Base = require('./$base')
 class CustomerRegistrationRequest extends Base {
   constructor(build) {
     super()
+    this.name = build.name
     this.phoneNumber = build.phoneNumber
     this.password = build.password
   }
@@ -14,6 +15,7 @@ class CustomerRegistrationRequest extends Base {
   }
   get body() {
     return {
+      name: this.name,
       phoneNumber: this.phoneNumber,
       password: this.password
     }
@@ -21,8 +23,13 @@ class CustomerRegistrationRequest extends Base {
   static get Builder() {
     class Builder {
          constructor() {
+           this.name = ''
            this.phoneNumber = ''
            this.password = ''
+         }
+         withName(name) {
+            this.name = name
+            return this
          }
          withPhoneNumber(phoneNumber) {
             this.phoneNumber = phoneNumber
