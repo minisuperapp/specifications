@@ -1,6 +1,18 @@
 const { Given, When, Then } = require('cucumber')
 const DelivererLoginRequest = require('support/requests/deliverer-api/login')
+const DelivererRegistrationRequest = require('support/requests/deliverer-api/registration')
 const { expect } = require('chai')
+
+When(
+  'Deliverer {string} registers with phone number {string} and password {string}',
+  async function(deliverer, phoneNumber, password) {
+    const request = new DelivererRegistrationRequest.Builder()
+      .withPhoneNumber(phoneNumber)
+      .withPassword(password)
+      .build()
+    await this.send(request)
+  },
+)
 
 When('Deliverer {string} logs in with phone number {string} and password {string}', async function(
   deliverer,
@@ -14,7 +26,7 @@ When('Deliverer {string} logs in with phone number {string} and password {string
   await this.send(request)
 })
 
-Then('Deliverer should receive session token', function () {
+Then('Deliverer should receive session token', function() {
   expect(this.lastResponse.data.sessionToken).not.to.be.undefined
   expect(this.lastResponse.data.sessionToken.length).to.be.at.least(1)
 })
