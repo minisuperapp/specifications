@@ -4,7 +4,7 @@ const DelivererRegistrationRequest = require('support/requests/deliverer-api/reg
 const { expect } = require('chai')
 
 Given(
-  'Deliverer {string} registers with phone number {string}, and password {string}',
+  'Deliverer {string} registers with phone number {string} and password {string}',
   async function(deliverer, phoneNumber, password) {
     const request = new DelivererRegistrationRequest.Builder()
       .withPhoneNumber(phoneNumber)
