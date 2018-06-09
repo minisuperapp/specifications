@@ -20,7 +20,7 @@ ${JSON.stringify(request.body)}`,
 
     this.lastResponse = await apiRequester.send(request, this.delivererSessionTokens[request.deliverer])
 
-    if (request instanceof DelivererLoginRequest) {
+    if (request instanceof DelivererLoginRequest && this.lastResponse.success) {
       this.delivererSessionTokens[request.deliverer] = this.lastResponse.data.sessionToken
     }
 

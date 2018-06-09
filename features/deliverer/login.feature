@@ -7,5 +7,4 @@ Scenario: Successful login as deliverer
 
 Scenario: Wrong password
   When Deliverer 'A' logs in with phone number '6483516383' and password 'secret2'
-  Then Deliverer should receive successful response
-  And Deliverer should receive session token
+  Then Deliverer should receive unsuccessful response
