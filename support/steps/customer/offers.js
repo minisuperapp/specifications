@@ -24,6 +24,10 @@ Then('Customer should receive one offer', function() {
   expect(this.lastResponse.data.length).to.equal(1)
 })
 
+Then('Customer should receive {int} offers', function(offersNumber) {
+  expect(this.lastResponse.data.length).to.equal(offersNumber)
+})
+
 Then('the offer should have an id, price, and estimated arrival time', function() {
   const offersWithMissingDetails = R.filter(
     o => !o.id || !o.price || !o.estimated_arrival_time,
