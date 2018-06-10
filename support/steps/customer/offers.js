@@ -1,20 +1,31 @@
 const { Given, When, Then } = require('cucumber')
-const OffersRequest = require('support/requests/customer-api/offers')
+const GetOffersRequest = require('support/requests/customer-api/get_offers')
 const { expect } = require('chai')
 const R = require('ramda')
 
 When('Customer sends request to get offers for product {string}', async function(productId) {
-  const request = new OffersRequest.Builder().withProductId(productId).build()
+  const request = new GetOffersRequest.Builder().withProductId(productId).build()
   await this.send(request)
 })
 
 When(
   'Customer sends request to get offers for product {string} with location {string}, {string}',
   async function(productId, latitude, longitude) {
-    const request = new OffersRequest.Builder()
+    const request = new GetOffersRequest.Builder()
       .withProductId(productId)
       .withCustomerLocationLatitude(latitude)
       .withCustomerLocationLongitude(longitude)
+      .build()
+    await this.send(request)
+  },
+)
+
+When(
+  'Customer sends request to get offers for product {string} and quantity {string}',
+  async function(productId, quantity) {
+    const request = new GetOffersRequest.Builder()
+      .withProductId(productId)
+      .withQuantity(quantity)
       .build()
     await this.send(request)
   },

@@ -48,8 +48,8 @@ Scenario: Get Offers From Multiple Deliverers Within Geo-Radius
   And Customer should receive 2 offers
 
 Scenario: Get No Offers for Product Which Just Lost Availability
-  Given Deliverer 'D1' adds a new offer for product '1' and available quantity of '1'
+  Given Deliverer 'D1' adds a new offer for product '1' and available quantity of '2'
   And Customer sends request to get offers for product '1'
   And Customer places order using offer from deliverer 'D1'
-  When Customer sends request to get offers for product '1'
+  When Customer sends request to get offers for product '1' and quantity '2'
   And Customer should receive zero offers
