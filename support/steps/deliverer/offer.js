@@ -28,3 +28,7 @@ When('Deliverer {string} adds a new offer', async function(deliverer) {
   const request = new AddOfferRequest.Builder(deliverer).build()
   await this.send(request)
 })
+
+When('Deliverer {string} updates offer location', function (string) {
+  
+})
