@@ -1,8 +1,8 @@
-Feature: Add Offer As Deliverer
+Feature: Change Deliverer Availability
 
 Background:
   Given Deliverer 'D1' registers with phone number '6481095678' and logs in
 
-Scenario: Add Offer Successfully
-  When Deliverer 'D1' adds a new offer
+Scenario: Deliverer Changes Availability False
+  When Deliverer 'D1' changes availability to 'false'
   Then Deliverer should receive successful response
