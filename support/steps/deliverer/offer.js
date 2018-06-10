@@ -1,5 +1,6 @@
 const { Given, When, Then } = require('cucumber')
 const AddOfferRequest = require('support/requests/deliverer-api/offer/add')
+const UpdateOfferLocationRequest = require('support/requests/deliverer-api/offer/update_location')
 const { expect } = require('chai')
 const R = require('ramda')
 
@@ -29,6 +30,19 @@ When('Deliverer {string} adds a new offer', async function(deliverer) {
   await this.send(request)
 })
 
-When('Deliverer {string} updates offer location', function (string) {
-  
+When('Deliverer {string} updates offer location', async function(deliverer) {
+  const request = new UpdateOfferLocationRequest.Builder(deliverer).build()
+  await this.send(request)
+})
+
+When('Deliverer {string} updates offer location to {string}, {string}', async function(
+  deliverer,
+  latitude,
+  longitude,
+) {
+  const request = new UpdateOfferLocationRequest.Builder(deliverer)
+    .withLocationLatitude(latitude)
+    .withLocationLongitude(longitude)
+    .build()
+  await this.send(request)
 })

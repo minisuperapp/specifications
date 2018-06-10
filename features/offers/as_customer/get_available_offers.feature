@@ -32,6 +32,13 @@ Scenario: Get Offer From Deliverer Within Geo-Radius
   Then Customer should receive successful response
   And Customer should receive one offer
 
+Scenario: Get Offer From Deliverer Who Just Got Within Geo-Radius
+  Given Deliverer 'D1' adds a new offer for product '1' with location '28.1924005', '-105.4676839' and delivery radius of 2 KM
+  And Customer sends request to get offers for product '1' with location '28.2007644', '-105.4870049'
+  Then Customer should receive zero offers
+  When Deliverer 'D1' updates offer location to '28.1924005', '-105.4776839'
+  Then Customer should receive one offer
+
 Scenario: Get Offers From Multiple Deliverers Within Geo-Radius
   Given Deliverer 'D1' adds a new offer for product '1' with location '28.1924005', '-105.4676839' and delivery radius of 3 KM
   And Deliverer 'D2' adds a new offer for product '1' with location '28.1924005', '-105.4676839' and delivery radius of 3 KM
