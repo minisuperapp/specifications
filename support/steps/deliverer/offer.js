@@ -25,6 +25,17 @@ Given(
   },
 )
 
+Given(
+  'Deliverer {string} adds a new offer for product {string} and available quantity of {string}',
+  async function(deliverer, productId, availableQuantity) {
+    const request = new AddOfferRequest.Builder(deliverer)
+      .withProductId(productId)
+      .withAvailableQuantity(availableQuantity)
+      .build()
+    await this.send(request)
+  },
+)
+
 When('Deliverer {string} adds a new offer', async function(deliverer) {
   const request = new AddOfferRequest.Builder(deliverer).build()
   await this.send(request)

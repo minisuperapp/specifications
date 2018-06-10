@@ -7,6 +7,7 @@ class AddOfferRequest extends Base {
     this.locationLatitude = build.locationLatitude
     this.locationLongitude = build.locationLongitude
     this.deliveryRadius = build.deliveryRadius
+    this.availableQuantity = build.availableQuantity
   }
   get method() {
     return 'POST'
@@ -17,7 +18,7 @@ class AddOfferRequest extends Base {
   get body() {
     return {
       productId: this.productId,
-      availableQuantity: '8',
+      availableQuantity: this.availableQuantity,
       onHandQuantity: '10',
       unitPrice: '18',
       deliveryRadius: this.deliveryRadius,
@@ -32,12 +33,17 @@ class AddOfferRequest extends Base {
       constructor(deliverer) {
         this.deliverer = deliverer
         this.productId = '1'
+        this.availableQuantity = '8'
         this.locationLatitude = '28.1867348'
         this.locationLongitude = '-105.4608849'
         this.deliveryRadius = '1'
       }
       withProductId(productId) {
         this.productId = productId
+        return this
+      }
+      withAvailableQuantity(availableQuantity) {
+        this.availableQuantity = availableQuantity
         return this
       }
       withDelivererLocationLatitude(locationLatitude) {
