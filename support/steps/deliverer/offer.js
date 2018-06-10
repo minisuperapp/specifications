@@ -40,7 +40,9 @@ When('Deliverer {string} updates offer location to {string}, {string}', async fu
   latitude,
   longitude,
 ) {
+  const offerId = this.delivererOfferMap[deliverer]
   const request = new UpdateOfferLocationRequest.Builder(deliverer)
+    .withOfferId(offerId)
     .withLocationLatitude(latitude)
     .withLocationLongitude(longitude)
     .build()
