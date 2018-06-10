@@ -3,13 +3,13 @@ const OffersRequest = require('support/requests/customer-api/offers')
 const { expect } = require('chai')
 const R = require('ramda')
 
-When('Customer send request to get offers for product {int}', async function(productId) {
+When('Customer sends request to get offers for product {int}', async function(productId) {
   const request = new OffersRequest.Builder().withProductId(productId).build()
   await this.send(request)
 })
 
 When(
-  'Customer send request to get offers for product {int} with location {string}, {string}',
+  'Customer sends request to get offers for product {int} with location {string}, {string}',
   async function(productId, latitude, longitude) {
     const request = new OffersRequest.Builder()
       .withProductId(productId)

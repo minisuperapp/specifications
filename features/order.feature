@@ -1,5 +1,9 @@
 Feature: Order
 
+Background:
+  Given Deliverer 'D1' registers with phone number '6483516383' and password 'secret1'
+  And Deliverer 'D1' logs in with phone number '6483516383' and password 'secret1'
+  And Deliverer 'D1' adds a new offer for product 1
+
 Scenario: Place an order successfully
-  When Customer send request to place an order
-  Then Customer should receive successful response
+  Given Customer sends request to get offers for product 1
