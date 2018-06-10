@@ -14,7 +14,7 @@ class Context {
   }
 
   async send(request) {
-    this.attach(`${request.method} ${request.uri}/${request.path}`)
+    this.attach(`${request.method} /${request.path} (${request.apiServer})`)
     this.attach(
       `request
 ${JSON.stringify(request.body)}`,
