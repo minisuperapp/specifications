@@ -12,11 +12,11 @@ class OrderRequest extends Base {
   }
   get body() {
     return {
-        "productId": "2",
+        "offerId": "2",
         "quantity": "2",
       	"deliveryPoint": {
       		"latitude": "27.670799",
-      		"longitude": "105.1599679,16"
+      		"longitude": "105.1599679"
       	}
     }
   }
