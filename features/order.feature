@@ -7,3 +7,4 @@ Background:
 
 Scenario: Place an order successfully
   Given Customer sends request to get offers for product 1
+  When Customer places order using offer from deliverer 'D1'
