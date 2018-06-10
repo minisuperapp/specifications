@@ -4,8 +4,8 @@ class AddOfferRequest extends Base {
   constructor(build) {
     super(build.deliverer)
     this.productId = build.productId
-    this.delivererLocationLatitude = build.delivererLocationLatitude
-    this.delivererLocationLongitude = build.delivererLocationLongitude
+    this.locationLatitude = build.locationLatitude
+    this.locationLongitude = build.locationLongitude
     this.deliveryRadius = build.deliveryRadius
   }
   get method() {
@@ -21,9 +21,9 @@ class AddOfferRequest extends Base {
       onHandQuantity: '10',
       unitPrice: '18',
       deliveryRadius: this.deliveryRadius,
-      delivererLocation: {
-        latitude: this.delivererLocationLatitude,
-        longitude: this.delivererLocationLongitude,
+      location: {
+        latitude: this.locationLatitude,
+        longitude: this.locationLongitude,
       },
     }
   }
@@ -32,20 +32,20 @@ class AddOfferRequest extends Base {
       constructor(deliverer) {
         this.deliverer = deliverer
         this.productId = '1'
-        this.delivererLocationLatitude = '28.1867348'
-        this.delivererLocationLongitude = '-105.4608849'
+        this.locationLatitude = '28.1867348'
+        this.locationLongitude = '-105.4608849'
         this.deliveryRadius = '1'
       }
       withProductId(productId) {
         this.productId = productId
         return this
       }
-      withDelivererLocationLatitude(delivererLocationLatitude) {
-        this.delivererLocationLatitude = delivererLocationLatitude
+      withDelivererLocationLatitude(locationLatitude) {
+        this.locationLatitude = locationLatitude
         return this
       }
-      withDelivererLocationLongitude(delivererLocationLongitude) {
-        this.delivererLocationLongitude = delivererLocationLongitude
+      withDelivererLocationLongitude(locationLongitude) {
+        this.locationLongitude = locationLongitude
         return this
       }
       withDeliveryRadius(deliveryRadius) {
