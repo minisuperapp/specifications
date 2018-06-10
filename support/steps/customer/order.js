@@ -8,6 +8,10 @@ When('Customer send request to place an order', async function () {
   await this.send(request)
 })
 
-When('Customer places order using offer from deliverer {string}', function (deliverer) {
+When('Customer places order using offer from deliverer {string}', async function (deliverer) {
   const offerId = this.delivererOfferMap[deliverer]
+  const request = new OrderRequest.Builder()
+    .withOfferId(offerId)
+    .build()
+  await this.send(request)
 })

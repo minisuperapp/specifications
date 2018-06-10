@@ -3,6 +3,7 @@ const Base = require('./$base')
 class OrderRequest extends Base {
   constructor(build) {
     super()
+    this.offerId = build.offerId
   }
   get method() {
     return 'POST'
@@ -12,7 +13,7 @@ class OrderRequest extends Base {
   }
   get body() {
     return {
-        "offerId": "2",
+        "offerId": this.offerId,
         "quantity": "2",
       	"deliveryPoint": {
       		"latitude": "27.670799",
@@ -23,7 +24,11 @@ class OrderRequest extends Base {
   static get Builder() {
     class Builder {
          constructor() {
-
+           this.offerId = ''
+         }
+         withOfferId(offerId) {
+           this.offerId = offerId
+           return this
          }
          build() {
             return new OrderRequest(this)
