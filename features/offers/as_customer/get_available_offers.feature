@@ -3,7 +3,7 @@ Feature: Get Available Offers As Customer
 Background:
   Given Deliverer 'D1' registers with phone number '6483516383' and password 'secret1'
   And Deliverer 'D1' logs in with phone number '6483516383' and password 'secret1'
-  And Deliverer 'D2' logs in with phone number '6484627494' and password 'secret2'
+  And Deliverer 'D2' registers with phone number '6484627494' and password 'secret2'
   And Deliverer 'D2' logs in with phone number '6484627494' and password 'secret2'
 
 Scenario: Get Available Offer for 1 product
