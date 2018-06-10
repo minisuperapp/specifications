@@ -2,7 +2,7 @@ const Base = require('./$base')
 
 class CustomerRegistrationRequest extends Base {
   constructor(build) {
-    super()
+    super('D1')
     this.name = build.name
     this.phoneNumber = build.phoneNumber
     this.password = build.password

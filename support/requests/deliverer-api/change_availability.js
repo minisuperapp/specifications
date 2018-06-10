@@ -19,7 +19,8 @@ class DelivererAvailabilityChangeRequest extends Base {
   static get Builder() {
     class Builder {
       constructor(deliverer) {
-        this.available = 'true'
+        this.deliverer = deliverer
+        this.available = true
       }
       withAvailable(available) {
         this.available = available

@@ -30,7 +30,7 @@ ${JSON.stringify(request.body)}`,
     if (request instanceof AddOfferRequest && this.lastResponse.success) {
       this.delivererOfferMap[request.deliverer] = this.lastResponse.data.id
     }
-    
+
     this.attach(
       `response
 ${JSON.stringify(this.lastResponse)}`,
