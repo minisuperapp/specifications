@@ -3,7 +3,7 @@ const AddOfferRequest = require('support/requests/deliverer-api/offer/add')
 const { expect } = require('chai')
 const R = require('ramda')
 
-Given('Deliverer {string} adds a new offer for product {int}', async function(
+Given('Deliverer {string} adds a new offer for product {string}', async function(
   deliverer,
   productId,
 ) {
@@ -12,7 +12,7 @@ Given('Deliverer {string} adds a new offer for product {int}', async function(
 })
 
 Given(
-  'Deliverer {string} adds a new offer for product {int} with location {string}, {string} and delivery radius of {int} KM',
+  'Deliverer {string} adds a new offer for product {string} with location {string}, {string} and delivery radius of {int} KM',
   async function(deliverer, productId, latitude, longitude, deliveryRadius) {
     const request = new AddOfferRequest.Builder(deliverer)
       .withProductId(productId)
