@@ -14,6 +14,20 @@ Given(
   },
 )
 
+Given('Deliverer {string} registers with phone number {string} and logs in', async function(
+  deliverer,
+  phoneNumber,
+) {
+  const registrationRequest = new DelivererRegistrationRequest.Builder()
+    .withPhoneNumber(phoneNumber)
+    .build()
+  await this.send(registrationRequest)
+  const loginRequest = new DelivererLoginRequest.Builder(deliverer)
+    .withPhoneNumber(phoneNumber)
+    .build()
+  await this.send(loginRequest)
+})
+
 When(
   'Deliverer {string} registers with name {string}, phone number {string}, and password {string}',
   async function(deliverer, name, phoneNumber, password) {

@@ -1,4 +1,4 @@
-Feature: Order
+Feature: Order Placing
 
 Background:
   Given Deliverer 'D1' registers with phone number '6483516383' and password 'secret1'
