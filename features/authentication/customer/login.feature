@@ -10,3 +10,4 @@ Scenario: Successful login
 Scenario: Wrong phone number
   When Customer logs in with phone number '6394516222'
   Then Customer should receive unsuccessful response
+  And Customer should receive single error message with property 'phoneNumber' and message 'not.found'
