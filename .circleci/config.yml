@@ -30,9 +30,8 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: mkdir -p results
-      - run: NODE_PATH=. ./node_modules/.bin/cucumber-js -r support -f json:results/cucumber_report.json || true
+      - run: NODE_PATH=. ./node_modules/.bin/cucumber-js -r support -f json:cucumber_report.json || true
       - run: node report-generator
       - store_artifacts:
-          path: results/cucumber_report.html
+          path: cucumber_report.html
           destination: cucumber_report.html

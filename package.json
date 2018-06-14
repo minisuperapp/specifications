@@ -4,7 +4,7 @@
   "description": "E2E Testing Framework",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_PATH=. cucumber-js -r support -f json:results/cucumber_report.json"
+    "test": "cross-env NODE_PATH=. cucumber-js -r support -f json:cucumber_report.json"
   },
   "repository": {
     "type": "git",
