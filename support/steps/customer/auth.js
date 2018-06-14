@@ -8,3 +8,7 @@ When('Customer registers with phone number {string}', async function (phoneNumbe
     .build()
   await this.send(request)
 })
+
+When('Customer logs in with phone number {string} and password {string}', function (string, string2) {
+
+})
