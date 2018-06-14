@@ -5,6 +5,10 @@ Then('Customer should receive successful response', function () {
   expect(this.lastResponse.success, JSON.stringify(this.lastResponse).substring(0,1000)).to.be.true
 })
 
+Then('Customer should receive unsuccessful response', function () {
+  expect(this.lastResponse.success, JSON.stringify(this.lastResponse).substring(0,1000)).to.be.false
+})
+
 Then('Deliverer should receive successful response', function () {
   expect(this.lastResponse.success, JSON.stringify(this.lastResponse).substring(0,1000)).to.be.true
 })
