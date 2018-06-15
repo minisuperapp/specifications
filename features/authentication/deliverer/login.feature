@@ -11,3 +11,4 @@ Scenario: Successful login
 Scenario: Wrong password
   When Deliverer 'D1' logs in with phone number '6483516383' and password 'secret2'
   Then Deliverer should receive unsuccessful response
+  And Deliverer should receive single error message with property '' and message 'incorrect.credentials'
