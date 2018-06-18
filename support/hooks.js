@@ -13,11 +13,11 @@ const redisClient = redis.createClient(config.redis_host, {
 })
 
 Before(async function (testCase) {
-  await apiRequester.send(new CustomerApiCleanRequest.Builder().build())
+  // await apiRequester.send(new CustomerApiCleanRequest.Builder().build())
   return await redisClient.flushall()
 })
 
 AfterAll(async function () {
-  await apiRequester.send(new CustomerApiCleanRequest.Builder().build())
+  // await apiRequester.send(new CustomerApiCleanRequest.Builder().build())
   return await redisClient.quit()
 })
