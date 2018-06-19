@@ -7,5 +7,5 @@ Scenario: Successful registration as deliverer
 Scenario: Register with existing phone number
   Given Deliverer 'D1' registers with phone number '6483516383' and password 'secret1'
   When Deliverer 'D1' registers with phone number '6483516383' and password 'secret2'
-  Then Customer should receive unsuccessful response
+  Then Deliverer should receive unsuccessful response
   And Deliverer should receive single error message with property 'phoneNumber' and message 'existing'
