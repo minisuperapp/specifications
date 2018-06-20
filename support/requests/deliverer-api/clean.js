@@ -1,8 +1,8 @@
 const Base = require('./$base')
 
-class CustomerApiCleanRequest extends Base {
+class DelivererApiCleanRequest extends Base {
   constructor(build) {
-    super()
+    super(build.deliverer)
     this.phoneNumber = build.phoneNumber
   }
   get method() {
@@ -18,13 +18,14 @@ class CustomerApiCleanRequest extends Base {
   static get Builder() {
     class Builder {
          constructor() {
+           this.deliverer = "D1"
          }
          build() {
-            return new CustomerApiCleanRequest(this)
+            return new DelivererApiCleanRequest(this)
          }
       }
       return Builder
   }
 }
 
-module.exports = CustomerApiCleanRequest
+module.exports = DelivererApiCleanRequest
