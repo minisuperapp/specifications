@@ -26,9 +26,12 @@
     "chai": "^4.1.2",
     "cucumber": "^4.2.1",
     "cucumber-html-reporter": "^4.0.2",
+    "dotenv": "^6.0.0",
     "es6-promise": "^4.2.4",
     "isomorphic-fetch": "^2.2.1",
+    "knex": "^0.14.6",
     "moment": "^2.22.1",
+    "pg": "^7.4.3",
     "ramda": "^0.25.0",
     "thunk-redis": "^2.1.6"
   },
