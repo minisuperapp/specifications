@@ -18,7 +18,12 @@ const redisClient = redis.createClient(config.redis_host, {
 
 Before(async function(testCase) {
   await apiRequester.send(new DelivererApiCleanRequest.Builder().build())
-  await knex('deliverers').del()
+  try {
+      await knex('deliverers').del()
+  } catch (error) {
+    console.log(error)
+  }
+
   return await redisClient.flushall()
 })
 
