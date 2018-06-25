@@ -24,7 +24,7 @@ Before(async function(testCase) {
 
 AfterAll(async function() {
   await apiRequester.send(new DelivererApiCleanRequest.Builder().build())
-  await knex('deliverers').del()
+  // await knex('deliverers').del()
   await knex.destroy()
   return await redisClient.quit()
 })
