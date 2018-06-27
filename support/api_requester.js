@@ -8,7 +8,7 @@ api_requester.send = async (request, sessionToken) => {
     body: request.method === 'GET' ? undefined : JSON.stringify(request.body),
     headers: {
       'Content-Type': 'application/json',
-      'Session-Token': sessionToken,
+      'session-token': sessionToken,
       'is-test': 'true',
     },
   }
