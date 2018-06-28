@@ -9,11 +9,6 @@ When('I send request to get products', async function () {
   await this.send(request)
 })
 
-Then('I should get at least one product', function () {
-  expect(this.lastResponse.data).not.to.be.undefined
-  expect(this.lastResponse.data.length).to.be.at.least(1)
-})
-
 Then('all products should have an id', function () {
   const productsWithNoEstimatedPrice = R.filter(o => !o.id, this.lastResponse.data)
   expect(productsWithNoEstimatedPrice).to.be.empty
