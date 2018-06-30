@@ -13,3 +13,5 @@ Scenario: Get Products
 
 Scenario: Get Available Products
   Given Deliverer 'D1' adds a new offer for product 'CORN_TORTILLA'
+  When I send request to get products
+  Then product 'CORN_TORTILLA' should be available

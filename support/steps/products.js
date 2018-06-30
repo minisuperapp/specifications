@@ -33,3 +33,8 @@ Then('all products should be unavailable', function () {
   const availableProducts = R.filter(o => o.available === true, this.lastResponse.data)
   expect(availableProducts).to.be.empty
 })
+
+Then('product {string} should be available', function (productCode) {
+  const cornTortilla = this.currentProducts.find(p => p.code === productCode)
+  expect(cornTortilla.available).to.be.true
+})
