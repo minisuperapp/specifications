@@ -3,7 +3,7 @@ const ProductsRequest = require('support/requests/customer-api/products')
 const { expect } = require('chai')
 const R = require('ramda')
 
-When('I send request to get products', async function () {
+When('Customer sends request to get products', async function () {
   const request = new ProductsRequest.Builder()
     .build()
   await this.send(request)
