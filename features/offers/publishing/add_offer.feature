@@ -1,4 +1,4 @@
-Feature: Add Offer As Deliverer
+Feature: Publish An Offer
 
 Background:
   Given Deliverer 'D1' registers with phone number '6481095678' and logs in
