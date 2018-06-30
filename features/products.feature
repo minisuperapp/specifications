@@ -15,5 +15,12 @@ Scenario: Get Available Products
   Given Deliverer 'D1' adds a new offer for product 'CORN_TORTILLA'
   When Customer sends request to get products
   Then product 'CORN_TORTILLA' should be available
-  And product 'RED_APPLE' should not be available
-  And product 'ORANGE' should not be available
+  And product 'RED_APPLE' should NOT be available
+  And product 'ORANGE' should NOT be available
+
+Scenario: Change Product Availability When An Offer Is Published
+  When Customer sends request to get products
+  Given Deliverer 'D1' adds a new offer for product 'CORN_TORTILLA'
+  Then product 'CORN_TORTILLA' should be available
+  And product 'RED_APPLE' should NOT be available
+  And product 'ORANGE' should NOT be available

@@ -39,7 +39,7 @@ Then('product {string} should be available', function (productCode) {
   expect(cornTortilla.available).to.be.true
 })
 
-Then('product {string} should not be available', function (productCode) {
+Then('product {string} should NOT be available', function (productCode) {
   const cornTortilla = this.currentProducts.find(p => p.code === productCode)
   expect(cornTortilla.available).to.be.false
 })
