@@ -3,16 +3,16 @@ const GetOffersRequest = require('support/requests/customer-api/get_offers')
 const { expect } = require('chai')
 const R = require('ramda')
 
-When('Customer sends request to get offers for product {string}', async function(productId) {
-  const request = new GetOffersRequest.Builder().withProductId(productId).build()
+When('Customer sends request to get offers for product {string}', async function(productCode) {
+  const request = new GetOffersRequest.Builder().withProductCode(productCode).build()
   await this.send(request)
 })
 
 When(
   'Customer sends request to get offers for product {string} with location {string}, {string}',
-  async function(productId, latitude, longitude) {
+  async function(productCode, latitude, longitude) {
     const request = new GetOffersRequest.Builder()
-      .withProductId(productId)
+      .withProductCode(productCode)
       .withCustomerLocationLatitude(latitude)
       .withCustomerLocationLongitude(longitude)
       .build()
@@ -22,9 +22,9 @@ When(
 
 When(
   'Customer sends request to get offers for product {string} and quantity {string}',
-  async function(productId, quantity) {
+  async function(productCode, quantity) {
     const request = new GetOffersRequest.Builder()
-      .withProductId(productId)
+      .withProductCode(productCode)
       .withQuantity(quantity)
       .build()
     await this.send(request)

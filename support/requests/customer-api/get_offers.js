@@ -3,7 +3,7 @@ const Base = require('./$base')
 class GetOffersRequest extends Base {
   constructor(build) {
     super()
-    this.productId = build.productId
+    this.productCode = build.productCode
     this.quantity = build.quantity
     this.customerLocationLatitude = build.customerLocationLatitude
     this.customerLocationLongitude = build.customerLocationLongitude
@@ -16,7 +16,7 @@ class GetOffersRequest extends Base {
   }
   get body() {
     return {
-      productId: this.productId,
+      productCode: this.productCode,
       quantity: this.quantity,
       customerLocation: {
         latitude: this.customerLocationLatitude,
@@ -27,13 +27,13 @@ class GetOffersRequest extends Base {
   static get Builder() {
     class Builder {
       constructor() {
-        this.productId = '1'
+        this.productCode = 'CORN_TORTILLA'
         this.quantity = '1'
         this.customerLocationLatitude = '28.1867048'
         this.customerLocationLongitude = '-105.4600849'
       }
-      withProductId(productId) {
-        this.productId = productId
+      withProductCode(productCode) {
+        this.productCode = productCode
         return this
       }
       withQuantity(quantity) {

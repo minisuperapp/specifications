@@ -6,17 +6,17 @@ const R = require('ramda')
 
 Given('Deliverer {string} adds a new offer for product {string}', async function(
   deliverer,
-  productId,
+  productCode,
 ) {
-  const request = new AddOfferRequest.Builder(deliverer).withProductId(productId).build()
+  const request = new AddOfferRequest.Builder(deliverer).withProductCode(productCode).build()
   await this.send(request)
 })
 
 Given(
   'Deliverer {string} adds a new offer for product {string} with location {string}, {string} and delivery radius of {int} KM',
-  async function(deliverer, productId, latitude, longitude, deliveryRadius) {
+  async function(deliverer, productCode, latitude, longitude, deliveryRadius) {
     const request = new AddOfferRequest.Builder(deliverer)
-      .withProductId(productId)
+      .withProductCode(productCode)
       .withDelivererLocationLatitude(latitude)
       .withDelivererLocationLongitude(longitude)
       .withDeliveryRadius(deliveryRadius)
@@ -27,9 +27,9 @@ Given(
 
 Given(
   'Deliverer {string} adds a new offer for product {string} and available quantity of {string}',
-  async function(deliverer, productId, availableQuantity) {
+  async function(deliverer, productCode, availableQuantity) {
     const request = new AddOfferRequest.Builder(deliverer)
-      .withProductId(productId)
+      .withProductCode(productCode)
       .withAvailableQuantity(availableQuantity)
       .build()
     await this.send(request)
