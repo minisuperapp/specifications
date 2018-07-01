@@ -29,7 +29,7 @@ Before(async function(testCase) {
 })
 
 After(async function(testCase) {
-  return await redisClient.flushall()
+  await redisClient.flushall()
   return await knex('deliverers').del()
 })
 
