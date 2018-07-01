@@ -25,9 +25,9 @@ Scenario: Change Product Availability When An Offer Is Published
   And product 'RED_APPLE' should NOT be available
   And product 'ORANGE' should NOT be available
 
-Scenario: Do Not Change Product Availability When An Offer Is Published Outside Deliverer Radius
-  When Customer sends request to get products with location '28.2007644', '-105.4870049'
-  Given Deliverer 'D1' adds a new offer for product 'CORN_TORTILLA' with location '28.1924005', '-105.4676839' and delivery radius of 1 KM
+Scenario: Do Not Change Product Availability When An Offer Is Published In A Different City
+    When Customer sends request to get products with location '28.2007644', '-105.4870049'
+  Given Deliverer 'D1' adds a new offer for product 'CORN_TORTILLA' with location '28.6472265', '-106.083621' and delivery radius of 1 KM
   Then product 'CORN_TORTILLA' should NOT be available
   And product 'RED_APPLE' should NOT be available
   And product 'ORANGE' should NOT be available
