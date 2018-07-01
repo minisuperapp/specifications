@@ -1,7 +1,7 @@
 const config = require('../config')
 require('dotenv').config()
 const redis = require('thunk-redis')
-const { Before, AfterAll } = require('cucumber')
+const { Before, After, AfterAll } = require('cucumber')
 const Bluebird = require('bluebird')
 const DelivererApiCleanRequest = require('./requests/deliverer-api/clean')
 const apiRequester = require('support/api_requester')
@@ -19,20 +19,22 @@ const redisClient = redis.createClient(config.redis_host, {
 })
 
 Before(async function(testCase) {
-  socket.on('published_offer', (offerPublishing) => {
+  socket.emit('send_location', this.currentLocation)
+  return socket.on('published_offer', offerPublishing => {
     const product = this.currentProducts.find(p => p.code === offerPublishing.productCode)
     if (product) {
       product.available = true
     }
   })
-  socket.on('get_location', () => {
-    socket.emit('send_location', this.currentLocation)
-  })
-  await knex('deliverers').del()
+})
+
+After(async function(testCase) {
   return await redisClient.flushall()
+  return await knex('deliverers').del()
 })
 
 AfterAll(async function() {
+  await redisClient.flushall()
   socket.disconnect()
   await knex('deliverers').del()
   await knex.destroy()
