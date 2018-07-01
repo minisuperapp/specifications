@@ -26,6 +26,14 @@ class ProductsRequest extends Base {
         this.customerLocationLatitude = '28.1867048'
         this.customerLocationLongitude = '-105.4600849'
       }
+      withCustomerLocationLatitude(customerLocationLatitude) {
+        this.customerLocationLatitude = customerLocationLatitude
+        return this
+      }
+      withCustomerLocationLongitude(customerLocationLongitude) {
+        this.customerLocationLongitude = customerLocationLongitude
+        return this
+      }
       build() {
         return new ProductsRequest(this)
       }
