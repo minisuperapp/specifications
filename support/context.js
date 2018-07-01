@@ -13,6 +13,10 @@ class Context {
     this.delivererOfferMap = {}
     this.currentOffers = []
     this.currentProducts = []
+    this.currentLocation = {
+      latitude: '28.1867048',
+      longitude: '-105.4600849',
+    }
   }
 
   async send(request) {
@@ -23,7 +27,10 @@ ${JSON.stringify(request.body)}`,
       'text/plain',
     )
 
-    this.lastResponse = await apiRequester.send(request, this.delivererSessionTokens[request.deliverer])
+    this.lastResponse = await apiRequester.send(
+      request,
+      this.delivererSessionTokens[request.deliverer],
+    )
 
     if (request instanceof DelivererLoginRequest && this.lastResponse.success) {
       this.delivererSessionTokens[request.deliverer] = this.lastResponse.data.sessionToken

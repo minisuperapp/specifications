@@ -25,6 +25,9 @@ Before(async function(testCase) {
       product.available = true
     }
   })
+  socket.on('get_location', () => {
+    socket.emit('send_location', this.currentLocation)
+  })
   await knex('deliverers').del()
   return await redisClient.flushall()
 })
