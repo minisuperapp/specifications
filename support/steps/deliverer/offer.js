@@ -1,5 +1,5 @@
 const { Given, When, Then } = require('cucumber')
-const AddOfferRequest = require('support/requests/deliverer-api/offer/add')
+const PublishOfferRequest = require('support/requests/deliverer-api/offer/publish')
 const UpdateOfferLocationRequest = require('support/requests/deliverer-api/offer/update_location')
 const { expect } = require('chai')
 const R = require('ramda')
@@ -8,14 +8,14 @@ Given('Deliverer {string} adds a new offer for product {string}', async function
   deliverer,
   productCode,
 ) {
-  const request = new AddOfferRequest.Builder(deliverer).withProductCode(productCode).build()
+  const request = new PublishOfferRequest.Builder(deliverer).withProductCode(productCode).build()
   await this.send(request)
 })
 
 Given(
   'Deliverer {string} adds a new offer for product {string} with location {string}, {string} and delivery radius of {int} KM',
   async function(deliverer, productCode, latitude, longitude, deliveryRadius) {
-    const request = new AddOfferRequest.Builder(deliverer)
+    const request = new PublishOfferRequest.Builder(deliverer)
       .withProductCode(productCode)
       .withDelivererLocationLatitude(latitude)
       .withDelivererLocationLongitude(longitude)
@@ -28,7 +28,7 @@ Given(
 Given(
   'Deliverer {string} adds a new offer for product {string} and available quantity of {string}',
   async function(deliverer, productCode, availableQuantity) {
-    const request = new AddOfferRequest.Builder(deliverer)
+    const request = new PublishOfferRequest.Builder(deliverer)
       .withProductCode(productCode)
       .withAvailableQuantity(availableQuantity)
       .build()
@@ -37,7 +37,7 @@ Given(
 )
 
 When('Deliverer {string} adds a new offer', async function(deliverer) {
-  const request = new AddOfferRequest.Builder(deliverer).build()
+  const request = new PublishOfferRequest.Builder(deliverer).build()
   await this.send(request)
 })
 
