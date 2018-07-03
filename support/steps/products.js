@@ -33,26 +33,3 @@ Then('all products should have a code', function() {
   const productsWithNoCode = R.filter(o => !o.code, this.lastResponse.data)
   expect(productsWithNoCode).to.be.empty
 })
-
-Then('all products should have available status', function() {
-  const productsWithNoAvailableStatus = R.filter(
-    o => o.available === undefined,
-    this.lastResponse.data,
-  )
-  expect(productsWithNoAvailableStatus).to.be.empty
-})
-
-Then('all products should be unavailable', function() {
-  const availableProducts = R.filter(o => o.available === true, this.lastResponse.data)
-  expect(availableProducts).to.be.empty
-})
-
-Then('product {string} should be available', function(productCode) {
-  const cornTortilla = this.currentProducts.find(p => p.code === productCode)
-  expect(cornTortilla.available).to.be.true
-})
-
-Then('product {string} should NOT be available', function(productCode) {
-  const cornTortilla = this.currentProducts.find(p => p.code === productCode)
-  expect(cornTortilla.available).to.be.false
-})
