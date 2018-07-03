@@ -1,4 +1,4 @@
-Feature: Get Available Offers
+Feature: Get Offers For A Selected Product
 
 Background:
   Given Deliverer 'D1' registers with phone number '6481095678' and logs in
