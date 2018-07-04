@@ -1,17 +1,17 @@
 const { Given, When, Then } = require('cucumber')
-const GetOffersRequest = require('support/requests/customer-api/get_offers')
+const GetProductOffersRequest = require('support/requests/customer-api/get_product_offers')
 const { expect } = require('chai')
 const R = require('ramda')
 
 When('Customer sends request to get offers for product {string}', async function(productCode) {
-  const request = new GetOffersRequest.Builder().withProductCode(productCode).build()
+  const request = new GetProductOffersRequest.Builder().withProductCode(productCode).build()
   await this.send(request)
 })
 
 When(
   'Customer sends request to get offers for product {string} with location {string}, {string}',
   async function(productCode, latitude, longitude) {
-    const request = new GetOffersRequest.Builder()
+    const request = new GetProductOffersRequest.Builder()
       .withProductCode(productCode)
       .withCustomerLocationLatitude(latitude)
       .withCustomerLocationLongitude(longitude)
@@ -23,13 +23,17 @@ When(
 When(
   'Customer sends request to get offers for product {string} and quantity {string}',
   async function(productCode, quantity) {
-    const request = new GetOffersRequest.Builder()
+    const request = new GetProductOffersRequest.Builder()
       .withProductCode(productCode)
       .withQuantity(quantity)
       .build()
     await this.send(request)
   },
 )
+
+When('Customer sends request to get all products offers', function () {
+
+})
 
 Then('Customer should receive one offer', function() {
   expect(this.lastResponse.data.length).to.equal(1)
