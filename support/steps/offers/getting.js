@@ -1,6 +1,6 @@
 const { Given, When, Then } = require('cucumber')
 const GetProductOffersRequest = require('support/requests/customer-api/get_product_offers')
-const GetOffersRequest = require('support/requests/customer-api/get_all_offers')
+const OffersGroupedByProductRequest = require('support/requests/customer-api/offers_grouped_by_product')
 const { expect } = require('chai')
 const R = require('ramda')
 
@@ -32,8 +32,8 @@ When(
   },
 )
 
-When('Customer sends request to get all products offers', async function () {
-  const request = new GetOffersRequest.Builder()
+When('Customer sends request to get offers by product', async function () {
+  const request = new OffersGroupedByProductRequest.Builder()
     .build()
   await this.send(request)
 })

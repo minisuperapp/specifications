@@ -1,4 +1,4 @@
-Feature: Get Offers For All Products
+Feature: Get Offers Grouped By Product
 
 Background:
   Given Deliverer 'D1' registers with phone number '6481095678' and logs in
@@ -6,5 +6,5 @@ Background:
 
 Scenario: Get Offers For All Products
   Given Deliverer 'D1' adds a new offer for product 'CORN_TORTILLA'
-  When Customer sends request to get all products offers
+  When Customer sends request to get offers by product
   Then Customer should receive successful response
