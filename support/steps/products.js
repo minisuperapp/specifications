@@ -36,5 +36,6 @@ Then('all products should have a code', function() {
 
 Then('Customer should see {int} offer\\(s) for product {string}', function (offers, productCode) {
   expect(this.currentProductOffers[productCode]).not.to.be.undefined
-  expect(this.currentProductOffers[productCode].length).to.equal(offers)
+  expect(this.currentProductOffers[productCode].offers).not.to.be.undefined
+  expect(this.currentProductOffers[productCode].offers.length).to.equal(offers)
 })
