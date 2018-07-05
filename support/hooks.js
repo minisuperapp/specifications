@@ -21,10 +21,10 @@ const redisClient = redis.createClient(config.redis_host, {
 Before(async function(testCase) {
   socket.emit('send_location', this.currentLocation)
   return socket.on('published_offer', offerPublishing => {
-    const product = this.currentProducts.find(p => p.code === offerPublishing.productCode)
-    if (product) {
-      product.available = true
+    if (!this.currentProductOffers[offerPublishing.productCode]) {
+      this.currentProductOffers[offerPublishing.productCode] = []
     }
+    this.currentProductOffers[offerPublishing.productCode].push(offerPublishing)
   })
 })
 

@@ -2,7 +2,6 @@ const { setWorldConstructor } = require('cucumber')
 const apiRequester = require('support/api_requester')
 const DelivererLoginRequest = require('./requests/deliverer-api/login')
 const PublishOfferRequest = require('./requests/deliverer-api/offer/publish')
-const GetProductsRequest = require('./requests/customer-api/get_products')
 
 class Context {
   constructor(params) {
@@ -12,7 +11,7 @@ class Context {
     this.delivererSessionTokens = []
     this.delivererOfferMap = {}
     this.currentOffers = []
-    this.currentProducts = []
+    this.currentProductOffers = {}
     this.currentLocation = {
       latitude: '28.1867048',
       longitude: '-105.4600849',
@@ -38,10 +37,6 @@ ${JSON.stringify(request.body)}`,
 
     if (request instanceof PublishOfferRequest && this.lastResponse.success) {
       this.delivererOfferMap[request.deliverer] = this.lastResponse.data.id
-    }
-
-    if (request instanceof GetProductsRequest && this.lastResponse.success) {
-      this.currentProducts = this.lastResponse.data
     }
 
     this.attach(
