@@ -10,7 +10,7 @@ class OffersGroupedByProductRequest extends Base {
     return 'POST'
   }
   get path() {
-    return 'offers'
+    return 'offers_grouped_by_product'
   }
   get body() {
     return {
