@@ -5,6 +5,7 @@ Background:
 
 Scenario: Get Products
   When Customer sends request to get products
-  Then all products should have an id
+  Then Customer should receive products
+  And all products should have an id
   And all products should have a name
   And all products should have a code

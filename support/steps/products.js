@@ -19,18 +19,22 @@ When('Customer sends request to get products with location {string}, {string}', 
   await this.send(request)
 })
 
+Then('Customer should receive products', function () {
+  expect(this.lastResponse.data.products).not.to.be.undefined
+})
+
 Then('all products should have an id', function() {
-  const productsWithNoId = R.filter(o => !o.id, this.lastResponse.data)
+  const productsWithNoId = R.filter(o => !o.id, this.lastResponse.data.products)
   expect(productsWithNoId).to.be.empty
 })
 
 Then('all products should have a name', function() {
-  const productsWithNoName = R.filter(o => !o.name, this.lastResponse.data)
+  const productsWithNoName = R.filter(o => !o.name, this.lastResponse.data.products)
   expect(productsWithNoName).to.be.empty
 })
 
 Then('all products should have a code', function() {
-  const productsWithNoCode = R.filter(o => !o.code, this.lastResponse.data)
+  const productsWithNoCode = R.filter(o => !o.code, this.lastResponse.data.products)
   expect(productsWithNoCode).to.be.empty
 })
 
