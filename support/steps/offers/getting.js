@@ -75,9 +75,9 @@ Then('Customer should receive zero offers', function() {
   expect(this.lastResponse.data.length).to.equal(0)
 })
 
-Then('Customer should receive one offer for product {string}', function (productCode) {
+Then('Customer should receive {int} offer\\(s) for product {string}', function (offers, productCode) {
   expect(this.lastResponse.data[productCode]).not.to.be.undefined
-  expect(this.lastResponse.data[productCode].length).to.equal(1)
+  expect(this.lastResponse.data[productCode].length).to.equal(offers)
 })
 
 Then('Customer should receive zero offers for product {string}', function (productCode) {
