@@ -18,7 +18,6 @@ class Context {
       longitude: '-105.4600849',
     }
     socket.on('published_offer', offer => {
-      console.log('offer: ' + JSON.stringify(offer))
       if (!this.currentProductOffers[offer.productCode]) {
         this.currentProductOffers[offer.productCode] = {}
         this.currentProductOffers[offer.productCode].offers = []
