@@ -1,6 +1,6 @@
 const Base = require('./$base')
 
-class GetProductsRequest extends Base {
+class ProductsAndOffersRequest extends Base {
   constructor(build) {
     super()
     this.customerLocationLatitude = build.customerLocationLatitude
@@ -10,7 +10,7 @@ class GetProductsRequest extends Base {
     return 'POST'
   }
   get path() {
-    return 'products'
+    return 'products_and_offers'
   }
   get body() {
     return {
@@ -35,11 +35,11 @@ class GetProductsRequest extends Base {
         return this
       }
       build() {
-        return new GetProductsRequest(this)
+        return new ProductsAndOffersRequest(this)
       }
     }
     return Builder
   }
 }
 
-module.exports = GetProductsRequest
+module.exports = ProductsAndOffersRequest
