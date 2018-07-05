@@ -33,3 +33,10 @@ Then('all products should have a code', function() {
   const productsWithNoCode = R.filter(o => !o.code, this.lastResponse.data)
   expect(productsWithNoCode).to.be.empty
 })
+
+Then('Customer should see {int} offer\\(s) for product {string}', function (offers, productCode) {
+  const product = this.currentProducts.find(p => p.code === productCode)
+  expect(product).not.to.be.undefined
+  expect(product.offers).not.to.be.undefined
+  expect(product.offers.length).to.equal(offers)
+})
