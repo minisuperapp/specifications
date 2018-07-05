@@ -3,6 +3,18 @@ const ProductsAndOffersRequest = require('support/requests/customer-api/products
 const { expect } = require('chai')
 const R = require('ramda')
 
+Given(
+  'Customer sends request to get products and offers with location {string}, {string}',
+  async function(latitude, longitude) {
+    this.sendCustomerLocation(latitude, longitude)
+    const request = new ProductsAndOffersRequest.Builder()
+      .withCustomerLocationLatitude(latitude)
+      .withCustomerLocationLongitude(longitude)
+      .build()
+    await this.send(request)
+  },
+)
+
 When('Customer sends request to get products and offers', async function() {
   const request = new ProductsAndOffersRequest.Builder().build()
   await this.send(request)
@@ -19,7 +31,7 @@ When('Customer sends request to get products with location {string}, {string}', 
   await this.send(request)
 })
 
-Then('Customer should receive products', function () {
+Then('Customer should receive products', function() {
   expect(this.lastResponse.data.products).not.to.be.undefined
 })
 
@@ -38,7 +50,7 @@ Then('all products should have a code', function() {
   expect(productsWithNoCode).to.be.empty
 })
 
-Then('Customer should see {int} offer\\(s) for product {string}', function (offers, productCode) {
+Then('Customer should see {int} offer\\(s) for product {string}', function(offers, productCode) {
   expect(this.currentProductOffers[productCode]).not.to.be.undefined
   expect(this.currentProductOffers[productCode].offers).not.to.be.undefined
   expect(this.currentProductOffers[productCode].offers.length).to.equal(offers)

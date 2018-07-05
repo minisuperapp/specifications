@@ -2,6 +2,8 @@ const { setWorldConstructor } = require('cucumber')
 const apiRequester = require('support/api_requester')
 const DelivererLoginRequest = require('./requests/deliverer-api/login')
 const PublishOfferRequest = require('./requests/deliverer-api/offer/publish')
+const io = require('socket.io-client')
+const socket = io(`${process.env.DELIVERER_API_URL || 'http://localhost:3001'}`)
 
 class Context {
   constructor(params) {
@@ -10,12 +12,19 @@ class Context {
     this.currentRequest = {}
     this.delivererSessionTokens = []
     this.delivererOfferMap = {}
-    this.currentOffers = []
     this.currentProductOffers = {}
     this.currentLocation = {
       latitude: '28.1867048',
       longitude: '-105.4600849',
     }
+    socket.on('published_offer', offer => {
+      console.log('offer: ' + JSON.stringify(offer))
+      if (!this.currentProductOffers[offer.productCode]) {
+        this.currentProductOffers[offer.productCode] = {}
+        this.currentProductOffers[offer.productCode].offers = []
+      }
+      this.currentProductOffers[offer.productCode].offers.push(offer)
+    })
   }
 
   async send(request) {
@@ -50,6 +59,13 @@ ${JSON.stringify(this.lastResponse)}`,
 
   async sendCurrentRequest() {
     return await this.send(this.currentRequest.build())
+  }
+
+  async sendCustomerLocation(latitude, longitude) {
+    socket.emit('send_location', {
+      latitude,
+      longitude
+    })
   }
 
   setCurrentRequest(currentRequest) {
