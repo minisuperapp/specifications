@@ -3,6 +3,8 @@ const Base = require('./$base')
 class GetProductsRequest extends Base {
   constructor(build) {
     super()
+    this.customerLocationLatitude = build.customerLocationLatitude
+    this.customerLocationLongitude = build.customerLocationLongitude
   }
   get method() {
     return 'POST'
@@ -11,11 +13,19 @@ class GetProductsRequest extends Base {
     return 'products'
   }
   get body() {
-    return {}
+    return {
+      customerLocation: {
+        latitude: this.customerLocationLatitude,
+        longitude: this.customerLocationLongitude,
+      },
+    }
   }
   static get Builder() {
     class Builder {
-      constructor() {}
+      constructor() {
+        this.customerLocationLatitude = '28.1867048'
+        this.customerLocationLongitude = '-105.4600849'
+      }
       withCustomerLocationLatitude(customerLocationLatitude) {
         this.customerLocationLatitude = customerLocationLatitude
         return this

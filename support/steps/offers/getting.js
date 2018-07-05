@@ -1,6 +1,5 @@
 const { Given, When, Then } = require('cucumber')
 const GetProductOffersRequest = require('support/requests/customer-api/get_product_offers')
-const OffersGroupedByProductRequest = require('support/requests/customer-api/offers_grouped_by_product')
 const { expect } = require('chai')
 const R = require('ramda')
 
@@ -31,12 +30,6 @@ When(
     await this.send(request)
   },
 )
-
-When('Customer sends request to get offers by product', async function () {
-  const request = new OffersGroupedByProductRequest.Builder()
-    .build()
-  await this.send(request)
-})
 
 Then('Customer should receive one offer', function() {
   expect(this.lastResponse.data.length).to.equal(1)
@@ -76,10 +69,10 @@ Then('Customer should receive zero offers', function() {
 })
 
 Then('Customer should receive {int} offer\\(s) for product {string}', function (offers, productCode) {
-  expect(this.lastResponse.data[productCode]).not.to.be.undefined
-  expect(this.lastResponse.data[productCode].length).to.equal(offers)
+  expect(this.lastResponse.data.offers[productCode]).not.to.be.undefined
+  expect(this.lastResponse.data.offers[productCode].length).to.equal(offers)
 })
 
 Then('Customer should receive zero offers for product {string}', function (productCode) {
-  expect(this.lastResponse.data[productCode]).to.be.undefined
+  expect(this.lastResponse.data.offers[productCode]).to.be.undefined
 })
