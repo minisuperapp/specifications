@@ -8,3 +8,4 @@ Scenario: Get Offers For All Products
   Given Deliverer 'D1' adds a new offer for product 'CORN_TORTILLA'
   When Customer sends request to get offers by product
   Then Customer should receive successful response
+  And Customer should receive one offer for product 'CORN_TORTILLA'

@@ -74,3 +74,8 @@ Then('offers should be ordered by estimated arrival time', function() {
 Then('Customer should receive zero offers', function() {
   expect(this.lastResponse.data.length).to.equal(0)
 })
+
+Then('Customer should receive one offer for product {string}', function (productCode) {
+  expect(this.lastResponse.data[productCode]).not.to.be.undefined
+  expect(this.lastResponse.data[productCode].length).to.equal(1)
+})
