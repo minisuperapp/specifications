@@ -2,8 +2,7 @@ const { setWorldConstructor } = require('cucumber')
 const apiRequester = require('support/api_requester')
 const DelivererLoginRequest = require('./requests/deliverer-api/login')
 const PublishOfferRequest = require('./requests/deliverer-api/offer/publish')
-const io = require('socket.io-client')
-const socket = io(`${process.env.DELIVERER_API_URL || 'http://localhost:3001'}`)
+const socket = require('./socket')
 
 class Context {
   constructor(params) {
