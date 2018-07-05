@@ -55,3 +55,7 @@ Then('Customer should see {int} offer\\(s) for product {string}', function(offer
   expect(this.currentProductOffers[productCode].offers).not.to.be.undefined
   expect(this.currentProductOffers[productCode].offers.length).to.equal(offers)
 })
+
+Then('Customer should see zero offers for product {string}', function (productCode) {
+  expect(this.currentProductOffers[productCode]).to.be.undefined
+})

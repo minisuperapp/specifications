@@ -9,6 +9,6 @@ Scenario: Add One Product Offer
   Then Customer should see 1 offer(s) for product 'CORN_TORTILLA'
 
 Scenario: Do Not Add Product Offer If Offer Is Outside Deliverer's Radius
-  Given Customer sends request to get products and offers with location '28.2007644', '-105.4870049'
-  When Deliverer 'D1' adds a new offer for product 'CORN_TORTILLA' with location '28.1924005', '-105.4676839' and delivery radius of 3 KM
-  Then Customer should see 0 offer(s) for product 'CORN_TORTILLA'
+  Given Customer sends request to get products and offers with location '28.1867048', '-105.4600849'
+  When Deliverer 'D1' adds a new offer for product 'CORN_TORTILLA' with location '28.1924005', '-105.39' and delivery radius of 1 KM
+  Then Customer should see zero offers for product 'CORN_TORTILLA'
