@@ -57,5 +57,6 @@ Then('Customer should see {int} offer\\(s) for product {string}', function(offer
 })
 
 Then('Customer should see zero offers for product {string}', function (productCode) {
-  expect(this.currentProductOffers[productCode]).to.be.undefined
+  expect(this.currentProductOffers[productCode] === undefined ||
+  this.currentProductOffers[productCode].length === 0).to.be.true
 })
