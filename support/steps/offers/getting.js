@@ -72,6 +72,8 @@ Then('Customer should receive {int} offer\\(s) for product {string}', function (
   expect(this.lastResponse.data.offersByProduct[productCode]).not.to.be.undefined
   expect(this.lastResponse.data.offersByProduct[productCode].offers).not.to.be.undefined
   expect(this.lastResponse.data.offersByProduct[productCode].offers.length).to.equal(offers)
+  const offerId = this.lastResponse.data.offersByProduct[productCode].offers[0].id
+  expect(this.lastResponse.data.offersById[offerId]).not.to.be.undefined
 })
 
 Then('Customer should receive zero offers for product {string}', function (productCode) {

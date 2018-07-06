@@ -13,7 +13,8 @@ class Context {
     this.delivererSessionTokens = []
     this.delivererOfferMap = {}
     this.state = {
-      offersByProduct: {}
+      offersByProduct: {},
+      offersById: {}
     }
     this.currentLocation = {
       latitude: '28.1867048',
@@ -25,6 +26,7 @@ class Context {
         this.state.offersByProduct[offer.productCode].offers = []
       }
       this.state.offersByProduct[offer.productCode].offers.push(offer)
+      this.state.offersById[offer.id] = offer
     })
   }
 
@@ -69,7 +71,7 @@ ${JSON.stringify(this.lastResponse)}`,
   async sendCustomerLocation(latitude, longitude) {
     socket.emit('send_location', {
       latitude,
-      longitude
+      longitude,
     })
   }
 

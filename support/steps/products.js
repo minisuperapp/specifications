@@ -54,6 +54,8 @@ Then('Customer should see {int} offer\\(s) for product {string}', function(offer
   expect(this.state.offersByProduct[productCode]).not.to.be.undefined
   expect(this.state.offersByProduct[productCode].offers).not.to.be.undefined
   expect(this.state.offersByProduct[productCode].offers.length).to.equal(offers)
+  const offerId = this.state.offersByProduct[productCode].offers[0].id
+  expect(this.state.offersById[offerId]).not.to.be.undefined
 })
 
 Then('Customer should see zero offers for product {string}', function (productCode) {
