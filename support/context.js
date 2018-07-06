@@ -11,17 +11,19 @@ class Context {
     this.currentRequest = {}
     this.delivererSessionTokens = []
     this.delivererOfferMap = {}
-    this.currentProductOffers = {}
+    this.state = {
+      offersByProduct: {}
+    }
     this.currentLocation = {
       latitude: '28.1867048',
       longitude: '-105.4600849',
     }
     socket.on('published_offer', offer => {
-      if (!this.currentProductOffers[offer.productCode]) {
-        this.currentProductOffers[offer.productCode] = {}
-        this.currentProductOffers[offer.productCode].offers = []
+      if (!this.state.offersByProduct[offer.productCode]) {
+        this.state.offersByProduct[offer.productCode] = {}
+        this.state.offersByProduct[offer.productCode].offers = []
       }
-      this.currentProductOffers[offer.productCode].offers.push(offer)
+      this.state.offersByProduct[offer.productCode].offers.push(offer)
     })
   }
 

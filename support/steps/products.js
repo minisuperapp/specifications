@@ -51,12 +51,12 @@ Then('all products should have a code', function() {
 })
 
 Then('Customer should see {int} offer\\(s) for product {string}', function(offers, productCode) {
-  expect(this.currentProductOffers[productCode]).not.to.be.undefined
-  expect(this.currentProductOffers[productCode].offers).not.to.be.undefined
-  expect(this.currentProductOffers[productCode].offers.length).to.equal(offers)
+  expect(this.state.offersByProduct[productCode]).not.to.be.undefined
+  expect(this.state.offersByProduct[productCode].offers).not.to.be.undefined
+  expect(this.state.offersByProduct[productCode].offers.length).to.equal(offers)
 })
 
 Then('Customer should see zero offers for product {string}', function (productCode) {
-  expect(this.currentProductOffers[productCode] === undefined ||
-  this.currentProductOffers[productCode].length === 0).to.be.true
+  expect(this.state.offersByProduct[productCode] === undefined ||
+  this.state.offersByProduct[productCode].offers.length === 0).to.be.true
 })
