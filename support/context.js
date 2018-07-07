@@ -26,7 +26,13 @@ class Context {
         this.state.offersByProduct[offer.productCode].offers = []
       }
       this.state.offersByProduct[offer.productCode].offers.push(offer)
-      this.state.offersById[offer.id] = offer
+      this.state.offersById[offer.id] = {
+        [offer.id]: offer
+      }
+    })
+    socket.on('update_offer_location', offer => {
+      this.state.offersById[offer.offerId].latitude = offer.newLocation.latitude
+      this.state.offersById[offer.offerId].longitude = offer.newLocation.longitude
     })
   }
 
