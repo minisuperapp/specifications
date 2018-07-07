@@ -42,7 +42,10 @@ When('Deliverer {string} adds a new offer', async function(deliverer) {
 })
 
 When('Deliverer {string} updates offer location', async function(deliverer) {
-  const request = new UpdateOfferLocationRequest.Builder(deliverer).build()
+  const offerId = this.delivererOfferMap[deliverer]
+  const request = new UpdateOfferLocationRequest.Builder(deliverer)
+  .withOfferId(offerId)
+  .build()
   await this.send(request)
 })
 
