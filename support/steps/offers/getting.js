@@ -5,7 +5,7 @@ const { expect } = require('chai')
 const R = require('ramda')
 
 Given(
-  'Customer sends request to get products and offers with location {string}, {string}',
+  'Customer sends request to get offers grouped by product with location {string}, {string}',
   async function(latitude, longitude) {
     this.sendCustomerLocation(latitude, longitude)
     const request = new ProductsAndOffersRequest.Builder()
@@ -16,19 +16,8 @@ Given(
   },
 )
 
-When('Customer sends request to get products and offers', async function() {
+When('Customer sends request to get offers grouped by product', async function() {
   const request = new ProductsAndOffersRequest.Builder().build()
-  await this.send(request)
-})
-
-When('Customer sends request to get products with location {string}, {string}', async function(
-  latitude,
-  longitude,
-) {
-  const request = new ProductsAndOffersRequest.Builder()
-    .withCustomerLocationLatitude(latitude)
-    .withCustomerLocationLongitude(longitude)
-    .build()
   await this.send(request)
 })
 
@@ -107,4 +96,21 @@ Then('Customer should receive {int} offer\\(s) for product {string}', function (
 
 Then('Customer should receive zero offers for product {string}', function (productCode) {
   expect(this.lastResponse.data.offersByProduct[productCode]).to.be.undefined
+})
+
+Then('Customer should see {int} offer\\(s) for product {string}', function(offers, productCode) {
+  expect(this.state.offersByProduct[productCode]).not.to.be.undefined
+  expect(this.state.offersByProduct[productCode].offers).not.to.be.undefined
+  expect(this.state.offersByProduct[productCode].offers.length).to.equal(offers)
+  const offerId = this.state.offersByProduct[productCode].offers[0].id
+  expect(this.state.offersById[offerId]).not.to.be.undefined
+})
+
+Then('Customer should see zero offers for product {string}', function (productCode) {
+  expect(this.state.offersByProduct[productCode] === undefined ||
+  this.state.offersByProduct[productCode].offers.length === 0).to.be.true
+})
+
+Then('Customer should receive product {string} in first place', function (productCode) {
+  expect(this.lastResponse.data[0].code).to.equal(productCode)
 })

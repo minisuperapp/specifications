@@ -5,7 +5,7 @@ Background:
   And Deliverer 'D2' registers with phone number '6481107823' and logs in
 
 Scenario: Get Products
-  When Customer sends request to get products and offers
+  When Customer sends request to get products
   Then Customer should receive products
   And all products should have an id
   And all products should have a name
