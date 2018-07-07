@@ -2,7 +2,7 @@ const { setWorldConstructor } = require('cucumber')
 const apiRequester = require('support/api_requester')
 const DelivererLoginRequest = require('./requests/deliverer-api/login')
 const PublishOfferRequest = require('./requests/deliverer-api/offer/publish')
-const ProductsAndOffersRequest = require('./requests/customer-api/products_and_offers')
+const OffersGroupedByProductRequest = require('./requests/customer-api/offers_grouped_by_product')
 const socket = require('./socket')
 
 class Context {
@@ -57,7 +57,7 @@ ${JSON.stringify(request.body)}`,
       this.delivererOfferMap[request.deliverer] = this.lastResponse.data.id
     }
 
-    if (request instanceof ProductsAndOffersRequest && this.lastResponse.success) {
+    if (request instanceof OffersGroupedByProductRequest && this.lastResponse.success) {
       this.state.offersByProduct = this.lastResponse.data.offersByProduct
     }
 
