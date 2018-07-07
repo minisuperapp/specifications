@@ -1,4 +1,4 @@
-Feature: Get Offers For A Selected Product
+Feature: Get Ranked Offers For A Selected Product
 
 Background:
   Given Deliverer 'D1' registers with phone number '6481095678' and logs in
@@ -45,7 +45,7 @@ Scenario: Get Offers From Multiple Deliverers Within Geo-Radius
   Then Customer should receive successful response
   And Customer should receive 2 offers
 
-Scenario: Get No Offers for Product Which Just Lost Availability
+Scenario: Get No Offers for Product Which Available Quantity Was Reduced
   Given Deliverer 'D1' adds a new offer for product 'CORN_TORTILLA' and available quantity of '2'
   And Customer sends request to get offers for product 'CORN_TORTILLA'
   And Customer places order using offer from deliverer 'D1'
