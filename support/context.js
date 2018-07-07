@@ -84,6 +84,10 @@ ${JSON.stringify(this.lastResponse)}`,
   setCurrentRequest(currentRequest) {
     this.currentRequest = currentRequest
   }
+
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 }
 
 setWorldConstructor(Context)
