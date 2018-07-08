@@ -13,8 +13,9 @@ Scenario: Get Offer For One Product
   And Customer should receive zero offers for product 'RED_APPLE'
 
 Scenario: Get Two Offers For One Product
-  Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA'
-  And Deliverer 'D2' publishes a new offer for product 'CORN_TORTILLA'
+  Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' with price '20.00'
+  And Deliverer 'D2' publishes a new offer for product 'CORN_TORTILLA' with price '19.99'
   When Customer sends request to get offers grouped by product
   Then Customer should receive successful response
   And Customer should receive 2 offer(s) for product 'CORN_TORTILLA'
+  And Customer should receive estimated price of '19.99' for product 'CORN_TORTILLA'
