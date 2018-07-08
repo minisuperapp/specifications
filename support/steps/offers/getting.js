@@ -128,6 +128,16 @@ Then('Customer should receive estimated price of {string} for product {string}',
   expect(this.state.offersByProduct[productCode].estimatedPrice).to.equal(estimatedPrice)
 })
 
-Then('Customer should receive estimated time of arrival for product {string}', function (productCode) {
+Then('Customer should receive estimated time of arrival for product {string}', function(
+  productCode,
+) {
   expect(this.state.offersByProduct[productCode].estimatedTimeOfArrival).not.to.be.undefined
 })
+
+Then(
+  'Customer should receive estimated time of arrival between {int} and {int} for product {string}',
+  function(min, max, productCode) {
+    expect(this.state.offersByProduct[productCode].estimatedTimeOfArrival).not.to.be.undefined
+    expect(this.state.offersByProduct[productCode].estimatedTimeOfArrival).to.be.within(min, max)
+  },
+)
