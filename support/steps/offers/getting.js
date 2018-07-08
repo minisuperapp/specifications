@@ -57,11 +57,8 @@ Then('Customer should receive {int} offers', function(offersNumber) {
   expect(this.lastResponse.data.length).to.equal(offersNumber)
 })
 
-Then('the offer should have an id, price, and estimated arrival time', function() {
-  const offersWithMissingDetails = R.filter(
-    o => !o.id || !o.unitPrice || !o.estimatedArrivalTime,
-    this.lastResponse.data,
-  )
+Then('the offer should have an id, and price', function() {
+  const offersWithMissingDetails = R.filter(o => !o.id || !o.unitPrice, this.lastResponse.data)
 
   expect(offersWithMissingDetails).to.be.empty
 })
@@ -138,6 +135,6 @@ Then(
   'Customer should receive estimated time of arrival between {int} and {int} for product {string}',
   function(min, max, productCode) {
     expect(this.state.offersByProduct[productCode].estimatedTimeOfArrival).not.to.be.undefined
-    expect(this.state.offersByProduct[productCode].estimatedTimeOfArrival).to.be.within(min, max)
+    expect(Number.parseInt(this.state.offersByProduct[productCode].estimatedTimeOfArrival)).to.be.within(min, max)
   },
 )
