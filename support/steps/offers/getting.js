@@ -59,7 +59,7 @@ Then('Customer should receive {int} offers', function(offersNumber) {
 
 Then('the offer should have an id, price, and estimated arrival time', function() {
   const offersWithMissingDetails = R.filter(
-    o => !o.id || !o.price || !o.estimated_arrival_time,
+    o => !o.id || !o.unitPrice || !o.estimatedArrivalTime,
     this.lastResponse.data,
   )
 
@@ -68,7 +68,7 @@ Then('the offer should have an id, price, and estimated arrival time', function(
 
 Then('the offer should have the deliverer name, reputation, and last rating', function() {
   const deliverersWithMissingDetails = R.filter(
-    o => !o.deliverer.name || !o.deliverer.reputation || !o.deliverer.last_rating,
+    o => !o.deliverer.name || !o.deliverer.reputation || !o.deliverer.lastRating,
     this.lastResponse.data,
   )
 
