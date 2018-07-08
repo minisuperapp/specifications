@@ -9,6 +9,7 @@ Scenario: Get Offer For One Product
   When Customer sends request to get offers grouped by product
   Then Customer should receive successful response
   And Customer should receive 1 offer(s) for product 'CORN_TORTILLA'
+  And Customer should receive estimated price of '20.00' for product 'CORN_TORTILLA'
   And Customer should receive zero offers for product 'RED_APPLE'
 
 Scenario: Get Two Offers For One Product

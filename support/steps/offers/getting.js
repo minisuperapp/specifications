@@ -86,7 +86,10 @@ Then('Customer should receive zero offers', function() {
   expect(this.lastResponse.data.length).to.equal(0)
 })
 
-Then('Customer should receive {int} offer\\(s) for product {string}', function (offers, productCode) {
+Then('Customer should receive {int} offer\\(s) for product {string}', function(
+  offers,
+  productCode,
+) {
   expect(this.lastResponse.data.offersByProduct[productCode]).not.to.be.undefined
   expect(this.lastResponse.data.offersByProduct[productCode].offers).not.to.be.undefined
   expect(this.lastResponse.data.offersByProduct[productCode].offers.length).to.equal(offers)
@@ -94,7 +97,7 @@ Then('Customer should receive {int} offer\\(s) for product {string}', function (
   expect(this.lastResponse.data.offersById[offerId]).not.to.be.undefined
 })
 
-Then('Customer should receive zero offers for product {string}', function (productCode) {
+Then('Customer should receive zero offers for product {string}', function(productCode) {
   expect(this.lastResponse.data.offersByProduct[productCode]).to.be.undefined
 })
 
@@ -106,11 +109,21 @@ Then('Customer should see {int} offer\\(s) for product {string}', function(offer
   expect(this.state.offersById[offerId]).not.to.be.undefined
 })
 
-Then('Customer should see zero offers for product {string}', function (productCode) {
-  expect(this.state.offersByProduct[productCode] === undefined ||
-  this.state.offersByProduct[productCode].offers.length === 0).to.be.true
+Then('Customer should see zero offers for product {string}', function(productCode) {
+  expect(
+    this.state.offersByProduct[productCode] === undefined ||
+      this.state.offersByProduct[productCode].offers.length === 0,
+  ).to.be.true
 })
 
-Then('Customer should receive product {string} in first place', function (productCode) {
+Then('Customer should receive product {string} in first place', function(productCode) {
   expect(this.lastResponse.data[0].code).to.equal(productCode)
+})
+
+Then('Customer should receive estimated price of {string} for product {string}', function(
+  estimatedPrice,
+  productCode,
+) {
+  expect(this.state.offersByProduct[productCode].estimatedPrice).not.to.be.undefined
+  expect(this.state.offersByProduct[productCode].estimatedPrice).to.equal(estimatedPrice)
 })
