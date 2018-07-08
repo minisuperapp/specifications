@@ -8,6 +8,7 @@ class PublishOfferRequest extends Base {
     this.locationLongitude = build.locationLongitude
     this.deliveryRadius = build.deliveryRadius
     this.availableQuantity = build.availableQuantity
+    this.unitPrice = build.unitPrice
   }
   get method() {
     return 'POST'
@@ -20,7 +21,7 @@ class PublishOfferRequest extends Base {
       productCode: this.productCode,
       availableQuantity: this.availableQuantity,
       onHandQuantity: '10',
-      unitPrice: '18',
+      unitPrice: this.unitPrice,
       deliveryRadius: this.deliveryRadius,
       location: {
         latitude: this.locationLatitude,
@@ -37,6 +38,7 @@ class PublishOfferRequest extends Base {
         this.locationLatitude = '28.1867348'
         this.locationLongitude = '-105.4608849'
         this.deliveryRadius = '1'
+        this.unitPrice = '18.00'
       }
       withProductCode(productCode) {
         this.productCode = productCode
@@ -56,6 +58,10 @@ class PublishOfferRequest extends Base {
       }
       withDeliveryRadius(deliveryRadius) {
         this.deliveryRadius = deliveryRadius
+        return this
+      }
+      withUnitPrice(unitPrice) {
+        this.unitPrice = unitPrice
         return this
       }
       build() {

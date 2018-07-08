@@ -12,14 +12,16 @@ Given('Deliverer {string} publishes a new offer for product {string}', async fun
   await this.send(request)
 })
 
-Given('Deliverer {string} publishes a new offer for product {string} with price {string}', async function(
-  deliverer,
-  productCode,
-  price,
-) {
-  const request = new PublishOfferRequest.Builder(deliverer).withProductCode(productCode).build()
-  await this.send(request)
-})
+Given(
+  'Deliverer {string} publishes a new offer for product {string} with price {string}',
+  async function(deliverer, productCode, unitPrice) {
+    const request = new PublishOfferRequest.Builder(deliverer)
+    .withProductCode(productCode)
+    .withUnitPrice(unitPrice)
+    .build()
+    await this.send(request)
+  },
+)
 
 Given(
   'Deliverer {string} publishes a new offer for product {string} with location {string}, {string} and delivery radius of {int} KM',
