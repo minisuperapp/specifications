@@ -127,3 +127,7 @@ Then('Customer should receive estimated price of {string} for product {string}',
   expect(this.state.offersByProduct[productCode].estimatedPrice).not.to.be.undefined
   expect(this.state.offersByProduct[productCode].estimatedPrice).to.equal(estimatedPrice)
 })
+
+Then('Customer should receive estimated time of arrival for product {string}', function (productCode) {
+  expect(this.state.offersByProduct[productCode].estimatedTimeOfArrival).not.to.be.undefined
+})
