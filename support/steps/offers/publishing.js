@@ -4,7 +4,7 @@ const UpdateOfferLocationRequest = require('support/requests/deliverer-api/offer
 const { expect } = require('chai')
 const R = require('ramda')
 
-Given('Deliverer {string} adds a new offer for product {string}', async function(
+Given('Deliverer {string} publishes a new offer for product {string}', async function(
   deliverer,
   productCode,
 ) {
@@ -12,8 +12,17 @@ Given('Deliverer {string} adds a new offer for product {string}', async function
   await this.send(request)
 })
 
+Given('Deliverer {string} publishes a new offer for product {string} with price {string}', async function(
+  deliverer,
+  productCode,
+  price,
+) {
+  const request = new PublishOfferRequest.Builder(deliverer).withProductCode(productCode).build()
+  await this.send(request)
+})
+
 Given(
-  'Deliverer {string} adds a new offer for product {string} with location {string}, {string} and delivery radius of {int} KM',
+  'Deliverer {string} publishes a new offer for product {string} with location {string}, {string} and delivery radius of {int} KM',
   async function(deliverer, productCode, latitude, longitude, deliveryRadius) {
     const request = new PublishOfferRequest.Builder(deliverer)
       .withProductCode(productCode)
@@ -26,7 +35,7 @@ Given(
 )
 
 Given(
-  'Deliverer {string} adds a new offer for product {string} and available quantity of {string}',
+  'Deliverer {string} publishes a new offer for product {string} and available quantity of {string}',
   async function(deliverer, productCode, availableQuantity) {
     const request = new PublishOfferRequest.Builder(deliverer)
       .withProductCode(productCode)
@@ -36,16 +45,14 @@ Given(
   },
 )
 
-When('Deliverer {string} adds a new offer', async function(deliverer) {
+When('Deliverer {string} publishes a new offer', async function(deliverer) {
   const request = new PublishOfferRequest.Builder(deliverer).build()
   await this.send(request)
 })
 
 When('Deliverer {string} updates offer location', async function(deliverer) {
   const offerId = this.delivererOfferMap[deliverer]
-  const request = new UpdateOfferLocationRequest.Builder(deliverer)
-  .withOfferId(offerId)
-  .build()
+  const request = new UpdateOfferLocationRequest.Builder(deliverer).withOfferId(offerId).build()
   await this.send(request)
 })
 

@@ -12,7 +12,7 @@ Scenario: Get Products
   And all products should have a code
 
 Scenario: Get Products Ordered By Offer Existence
-  Given Deliverer 'D1' adds a new offer for product 'RED_APPLE'
+  Given Deliverer 'D1' publishes a new offer for product 'RED_APPLE'
   When Customer sends request to get products
   Then Customer should receive successful response
   And Customer should receive product 'RED_APPLE' in first place
