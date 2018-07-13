@@ -12,7 +12,7 @@ class OffersGroupedByProductRequest extends Base {
   get path() {
     return 'offers/grouped_by_product'
   }
-  get body() {
+  get payload() {
     return {
       customerLocation: {
         latitude: this.customerLocationLatitude,

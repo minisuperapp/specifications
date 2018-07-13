@@ -14,7 +14,7 @@ class GetProductOffersRequest extends Base {
   get path() {
     return 'product/offers'
   }
-  get body() {
+  get payload() {
     return {
       productCode: this.productCode,
       quantity: this.quantity,

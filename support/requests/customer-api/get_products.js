@@ -12,7 +12,7 @@ class GetProductsRequest extends Base {
   get path() {
     return 'products'
   }
-  get body() {
+  get payload() {
     return {
       customerLocation: {
         latitude: this.customerLocationLatitude,

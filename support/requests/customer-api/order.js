@@ -11,7 +11,7 @@ class OrderRequest extends Base {
   get path() {
     return 'order'
   }
-  get body() {
+  get payload() {
     return {
         "offerId": this.offerId,
         "quantity": "2",

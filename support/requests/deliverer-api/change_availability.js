@@ -11,7 +11,7 @@ class DelivererAvailabilityChangeRequest extends Base {
   get path() {
     return 'change_availability'
   }
-  get body() {
+  get payload() {
     return {
       available: this.available
     }

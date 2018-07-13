@@ -11,7 +11,7 @@ class DelivererApiCleanRequest extends Base {
   get path() {
     return 'clean'
   }
-  get body() {
+  get payload() {
     return {
     }
   }

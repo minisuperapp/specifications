@@ -5,7 +5,7 @@ const api_requester = {}
 api_requester.send = async (request, sessionToken) => {
   const info = {
     method: request.method,
-    body: request.method === 'GET' ? undefined : JSON.stringify(request.body),
+    body: request.method === 'GET' ? undefined : JSON.stringify(request.payload),
     headers: {
       'Content-Type': 'application/json',
       'session-token': sessionToken,

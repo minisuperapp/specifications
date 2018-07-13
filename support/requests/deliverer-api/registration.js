@@ -13,7 +13,7 @@ class CustomerRegistrationRequest extends Base {
   get path() {
     return 'register'
   }
-  get body() {
+  get payload() {
     return {
       name: this.name,
       phoneNumber: this.phoneNumber,

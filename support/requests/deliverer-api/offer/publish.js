@@ -16,7 +16,7 @@ class PublishOfferRequest extends Base {
   get path() {
     return 'offer/publish'
   }
-  get body() {
+  get payload() {
     return {
       productCode: this.productCode,
       availableQuantity: this.availableQuantity,

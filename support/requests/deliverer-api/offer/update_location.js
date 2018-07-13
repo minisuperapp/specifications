@@ -13,7 +13,7 @@ class UpdateOfferLocationRequest extends Base {
   get path() {
     return 'offer/update_location'
   }
-  get body() {
+  get payload() {
     return {
       offerId: this.offerId,
       newLocation: {

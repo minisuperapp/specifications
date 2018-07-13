@@ -11,7 +11,7 @@ class CustomerLoginRequest extends Base {
   get path() {
     return 'login'
   }
-  get body() {
+  get payload() {
     return {
       phoneNumber: this.phoneNumber
     }
