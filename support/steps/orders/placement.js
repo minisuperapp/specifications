@@ -15,3 +15,7 @@ When('Customer places order using offer from deliverer {string}', async function
     .build()
   await this.send(request)
 })
+
+Then('Customer should receive an order id', function () {
+  expect(this.lastResponse.data.id).not.to.be.undefined
+})
