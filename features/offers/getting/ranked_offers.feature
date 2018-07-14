@@ -1,7 +1,7 @@
 Feature: Get Ranked Offers For A Selected Product
 
 Background:
-  Given Deliverer 'D1' registers with phone number '6481095678' and logs in
+  Given Deliverer 'D1' registers with phone number '6481095678', name 'Alonso Ayala', and then and logs in
   And Deliverer 'D2' registers with phone number '6481107823' and logs in
 
 Scenario: Get Available Offer For 1 Product

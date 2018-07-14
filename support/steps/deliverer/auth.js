@@ -28,6 +28,21 @@ Given('Deliverer {string} registers with phone number {string} and logs in', asy
   await this.send(loginRequest)
 })
 
+Given(
+  'Deliverer {string} registers with phone number {string}, name {string}, and then and logs in',
+  async function(deliverer, phoneNumber, name) {
+    await this.send(
+      new DelivererRegistrationRequest.Builder()
+      .withPhoneNumber(phoneNumber)
+      .withName(name)
+      .build()
+    )
+    await this.send(
+      new DelivererLoginRequest.Builder(deliverer).withPhoneNumber(phoneNumber).build(),
+    )
+  },
+)
+
 When(
   'Deliverer {string} registers with name {string}, phone number {string}, and password {string}',
   async function(deliverer, name, phoneNumber, password) {
