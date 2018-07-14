@@ -63,13 +63,17 @@ Then('the offer should have an id, and price', function() {
   expect(offersWithMissingDetails).to.be.empty
 })
 
-Then('the offer should have the deliverer name, reputation, and last rating', function() {
+Then('the offer should have the deliverer reputation, and last rating', function() {
   const deliverersWithMissingDetails = R.filter(
-    o => !o.deliverer.name || !o.deliverer.reputation || !o.deliverer.lastRating,
+    o => !o.deliverer.reputation || !o.deliverer.lastRating,
     this.lastResponse.data,
   )
 
   expect(deliverersWithMissingDetails).to.be.empty
+})
+
+Then('the deliverer name should be {string}', function (name) {
+  expect(this.lastResponse.data[0].deliverer.name).to.equal(name)
 })
 
 Then('offers should be ordered by estimated arrival time', function() {

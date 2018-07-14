@@ -10,7 +10,8 @@ Scenario: Get Available Offer For 1 Product
   Then Customer should receive successful response
   And Customer should receive one offer
   And the offer should have an id, and price
-  And the offer should have the deliverer name, reputation, and last rating
+  And the offer should have the deliverer reputation, and last rating
+  And the deliverer name should be 'Alonso Ayala'
 
 Scenario: Get No Offers For A Product Not Yet Offered
   Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA'
