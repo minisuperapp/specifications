@@ -11,6 +11,7 @@ class Context {
     this.lastResponse = {}
     this.currentRequest = {}
     this.delivererSessionTokens = []
+    this.customerCode = null
     this.delivererOfferMap = {}
     this.state = {
       offersByProduct: {},
@@ -47,8 +48,13 @@ ${JSON.stringify(request.body)}`,
     this.lastResponse = await apiRequester.send(
       request,
       this.delivererSessionTokens[request.deliverer],
+      this.customerCode,
     )
-console.log('this.lastResponse: ' + JSON.stringify(this.lastResponse))
+
+    if (this.lastResponse.headers && this.lastResponse.headers.setCustomerCode) {
+      this.customerCode = this.lastResponse.headers.setCustomerCode
+    }
+
     if (request instanceof DelivererLoginRequest && this.lastResponse.success) {
       this.delivererSessionTokens[request.deliverer] = this.lastResponse.data.sessionToken
     }

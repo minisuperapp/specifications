@@ -2,13 +2,14 @@ require('isomorphic-fetch')
 
 const api_requester = {}
 
-api_requester.send = async (request, sessionToken) => {
+api_requester.send = async (request, delivererSessionToken, customerCode) => {
   const info = {
     method: request.method,
     body: request.method === 'GET' ? undefined : JSON.stringify(request.payload),
     headers: {
       'Content-Type': 'application/json',
-      'session-token': sessionToken,
+      'session-token': delivererSessionToken,
+      'customer-code': customerCode,
       'is-test': 'true',
     },
   }
@@ -19,7 +20,9 @@ api_requester.send = async (request, sessionToken) => {
     if (res.headers && res.headers._headers && res.headers._headers['set-customer-code']) {
       return Promise.resolve({
         ...jsonResponse,
-        setCustomerCode: res.headers._headers['set-customer-code'][0]
+        headers: {
+          setCustomerCode: res.headers._headers['set-customer-code'][0]
+        }
       })
     }
 
