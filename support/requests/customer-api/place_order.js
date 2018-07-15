@@ -1,6 +1,6 @@
 const Base = require('./$base')
 
-class OrderRequest extends Base {
+class PlaceOrderRequest extends Base {
   constructor(build) {
     super()
     this.offerId = build.offerId
@@ -49,11 +49,11 @@ class OrderRequest extends Base {
         return this
       }
       build() {
-        return new OrderRequest(this)
+        return new PlaceOrderRequest(this)
       }
     }
     return Builder
   }
 }
 
-module.exports = OrderRequest
+module.exports = PlaceOrderRequest

@@ -3,6 +3,7 @@ const apiRequester = require('support/api_requester')
 const DelivererLoginRequest = require('./requests/deliverer-api/login')
 const PublishOfferRequest = require('./requests/deliverer-api/offer/publish')
 const OffersGroupedByProductRequest = require('./requests/customer-api/offers_grouped_by_product')
+const PlaceOrderRequest = require('./requests/customer-api/place_order')
 const socket = require('./socket')
 
 class Context {
@@ -13,6 +14,7 @@ class Context {
     this.delivererSessionTokens = []
     this.customerCode = null
     this.delivererOfferMap = {}
+    this.lastPlacedOrderId = ''
     this.state = {
       customer: {
         offersByProduct: {},
@@ -70,6 +72,10 @@ ${JSON.stringify(request.body)}`,
 
     if (request instanceof OffersGroupedByProductRequest && this.lastResponse.success) {
       this.state.customer.offersByProduct = this.lastResponse.data.offersByProduct
+    }
+
+    if (request instanceof PlaceOrderRequest && this.lastResponse.success) {
+      this.lastPlacedOrderId = this.lastResponse.data.id
     }
 
     this.attach(
