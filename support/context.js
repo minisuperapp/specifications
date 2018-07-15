@@ -28,6 +28,10 @@ class Context {
       latitude: '28.1867048',
       longitude: '-105.4600849',
     }
+    this._setSocketListeners()
+  }
+
+  _setSocketListeners() {
     socket.on('published_offer', offer => {
       if (!this.state.customer.offersByProduct[offer.productCode]) {
         this.state.customer.offersByProduct[offer.productCode] = {}

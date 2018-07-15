@@ -41,7 +41,8 @@ Then('Customer should receive an order with total {string}', function(total) {
   expect(this.lastResponse.data.total).to.equal(Number.parseFloat(total))
 })
 
-Then('Deliverer should receive a pending delivery with last placed order id', function () {
+Then('Deliverer should receive a pending delivery with last placed order id', async function () {
+  await this.sleep(200)
   expect(this.state.deliverer.pendingDeliveries[0]).not.to.be.undefined
   expect(this.state.deliverer.pendingDeliveries[0].orderId).to.equal(this.lastPlacedOrderId)
 })
