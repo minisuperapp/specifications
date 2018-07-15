@@ -58,25 +58,7 @@ ${JSON.stringify(request.body)}`,
       this.customerCode,
     )
 
-    if (this.lastResponse.cookies && this.lastResponse.cookies.setCustomerCode) {
-      this.customerCode = this.lastResponse.cookies.setCustomerCode
-    }
-
-    if (request instanceof DelivererLoginRequest && this.lastResponse.success) {
-      this.delivererSessionTokens[request.deliverer] = this.lastResponse.data.sessionToken
-    }
-
-    if (request instanceof PublishOfferRequest && this.lastResponse.success) {
-      this.delivererOfferMap[request.deliverer] = this.lastResponse.data.id
-    }
-
-    if (request instanceof OffersGroupedByProductRequest && this.lastResponse.success) {
-      this.state.customer.offersByProduct = this.lastResponse.data.offersByProduct
-    }
-
-    if (request instanceof PlaceOrderRequest && this.lastResponse.success) {
-      this.lastPlacedOrderId = this.lastResponse.data.id
-    }
+    this._modifyLocalState(request)
 
     this.attach(
       `response
@@ -104,6 +86,28 @@ ${JSON.stringify(this.lastResponse)}`,
 
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  _modifyLocalState(request) {
+    if (this.lastResponse.cookies && this.lastResponse.cookies.setCustomerCode) {
+      this.customerCode = this.lastResponse.cookies.setCustomerCode
+    }
+
+    if (request instanceof DelivererLoginRequest && this.lastResponse.success) {
+      this.delivererSessionTokens[request.deliverer] = this.lastResponse.data.sessionToken
+    }
+
+    if (request instanceof PublishOfferRequest && this.lastResponse.success) {
+      this.delivererOfferMap[request.deliverer] = this.lastResponse.data.id
+    }
+
+    if (request instanceof OffersGroupedByProductRequest && this.lastResponse.success) {
+      this.state.customer.offersByProduct = this.lastResponse.data.offersByProduct
+    }
+
+    if (request instanceof PlaceOrderRequest && this.lastResponse.success) {
+      this.lastPlacedOrderId = this.lastResponse.data.id
+    }
   }
 }
 
