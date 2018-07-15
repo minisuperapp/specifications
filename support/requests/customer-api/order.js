@@ -9,7 +9,7 @@ class OrderRequest extends Base {
     return 'POST'
   }
   get path() {
-    return 'order'
+    return 'order/place'
   }
   get payload() {
     return {
