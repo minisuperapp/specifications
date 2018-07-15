@@ -1,4 +1,5 @@
 require('isomorphic-fetch')
+const cookie = require('cookie')
 
 const api_requester = {}
 
@@ -17,19 +18,24 @@ api_requester.send = async (request, delivererSessionToken, customerCode) => {
     const res = await fetch(request.uri + '/' + request.path, info)
     const jsonResponse = await res.json()
 
-    if (res.headers && res.headers._headers && res.headers._headers['set-customer-code']) {
-      return Promise.resolve({
-        ...jsonResponse,
-        headers: {
-          setCustomerCode: res.headers._headers['set-customer-code'][0]
-        }
-      })
-    }
-
-    return Promise.resolve(jsonResponse)
+    return Promise.resolve({
+      ...jsonResponse,
+      cookies: {
+        setCustomerCode: getCustomerCookie(res),
+      },
+    })
   } catch (err) {
     console.log(request.uri + '/' + request.path, info)
     console.log(err)
+  }
+}
+
+function getCustomerCookie(res) {
+  if (res.headers && res.headers._headers && res.headers._headers['set-cookie']) {
+    const foundCookie = res.headers._headers['set-cookie'].find(c => c.startsWith('customer-code'))
+    if (foundCookie) {
+      return cookie.parse(foundCookie)['customer-code']
+    }
   }
 }
 
