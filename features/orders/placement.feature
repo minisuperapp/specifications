@@ -6,6 +6,6 @@ Background:
 
 Scenario: Place an order successfully
   Given Customer sends request to get offers for product 'CORN_TORTILLA'
-  When Customer places order using offer from deliverer 'D1'
+  When Customer places order using offer from deliverer 'D1' with quantity '2'
   Then Customer should receive successful response
   And Customer should receive an order id

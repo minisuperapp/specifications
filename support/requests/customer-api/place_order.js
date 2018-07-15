@@ -4,6 +4,7 @@ class OrderRequest extends Base {
   constructor(build) {
     super()
     this.offerId = build.offerId
+    this.quantity = build.quantity
   }
   get method() {
     return 'POST'
@@ -14,7 +15,7 @@ class OrderRequest extends Base {
   get payload() {
     return {
         "offerId": this.offerId,
-        "quantity": "2",
+        "quantity": this.quantity,
       	"customerLocation": {
       		"latitude": "27.670799",
       		"longitude": "105.1599679"
@@ -25,9 +26,14 @@ class OrderRequest extends Base {
     class Builder {
          constructor() {
            this.offerId = ''
+           this.quantity = '0'
          }
          withOfferId(offerId) {
            this.offerId = offerId
+           return this
+         }
+         withQuantity(quantity) {
+           this.quantity = quantity
            return this
          }
          build() {
