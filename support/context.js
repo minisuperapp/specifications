@@ -18,11 +18,11 @@ class Context {
     this.state = {
       customer: {
         offersByProduct: {},
-        offersById: {}
+        offersById: {},
       },
       deliverer: {
-        pendingDeliveries: []
-      }
+        pendingDeliveries: [],
+      },
     }
     this.currentLocation = {
       latitude: '28.1867048',
@@ -35,7 +35,7 @@ class Context {
       }
       this.state.customer.offersByProduct[offer.productCode].offers.push(offer)
       this.state.customer.offersById[offer.id] = {
-        [offer.id]: offer
+        [offer.id]: offer,
       }
     })
     socket.on('update_offer_location', offer => {
@@ -45,12 +45,7 @@ class Context {
   }
 
   async send(request) {
-    this.attach(`${request.method} /${request.path} (${request.apiServer})`)
-    this.attach(
-      `request
-${JSON.stringify(request.body)}`,
-      'text/plain',
-    )
+    this._logRequestInfo(request)
 
     this.lastResponse = await apiRequester.send(
       request,
@@ -58,13 +53,9 @@ ${JSON.stringify(request.body)}`,
       this.customerCode,
     )
 
-    this._modifyLocalState(request)
+    this._logResponseInfo(this.lastResponse)
 
-    this.attach(
-      `response
-${JSON.stringify(this.lastResponse)}`,
-      'text/plain',
-    )
+    this._modifyLocalState(request)
 
     return this.lastResponse
   }
@@ -85,7 +76,24 @@ ${JSON.stringify(this.lastResponse)}`,
   }
 
   sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout(resolve, ms))
+  }
+
+  _logRequestInfo(request) {
+    this.attach(`${request.method} /${request.path} (${request.apiServer})`)
+    this.attach(
+      `request
+${JSON.stringify(request.body)}`,
+      'text/plain',
+    )
+  }
+
+  _logResponseInfo(response) {
+    this.attach(
+      `response
+${JSON.stringify(response)}`,
+      'text/plain',
+    )
   }
 
   _modifyLocalState(request) {
