@@ -21,7 +21,7 @@ api_requester.send = async (request, delivererSessionToken, customerCode) => {
     return Promise.resolve({
       ...jsonResponse,
       cookies: {
-        setCustomerCode: getCustomerCookie(res),
+        setCustomerCode: getCustomerCodeCookie(res),
       },
     })
   } catch (err) {
@@ -30,7 +30,7 @@ api_requester.send = async (request, delivererSessionToken, customerCode) => {
   }
 }
 
-function getCustomerCookie(res) {
+function getCustomerCodeCookie(res) {
   if (res.headers && res.headers._headers && res.headers._headers['set-cookie']) {
     const foundCookie = res.headers._headers['set-cookie'].find(c => c.startsWith('customer-code'))
     if (foundCookie) {
