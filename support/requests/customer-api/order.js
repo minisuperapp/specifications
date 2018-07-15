@@ -15,7 +15,7 @@ class OrderRequest extends Base {
     return {
         "offerId": this.offerId,
         "quantity": "2",
-      	"deliveryPoint": {
+      	"customerLocation": {
       		"latitude": "27.670799",
       		"longitude": "105.1599679"
       	}

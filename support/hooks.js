@@ -29,14 +29,18 @@ Before(async function(testCase) {
 After(async function(testCase) {
   await redisClient.flushall()
   await knex('deliverers').del()
-  return await knex('customers').del()
+  await knex('orders').del()
+  await knex('order_times').del()
+  await knex('customers').del()
 })
 
 AfterAll(async function() {
   socket.disconnect()
   await redisClient.flushall()
   await knex('deliverers').del()
+  await knex('orders').del()
+  await knex('order_times').del()
   await knex('customers').del()
   await knex.destroy()
-  return await redisClient.quit()
+  await redisClient.quit()
 })
