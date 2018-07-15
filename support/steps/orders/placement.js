@@ -19,6 +19,10 @@ When('Customer send request to place an order', async function () {
   await this.send(request)
 })
 
-Then('Customer should receive an order id', function () {
+Then('Customer should receive an order with non empty id', function () {
   expect(this.lastResponse.data.id).not.to.be.undefined
+})
+
+Then('Customer should receive an order with total {string}', function (total) {
+  expect(this.lastResponse.data.total).to.equal(Number.parseFloat(total))
 })
