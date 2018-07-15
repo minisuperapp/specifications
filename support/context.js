@@ -72,7 +72,7 @@ class Context {
   }
 
   async sendCustomerLocation(latitude, longitude) {
-    socket.emit('send_location', {
+    socket.emit('customer_location', {
       latitude,
       longitude,
     })
