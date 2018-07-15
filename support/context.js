@@ -53,7 +53,6 @@ ${JSON.stringify(request.body)}`,
 
     if (this.lastResponse.cookies && this.lastResponse.cookies.setCustomerCode) {
       this.customerCode = this.lastResponse.cookies.setCustomerCode
-      console.log('this.customerCode: ' + this.customerCode)
     }
 
     if (request instanceof DelivererLoginRequest && this.lastResponse.success) {
