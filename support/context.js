@@ -14,26 +14,31 @@ class Context {
     this.customerCode = null
     this.delivererOfferMap = {}
     this.state = {
-      offersByProduct: {},
-      offersById: {}
+      customer: {
+        offersByProduct: {},
+        offersById: {}
+      },
+      deliverer: {
+        pendingDeliveries: []
+      }
     }
     this.currentLocation = {
       latitude: '28.1867048',
       longitude: '-105.4600849',
     }
     socket.on('published_offer', offer => {
-      if (!this.state.offersByProduct[offer.productCode]) {
-        this.state.offersByProduct[offer.productCode] = {}
-        this.state.offersByProduct[offer.productCode].offers = []
+      if (!this.state.customer.offersByProduct[offer.productCode]) {
+        this.state.customer.offersByProduct[offer.productCode] = {}
+        this.state.customer.offersByProduct[offer.productCode].offers = []
       }
-      this.state.offersByProduct[offer.productCode].offers.push(offer)
-      this.state.offersById[offer.id] = {
+      this.state.customer.offersByProduct[offer.productCode].offers.push(offer)
+      this.state.customer.offersById[offer.id] = {
         [offer.id]: offer
       }
     })
     socket.on('update_offer_location', offer => {
-      this.state.offersById[offer.offerId].latitude = offer.newLocation.latitude
-      this.state.offersById[offer.offerId].longitude = offer.newLocation.longitude
+      this.state.customer.offersById[offer.offerId].latitude = offer.newLocation.latitude
+      this.state.customer.offersById[offer.offerId].longitude = offer.newLocation.longitude
     })
   }
 
@@ -64,7 +69,7 @@ ${JSON.stringify(request.body)}`,
     }
 
     if (request instanceof OffersGroupedByProductRequest && this.lastResponse.success) {
-      this.state.offersByProduct = this.lastResponse.data.offersByProduct
+      this.state.customer.offersByProduct = this.lastResponse.data.offersByProduct
     }
 
     this.attach(

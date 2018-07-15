@@ -103,17 +103,17 @@ Then('Customer should receive zero offers for product {string}', function(produc
 })
 
 Then('Customer should see {int} offer\\(s) for product {string}', function(offers, productCode) {
-  expect(this.state.offersByProduct[productCode]).not.to.be.undefined
-  expect(this.state.offersByProduct[productCode].offers).not.to.be.undefined
-  expect(this.state.offersByProduct[productCode].offers.length).to.equal(offers)
-  const offerId = this.state.offersByProduct[productCode].offers[0].id
-  expect(this.state.offersById[offerId]).not.to.be.undefined
+  expect(this.state.customer.offersByProduct[productCode]).not.to.be.undefined
+  expect(this.state.customer.offersByProduct[productCode].offers).not.to.be.undefined
+  expect(this.state.customer.offersByProduct[productCode].offers.length).to.equal(offers)
+  const offerId = this.state.customer.offersByProduct[productCode].offers[0].id
+  expect(this.state.customer.offersById[offerId]).not.to.be.undefined
 })
 
 Then('Customer should see zero offers for product {string}', function(productCode) {
   expect(
-    this.state.offersByProduct[productCode] === undefined ||
-      this.state.offersByProduct[productCode].offers.length === 0,
+    this.state.customer.offersByProduct[productCode] === undefined ||
+      this.state.customer.offersByProduct[productCode].offers.length === 0,
   ).to.be.true
 })
 
@@ -125,20 +125,20 @@ Then('Customer should receive estimated price of {string} for product {string}',
   estimatedPrice,
   productCode,
 ) {
-  expect(this.state.offersByProduct[productCode].estimatedPrice).not.to.be.undefined
-  expect(this.state.offersByProduct[productCode].estimatedPrice).to.equal(estimatedPrice)
+  expect(this.state.customer.offersByProduct[productCode].estimatedPrice).not.to.be.undefined
+  expect(this.state.customer.offersByProduct[productCode].estimatedPrice).to.equal(estimatedPrice)
 })
 
 Then('Customer should receive estimated time of arrival for product {string}', function(
   productCode,
 ) {
-  expect(this.state.offersByProduct[productCode].estimatedTimeOfArrival).not.to.be.undefined
+  expect(this.state.customer.offersByProduct[productCode].estimatedTimeOfArrival).not.to.be.undefined
 })
 
 Then(
   'Customer should receive estimated time of arrival between {int} and {int} for product {string}',
   function(min, max, productCode) {
-    expect(this.state.offersByProduct[productCode].estimatedTimeOfArrival).not.to.be.undefined
-    expect(Number.parseInt(this.state.offersByProduct[productCode].estimatedTimeOfArrival)).to.be.within(min, max)
+    expect(this.state.customer.offersByProduct[productCode].estimatedTimeOfArrival).not.to.be.undefined
+    expect(Number.parseInt(this.state.customer.offersByProduct[productCode].estimatedTimeOfArrival)).to.be.within(min, max)
   },
 )
