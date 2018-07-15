@@ -46,6 +46,9 @@ class Context {
       this.state.customer.offersById[offer.offerId].latitude = offer.newLocation.latitude
       this.state.customer.offersById[offer.offerId].longitude = offer.newLocation.longitude
     })
+    socket.on('placed_order', order => {
+      this.state.deliverer.pendingDeliveries.push(order)
+    })
   }
 
   async send(request) {
