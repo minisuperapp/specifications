@@ -5,6 +5,8 @@ class OrderRequest extends Base {
     super()
     this.offerId = build.offerId
     this.quantity = build.quantity
+    this.customerLocationLatitude = build.customerLocationLatitude
+    this.customerLocationLongitude = build.customerLocationLongitude
   }
   get method() {
     return 'POST'
@@ -14,33 +16,43 @@ class OrderRequest extends Base {
   }
   get payload() {
     return {
-        "offerId": this.offerId,
-        "quantity": this.quantity,
-      	"customerLocation": {
-      		"latitude": "27.670799",
-      		"longitude": "105.1599679"
-      	}
+      offerId: this.offerId,
+      quantity: this.quantity,
+      customerLocation: {
+        latitude: '27.670799',
+        longitude: '105.1599679',
+      },
     }
   }
   static get Builder() {
     class Builder {
-         constructor() {
-           this.offerId = ''
-           this.quantity = '0'
-         }
-         withOfferId(offerId) {
-           this.offerId = offerId
-           return this
-         }
-         withQuantity(quantity) {
-           this.quantity = quantity
-           return this
-         }
-         build() {
-            return new OrderRequest(this)
-         }
+      constructor() {
+        this.offerId = ''
+        this.quantity = '0'
+        this.customerLocationLatitude = '27.670799'
+        this.customerLocationLongitude = '105.1599679'
       }
-      return Builder
+      withOfferId(offerId) {
+        this.offerId = offerId
+        return this
+      }
+      withQuantity(quantity) {
+        this.quantity = quantity
+        return this
+      }
+      withCustomerLocationLatitude(latitude) {
+        this.customerLocationLatitude = latitude
+        return this
+      }
+      withCustomerLocationLongitude(longitude) {
+        this.customerLocationLongitude = longitude
+        return this
+      }
+      build() {
+        return new OrderRequest(this)
+      }
+    }
+    return Builder
   }
 }
 
