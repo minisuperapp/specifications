@@ -14,7 +14,16 @@ api_requester.send = async (request, sessionToken) => {
   }
   try {
     const res = await fetch(request.uri + '/' + request.path, info)
-    return await res.json()
+    const jsonResponse = await res.json()
+
+    if (res.headers && res.headers._headers && res.headers._headers['set-customer-code']) {
+      return Promise.resolve({
+        ...jsonResponse,
+        setCustomerCode: res.headers._headers['set-customer-code'][0]
+      })
+    }
+
+    return Promise.resolve(jsonResponse)
   } catch (err) {
     console.log(request.uri + '/' + request.path, info)
     console.log(err)

@@ -48,7 +48,7 @@ ${JSON.stringify(request.body)}`,
       request,
       this.delivererSessionTokens[request.deliverer],
     )
-
+console.log('this.lastResponse: ' + JSON.stringify(this.lastResponse))
     if (request instanceof DelivererLoginRequest && this.lastResponse.success) {
       this.delivererSessionTokens[request.deliverer] = this.lastResponse.data.sessionToken
     }
