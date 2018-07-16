@@ -102,7 +102,8 @@ Then('Customer should receive zero offers for product {string}', function(produc
   expect(this.lastResponse.data.offersByProduct[productCode]).to.be.undefined
 })
 
-Then('Customer should see {int} offer\\(s) for product {string}', function(offers, productCode) {
+Then('Customer should see {int} offer\\(s) for product {string}', async function(offers, productCode) {
+  await this.sleep(200)
   expect(this.state.customer.offersByProduct[productCode]).not.to.be.undefined
   expect(this.state.customer.offersByProduct[productCode].offers).not.to.be.undefined
   expect(this.state.customer.offersByProduct[productCode].offers.length).to.equal(offers)
