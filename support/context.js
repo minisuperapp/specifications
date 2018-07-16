@@ -4,7 +4,7 @@ const DelivererLoginRequest = require('./requests/deliverer-api/login')
 const PublishOfferRequest = require('./requests/deliverer-api/offer/publish')
 const OffersGroupedByProductRequest = require('./requests/customer-api/offers_grouped_by_product')
 const PlaceOrderRequest = require('./requests/customer-api/place_order')
-const socket = require('./socket')
+const customerSocket = require('./customer_socket')
 
 class Context {
   constructor(params) {
@@ -32,7 +32,7 @@ class Context {
   }
 
   _setSocketListeners() {
-    socket.on('published_offer', offer => {
+    customerSocket.on('published_offer', offer => {
       if (!this.state.customer.offersByProduct[offer.productCode]) {
         this.state.customer.offersByProduct[offer.productCode] = {}
         this.state.customer.offersByProduct[offer.productCode].offers = []
@@ -42,11 +42,11 @@ class Context {
         [offer.id]: offer,
       }
     })
-    socket.on('update_offer_location', offer => {
+    customerSocket.on('update_offer_location', offer => {
       this.state.customer.offersById[offer.offerId].latitude = offer.newLocation.latitude
       this.state.customer.offersById[offer.offerId].longitude = offer.newLocation.longitude
     })
-    socket.on('placed_order', order => {
+    customerSocket.on('placed_order', order => {
       this.state.deliverer.pendingDeliveries.push(order)
     })
   }
@@ -72,7 +72,7 @@ class Context {
   }
 
   async sendCustomerLocation(latitude, longitude) {
-    socket.emit('customer_location', {
+    customerSocket.emit('customer_location', {
       latitude,
       longitude,
     })
