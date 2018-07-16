@@ -28,6 +28,7 @@ Before(async function(testCase) {
 
 After(async function(testCase) {
   await redisClient.flushall()
+  Object.keys(this.delivererSockets).map(d => this.delivererSockets[d].disconnect())
   await knex('deliverers').del()
   await knex('orders').del()
   await knex('order_times').del()

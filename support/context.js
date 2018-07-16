@@ -5,6 +5,7 @@ const PublishOfferRequest = require('./requests/deliverer-api/offer/publish')
 const OffersGroupedByProductRequest = require('./requests/customer-api/offers_grouped_by_product')
 const PlaceOrderRequest = require('./requests/customer-api/place_order')
 const customerSocket = require('./customer_socket')
+const delivererSocket = require('./deliverer_socket')
 
 class Context {
   constructor(params) {
@@ -14,15 +15,14 @@ class Context {
     this.delivererSessionTokens = []
     this.customerCode = null
     this.delivererOfferMap = {}
+    this.delivererSockets = {}
     this.lastPlacedOrderId = ''
     this.state = {
       customer: {
         offersByProduct: {},
         offersById: {},
       },
-      deliverer: {
-        pendingDeliveries: [],
-      },
+      deliverer: {},
     }
     this.currentLocation = {
       latitude: '28.1867048',
@@ -46,8 +46,11 @@ class Context {
       this.state.customer.offersById[offer.offerId].latitude = offer.newLocation.latitude
       this.state.customer.offersById[offer.offerId].longitude = offer.newLocation.longitude
     })
-    customerSocket.on('placed_order', order => {
-      this.state.deliverer.pendingDeliveries.push(order)
+
+    Object.keys(this.delivererSockets).map(d => {
+      this.delivererSockets[d].on('placed_order', order => {
+        this.state.deliverer[d].pendingDeliveries.push(order)
+      })
     })
   }
 
@@ -110,6 +113,7 @@ ${JSON.stringify(response)}`,
 
     if (request instanceof DelivererLoginRequest && this.lastResponse.success) {
       this.delivererSessionTokens[request.deliverer] = this.lastResponse.data.sessionToken
+      this.delivererSockets[request.deliverer] = delivererSocket.create()
     }
 
     if (request instanceof PublishOfferRequest && this.lastResponse.success) {
