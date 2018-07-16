@@ -3,7 +3,7 @@ const io = require('socket.io-client')
 let socket
 
 const connect = () => {
-  socket = io(`${process.env.DELIVERER_API_URL || 'http://localhost:3001'}`)
+  socket = io(`${process.env.CUSTOMER_API_URL || 'http://localhost:3000'}`)
 }
 
 const emit = (event, data) => {
