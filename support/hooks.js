@@ -4,11 +4,11 @@ const redis = require('thunk-redis')
 const { BeforeAll, Before, After, AfterAll } = require('cucumber')
 const Bluebird = require('bluebird')
 const DelivererApiCleanRequest = require('./requests/deliverer-api/clean')
-const apiRequester = require('support/tools/api_requester')
+const apiRequester = require('./api_requester')
 const Knex = require('knex')
 const KnexFile = require('./knexfile')
 const knex = Knex(KnexFile)
-const customerSocket = require('./customer_socket')
+const customerSocket = require('./web/customer_socket')
 const redisClient = redis.createClient(config.redis_host, {
   usePromise: Bluebird,
   returnBuffers: false,

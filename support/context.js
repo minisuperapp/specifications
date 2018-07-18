@@ -1,11 +1,11 @@
 const { setWorldConstructor } = require('cucumber')
-const apiRequester = require('support/tools/api_requester')
+const apiRequester = require('./api_requester')
 const DelivererLoginRequest = require('./requests/deliverer-api/login')
 const PublishOfferRequest = require('./requests/deliverer-api/offer/publish')
 const OffersGroupedByProductRequest = require('./requests/customer-api/offers_grouped_by_product')
 const PlaceOrderRequest = require('./requests/customer-api/place_order')
-const customerSocket = require('./customer_socket')
-const delivererSocket = require('./deliverer_socket')
+const customerSocket = require('./web/customer_socket')
+const delivererSocket = require('./web/deliverer_socket')
 
 class Context {
   constructor(params) {
