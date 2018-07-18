@@ -1,5 +1,5 @@
 const { Given, When, Then } = require('cucumber')
-const GetProductsRequest = require('support/requests/customer-api/get_products')
+const GetProductsRequest = require('support/web/requests/customer-api/get_products')
 const { expect } = require('chai')
 const R = require('ramda')
 

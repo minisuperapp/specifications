@@ -1,6 +1,6 @@
 const { Given, When, Then } = require('cucumber')
-const DelivererLoginRequest = require('support/requests/deliverer-api/login')
-const DelivererRegistrationRequest = require('support/requests/deliverer-api/registration')
+const DelivererLoginRequest = require('support/web/requests/deliverer-api/login')
+const DelivererRegistrationRequest = require('support/web/requests/deliverer-api/registration')
 const { expect } = require('chai')
 
 Given(

@@ -1,6 +1,6 @@
 const { Given, When, Then } = require('cucumber')
-const PublishOfferRequest = require('support/requests/deliverer-api/offer/publish')
-const UpdateOfferLocationRequest = require('support/requests/deliverer-api/offer/update_location')
+const PublishOfferRequest = require('support/web/requests/deliverer-api/offer/publish')
+const UpdateOfferLocationRequest = require('support/web/requests/deliverer-api/offer/update_location')
 const { expect } = require('chai')
 const R = require('ramda')
 

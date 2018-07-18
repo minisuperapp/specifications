@@ -1,5 +1,5 @@
 const { Given, When, Then } = require('cucumber')
-const PlaceOrderRequest = require('support/requests/customer-api/place_order')
+const PlaceOrderRequest = require('support/web/requests/customer-api/place_order')
 const { expect } = require('chai')
 
 Given(

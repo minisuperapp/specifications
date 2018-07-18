@@ -1,5 +1,5 @@
 const { Given, When, Then } = require('cucumber')
-const DelivererAvailabilityChangeRequest = require('support/requests/deliverer-api/change_availability')
+const DelivererAvailabilityChangeRequest = require('support/web/requests/deliverer-api/change_availability')
 const { expect } = require('chai')
 const R = require('ramda')
 
