@@ -8,7 +8,7 @@ const apiRequester = require('./web/api_requester')
 const Knex = require('knex')
 const KnexFile = require('./knexfile')
 const knex = Knex(KnexFile)
-const customerSocket = require('./web/customer_socket')
+const customerSocket = require('./web/sockets/customer_socket_client')
 const redisClient = redis.createClient(config.redis_host, {
   usePromise: Bluebird,
   returnBuffers: false,

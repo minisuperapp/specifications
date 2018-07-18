@@ -4,8 +4,8 @@ const DelivererLoginRequest = require('./web/requests/deliverer-api/login')
 const PublishOfferRequest = require('./web/requests/deliverer-api/offer/publish')
 const OffersGroupedByProductRequest = require('./web/requests/customer-api/offers_grouped_by_product')
 const PlaceOrderRequest = require('./web/requests/customer-api/place_order')
-const customerSocket = require('./web/customer_socket')
-const delivererSocket = require('./web/deliverer_socket')
+const customerSocket = require('./web/sockets/customer_socket_client')
+const delivererSocket = require('./web/sockets/deliverer_socket_client')
 
 class Context {
   constructor(params) {
