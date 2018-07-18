@@ -1,5 +1,5 @@
 const { setWorldConstructor } = require('cucumber')
-const apiRequester = require('support/api_requester')
+const apiRequester = require('support/tools/api_requester')
 const DelivererLoginRequest = require('./requests/deliverer-api/login')
 const PublishOfferRequest = require('./requests/deliverer-api/offer/publish')
 const OffersGroupedByProductRequest = require('./requests/customer-api/offers_grouped_by_product')
