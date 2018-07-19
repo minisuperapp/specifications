@@ -114,6 +114,10 @@ ${JSON.stringify(response)}`,
     if (request instanceof DelivererLoginRequest && this.lastResponse.success) {
       this.delivererSessionTokens[request.deliverer] = this.lastResponse.data.sessionToken
       this.delivererSockets[request.deliverer] = delivererSocket.create()
+      this.delivererSockets[request.deliverer].emit(
+        'deliverer_socket_connection',
+        this.lastResponse.data.sessionToken,
+      )
     }
 
     if (request instanceof PublishOfferRequest && this.lastResponse.success) {
