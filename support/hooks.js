@@ -29,19 +29,19 @@ Before(async function(testCase) {
 After(async function(testCase) {
   await redisClient.flushall()
   Object.keys(this.delivererSockets).map(d => this.delivererSockets[d].disconnect())
-  await knex('deliverers').truncate()
   await knex('orders').truncate()
   await knex('order_times').truncate()
   await knex('customers').truncate()
+  await knex('deliverers').truncate()
 })
 
 AfterAll(async function() {
   customerSocket.disconnect()
   await redisClient.flushall()
-  await knex('deliverers').truncate()
   await knex('orders').truncate()
   await knex('order_times').truncate()
   await knex('customers').truncate()
+  await knex('deliverers').truncate()
   await knex.destroy()
   await redisClient.quit()
 })
