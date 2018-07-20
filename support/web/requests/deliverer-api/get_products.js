@@ -2,7 +2,9 @@ const Base = require('./$base')
 
 class GetProductsRequest extends Base {
   constructor(build) {
-    super()
+    super(build.deliverer)
+    this.customerLocationLatitude = build.customerLocationLatitude
+    this.customerLocationLongitude = build.customerLocationLongitude
   }
   get method() {
     return 'POST'
@@ -11,11 +13,14 @@ class GetProductsRequest extends Base {
     return 'products'
   }
   get payload() {
-    return {}
+    return {
+    }
   }
   static get Builder() {
     class Builder {
-      constructor() {}
+      constructor(deliverer) {
+        this.deliverer = deliverer
+      }
       build() {
         return new GetProductsRequest(this)
       }
