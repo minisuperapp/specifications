@@ -23,12 +23,14 @@ BeforeAll(async function() {
 
 Before(async function(testCase) {
   this.currentProductOffers = {}
+  this.delivererSockets = {}
   this.sendCustomerLocation(this.currentLocation.latitude, this.currentLocation.longitude)
 })
 
 After(async function(testCase) {
   await redisClient.flushall()
   Object.keys(this.delivererSockets).map(d => this.delivererSockets[d].disconnect())
+  this.delivererSockets = {}
   await knex('orders').truncate()
   await knex('order_times').truncate()
   await knex('customers').truncate()

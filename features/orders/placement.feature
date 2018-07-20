@@ -10,4 +10,4 @@ Scenario: Place an order successfully
   Then Customer should receive successful response
   And Customer should receive an order with non empty id
   And Customer should receive an order with total '37'
-  And Deliverer should receive a pending delivery with last placed order id
+  And Deliverer 'D1' should receive a pending delivery with last placed order id

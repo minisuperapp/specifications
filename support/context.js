@@ -46,12 +46,6 @@ class Context {
       this.state.customer.offersById[offer.offerId].latitude = offer.newLocation.latitude
       this.state.customer.offersById[offer.offerId].longitude = offer.newLocation.longitude
     })
-
-    Object.keys(this.delivererSockets).map(d => {
-      this.delivererSockets[d].on('placed_order', order => {
-        this.state.deliverer[d].pendingDeliveries.push(order)
-      })
-    })
   }
 
   async send(request) {
@@ -113,11 +107,17 @@ ${JSON.stringify(response)}`,
 
     if (request instanceof DelivererLoginRequest && this.lastResponse.success) {
       this.delivererSessionTokens[request.deliverer] = this.lastResponse.data.sessionToken
-      this.delivererSockets[request.deliverer] = delivererSocket.create()
-      this.delivererSockets[request.deliverer].emit(
-        'deliverer_socket_connection',
-        this.lastResponse.data.sessionToken,
-      )
+
+      const socket = delivererSocket.create()
+      this.delivererSockets[request.deliverer] = socket
+      socket.on('placed_order', order => {
+        if (!this.state.deliverer[request.deliverer]) {
+          this.state.deliverer[request.deliverer] = {}
+          this.state.deliverer[request.deliverer].pendingDeliveries = []
+        }
+        this.state.deliverer[request.deliverer].pendingDeliveries.push(order)
+      })
+      socket.emit('deliverer_socket_connection', this.lastResponse.data.sessionToken)
     }
 
     if (request instanceof PublishOfferRequest && this.lastResponse.success) {
