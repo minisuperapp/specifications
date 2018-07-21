@@ -1,9 +1,12 @@
+const config = require('config')
 const io = require('socket.io-client')
 
 let socket
 
 const connect = () => {
-  socket = io(`${process.env.CUSTOMER_API_URL || 'http://localhost:3000'}`)
+  socket = io(config.customer_api_host, {
+    query: `customerLocation=${JSON.stringify(config.mocks.customerLocation)}`,
+  })
 }
 
 const emit = (event, data) => {
@@ -19,5 +22,8 @@ const disconnect = () => {
 }
 
 module.exports = {
-  connect, emit, on, disconnect
+  connect,
+  emit,
+  on,
+  disconnect,
 }

@@ -7,7 +7,6 @@ const R = require('ramda')
 Given(
   'Customer sends request to get offers grouped by product with location {string}, {string}',
   async function(latitude, longitude) {
-    this.sendCustomerLocation(latitude, longitude)
     const request = new OffersGroupedByProductRequest.Builder()
       .withCustomerLocationLatitude(latitude)
       .withCustomerLocationLongitude(longitude)

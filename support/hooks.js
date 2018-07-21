@@ -24,7 +24,6 @@ BeforeAll(async function() {
 Before(async function(testCase) {
   this.currentProductOffers = {}
   this.delivererSockets = {}
-  this.sendCustomerLocation(this.currentLocation.latitude, this.currentLocation.longitude)
 })
 
 After(async function(testCase) {

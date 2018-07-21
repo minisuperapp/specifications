@@ -24,10 +24,6 @@ class Context {
       },
       deliverer: {},
     }
-    this.currentLocation = {
-      latitude: '28.1867048',
-      longitude: '-105.4600849',
-    }
     this._setSocketListeners()
   }
 
@@ -66,13 +62,6 @@ class Context {
 
   async sendCurrentRequest() {
     return await this.send(this.currentRequest.build())
-  }
-
-  async sendCustomerLocation(latitude, longitude) {
-    customerSocket.emit('customer_location', {
-      latitude,
-      longitude,
-    })
   }
 
   setCurrentRequest(currentRequest) {
