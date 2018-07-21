@@ -3,9 +3,9 @@ const io = require('socket.io-client')
 
 let socket
 
-const connect = () => {
+const connect = (customerLocation) => {
   socket = io(config.customer_api_host, {
-    query: `customerLocation=${JSON.stringify(config.mocks.customerLocation)}`,
+    query: `customerLocation=${JSON.stringify(customerLocation)}`,
   })
 }
 
@@ -18,7 +18,9 @@ const on = (event, func) => {
 }
 
 const disconnect = () => {
-  socket.disconnect()
+  if (socket) {
+    socket.disconnect()
+  }
 }
 
 module.exports = {

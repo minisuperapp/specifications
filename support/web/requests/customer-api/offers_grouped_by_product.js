@@ -1,4 +1,5 @@
 const Base = require('./$base')
+const config = require('config')
 
 class OffersGroupedByProductRequest extends Base {
   constructor(build) {
@@ -23,8 +24,8 @@ class OffersGroupedByProductRequest extends Base {
   static get Builder() {
     class Builder {
       constructor() {
-        this.customerLocationLatitude = '28.1867048'
-        this.customerLocationLongitude = '-105.4600849'
+        this.customerLocationLatitude = config.mocks.customerLocation.latitude
+        this.customerLocationLongitude = config.mocks.customerLocation.longitude
       }
       withCustomerLocationLatitude(customerLocationLatitude) {
         this.customerLocationLatitude = customerLocationLatitude

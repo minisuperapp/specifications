@@ -24,7 +24,6 @@ class Context {
       },
       deliverer: {},
     }
-    this._setSocketListeners()
   }
 
   _setSocketListeners() {
@@ -46,6 +45,11 @@ class Context {
 
   async send(request) {
     this._logRequestInfo(request)
+
+    if (request instanceof OffersGroupedByProductRequest) {
+      customerSocket.connect(request.payload.customerLocation)
+      this._setSocketListeners()
+    }
 
     this.lastResponse = await apiRequester.send(
       request,

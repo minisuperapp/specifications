@@ -17,10 +17,6 @@ const redisClient = redis.createClient(config.redis_host, {
   noDelay: true,
 })
 
-BeforeAll(async function() {
-  customerSocket.connect()
-})
-
 Before(async function(testCase) {
   this.currentProductOffers = {}
   this.delivererSockets = {}
@@ -29,6 +25,7 @@ Before(async function(testCase) {
 After(async function(testCase) {
   await redisClient.flushall()
   Object.keys(this.delivererSockets).map(d => this.delivererSockets[d].disconnect())
+  customerSocket.disconnect()
   this.delivererSockets = {}
   await knex('orders').truncate()
   await knex('order_times').truncate()
@@ -37,7 +34,6 @@ After(async function(testCase) {
 })
 
 AfterAll(async function() {
-  customerSocket.disconnect()
   await redisClient.flushall()
   await knex('orders').truncate()
   await knex('order_times').truncate()
