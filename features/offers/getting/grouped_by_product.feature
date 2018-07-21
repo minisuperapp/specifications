@@ -9,7 +9,7 @@ Scenario: Get Offer For One Product
   When Customer sends request to get offers grouped by product
   Then Customer should receive successful response
   And Customer should receive 1 offer(s) for product 'CORN_TORTILLA'
-  And Customer should receive estimated price of '20.00' for product 'CORN_TORTILLA'
+  And Customer should receive lowest unit price of '20.00' for product 'CORN_TORTILLA'
   And Customer should receive estimated time of arrival between 0 and 120 for product 'CORN_TORTILLA'
   And Customer should receive zero offers for product 'RED_APPLE'
 
@@ -19,7 +19,7 @@ Scenario: Get Two Offers For One Product
   When Customer sends request to get offers grouped by product
   Then Customer should receive successful response
   And Customer should receive 2 offer(s) for product 'CORN_TORTILLA'
-  And Customer should receive estimated price of '19.99' for product 'CORN_TORTILLA'
+  And Customer should receive lowest unit price of '19.99' for product 'CORN_TORTILLA'
 
 Scenario: Get Only Offers Within Deliverer's Radius For One Product
   Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' with price '20.00' with location '28.1867348', '-105.4608849' and delivery radius of 1 KM
@@ -27,4 +27,4 @@ Scenario: Get Only Offers Within Deliverer's Radius For One Product
   When Customer sends request to get offers grouped by product with location '28.1867048', '-105.4600849'
   Then Customer should receive successful response
   And Customer should receive 1 offer(s) for product 'CORN_TORTILLA'
-  And Customer should receive estimated price of '20.00' for product 'CORN_TORTILLA'
+  And Customer should receive lowest unit price of '20.00' for product 'CORN_TORTILLA'

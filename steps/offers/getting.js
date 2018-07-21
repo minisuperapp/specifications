@@ -122,12 +122,12 @@ Then('Customer should receive product {string} in first place', function(product
   expect(this.lastResponse.data[0].code).to.equal(productCode)
 })
 
-Then('Customer should receive estimated price of {string} for product {string}', function(
+Then('Customer should receive lowest unit price of {string} for product {string}', function(
   estimatedPrice,
   productCode,
 ) {
-  expect(this.state.customer.offersByProduct[productCode].estimatedPrice).not.to.be.undefined
-  expect(this.state.customer.offersByProduct[productCode].estimatedPrice).to.equal(estimatedPrice)
+  expect(this.state.customer.offersByProduct[productCode].lowestUnitPrice).not.to.be.undefined
+  expect(this.state.customer.offersByProduct[productCode].lowestUnitPrice).to.equal(estimatedPrice)
 })
 
 Then('Customer should receive estimated time of arrival for product {string}', function(
