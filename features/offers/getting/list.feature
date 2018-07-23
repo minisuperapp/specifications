@@ -1,4 +1,4 @@
-Feature: Get Ranked Offers For A Selected Product
+Feature: Get Offers List For A Selected Product
 
 Background:
   Given Deliverer 'D1' registers with phone number '6481095678', name 'Alonso Ayala', and then and logs in

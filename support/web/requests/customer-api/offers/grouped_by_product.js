@@ -1,4 +1,4 @@
-const Base = require('./$base')
+const Base = require('../$base')
 const config = require('config')
 
 class OffersGroupedByProductRequest extends Base {

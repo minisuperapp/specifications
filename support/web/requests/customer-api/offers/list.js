@@ -1,6 +1,6 @@
-const Base = require('./$base')
+const Base = require('../$base')
 
-class GetProductOffersRequest extends Base {
+class Request extends Base {
   constructor(build) {
     super()
     this.productCode = build.productCode
@@ -12,7 +12,7 @@ class GetProductOffersRequest extends Base {
     return 'POST'
   }
   get path() {
-    return 'product/offers'
+    return 'offers/list'
   }
   get payload() {
     return {
@@ -49,11 +49,11 @@ class GetProductOffersRequest extends Base {
         return this
       }
       build() {
-        return new GetProductOffersRequest(this)
+        return new Request(this)
       }
     }
     return Builder
   }
 }
 
-module.exports = GetProductOffersRequest
+module.exports = Request
