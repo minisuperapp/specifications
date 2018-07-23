@@ -80,7 +80,7 @@ class Context {
     this.attach(`${request.method} /${request.path} (${request.apiServer})`)
     this.attach(
       `request
-${JSON.stringify(request.body)}`,
+${JSON.stringify(request.payload)}`,
       'text/plain',
     )
   }
