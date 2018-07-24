@@ -35,3 +35,20 @@ jobs:
       - store_artifacts:
           path: cucumber_report.html
           destination: cucumber_report.html
+      - run:
+    name: Export to Cucumber Pro
+    command: |
+        profile_name=default
+        results_path=cucumber-results.json
+        mask='password|key|token'
+        revision=$(git rev-parse HEAD)
+        [[ -f $results_path ]] || (echo "No results found at '$results_path'" && exit 1)
+        env | \
+          grep --extended-regexp --ignore-case --invert-match "^.*(${mask}).*=" | \
+          curl \
+            --fail \
+            --request POST \
+            --form env=@- \
+            --form "profileName=${profile_name}" \
+            --form "payload=@${results_path};type=application/x.cucumber.js.results+json" \
+            "https://63071e9f13ab4639f6d10e0ae82b1a9fb6b@app.cucumber.pro/tests/results/we-go-foods/$revision"
