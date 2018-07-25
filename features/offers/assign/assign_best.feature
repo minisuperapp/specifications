@@ -5,9 +5,10 @@ Background:
   And Deliverer 'D2' registers with phone number '6391213489', name 'Maria', and then and logs in
 
 Scenario: Assign Lowest-Price Offer
-  Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA'
+  Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' with price '20.99'
+  And Deliverer 'D2' publishes a new offer for product 'CORN_TORTILLA' with price '19.99'
   When Customer sends request to assign best offer for product 'CORN_TORTILLA'
   Then Customer should receive successful response
-  And the offer should have an id, and unit price
+  And the offer should have unit price '19.99'
   And the offer should have the deliverer reputation, and last rating
-  And the deliverer name should be 'Juan'
+  And the deliverer name should be 'Maria'
