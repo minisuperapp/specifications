@@ -56,13 +56,23 @@ Then('Customer should receive {int} offers', function(offersNumber) {
   expect(this.lastResponse.data.length).to.equal(offersNumber)
 })
 
-Then('the offer should have an id, and price', function() {
+Then('the offer should have an id, and unit price', function() {
+  expect(this.lastResponse.data.id).not.to.be.undefined
+  expect(this.lastResponse.data.unitPrice).not.to.be.undefined
+})
+
+Then('the offer should have the deliverer reputation, and last rating', function() {
+  expect(this.lastResponse.data.deliverer.reputation).not.to.be.undefined
+  expect(this.lastResponse.data.deliverer.lastRating).not.to.be.undefined
+})
+
+Then('all offers should have an id, and price', function() {
   const offersWithMissingDetails = R.filter(o => !o.id || !o.unitPrice, this.lastResponse.data)
 
   expect(offersWithMissingDetails).to.be.empty
 })
 
-Then('the offer should have the deliverer reputation, and last rating', function() {
+Then('all offers should have the deliverer reputation, and last rating', function() {
   const deliverersWithMissingDetails = R.filter(
     o => !o.deliverer.reputation || !o.deliverer.lastRating,
     this.lastResponse.data,
@@ -71,8 +81,12 @@ Then('the offer should have the deliverer reputation, and last rating', function
   expect(deliverersWithMissingDetails).to.be.empty
 })
 
-Then('the deliverer name should be {string}', function (name) {
-  expect(this.lastResponse.data[0].deliverer.name).to.equal(name)
+Then('the deliverer name should be {string}', function(name) {
+  const deliverer = this.lastResponse.data.length
+    ? this.lastResponse.data[0].deliverer
+    : this.lastResponse.data.deliverer
+    
+  expect(deliverer.name).to.equal(name)
 })
 
 Then('offers should be ordered by estimated arrival time', function() {
@@ -101,7 +115,10 @@ Then('Customer should receive zero offers for product {string}', function(produc
   expect(this.lastResponse.data.offersByProduct[productCode]).to.be.undefined
 })
 
-Then('Customer should see {int} offer\\(s) for product {string}', async function(offers, productCode) {
+Then('Customer should see {int} offer\\(s) for product {string}', async function(
+  offers,
+  productCode,
+) {
   await this.sleep(200)
   expect(this.state.customer.offersByProduct[productCode]).not.to.be.undefined
   expect(this.state.customer.offersByProduct[productCode].offers).not.to.be.undefined
@@ -132,13 +149,17 @@ Then('Customer should receive lowest unit price of {string} for product {string}
 Then('Customer should receive estimated time of arrival for product {string}', function(
   productCode,
 ) {
-  expect(this.state.customer.offersByProduct[productCode].estimatedTimeOfArrival).not.to.be.undefined
+  expect(this.state.customer.offersByProduct[productCode].estimatedTimeOfArrival).not.to.be
+    .undefined
 })
 
 Then(
   'Customer should receive estimated time of arrival between {int} and {int} for product {string}',
   function(min, max, productCode) {
-    expect(this.state.customer.offersByProduct[productCode].estimatedTimeOfArrival).not.to.be.undefined
-    expect(Number.parseInt(this.state.customer.offersByProduct[productCode].estimatedTimeOfArrival)).to.be.within(min, max)
+    expect(this.state.customer.offersByProduct[productCode].estimatedTimeOfArrival).not.to.be
+      .undefined
+    expect(
+      Number.parseInt(this.state.customer.offersByProduct[productCode].estimatedTimeOfArrival),
+    ).to.be.within(min, max)
   },
 )
