@@ -3,6 +3,7 @@ const apiRequester = require('./web/api_requester')
 const DelivererLoginRequest = require('./web/requests/deliverer-api/login')
 const PublishOfferRequest = require('./web/requests/deliverer-api/offer/publish')
 const OffersGroupedByProductRequest = require('./web/requests/customer-api/offers/grouped_by_product')
+const BestOfferAssigmentRequest = require('support/web/requests/customer-api/offers/assign_best')
 const PlaceOrderRequest = require('./web/requests/customer-api/place_order')
 const customerSocket = require('./web/sockets/customer_socket_client')
 const delivererSocket = require('./web/sockets/deliverer_socket_client')
@@ -21,6 +22,7 @@ class Context {
       customer: {
         offersByProduct: {},
         offersById: {},
+        lastAssignedOfferId: ''
       },
       deliverer: {},
     }
@@ -123,6 +125,10 @@ ${JSON.stringify(response)}`,
 
     if (request instanceof PlaceOrderRequest && this.lastResponse.success) {
       this.lastPlacedOrderId = this.lastResponse.data.id
+    }
+
+    if (request instanceof BestOfferAssigmentRequest && this.lastResponse.success) {
+      this.state.customer.lastAssignedOfferId = this.lastResponse.data.id
     }
   }
 }

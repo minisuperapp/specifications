@@ -19,6 +19,13 @@ Scenario: Reduce Availability Of Assigned Offer
   When Customer sends request to get offers for product 'CORN_TORTILLA' and quantity '2'
   And Customer should receive zero offers
 
+Scenario: Reduce Availability Of Canceled Assigned Offer
+  Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' and available quantity of '2'
+  And Customer sends request to assign best offer for product 'CORN_TORTILLA' with quantity '2'
+  And Customer sends request to cancel last assigned offer
+  When Customer sends request to get offers for product 'CORN_TORTILLA' and quantity '2'
+  And Customer should receive one offer
+
 Scenario: Do Not Reduce Availability Of Not-Assigned Higher-Price Offer
   Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' with price '20.99' and available quantity of '2'
   Given Deliverer 'D2' publishes a new offer for product 'CORN_TORTILLA' with price '19.99' and available quantity of '2'
