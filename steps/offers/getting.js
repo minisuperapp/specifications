@@ -61,8 +61,9 @@ Then('the offer should have an id, and unit price', function() {
   expect(this.lastResponse.data.unitPrice).not.to.be.undefined
 })
 
-Then('the offer should have unit price {string}', function(unitPrice) {
-  expect(this.lastResponse.data.unitPrice).to.equal(unitPrice)
+Then('the offer unit price should be {string}', function(unitPrice) {
+  const offer = this.lastResponse.data.length ? this.lastResponse.data[0] : this.lastResponse.data
+  expect(offer.unitPrice).to.equal(unitPrice)
 })
 
 Then('the offer should have the deliverer reputation, and last rating', function() {

@@ -9,7 +9,7 @@ Scenario: Assign Lowest-Price Offer
   And Deliverer 'D2' publishes a new offer for product 'CORN_TORTILLA' with price '19.99'
   When Customer sends request to assign best offer for product 'CORN_TORTILLA'
   Then Customer should receive successful response
-  And the offer should have unit price '19.99'
+  And the offer unit price should be '19.99'
   And the offer should have the deliverer reputation, and last rating
   And the deliverer name should be 'Maria'
 
@@ -18,3 +18,12 @@ Scenario: Reduce Availability Of Assigned Offer
   And Customer sends request to assign best offer for product 'CORN_TORTILLA' with quantity '2'
   When Customer sends request to get offers for product 'CORN_TORTILLA' and quantity '2'
   And Customer should receive zero offers
+
+Scenario: Do Not Reduce Availability Of Not-Assigned Higher-Price Offer
+  Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' with price '20.99' and available quantity of '2'
+  Given Deliverer 'D2' publishes a new offer for product 'CORN_TORTILLA' with price '19.99' and available quantity of '2'
+  And Customer sends request to assign best offer for product 'CORN_TORTILLA' with quantity '2'
+  When Customer sends request to get offers for product 'CORN_TORTILLA' and quantity '2'
+  And Customer should receive one offer
+  And the offer unit price should be '20.99'
+  And the deliverer name should be 'Juan'

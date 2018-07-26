@@ -51,6 +51,18 @@ Given(
 )
 
 Given(
+  'Deliverer {string} publishes a new offer for product {string} with price {string} and available quantity of {string}',
+  async function(deliverer, productCode, unitPrice, availableQuantity) {
+    const request = new PublishOfferRequest.Builder(deliverer)
+      .withProductCode(productCode)
+      .withUnitPrice(unitPrice)
+      .withAvailableQuantity(availableQuantity)
+      .build()
+    await this.send(request)
+  },
+)
+
+Given(
   'Deliverer {string} publishes a new offer for product {string} and available quantity of {string}',
   async function(deliverer, productCode, availableQuantity) {
     const request = new PublishOfferRequest.Builder(deliverer)
