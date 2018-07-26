@@ -12,3 +12,9 @@ Scenario: Assign Lowest-Price Offer
   And the offer should have unit price '19.99'
   And the offer should have the deliverer reputation, and last rating
   And the deliverer name should be 'Maria'
+
+Scenario: Reduce Availability Of Assigned Offer
+  Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' and available quantity of '2'
+  And Customer sends request to assign best offer for product 'CORN_TORTILLA' with quantity '2'
+  When Customer sends request to get offers for product 'CORN_TORTILLA' and quantity '2'
+  And Customer should receive zero offers
