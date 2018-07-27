@@ -9,7 +9,7 @@ class Request extends Base {
     return 'POST'
   }
   get path() {
-    return 'offers/cancel'
+    return 'offers/discard_assignment'
   }
   get payload() {
     return {

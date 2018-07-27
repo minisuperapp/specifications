@@ -1,6 +1,6 @@
 const { Given, When, Then } = require('cucumber')
 const BestOfferAssigmentRequest = require('support/web/requests/customer-api/offers/assign_best')
-const CancelOfferAssigmentByCustomerRequest = require('support/web/requests/customer-api/offers/cancel')
+const DiscardOfferAssigmentRequest = require('support/web/requests/customer-api/offers/discard_assigment')
 const { expect } = require('chai')
 const R = require('ramda')
 
@@ -16,7 +16,7 @@ Given(
 )
 
 Given('Customer sends request to cancel last assigned offer', async function() {
-  const request = new CancelOfferAssigmentByCustomerRequest.Builder().withOfferId(
+  const request = new DiscardOfferAssigmentRequest.Builder().withOfferId(
     this.state.customer.lastAssignedOfferId,
   ).build()
   await this.send(request)
