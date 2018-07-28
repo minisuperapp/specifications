@@ -22,3 +22,11 @@ Then('the order should be for product {string}', function(productCode) {
 Then('the order should have quantity {string}', function(quantity) {
   expect(this.lastResponse.data[0].productQuantity).to.equal(quantity)
 })
+
+Then('the order should have customer location {string}, {string}', function(
+  customerLocationLatitude,
+  customerLocationLongitude,
+) {
+  expect(this.lastResponse.data[0].customerLocationLatitude).to.equal(customerLocationLatitude)
+  expect(this.lastResponse.data[0].customerLocationLongitude).to.equal(customerLocationLongitude)
+})

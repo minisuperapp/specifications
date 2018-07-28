@@ -19,8 +19,8 @@ class PlaceOrderRequest extends Base {
       offerId: this.offerId,
       quantity: this.quantity,
       customerLocation: {
-        latitude: '27.670799',
-        longitude: '105.1599679',
+        latitude: this.customerLocationLatitude,
+        longitude: this.customerLocationLongitude,
       },
     }
   }
