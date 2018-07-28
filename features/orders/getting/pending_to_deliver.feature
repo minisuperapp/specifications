@@ -9,3 +9,4 @@ Scenario: Get New Started Order
   When Deliverer 'D1' sends request to get started orders pending to deliver
   Then Deliverer should receive successful response
   And Deliverer should receive one order
+  And the order should be for product 'CORN_TORTILLA'
