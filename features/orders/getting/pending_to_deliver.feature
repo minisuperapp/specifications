@@ -1,4 +1,4 @@
-Feature: Get Started Orders Assigned To A Deliverer
+Feature: Get Orders As Deliverer Pending To Deliver
 
 Background:
   Given Deliverer 'D1' registers with phone number '6483516383' and logs in
