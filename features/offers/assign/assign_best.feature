@@ -19,7 +19,13 @@ Scenario: Reduce Availability Of Assigned Offer
   When Customer sends request to get offers for product 'CORN_TORTILLA' and quantity '2'
   And Customer should receive zero offers
 
-Scenario: Reduce Availability Of Canceled Assigned Offer
+# Scenario: Try To Assign Offer For Product With No Offers Available
+#   Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' and available quantity of '1'
+#   And Customer sends request to assign best offer for product 'CORN_TORTILLA' with quantity '1'
+#   When Customer sends request to assign best offer for product 'CORN_TORTILLA' with quantity '1'
+#   Then Customer should receive the error message 'offer.not.available.anymore'
+
+Scenario: Increase Availability Of Canceled Assigned Offer
   Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' and available quantity of '2'
   And Customer sends request to assign best offer for product 'CORN_TORTILLA' with quantity '2'
   And Customer sends request to cancel last assigned offer
@@ -32,5 +38,14 @@ Scenario: Do Not Reduce Availability Of Not-Assigned Higher-Price Offer
   And Customer sends request to assign best offer for product 'CORN_TORTILLA' with quantity '2'
   When Customer sends request to get offers for product 'CORN_TORTILLA' and quantity '2'
   And Customer should receive one offer
+  And the offer unit price should be '20.99'
+  And the deliverer name should be 'Juan'
+
+Scenario: Assign Next Lowest-Priced Offer When The Current Lowest-Priced Offer Has Not Enough Availability
+  Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' with price '20.99' and available quantity of '2'
+  Given Deliverer 'D2' publishes a new offer for product 'CORN_TORTILLA' with price '19.99' and available quantity of '2'
+  And Customer sends request to assign best offer for product 'CORN_TORTILLA' with quantity '2'
+  And Customer sends request to assign best offer for product 'CORN_TORTILLA' with quantity '1'
+  Then Customer should receive successful response
   And the offer unit price should be '20.99'
   And the deliverer name should be 'Juan'
