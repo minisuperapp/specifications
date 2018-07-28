@@ -6,5 +6,6 @@ Background:
 
 Scenario: Get New Started Order
   Given Customer places an order using offer from deliverer 'D1' with quantity '2'
-  When Deliverer 'D1' gets started orders pending to deliver
+  When Deliverer 'D1' sends request to get started orders pending to deliver
   Then Deliverer should receive successful response
+  And Deliverer should receive one order

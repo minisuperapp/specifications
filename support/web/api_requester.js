@@ -26,8 +26,7 @@ api_requester.send = async (request, delivererSessionToken, customerCode) => {
       },
     })
   } catch (err) {
-    console.log('responseText: ', responseText)
-    console.log(request.uri + '/' + request.path, info)
+    console.log(responseText, request.uri + '/' + request.path, info)
     throw err
   }
 }
