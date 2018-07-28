@@ -14,19 +14,21 @@ api_requester.send = async (request, delivererSessionToken, customerCode) => {
       'is-test': 'true',
     },
   }
+  let responseText
   try {
     const res = await fetch(request.uri + '/' + request.path, info)
-    const jsonResponse = await res.json()
+    responseText = await res.text()
 
     return Promise.resolve({
-      ...jsonResponse,
+      ...JSON.parse(responseText),
       cookies: {
         setCustomerCode: getCustomerCodeCookie(res),
       },
     })
   } catch (err) {
+    console.log('responseText: ', responseText)
     console.log(request.uri + '/' + request.path, info)
-    console.log(err)
+    throw err
   }
 }
 

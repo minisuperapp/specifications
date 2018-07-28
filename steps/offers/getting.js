@@ -1,8 +1,8 @@
+const R = require('ramda')
 const { Given, When, Then } = require('cucumber')
 const OffersListRequest = require('support/web/requests/customer-api/offers/list')
 const OffersGroupedByProductRequest = require('support/web/requests/customer-api/offers/grouped_by_product')
 const { expect } = require('chai')
-const R = require('ramda')
 
 Given(
   'Customer sends request to get offers grouped by product with location {string}, {string}',
