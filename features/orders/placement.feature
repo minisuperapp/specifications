@@ -6,7 +6,7 @@ Background:
 
 Scenario: Place an order successfully
   Given Customer sends request to get offers for product 'CORN_TORTILLA'
-  When Customer places order using offer from deliverer 'D1' with quantity '2' and location '27.670799', '105.1599679'
+  When Customer places an order using offer from deliverer 'D1' with quantity '2' and location '27.670799', '105.1599679'
   Then Customer should receive successful response
   And Customer should receive an order with non empty id
   And Customer should receive an order with total '37'

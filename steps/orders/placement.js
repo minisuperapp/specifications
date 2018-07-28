@@ -3,7 +3,7 @@ const PlaceOrderRequest = require('support/web/requests/customer-api/place_order
 const { expect } = require('chai')
 
 Given(
-  'Customer places order using offer from deliverer {string} with quantity {string}',
+  'Customer places an order using offer from deliverer {string} with quantity {string}',
   async function(deliverer, quantity) {
     const offerId = this.delivererOfferMap[deliverer]
     const request = new PlaceOrderRequest.Builder()
@@ -15,7 +15,7 @@ Given(
 )
 
 When(
-  'Customer places order using offer from deliverer {string} with quantity {string} and location {string}, {string}',
+  'Customer places an order using offer from deliverer {string} with quantity {string} and location {string}, {string}',
   async function(deliverer, quantity, latitude, longitude) {
     const offerId = this.delivererOfferMap[deliverer]
     const request = new PlaceOrderRequest.Builder()
