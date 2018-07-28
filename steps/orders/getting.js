@@ -18,3 +18,7 @@ Then('Deliverer should receive one order', function() {
 Then('the order should be for product {string}', function(productCode) {
   expect(this.lastResponse.data[0].productCode).to.equal(productCode)
 })
+
+Then('the order should have quantity {string}', function(quantity) {
+  expect(this.lastResponse.data[0].productQuantity).to.equal(quantity)
+})
