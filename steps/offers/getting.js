@@ -168,7 +168,3 @@ Then(
     ).to.be.within(min, max)
   },
 )
-
-Then('Customer should receive the error message {string}', function(string) {
-  
-})
