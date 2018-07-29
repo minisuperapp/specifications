@@ -36,4 +36,6 @@ Then('the order should have customer location {string}, {string}', function(
   )
 })
 
-Then('Customer should see order status as {string}', function(orderStatus) {})
+Then('Customer should see order status as {string}', function(orderStatus) {
+  expect(this.state.customer.orders[this.lastPlacedOrderId].status).to.equal(orderStatus)
+})
