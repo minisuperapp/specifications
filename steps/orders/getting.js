@@ -3,6 +3,12 @@ const { Given, When, Then } = require('cucumber')
 const AsDelivererListPendingOrdersToDeliverRequest = require('support/web/requests/deliverer-api/orders/list_pending_to_deliver')
 const { expect } = require('chai')
 
+Given('Customer subscribes to get order updates', async function() {
+  const socket = this.createCustomerSocket()
+  socket.emit('subscribe_for_order_updates', this.lastPlacedOrderId)
+  await this.sleep(300)
+})
+
 When('Deliverer {string} sends request to get started orders pending to deliver', async function(
   deliverer,
 ) {
