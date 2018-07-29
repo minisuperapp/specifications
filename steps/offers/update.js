@@ -3,7 +3,7 @@ const { expect } = require('chai')
 const R = require('ramda')
 
 Then(
-  'Then the offer location for product {string} should be updated to {string}, {string}',
+  'the offer location for product {string} should be updated to {string}, {string}',
   async function(product, latitude, longitude) {
     const currentLock = this.socketLocks.updateOfferLocation
     this.socketLocks.updateOfferLocation++

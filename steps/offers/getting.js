@@ -32,7 +32,8 @@ Given('Customer subscribes to get offers updates with location {string}, {string
   await this.sleep(300)
 })
 
-Given('Customer disconnet subscription for offers updates', function() {
+Given('Customer disconnects subscription for offers updates', async function() {
+  await this.sleep(200)
   const lastCustomerSocket = this.customerSockets[this.customerSockets.length - 1]
   lastCustomerSocket.disconnect()
 })
