@@ -27,6 +27,9 @@ class Context {
       },
       deliverer: {},
     }
+    this.socketLocks = {
+      updateOfferLocation: 0
+    }
   }
 
   _setSocketListeners(socket) {
@@ -44,6 +47,7 @@ class Context {
       await this.awaitOn(() => this.state.customer.offersById[offer.offerId])
       this.state.customer.offersById[offer.offerId].latitude = offer.newLocation.latitude
       this.state.customer.offersById[offer.offerId].longitude = offer.newLocation.longitude
+      this.socketLocks.updateOfferLocation--
     })
   }
 
