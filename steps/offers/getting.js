@@ -139,7 +139,7 @@ Then('Customer should see {int} offer\\(s) for product {string}', async function
   offers,
   productCode,
 ) {
-  await this.waitOn(() => this.state.customer.offersByProduct[productCode])
+  await this.awaitOn(() => this.state.customer.offersByProduct[productCode])
   expect(this.state.customer.offersByProduct[productCode]).not.to.be.undefined
   expect(this.state.customer.offersByProduct[productCode].offers).not.to.be.undefined
   expect(this.state.customer.offersByProduct[productCode].offers.length).to.equal(offers)

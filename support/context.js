@@ -41,7 +41,7 @@ class Context {
       }
     })
     socket.on('update_offer_location', async offer => {
-      await this.waitOn(() => this.state.customer.offersById[offer.offerId])
+      await this.awaitOn(() => this.state.customer.offersById[offer.offerId])
       this.state.customer.offersById[offer.offerId].latitude = offer.newLocation.latitude
       this.state.customer.offersById[offer.offerId].longitude = offer.newLocation.longitude
     })
@@ -78,7 +78,7 @@ class Context {
     this.currentRequest = currentRequest
   }
 
-  async waitOn(func) {
+  async awaitOn(func) {
     let tries = 10
     while(!func() && tries-- > 0) {
       await this.sleep(100)
