@@ -49,10 +49,6 @@ class Context {
   async send(request) {
     this._logRequestInfo(request)
 
-    if (request instanceof OffersGroupedByProductRequest) {
-      this.createCustomerSocket(request.payload.customerLocation)
-    }
-
     this.lastResponse = await apiRequester.send(
       request,
       this.delivererSessionTokens[request.deliverer],

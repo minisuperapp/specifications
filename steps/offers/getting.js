@@ -18,7 +18,17 @@ Given(
 )
 
 Given('Customer subscribes to get offers updates', function() {
-  // customerSocket.connect(config.mocks.customerLocation)
+  this.createCustomerSocket(config.mocks.customerLocation)
+})
+
+Given('Customer subscribes to get offers updates with location {string}, {string}', function(
+  latitude,
+  longitude,
+) {
+  this.createCustomerSocket({
+    latitude,
+    longitude,
+  })
 })
 
 When('Customer sends request to get offers grouped by product', async function() {
