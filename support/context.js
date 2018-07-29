@@ -30,6 +30,7 @@ class Context {
     this.socketLocks = {
       updateOfferLocation: 0
     }
+    this.socketExceptions = []
   }
 
   _setSocketListeners(socket) {
@@ -48,6 +49,9 @@ class Context {
       this.state.customer.offersById[offer.offerId].latitude = offer.newLocation.latitude
       this.state.customer.offersById[offer.offerId].longitude = offer.newLocation.longitude
       this.socketLocks.updateOfferLocation--
+    })
+    socket.on('warning', async message => {
+      this.socketExceptions.push(message)
     })
   }
 
