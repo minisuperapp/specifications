@@ -35,3 +35,5 @@ Then('the order should have customer location {string}, {string}', function(
     customerLocationLongitude,
   )
 })
+
+Then('Customer should see order status as {string}', function(orderStatus) {})
