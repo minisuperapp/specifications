@@ -19,16 +19,18 @@ class Context {
     this.delivererSockets = {}
     this.customerSockets = []
     this.lastPlacedOrderId = ''
-    this.state = {
+    this.initState = {
       customer: {
         offersByProduct: {},
         offersById: {},
-        lastAssignedOfferId: ''
+        lastAssignedOfferId: '',
+        orders: {},
       },
       deliverer: {},
     }
+    this.state = this.initState
     this.socketLocks = {
-      updateOfferLocation: 0
+      updateOfferLocation: 0,
     }
     this.socketExceptions = []
   }
@@ -88,7 +90,7 @@ class Context {
 
   async awaitOn(func) {
     let tries = 10
-    while(!func() && tries-- > 0) {
+    while (!func() && tries-- > 0) {
       await this.sleep(200)
     }
   }
@@ -144,6 +146,7 @@ ${JSON.stringify(response)}`,
 
     if (request instanceof PlaceOrderRequest && this.lastResponse.success) {
       this.lastPlacedOrderId = this.lastResponse.data.id
+      this.state.customer.orders[this.lastResponse.data.id] = this.lastResponse.data
     }
 
     if (request instanceof BestOfferAssigmentRequest && this.lastResponse.success) {

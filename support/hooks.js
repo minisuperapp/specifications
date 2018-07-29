@@ -19,7 +19,7 @@ const redisClient = redis.createClient(config.redis_host, {
 Before(async function(testCase) {
   this.currentProductOffers = {}
   this.delivererSockets = {}
-  this.createCustomerSocket(config.mocks.customerLocation)
+  this.createCustomerSocket(config.mocks.customerLocation) // For socket exception detection
 })
 
 After(async function(testCase) {
@@ -33,6 +33,7 @@ After(async function(testCase) {
     throw new Error(e)
   })
   this.socketExceptions = []
+  this.state = this.initState
   await knex('orders').truncate()
   await knex('order_times').truncate()
   await knex('customers').truncate()
