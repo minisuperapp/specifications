@@ -31,7 +31,8 @@ Given('Customer subscribes to get offers updates with location {string}, {string
 })
 
 Given('Customer disconnet subscription for offers updates', function() {
-  // this.customerSockets[0].disconnect()
+  const lastCustomerSocket = this.customerSockets[this.customerSockets.length - 1]
+  lastCustomerSocket.disconnect()
 })
 
 When('Customer sends request to get offers grouped by product', async function() {

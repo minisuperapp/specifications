@@ -15,7 +15,7 @@ Scenario: Do Not Notify Offer Publishing If Customer Disconnect Subscription
   And Deliverer 'D1' publishes a new offer for product 'RED_APPLE'
   And Customer disconnet subscription for offers updates
   And Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA'
-  # Then Customer should see zero offers for product 'CORN_TORTILLA'
+  Then Customer should see zero offers for product 'CORN_TORTILLA'
 
 Scenario: Do Not Notify Offer Publishing If Offer Is Outside Deliverer's Radius
   Given Customer sends request to get offers grouped by product with location '28.1867048', '-105.4600849'
