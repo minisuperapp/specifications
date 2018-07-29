@@ -15,6 +15,10 @@ Given(
   },
 )
 
+Given('Customer subscribes to get offers updates', function() {
+  
+})
+
 When('Customer sends request to get offers grouped by product', async function() {
   const request = new OffersGroupedByProductRequest.Builder().build()
   await this.send(request)
