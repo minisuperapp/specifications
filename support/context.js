@@ -85,7 +85,7 @@ class Context {
   async awaitOn(func) {
     let tries = 10
     while(!func() && tries-- > 0) {
-      await this.sleep(100)
+      await this.sleep(200)
     }
   }
 
