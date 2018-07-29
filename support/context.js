@@ -50,9 +50,7 @@ class Context {
     this._logRequestInfo(request)
 
     if (request instanceof OffersGroupedByProductRequest) {
-      const socket = customerSocket.create(request.payload.customerLocation)
-      this.customerSockets.push(socket)
-      this._setSocketListeners(socket)
+      this.createCustomerSocket(request.payload.customerLocation)
     }
 
     this.lastResponse = await apiRequester.send(
@@ -66,6 +64,12 @@ class Context {
     this._modifyLocalState(request)
 
     return this.lastResponse
+  }
+
+  createCustomerSocket(location) {
+    const socket = customerSocket.create(location)
+    this.customerSockets.push(socket)
+    this._setSocketListeners(socket)
   }
 
   async sendCurrentRequest() {
