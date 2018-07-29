@@ -139,10 +139,7 @@ Then('Customer should see {int} offer\\(s) for product {string}', async function
   offers,
   productCode,
 ) {
-  const tries = 10
-  while(!this.state.customer.offersByProduct[productCode] && tries-- > 0) {
-    await this.sleep(100)
-  }
+  await this.waitOn(() => this.state.customer.offersByProduct[productCode])
   expect(this.state.customer.offersByProduct[productCode]).not.to.be.undefined
   expect(this.state.customer.offersByProduct[productCode].offers).not.to.be.undefined
   expect(this.state.customer.offersByProduct[productCode].offers.length).to.equal(offers)
