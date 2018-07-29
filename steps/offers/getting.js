@@ -30,6 +30,10 @@ Given('Customer subscribes to get offers updates with location {string}, {string
   socket.emit('subscribe_for_offers_updates', { latitude, longitude })
 })
 
+Given('Customer disconnet subscription for offers updates', function() {
+  // this.customerSockets[0].disconnect()
+})
+
 When('Customer sends request to get offers grouped by product', async function() {
   const request = new OffersGroupedByProductRequest.Builder().build()
   await this.send(request)
