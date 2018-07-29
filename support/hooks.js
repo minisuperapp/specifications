@@ -27,6 +27,7 @@ After(async function(testCase) {
   Object.keys(this.delivererSockets).map(d => this.delivererSockets[d].disconnect())
   this.customerSockets = {}
   this.delivererSockets = {}
+  this.socketLocks.updateOfferLocation = 0
   await knex('orders').truncate()
   await knex('order_times').truncate()
   await knex('customers').truncate()
