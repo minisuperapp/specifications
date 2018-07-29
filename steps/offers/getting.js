@@ -18,17 +18,16 @@ Given(
 )
 
 Given('Customer subscribes to get offers updates', function() {
-  this.createCustomerSocket(config.mocks.customerLocation)
+  const socket = this.createCustomerSocket()
+  socket.emit('subscribe_for_offers_updates', config.mocks.customerLocation)
 })
 
 Given('Customer subscribes to get offers updates with location {string}, {string}', function(
   latitude,
   longitude,
 ) {
-  this.createCustomerSocket({
-    latitude,
-    longitude,
-  })
+  const socket = this.createCustomerSocket()
+  socket.emit('subscribe_for_offers_updates', { latitude, longitude })
 })
 
 When('Customer sends request to get offers grouped by product', async function() {
@@ -140,7 +139,10 @@ Then('Customer should see {int} offer\\(s) for product {string}', async function
   offers,
   productCode,
 ) {
-  await this.sleep(200)
+  const tries = 10
+  while(!this.state.customer.offersByProduct[productCode] && tries-- > 0) {
+    await this.sleep(100)
+  }
   expect(this.state.customer.offersByProduct[productCode]).not.to.be.undefined
   expect(this.state.customer.offersByProduct[productCode].offers).not.to.be.undefined
   expect(this.state.customer.offersByProduct[productCode].offers.length).to.equal(offers)

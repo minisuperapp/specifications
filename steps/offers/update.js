@@ -5,7 +5,7 @@ const R = require('ramda')
 Then(
   'Then the offer location for product {string} should be updated to {string}, {string}',
   async function(product, latitude, longitude) {
-    await this.sleep(200)
+    await this.sleep(600)
     const offerId = this.state.customer.offersByProduct[product].offers[0].id
     expect(this.state.customer.offersById[offerId]).not.to.be.undefined
     expect(this.state.customer.offersById[offerId].latitude).to.equal(latitude)

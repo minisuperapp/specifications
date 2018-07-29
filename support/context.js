@@ -40,7 +40,11 @@ class Context {
         [offer.id]: offer,
       }
     })
-    socket.on('update_offer_location', offer => {
+    socket.on('update_offer_location', async offer => {
+      const tries = 10
+      while(!this.state.customer.offersById[offer.offerId] && tries-- > 0) {
+        await this.sleep(100)
+      }
       this.state.customer.offersById[offer.offerId].latitude = offer.newLocation.latitude
       this.state.customer.offersById[offer.offerId].longitude = offer.newLocation.longitude
     })
@@ -66,6 +70,7 @@ class Context {
     const socket = customerSocket.create(location)
     this.customerSockets.push(socket)
     this._setSocketListeners(socket)
+    return socket
   }
 
   async sendCurrentRequest() {
