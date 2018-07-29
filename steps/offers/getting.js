@@ -1,7 +1,9 @@
 const R = require('ramda')
+const config = require('config')
 const { Given, When, Then } = require('cucumber')
 const OffersListRequest = require('support/web/requests/customer-api/offers/list')
 const OffersGroupedByProductRequest = require('support/web/requests/customer-api/offers/grouped_by_product')
+const customerSocket = require('support/web/sockets/customer_socket_client')
 const { expect } = require('chai')
 
 Given(
@@ -16,7 +18,7 @@ Given(
 )
 
 Given('Customer subscribes to get offers updates', function() {
-  
+  // customerSocket.connect(config.mocks.customerLocation)
 })
 
 When('Customer sends request to get offers grouped by product', async function() {

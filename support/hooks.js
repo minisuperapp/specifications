@@ -8,7 +8,6 @@ const apiRequester = require('./web/api_requester')
 const Knex = require('knex')
 const KnexFile = require('./knexfile')
 const knex = Knex(KnexFile)
-const customerSocket = require('./web/sockets/customer_socket_client')
 const redisClient = redis.createClient(config.redis_host, {
   usePromise: Bluebird,
   returnBuffers: false,
@@ -24,8 +23,9 @@ Before(async function(testCase) {
 
 After(async function(testCase) {
   await redisClient.flushall()
+  this.customerSockets.map(s => s.disconnect())
   Object.keys(this.delivererSockets).map(d => this.delivererSockets[d].disconnect())
-  customerSocket.disconnect()
+  this.customerSockets = {}
   this.delivererSockets = {}
   await knex('orders').truncate()
   await knex('order_times').truncate()

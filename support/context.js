@@ -17,6 +17,7 @@ class Context {
     this.customerCode = null
     this.delivererOfferMap = {}
     this.delivererSockets = {}
+    this.customerSockets = []
     this.lastPlacedOrderId = ''
     this.state = {
       customer: {
@@ -28,8 +29,8 @@ class Context {
     }
   }
 
-  _setSocketListeners() {
-    customerSocket.on('published_offer', offer => {
+  _setSocketListeners(socket) {
+    socket.on('published_offer', offer => {
       if (!this.state.customer.offersByProduct[offer.productCode]) {
         this.state.customer.offersByProduct[offer.productCode] = {}
         this.state.customer.offersByProduct[offer.productCode].offers = []
@@ -39,7 +40,7 @@ class Context {
         [offer.id]: offer,
       }
     })
-    customerSocket.on('update_offer_location', offer => {
+    socket.on('update_offer_location', offer => {
       this.state.customer.offersById[offer.offerId].latitude = offer.newLocation.latitude
       this.state.customer.offersById[offer.offerId].longitude = offer.newLocation.longitude
     })
@@ -49,8 +50,9 @@ class Context {
     this._logRequestInfo(request)
 
     if (request instanceof OffersGroupedByProductRequest) {
-      customerSocket.connect(request.payload.customerLocation)
-      this._setSocketListeners()
+      const socket = customerSocket.create(request.payload.customerLocation)
+      this.customerSockets.push(socket)
+      this._setSocketListeners(socket)
     }
 
     this.lastResponse = await apiRequester.send(
