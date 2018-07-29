@@ -11,22 +11,26 @@ When('Deliverer {string} sends request to get started orders pending to deliver'
 })
 
 Then('Deliverer should receive one order', function() {
-  expect(this.lastResponse.data.length).not.to.be.undefined
-  expect(this.lastResponse.data.length).to.equal(1)
+  expect(this.lastResponse.data.orders).not.to.be.undefined
+  expect(this.lastResponse.data.orders.length).to.equal(1)
 })
 
 Then('the order should be for product {string}', function(productCode) {
-  expect(this.lastResponse.data[0].productCode).to.equal(productCode)
+  expect(this.lastResponse.data.orders[0].productCode).to.equal(productCode)
 })
 
 Then('the order should have quantity {string}', function(quantity) {
-  expect(this.lastResponse.data[0].productQuantity).to.equal(quantity)
+  expect(this.lastResponse.data.orders[0].productQuantity).to.equal(quantity)
 })
 
 Then('the order should have customer location {string}, {string}', function(
   customerLocationLatitude,
   customerLocationLongitude,
 ) {
-  expect(this.lastResponse.data[0].customerLocationLatitude).to.equal(customerLocationLatitude)
-  expect(this.lastResponse.data[0].customerLocationLongitude).to.equal(customerLocationLongitude)
+  expect(this.lastResponse.data.orders[0].customerLocationLatitude).to.equal(
+    customerLocationLatitude,
+  )
+  expect(this.lastResponse.data.orders[0].customerLocationLongitude).to.equal(
+    customerLocationLongitude,
+  )
 })
