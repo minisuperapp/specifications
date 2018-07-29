@@ -3,7 +3,7 @@ const Base = require('../$base')
 class Request extends Base {
   constructor(build) {
     super(build.deliverer)
-    this.offerId = build.offerId
+    this.orderId = build.orderId
   }
   get method() {
     return 'POST'
@@ -13,17 +13,17 @@ class Request extends Base {
   }
   get payload() {
     return {
-      offerId: this.offerId
+      orderId: this.orderId
     }
   }
   static get Builder() {
     class Builder {
       constructor(deliverer) {
         this.deliverer = deliverer
-        this.offerId = ''
+        this.orderId = ''
       }
-      withOfferId(offerId) {
-        this.offerId = offerId
+      withOrderId(orderId) {
+        this.orderId = orderId
         return this
       }
       build() {
