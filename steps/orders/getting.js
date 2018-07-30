@@ -43,8 +43,6 @@ Then('the order should have customer location {string}, {string}', function(
 })
 
 Then('Customer should see order status as {string}', async function(orderStatus) {
-  const currentLock = this.socketLocks.updateOrderStatus
-  this.socketLocks.updateOrderStatus++
-  await this.awaitOn(() => this.socketLocks.updateOrderStatus <= currentLock)
+  await this.awaitForSocket('updateOrderStatus')
   expect(this.state.customer.orders[this.lastPlacedOrderId].status).to.equal(orderStatus)
 })

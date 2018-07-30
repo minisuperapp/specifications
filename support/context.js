@@ -109,6 +109,12 @@ class Context {
     }
   }
 
+  async awaitForSocket(lock) {
+    const currentLock = this.socketLocks[lock]
+    this.socketLocks[lock]++
+    await this.awaitOn(() => this.socketLocks[lock] <= currentLock)
+  }
+
   sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms))
   }
