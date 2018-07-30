@@ -9,4 +9,4 @@ Scenario: Get New Started Order
   And Customer subscribes to get order updates
   When Deliverer 'D1' updates last placed order to -in transit-
   Then Deliverer should receive successful response
-  # And Customer should see order status as 'IN_TRANSIT'
+  And Customer should see order status as 'IN_TRANSIT'

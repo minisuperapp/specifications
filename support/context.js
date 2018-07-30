@@ -29,9 +29,11 @@ class Context {
       deliverer: {},
     }
     this.state = this.initState
-    this.socketLocks = {
+    this.initSocketLocks = {
       updateOfferLocation: 0,
+      updateOrderStatus: 0,
     }
+    this.socketLocks = this.initSocketLocks
     this.socketExceptions = []
   }
 
@@ -51,6 +53,18 @@ class Context {
       this.state.customer.offersById[offer.offerId].latitude = offer.newLocation.latitude
       this.state.customer.offersById[offer.offerId].longitude = offer.newLocation.longitude
       this.socketLocks.updateOfferLocation--
+    })
+    socket.on('update_order_status', async order => {
+      const currentOrder = this.state.customer.orders[order.orderId]
+      this.state.customer.orders = {
+        ...this.state.customer.orders,
+        [order.orderId]: {
+          ...currentOrder,
+          status: order.status,
+        },
+      }
+
+      this.socketLocks.updateOrderStatus--
     })
     socket.on('warning', async message => {
       this.socketExceptions.push(message)
