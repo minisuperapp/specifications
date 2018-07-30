@@ -17,27 +17,6 @@ Given(
   },
 )
 
-Given('Customer subscribes to get offers updates', async function() {
-  const socket = this.createCustomerSocket()
-  socket.emit('subscribe_for_offers_updates', config.mocks.customerLocation)
-  await this.sleep(300)
-})
-
-Given('Customer subscribes to get offers updates with location {string}, {string}', async function(
-  latitude,
-  longitude,
-) {
-  const socket = this.createCustomerSocket()
-  socket.emit('subscribe_for_offers_updates', { latitude, longitude })
-  await this.sleep(300)
-})
-
-Given('Customer disconnects subscription for offers updates', async function() {
-  await this.sleep(200)
-  const lastCustomerSocket = this.customerSockets[this.customerSockets.length - 1]
-  lastCustomerSocket.disconnect()
-})
-
 When('Customer sends request to get offers grouped by product', async function() {
   const request = new OffersGroupedByProductRequest.Builder().build()
   await this.send(request)
