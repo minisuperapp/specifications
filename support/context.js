@@ -3,7 +3,7 @@ const apiRequester = require('./web/api_requester')
 const DelivererLoginRequest = require('./web/requests/deliverer-api/login')
 const PublishOfferRequest = require('./web/requests/deliverer-api/offer/publish')
 const OffersGroupedByProductRequest = require('./web/requests/customer-api/offers/grouped_by_product')
-const BestOfferAssigmentRequest = require('support/web/requests/customer-api/offers/assign_best')
+const BestOfferAssigmentRequest = require('./web/requests/customer-api/offers/assign_best')
 const PlaceOrderRequest = require('./web/requests/customer-api/place_order')
 const customerSocket = require('./web/sockets/customer_socket_client')
 const delivererSocket = require('./web/sockets/deliverer_socket_client')
@@ -26,7 +26,9 @@ class Context {
         lastAssignedOfferId: '',
         orders: {},
       },
-      deliverer: {},
+      deliverer: {
+        pendingDeliveryOrders: []
+      },
     }
     this.state = this.initState
     this.initSocketLocks = {
