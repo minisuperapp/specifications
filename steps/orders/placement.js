@@ -2,6 +2,10 @@ const { Given, When, Then } = require('cucumber')
 const PlaceOrderRequest = require('support/web/requests/customer-api/place_order')
 const { expect } = require('chai')
 
+Given('Deliverer {string} subscribes to get order placements notifications', function(string) {
+
+})
+
 Given(
   'Customer places an order using offer from deliverer {string} with quantity {string}',
   async function(deliverer, quantity) {

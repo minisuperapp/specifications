@@ -1,6 +1,21 @@
+const config = require('config')
 const { Given, When, Then } = require('cucumber')
 const { expect } = require('chai')
-const R = require('ramda')
+
+Given('Customer subscribes to get offers updates', async function() {
+  const socket = this.createCustomerSocket()
+  socket.emit('subscribe_for_offers_updates', config.mocks.customerLocation)
+  await this.sleep(300)
+})
+
+Given('Customer subscribes to get offers updates with location {string}, {string}', async function(
+  latitude,
+  longitude,
+) {
+  const socket = this.createCustomerSocket()
+  socket.emit('subscribe_for_offers_updates', { latitude, longitude })
+  await this.sleep(300)
+})
 
 Then(
   'the offer location for product {string} should be updated to {string}, {string}',
