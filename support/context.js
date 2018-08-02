@@ -96,6 +96,13 @@ class Context {
     return socket
   }
 
+  createDelivererSocket(deliverer) {
+    const socket = delivererSocket.create()
+    this.delivererSockets[deliverer] = socket
+    this._setSocketListeners(socket)
+    return socket
+  }
+
   async sendCurrentRequest() {
     return await this.send(this.currentRequest.build())
   }
@@ -146,8 +153,7 @@ ${JSON.stringify(response)}`,
     if (request instanceof DelivererLoginRequest && this.lastResponse.success) {
       this.delivererSessionTokens[request.deliverer] = this.lastResponse.data.sessionToken
 
-      const socket = delivererSocket.create()
-      this.delivererSockets[request.deliverer] = socket
+      const socket = this.createDelivererSocket(request.deliverer)
       socket.on('placed_order', order => {
         if (!this.state.deliverer[request.deliverer]) {
           this.state.deliverer[request.deliverer] = {}
@@ -156,6 +162,7 @@ ${JSON.stringify(response)}`,
         this.state.deliverer[request.deliverer].pendingDeliveries.push(order)
       })
       socket.emit('deliverer_socket_connection', this.lastResponse.data.sessionToken)
+      socket.emit('subscribe_for_order_placements', this.lastResponse.data.sessionToken)
     }
 
     if (request instanceof PublishOfferRequest && this.lastResponse.success) {
