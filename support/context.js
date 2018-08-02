@@ -39,7 +39,7 @@ class Context {
     this.socketExceptions = []
   }
 
-  _setSocketListeners(socket) {
+  _setCustomerSocketListeners(socket) {
     socket.on('published_offer', offer => {
       if (!this.state.customer.offersByProduct[offer.productCode]) {
         this.state.customer.offersByProduct[offer.productCode] = {}
@@ -105,7 +105,7 @@ class Context {
   createCustomerSocket(location) {
     const socket = customerSocket.create(location)
     this.customerSockets.push(socket)
-    this._setSocketListeners(socket)
+    this._setCustomerSocketListeners(socket)
     return socket
   }
 
@@ -167,7 +167,6 @@ ${JSON.stringify(response)}`,
       this.delivererSessionTokens[request.deliverer] = this.lastResponse.data.sessionToken
 
       const socket = this.createDelivererSocket(request.deliverer)
-      socket.emit('deliverer_socket_connection', this.lastResponse.data.sessionToken)
       socket.emit('subscribe_for_order_placements', this.lastResponse.data.sessionToken)
     }
 
