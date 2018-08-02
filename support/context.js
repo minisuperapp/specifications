@@ -73,6 +73,19 @@ class Context {
     })
   }
 
+  _setDelivererSocketListeners(socket, deliverer) {
+    socket.on('placed_order', order => {
+      if (!this.state.deliverer[deliverer]) {
+        this.state.deliverer[deliverer] = {}
+        this.state.deliverer[deliverer].pendingDeliveries = []
+      }
+      this.state.deliverer[deliverer].pendingDeliveries.push(order)
+    })
+    socket.on('warning', async message => {
+      this.socketExceptions.push(message)
+    })
+  }
+
   async send(request) {
     this._logRequestInfo(request)
 
@@ -99,7 +112,7 @@ class Context {
   createDelivererSocket(deliverer) {
     const socket = delivererSocket.create()
     this.delivererSockets[deliverer] = socket
-    this._setSocketListeners(socket)
+    this._setDelivererSocketListeners(socket, deliverer)
     return socket
   }
 
@@ -154,13 +167,6 @@ ${JSON.stringify(response)}`,
       this.delivererSessionTokens[request.deliverer] = this.lastResponse.data.sessionToken
 
       const socket = this.createDelivererSocket(request.deliverer)
-      socket.on('placed_order', order => {
-        if (!this.state.deliverer[request.deliverer]) {
-          this.state.deliverer[request.deliverer] = {}
-          this.state.deliverer[request.deliverer].pendingDeliveries = []
-        }
-        this.state.deliverer[request.deliverer].pendingDeliveries.push(order)
-      })
       socket.emit('deliverer_socket_connection', this.lastResponse.data.sessionToken)
       socket.emit('subscribe_for_order_placements', this.lastResponse.data.sessionToken)
     }
