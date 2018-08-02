@@ -2,8 +2,9 @@ const { Given, When, Then } = require('cucumber')
 const PlaceOrderRequest = require('support/web/requests/customer-api/place_order')
 const { expect } = require('chai')
 
-Given('Deliverer {string} subscribes to get order placements notifications', function(string) {
-
+Given('Deliverer {string} subscribes to get order placements notifications', function(deliverer) {
+  const socket = this.createDelivererSocket(deliverer)
+  socket.emit('subscribe_for_order_placements', this.delivererSessionTokens[deliverer])
 })
 
 Given(
@@ -53,7 +54,7 @@ Then('Customer should receive an order with status {string}', function(orderStat
 Then(
   'Deliverer {string} should receive a pending delivery with last placed order id',
   async function(deliverer) {
-    await this.sleep(200)
+    await this.awaitForSocket('placedOrder')
     expect(this.state.deliverer[deliverer].pendingDeliveries[0]).not.to.be.undefined
     expect(this.state.deliverer[deliverer].pendingDeliveries[0].id).to.equal(this.lastPlacedOrderId)
   },

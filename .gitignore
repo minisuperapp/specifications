@@ -4,3 +4,4 @@ cucumber_report.json
 cucumber_report.html
 .env
 .idea/
+yarn-error.log

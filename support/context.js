@@ -34,6 +34,7 @@ class Context {
     this.initSocketLocks = {
       updateOfferLocation: 0,
       updateOrderStatus: 0,
+      placedOrder: 0,
     }
     this.socketLocks = this.initSocketLocks
     this.socketExceptions = []
@@ -80,6 +81,7 @@ class Context {
         this.state.deliverer[deliverer].pendingDeliveries = []
       }
       this.state.deliverer[deliverer].pendingDeliveries.push(order)
+      this.socketLocks.placedOrder--
     })
     socket.on('warning', async message => {
       this.socketExceptions.push(message)
@@ -165,9 +167,6 @@ ${JSON.stringify(response)}`,
 
     if (request instanceof DelivererLoginRequest && this.lastResponse.success) {
       this.delivererSessionTokens[request.deliverer] = this.lastResponse.data.sessionToken
-
-      const socket = this.createDelivererSocket(request.deliverer)
-      socket.emit('subscribe_for_order_placements', this.lastResponse.data.sessionToken)
     }
 
     if (request instanceof PublishOfferRequest && this.lastResponse.success) {
