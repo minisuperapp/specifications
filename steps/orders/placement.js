@@ -2,9 +2,10 @@ const { Given, When, Then } = require('cucumber')
 const PlaceOrderRequest = require('support/web/requests/customer-api/place_order')
 const { expect } = require('chai')
 
-Given('Deliverer {string} subscribes to get order placements notifications', function(deliverer) {
+Given('Deliverer {string} subscribes to get order placements notifications', async function(deliverer) {
   const socket = this.createDelivererSocket(deliverer)
   socket.emit('subscribe_for_order_placements', this.delivererSessionTokens[deliverer])
+  await this.sleep(300)
 })
 
 Given(
