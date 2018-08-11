@@ -27,7 +27,7 @@ class Context {
         orders: {},
       },
       deliverer: {
-        pendingDeliveryOrders: []
+        pendingDeliveryOrders: [],
       },
     }
     this.state = this.initState
@@ -42,6 +42,7 @@ class Context {
 
   _setCustomerSocketListeners(socket) {
     socket.on('published_offer', offer => {
+      this._logSocketMessage('customer-api', 'published_offer', offer)
       if (!this.state.customer.offersByProduct[offer.productCode]) {
         this.state.customer.offersByProduct[offer.productCode] = {}
         this.state.customer.offersByProduct[offer.productCode].offers = []
@@ -52,12 +53,14 @@ class Context {
       }
     })
     socket.on('update_offer_location', async offer => {
+      this._logSocketMessage('customer-api', 'update_offer_location', offer)
       await this.awaitOn(() => this.state.customer.offersById[offer.offerId])
       this.state.customer.offersById[offer.offerId].latitude = offer.newLocation.latitude
       this.state.customer.offersById[offer.offerId].longitude = offer.newLocation.longitude
       this.socketLocks.updateOfferLocation--
     })
     socket.on('update_order_status', async order => {
+      this._logSocketMessage('customer-api', 'update_order_status', order)
       const currentOrder = this.state.customer.orders[order.orderId]
       this.state.customer.orders = {
         ...this.state.customer.orders,
@@ -70,12 +73,14 @@ class Context {
       this.socketLocks.updateOrderStatus--
     })
     socket.on('warning', async message => {
+      this._logSocketMessage('customer-api', 'warning', { message })
       this.socketExceptions.push(message)
     })
   }
 
   _setDelivererSocketListeners(socket, deliverer) {
     socket.on('placed_order', order => {
+      this._logSocketMessage('deliverer-api', 'placed_order', order)
       if (!this.state.deliverer[deliverer]) {
         this.state.deliverer[deliverer] = {}
         this.state.deliverer[deliverer].pendingDeliveries = []
@@ -84,6 +89,7 @@ class Context {
       this.socketLocks.placedOrder--
     })
     socket.on('warning', async message => {
+      this._logSocketMessage('deliverer-api', 'warning', { message })
       this.socketExceptions.push(message)
     })
   }
@@ -156,6 +162,15 @@ ${JSON.stringify(request.payload)}`,
     this.attach(
       `response
 ${JSON.stringify(response)}`,
+      'text/plain',
+    )
+  }
+
+  _logSocketMessage(endpoint, channel, data) {
+    this.attach(`${endpoint} ${channel}`)
+    this.attach(
+      `socket response
+${JSON.stringify(data)}`,
       'text/plain',
     )
   }
