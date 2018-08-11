@@ -20,6 +20,7 @@ Before(async function(testCase) {
   this.currentProductOffers = {}
   this.delivererSockets = {}
   this.createCustomerSocket(config.mocks.customerLocation) // For socket exception detection
+  this.createDelivererSocket('') // For socket exception detection
 })
 
 After(async function(testCase) {
