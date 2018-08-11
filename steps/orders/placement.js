@@ -8,6 +8,11 @@ Given('Deliverer {string} subscribes to get order placements notifications', asy
   await this.sleep(300)
 })
 
+Given('Deliverer {string} disconnects to get order placements notifications', async function(deliverer) {
+  await this.sleep(200)
+  this.delivererSockets[deliverer].disconnect()
+})
+
 Given(
   'Customer places an order using offer from deliverer {string} with quantity {string}',
   async function(deliverer, quantity) {
@@ -60,3 +65,7 @@ Then(
     expect(this.state.deliverer[deliverer].pendingDeliveries[0].id).to.equal(this.lastPlacedOrderId)
   },
 )
+
+When('Deliverer {string} should see zero pending deliveries', function(deliverer) {
+  expect(this.state.deliverer[deliverer]).to.be.undefined
+})
