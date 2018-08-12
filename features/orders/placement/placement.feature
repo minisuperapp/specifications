@@ -16,7 +16,7 @@ Scenario: Notify Order Placing
   Given Customer sends request to get offers for product 'CORN_TORTILLA'
   And Deliverer 'D1' subscribes to get order placements notifications
   When Customer places an order using offer from deliverer 'D1' with quantity '2' and location '27.670799', '105.1599679'
-  And Deliverer 'D1' should receive a pending delivery with last placed order id
+  And Deliverer 'D1' should receive a pending delivery for product 'CORN_TORTILLA' with last placed order id
 
 Scenario: Do Not Notify Order Placing If Deliverer Disconnected Subscription
   Given Customer sends request to get offers for product 'CORN_TORTILLA'
