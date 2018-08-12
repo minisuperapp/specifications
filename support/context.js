@@ -85,7 +85,10 @@ class Context {
         this.state.deliverer[deliverer] = {}
         this.state.deliverer[deliverer].pendingDeliveries = []
       }
-      this.state.deliverer[deliverer].pendingDeliveries.push(data.order)
+      this.state.deliverer[deliverer].pendingDeliveries.push({
+        order: data.order,
+        product: data.product
+      })
       this.socketLocks.placedOrder--
     })
     socket.on('warning', async message => {
