@@ -79,13 +79,13 @@ class Context {
   }
 
   _setDelivererSocketListeners(socket, deliverer) {
-    socket.on('placed_order', order => {
-      this._logSocketMessage('deliverer-api', 'placed_order', order)
+    socket.on('placed_order', data => {
+      this._logSocketMessage('deliverer-api', 'placed_order', data)
       if (!this.state.deliverer[deliverer]) {
         this.state.deliverer[deliverer] = {}
         this.state.deliverer[deliverer].pendingDeliveries = []
       }
-      this.state.deliverer[deliverer].pendingDeliveries.push(order)
+      this.state.deliverer[deliverer].pendingDeliveries.push(data.order)
       this.socketLocks.placedOrder--
     })
     socket.on('warning', async message => {
