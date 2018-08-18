@@ -25,6 +25,15 @@ Given(
   },
 )
 
+Given('Customer places an order using offer from deliverer {string}', async function(deliverer) {
+  const offerId = this.delivererOfferMap[deliverer]
+  const request = new PlaceOrderRequest.Builder()
+    .withOfferId(offerId)
+    .build()
+  await this.send(request)
+})
+
+
 When(
   'Customer places an order using offer from deliverer {string} with quantity {string} and location {string}, {string}',
   async function(deliverer, quantity, latitude, longitude) {

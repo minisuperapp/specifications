@@ -28,7 +28,7 @@ class PlaceOrderRequest extends Base {
     class Builder {
       constructor() {
         this.offerId = ''
-        this.quantity = '0'
+        this.quantity = '1'
         this.customerLocationLatitude = '27.670799'
         this.customerLocationLongitude = '105.1599679'
       }
