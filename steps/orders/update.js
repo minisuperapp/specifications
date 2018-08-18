@@ -1,6 +1,7 @@
 const config = require('config')
 const { Given, When, Then } = require('cucumber')
 const UpdateOrderToInTransitRequest = require('support/web/requests/deliverer-api/orders/update_to_in_transit')
+const UpdateOrderToArrivedRequest = require('support/web/requests/deliverer-api/orders/update_to_arrived')
 const { expect } = require('chai')
 
 When('Deliverer {string} updates last placed order to -in transit-', async function(deliverer) {
@@ -10,6 +11,15 @@ When('Deliverer {string} updates last placed order to -in transit-', async funct
     .build()
   await this.send(request)
 })
+
+When('Deliverer {string} updates last placed order to -arrived-', async function(deliverer) {
+  const orderId = this.lastPlacedOrderId
+  const request = new UpdateOrderToArrivedRequest.Builder(deliverer)
+    .withOrderId(orderId)
+    .build()
+  await this.send(request)
+})
+
 
 Given('Customer subscribes to get order updates', async function() {
   const socket = this.createCustomerSocket()
