@@ -18,7 +18,7 @@ class Context {
     this.delivererOfferMap = {}
     this.delivererSockets = {}
     this.customerSockets = []
-    this.lastPlacedOrderId = ''
+    this.lastPlacedOrder = {}
     this.initState = {
       customer: {
         offersByProduct: {},
@@ -196,7 +196,7 @@ ${JSON.stringify(data)}`,
     }
 
     if (request instanceof PlaceOrderRequest && this.lastResponse.success) {
-      this.lastPlacedOrderId = this.lastResponse.data.id
+      this.lastPlacedOrder = this.lastResponse.data
       this.state.customer.orders[this.lastResponse.data.id] = this.lastResponse.data
     }
 

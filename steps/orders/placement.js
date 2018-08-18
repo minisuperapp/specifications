@@ -62,14 +62,14 @@ Then(
   async function(deliverer) {
     await this.awaitForSocket('placedOrder')
     expect(this.state.deliverer[deliverer].pendingDeliveries[0]).not.to.be.undefined
-    expect(this.state.deliverer[deliverer].pendingDeliveries[0].order.id).to.equal(this.lastPlacedOrderId)
-    expect(this.state.deliverer[deliverer].pendingDeliveries[0].product.code).to.equal(this.lastPlacedOrderId)
+    expect(this.state.deliverer[deliverer].pendingDeliveries[0].order.id).to.equal(this.lastPlacedOrder.id)
+    expect(this.state.deliverer[deliverer].pendingDeliveries[0].product.code).to.equal(this.lastPlacedOrder.id)
   },
 )
 
 When('Deliverer {string} should receive a pending delivery for product {string} with last placed order id', function(deliverer, productCode) {
   expect(this.state.deliverer[deliverer].pendingDeliveries[0]).not.to.be.undefined
-  expect(this.state.deliverer[deliverer].pendingDeliveries[0].order.id).to.equal(this.lastPlacedOrderId)
+  expect(this.state.deliverer[deliverer].pendingDeliveries[0].order.id).to.equal(this.lastPlacedOrder.id)
   expect(this.state.deliverer[deliverer].pendingDeliveries[0].product).not.to.be.undefined
   expect(this.state.deliverer[deliverer].pendingDeliveries[0].product.code).to.equal(productCode)
 })

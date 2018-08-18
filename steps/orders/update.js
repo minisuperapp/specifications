@@ -5,7 +5,7 @@ const UpdateOrderToArrivedRequest = require('support/web/requests/deliverer-api/
 const { expect } = require('chai')
 
 When('Deliverer {string} updates last placed order to -in transit-', async function(deliverer) {
-  const orderId = this.lastPlacedOrderId
+  const orderId = this.lastPlacedOrder.id
   const request = new UpdateOrderToInTransitRequest.Builder(deliverer)
     .withOrderId(orderId)
     .build()
@@ -13,7 +13,7 @@ When('Deliverer {string} updates last placed order to -in transit-', async funct
 })
 
 When('Deliverer {string} updates last placed order to -arrived-', async function(deliverer) {
-  const orderId = this.lastPlacedOrderId
+  const orderId = this.lastPlacedOrder.id
   const request = new UpdateOrderToArrivedRequest.Builder(deliverer)
     .withOrderId(orderId)
     .build()
@@ -23,7 +23,7 @@ When('Deliverer {string} updates last placed order to -arrived-', async function
 
 Given('Customer subscribes to get order updates', async function() {
   const socket = this.createCustomerSocket()
-  socket.emit('subscribe_for_order_updates', this.lastPlacedOrderId)
+  socket.emit('subscribe_for_order_updates', this.lastPlacedOrder.id)
   await this.sleep(300)
 })
 
