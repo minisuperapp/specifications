@@ -76,7 +76,8 @@ Then(
   },
 )
 
-When('Deliverer {string} should receive a pending delivery for product {string} with last placed order id', function(deliverer, productCode) {
+When('Deliverer {string} should receive a pending delivery for product {string} with last placed order id', async function(deliverer, productCode) {
+  await this.awaitForSocket('placedOrder')
   expect(this.state.deliverer[deliverer].pendingDeliveries[0]).not.to.be.undefined
   expect(this.state.deliverer[deliverer].pendingDeliveries[0].order.id).to.equal(this.lastPlacedOrder.id)
   expect(this.state.deliverer[deliverer].pendingDeliveries[0].product).not.to.be.undefined
