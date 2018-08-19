@@ -7,6 +7,10 @@ Feature: Rate Deliverer
     And Customer places an order using offer from deliverer 'D1'
 
   Scenario: Customer Rates Deliverer For Order Service
-    When Customer rates last order deliverer for 'SERVICE' with rating '2'
+    When Customer rates last order deliverer for 'SERVICE' with rating 2
     Then Customer should receive successful response
-    And Deliverer should have reputation '2'
+
+  Scenario: Deliverer Gets Reputation Updated When Customers Rates Him
+    Given Customer rates last order deliverer for 'SERVICE' with rating -1
+    When Deliverer 'D1' publishes a new offer for product 'RED_APPLE'
+    Then Deliverer publishing 'RED_APPLE' should have reputation of -1

@@ -3,7 +3,7 @@ const RateDelivererRequest = require('support/web/requests/customer-api/rate_del
 const OffersGroupedByProductRequest = require('support/web/requests/customer-api/offers/grouped_by_product')
 const { expect } = require('chai')
 
-When('Customer rates last order deliverer for {string} with rating {string}',
+When('Customer rates last order deliverer for {string} with rating {int}',
   async function(concept, rating) {
     const request = new RateDelivererRequest.Builder()
       .withDelivererId(this.lastPlacedOrder.delivererId)
@@ -14,11 +14,10 @@ When('Customer rates last order deliverer for {string} with rating {string}',
     await this.send(request)
   })
 
-Then('Deliverer should have reputation {string}', async function(reputation) {
+Then('Deliverer publishing {string} should have reputation of {int}', async function (productCode, reputation) {
   const request = new OffersGroupedByProductRequest.Builder().build()
   const offers = await this.send(request)
 
-  const productCode = Object.keys(offers.data.offersByProduct)[0]
   const deliverer = offers.data.offersByProduct[productCode].offers[0].deliverer
   expect(deliverer.reputation).to.equal(reputation)
-})
+});
