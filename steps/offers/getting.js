@@ -81,7 +81,7 @@ Then('all offers should have an id, and price', function() {
 
 Then('all offers should have the deliverer reputation, and last rating', function() {
   const deliverersWithMissingDetails = R.filter(
-    o => !o.deliverer.reputation || !o.deliverer.lastRating,
+    o => o.deliverer.reputation === undefined || !o.deliverer.lastRating,
     this.lastResponse.data,
   )
 
