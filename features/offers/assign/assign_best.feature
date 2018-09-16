@@ -26,7 +26,7 @@ Feature: Assign Best Offer
     Then Customer should receive unsuccessful response
     And Customer should receive single error message with property 'product' and message 'no.offers.available'
 
-  Scenario: Increase Availability Of Canceled Assigned Offer
+  Scenario: Increase Availability Of Discarded Assigned Offer
     Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' and available quantity of '2'
     And Customer sends request to assign best offer for product 'CORN_TORTILLA' with quantity '2'
     And Customer sends request to cancel last assigned offer
