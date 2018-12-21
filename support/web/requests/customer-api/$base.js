@@ -1,6 +1,8 @@
+const config = require('config')
+
 class Base {
-  constructor(build) {
-    this.uri = `${process.env.CUSTOMER_API_URL || 'http://localhost:3000'}/api`
+  constructor() {
+    this.uri = `${config.customer_api_host}/api`
     this.apiServer = 'customer-api'
   }
 }
