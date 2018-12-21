@@ -31,4 +31,5 @@ Given('Customer disconnects subscription for updates', async function() {
   await this.sleep(200)
   const lastCustomerSocket = this.customerSockets[this.customerSockets.length - 1]
   lastCustomerSocket.disconnect()
+  await this.sleep(200)
 })
