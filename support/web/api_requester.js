@@ -11,6 +11,7 @@ api_requester.send = async (request, delivererSessionToken, customerCode) => {
       'Content-Type': 'application/json',
       'session-token': delivererSessionToken,
       'customer-code': customerCode,
+      'Cookie': `customer-code=${customerCode}`,
       'is-test': 'true',
     },
   }

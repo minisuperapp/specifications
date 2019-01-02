@@ -13,9 +13,8 @@ When('Deliverer {string} sends request to receive started orders pending to deli
 
 When('Customer sends request to receive started orders pending to deliver', async function() {
   const request = new AsCustomerListPendingOrdersToDeliverRequest.Builder()
-    .withCustomerCode(this.customerCode)
     .build()
-  await this.send(request)
+  await this.send(request, null, this.customerCode)
 })
 
 Then('Deliverer should receive one order', function() {
