@@ -1,4 +1,4 @@
-Feature: Get Orders As Deliverer Pending To Deliver
+Feature: Get Orders Pending To Deliver As Deliverer
 
   Background:
     Given Deliverer 'D1' registers with phone number '6483516383' and logs in
@@ -6,7 +6,7 @@ Feature: Get Orders As Deliverer Pending To Deliver
 
   Scenario: Get New Started Order
     Given Customer places an order using offer from deliverer 'D1' with quantity '2' and location '28.1867048', '-105.4600849'
-    When Deliverer 'D1' sends request to get started orders pending to deliver
+    When Deliverer 'D1' sends request to receive started orders pending to deliver
     Then Deliverer should receive successful response
     And Deliverer should receive one order
     And the order should be for product 'CORN_TORTILLA'
