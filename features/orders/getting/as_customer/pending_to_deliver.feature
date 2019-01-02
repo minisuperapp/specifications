@@ -12,6 +12,3 @@ Feature: Get Orders Pending To Deliver As Customer
     When Customer sends request to receive started orders pending to deliver
     Then Customer should receive successful response
     And Customer should receive 2 orders
-#    And the order should be for product 'CORN_TORTILLA'
-#    And the order should have quantity '2'
-#    And the order should have customer location '28.1867048', '-105.4600849'
