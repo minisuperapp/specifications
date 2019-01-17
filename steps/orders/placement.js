@@ -5,7 +5,7 @@ const { expect } = require('chai')
 Given('Deliverer {string} subscribes to get order placements notifications', async function(deliverer) {
   const socket = this.createDelivererSocket(deliverer)
   socket.emit('subscribe_for_order_placements', this.delivererSessionTokens[deliverer])
-  await this.sleep(300)
+  await this.sleep(500)
 })
 
 Given('Deliverer {string} disconnects to get order placements notifications', async function(deliverer) {
