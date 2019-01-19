@@ -24,7 +24,7 @@ When('Deliverer {string} updates last placed order to -arrived-', async function
 Given('Customer subscribes to get order updates', async function() {
   const socket = this.createCustomerSocket()
   socket.emit('subscribe_for_order_updates', this.lastPlacedOrder.id)
-  await this.sleep(300)
+  await this.sleep(500)
 })
 
 Given('Customer disconnects subscription for updates', async function() {
