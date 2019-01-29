@@ -1,9 +1,8 @@
 const R = require('ramda')
-const config = require('config')
 const { Given, When, Then } = require('cucumber')
 const OffersListRequest = require('support/web/requests/customer-api/offers/list')
 const OffersGroupedByProductRequest = require('support/web/requests/customer-api/offers/grouped_by_product')
-const customerSocket = require('support/web/sockets/customer_socket_client')
+const ProviderOffersGroupedByProductRequest = require('support/web/requests/deliverer-api/offers/grouped_by_product')
 const { expect } = require('chai')
 
 Given(
@@ -49,6 +48,11 @@ When(
     await this.send(request)
   },
 )
+
+When('Deliverer {string} sends request to get published offers', async function(deliverer) {
+  const request = new ProviderOffersGroupedByProductRequest.Builder(deliverer).build()
+  await this.send(request)
+})
 
 Then('Customer should receive one offer', function() {
   expect(this.lastResponse.data.length).to.equal(1)
@@ -137,7 +141,7 @@ Then('Customer should see {int} offer\\(s) for product {string}', async function
 Then('Customer should see zero offers for product {string}', function(productCode) {
   expect(
     this.state.customer.offersByProduct[productCode] === undefined ||
-      this.state.customer.offersByProduct[productCode].offers.length === 0,
+    this.state.customer.offersByProduct[productCode].offers.length === 0,
   ).to.be.true
 })
 
