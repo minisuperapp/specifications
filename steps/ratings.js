@@ -1,6 +1,6 @@
 const { Given, When, Then } = require('cucumber')
 const RateDelivererRequest = require('support/web/requests/customer-api/rate_deliverer')
-const OffersGroupedByProductRequest = require('support/web/requests/customer-api/offers/grouped_by_product')
+const OffersGroupedByProductRequest = require('support/web/requests/customer-api/offers/searchForAllProducts')
 const { expect } = require('chai')
 
 When('Customer rates last order deliverer for {string} with rating {int}',
