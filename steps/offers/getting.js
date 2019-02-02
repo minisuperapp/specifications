@@ -1,7 +1,7 @@
 const R = require('ramda')
 const { Given, When, Then } = require('cucumber')
-const OffersListRequest = require('support/web/requests/customer-api/offers/searchForOneProduct')
-const OffersGroupedByProductRequest = require('support/web/requests/customer-api/offers/searchForAllProducts')
+const OffersListRequest = require('support/web/requests/customer-api/offers/search_for_one_product')
+const OffersGroupedByProductRequest = require('support/web/requests/customer-api/offers/search_for_all_products')
 const ProviderOffersGroupedByProductRequest = require('support/web/requests/deliverer-api/offers/grouped_by_product')
 const { expect } = require('chai')
 
