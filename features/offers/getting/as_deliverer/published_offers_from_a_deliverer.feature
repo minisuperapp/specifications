@@ -1,4 +1,4 @@
-Feature: Get Offers Grouped By Product As Provider
+Feature: Get Published Offers From A Deliverer
 
   Background:
     Given Deliverer 'D1' registers with phone number '6481095678' and logs in

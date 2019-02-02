@@ -2,7 +2,7 @@ const R = require('ramda')
 const { Given, When, Then } = require('cucumber')
 const OffersListRequest = require('support/web/requests/customer-api/offers/search_for_one_product')
 const OffersGroupedByProductRequest = require('support/web/requests/customer-api/offers/search_for_all_products')
-const ProviderOffersGroupedByProductRequest = require('support/web/requests/deliverer-api/offers/grouped_by_product')
+const PublishedOffersFromADelivererRequest = require('support/web/requests/deliverer-api/offers/from_a_deliverer')
 const { expect } = require('chai')
 
 Given(
@@ -50,7 +50,7 @@ When(
 )
 
 When('Deliverer {string} sends request to get published offers', async function(deliverer) {
-  const request = new ProviderOffersGroupedByProductRequest.Builder(deliverer).build()
+  const request = new PublishedOffersFromADelivererRequest.Builder(deliverer).build()
   await this.send(request)
 })
 
