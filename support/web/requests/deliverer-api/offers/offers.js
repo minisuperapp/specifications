@@ -10,7 +10,7 @@ class Request extends Base {
   }
 
   get path() {
-    return 'offers/get_from_a_deliverer'
+    return 'offers'
   }
 
   get payload() {
