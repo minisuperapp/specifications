@@ -174,3 +174,12 @@ Then(
     ).to.be.within(min, max)
   },
 )
+
+Then('Deliverer {string} should get {int} offer for product {string} with price {string}',
+  function (deliverer, offers, productCode, price) {
+  expect(this.lastResponse[productCode]).not.to.be.undefined
+  expect(this.lastResponse[productCode].length).not.to.be.undefined
+  expect(this.lastResponse[productCode].length).to.equal(offers)
+  expect(this.lastResponse[productCode][0].price).to.equal(price)
+});
+
