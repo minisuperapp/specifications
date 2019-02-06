@@ -177,9 +177,9 @@ Then(
 
 Then('Deliverer {string} should get {int} offer for product {string} with price {string}',
   function (deliverer, offers, productCode, price) {
-  expect(this.lastResponse[productCode]).not.to.be.undefined
-  expect(this.lastResponse[productCode].length).not.to.be.undefined
-  expect(this.lastResponse[productCode].length).to.equal(offers)
-  expect(this.lastResponse[productCode][0].price).to.equal(price)
+  expect(this.lastResponse.data[productCode]).not.to.be.undefined
+  expect(this.lastResponse.data[productCode].length).not.to.be.undefined
+  expect(this.lastResponse.data[productCode].length).to.equal(offers)
+  expect(this.lastResponse.data[productCode][0].unitPrice).to.equal(price)
 });
 
