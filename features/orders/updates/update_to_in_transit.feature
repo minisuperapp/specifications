@@ -20,4 +20,4 @@ Feature: Update Order To In Transit
     And Customer subscribes to get order updates
     And Customer disconnects subscription for updates
     When Deliverer 'D1' updates last placed order to -in transit-
-    Then Customer should see order status as 'STARTED'
+    Then Customer should see order status as 'PLACED'
