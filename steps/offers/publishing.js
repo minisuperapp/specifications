@@ -1,8 +1,5 @@
 const { Given, When, Then } = require('cucumber')
 const PublishOfferRequest = require('support/web/requests/deliverer-api/offers/publish')
-const UpdateOfferLocationRequest = require('support/web/requests/deliverer-api/offers/update_location')
-const { expect } = require('chai')
-const R = require('ramda')
 
 Given('Deliverer {string} publishes a new offer for product {string}', async function(
   deliverer,
@@ -75,25 +72,5 @@ Given(
 
 When('Deliverer {string} publishes a new offer', async function(deliverer) {
   const request = new PublishOfferRequest.Builder(deliverer).build()
-  await this.send(request)
-})
-
-When('Deliverer {string} updates offer location', async function(deliverer) {
-  const offerId = this.delivererOfferMap[deliverer]
-  const request = new UpdateOfferLocationRequest.Builder(deliverer).withOfferId(offerId).build()
-  await this.send(request)
-})
-
-When('Deliverer {string} updates offer location to {string}, {string}', async function(
-  deliverer,
-  latitude,
-  longitude,
-) {
-  const offerId = this.delivererOfferMap[deliverer]
-  const request = new UpdateOfferLocationRequest.Builder(deliverer)
-    .withOfferId(offerId)
-    .withLocationLatitude(latitude)
-    .withLocationLongitude(longitude)
-    .build()
   await this.send(request)
 })

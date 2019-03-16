@@ -1,6 +1,7 @@
 const config = require('config')
 const { Given, When, Then } = require('cucumber')
 const { expect } = require('chai')
+const UpdateOfferLocationRequest = require('support/web/requests/deliverer-api/offers/update_location')
 
 Given('Customer subscribes to get offers updates', async function() {
   const socket = this.createCustomerSocket()
@@ -16,6 +17,32 @@ Given('Customer subscribes to get offers updates with location {string}, {string
   socket.emit('subscribe_for_offers_updates', { latitude, longitude })
   await this.sleep(300)
 })
+
+When('Deliverer {string} updates offer location', async function(deliverer) {
+  const offerId = this.delivererOfferMap[deliverer]
+  const request = new UpdateOfferLocationRequest.Builder(deliverer).withOfferId(offerId).build()
+  await this.send(request)
+})
+
+When('Deliverer {string} updates offer location to {string}, {string}', async function(
+  deliverer,
+  latitude,
+  longitude,
+) {
+  const offerId = this.delivererOfferMap[deliverer]
+  const request = new UpdateOfferLocationRequest.Builder(deliverer)
+    .withOfferId(offerId)
+    .withLocationLatitude(latitude)
+    .withLocationLongitude(longitude)
+    .build()
+  await this.send(request)
+})
+
+When('Deliverer {string} deletes the last published offer', function(string) {
+  // Write code here that turns the phrase above into concrete actions
+  return 'pending'
+})
+
 
 Then(
   'the offer location for product {string} should be updated to {string}, {string}',
