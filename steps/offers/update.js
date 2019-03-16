@@ -2,6 +2,7 @@ const config = require('config')
 const { Given, When, Then } = require('cucumber')
 const { expect } = require('chai')
 const UpdateOfferLocationRequest = require('support/web/requests/deliverer-api/offers/update_location')
+const DeleteOfferRequest = require('support/web/requests/deliverer-api/offers/delete')
 
 Given('Customer subscribes to get offers updates', async function() {
   const socket = this.createCustomerSocket()
@@ -38,9 +39,11 @@ When('Deliverer {string} updates offer location to {string}, {string}', async fu
   await this.send(request)
 })
 
-When('Deliverer {string} deletes the last published offer', function(string) {
-  // Write code here that turns the phrase above into concrete actions
-  return 'pending'
+When('Deliverer {string} deletes the last published offer', async function(deliverer) {
+  const request = new DeleteOfferRequest.Builder(deliverer)
+    .withOfferId(this.lastResponse.data.id)
+    .build()
+  await this.send(request)
 })
 
 
