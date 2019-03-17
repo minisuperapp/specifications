@@ -13,3 +13,8 @@ Feature: Delete An Offer
     Given Deliverer 'D1' deletes the last published offer
     When Customer sends request to get offers grouped by product
     Then Customer should receive zero offers for product 'CORN_TORTILLA'
+
+  Scenario: Deliverer gets no offers after deletion
+    Given Deliverer 'D1' deletes the last published offer
+    When Deliverer 'D1' sends request to get published offers
+    Then Deliverer 'D1' should get zero offers for product 'CORN_TORTILLA'
