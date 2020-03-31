@@ -28,22 +28,22 @@ Then('Customer should receive {int} orders', function(ordersNumber) {
 })
 
 Then('the order should be for product {string}', function(productCode) {
-  expect(this.lastResponse.data.orders[0].productCode).to.equal(productCode)
+  expect(this.lastResponse.data.orders[0].product_code).to.equal(productCode)
   expect(this.lastResponse.data.productsByCode[productCode]).not.to.be.undefined
 })
 
 Then('the order should have quantity {string}', function(quantity) {
-  expect(this.lastResponse.data.orders[0].productQuantity).to.equal(quantity)
+  expect(this.lastResponse.data.orders[0].product_quantity).to.equal(quantity)
 })
 
 Then('the order should have customer location {string}, {string}', function(
   customerLocationLatitude,
   customerLocationLongitude,
 ) {
-  expect(this.lastResponse.data.orders[0].customerLocationLatitude).to.equal(
+  expect(this.lastResponse.data.orders[0].customer_location_latitude).to.equal(
     customerLocationLatitude,
   )
-  expect(this.lastResponse.data.orders[0].customerLocationLongitude).to.equal(
+  expect(this.lastResponse.data.orders[0].customer_location_longitude).to.equal(
     customerLocationLongitude,
   )
 })

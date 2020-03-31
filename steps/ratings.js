@@ -6,7 +6,7 @@ const { expect } = require('chai')
 When('Customer rates last order deliverer for {string} with rating {int}',
   async function(concept, rating) {
     const request = new RateDelivererRequest.Builder()
-      .withDelivererId(this.lastPlacedOrder.delivererId)
+      .withDelivererId(this.lastPlacedOrder.deliverer_id)
       .withOrderId(this.lastPlacedOrder.id)
       .withConcept(concept)
       .withRating(rating)
