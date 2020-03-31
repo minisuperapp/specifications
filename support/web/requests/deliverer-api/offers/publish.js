@@ -3,7 +3,7 @@ const Base = require('../$base')
 class PublishOfferRequest extends Base {
   constructor(build) {
     super(build.deliverer)
-    this.productCode = build.productCode
+    this.product_code = build.product_code
     this.locationLatitude = build.locationLatitude
     this.locationLongitude = build.locationLongitude
     this.deliveryRadius = build.deliveryRadius
@@ -18,7 +18,7 @@ class PublishOfferRequest extends Base {
   }
   get payload() {
     return {
-      productCode: this.productCode,
+      product_code: this.product_code,
       availableQuantity: this.availableQuantity,
       onHandQuantity: '10',
       unitPrice: this.unitPrice,
@@ -33,15 +33,15 @@ class PublishOfferRequest extends Base {
     class Builder {
       constructor(deliverer) {
         this.deliverer = deliverer
-        this.productCode = 'CORN_TORTILLA'
+        this.product_code = 'CORN_TORTILLA'
         this.availableQuantity = '8'
         this.locationLatitude = '28.1867348'
         this.locationLongitude = '-105.4608849'
         this.deliveryRadius = '1'
         this.unitPrice = '18.00'
       }
-      withProductCode(productCode) {
-        this.productCode = productCode
+      withProductCode(product_code) {
+        this.product_code = product_code
         return this
       }
       withAvailableQuantity(availableQuantity) {

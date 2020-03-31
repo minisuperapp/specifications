@@ -21,16 +21,16 @@ When('Customer sends request to get offers grouped by product', async function()
   await this.send(request)
 })
 
-When('Customer sends request to get offers for product {string}', async function(productCode) {
-  const request = new OffersListRequest.Builder().withProductCode(productCode).build()
+When('Customer sends request to get offers for product {string}', async function(product_code) {
+  const request = new OffersListRequest.Builder().withProductCode(product_code).build()
   await this.send(request)
 })
 
 When(
   'Customer sends request to get offers for product {string} with location {string}, {string}',
-  async function(productCode, latitude, longitude) {
+  async function(product_code, latitude, longitude) {
     const request = new OffersListRequest.Builder()
-      .withProductCode(productCode)
+      .withProductCode(product_code)
       .withCustomerLocationLatitude(latitude)
       .withCustomerLocationLongitude(longitude)
       .build()
@@ -40,9 +40,9 @@ When(
 
 When(
   'Customer sends request to get offers for product {string} and quantity {string}',
-  async function(productCode, quantity) {
+  async function(product_code, quantity) {
     const request = new OffersListRequest.Builder()
-      .withProductCode(productCode)
+      .withProductCode(product_code)
       .withQuantity(quantity)
       .build()
     await this.send(request)
@@ -113,74 +113,74 @@ Then('Customer should receive zero offers', function() {
 
 Then('Customer should receive {int} offer\\(s) for product {string}', function(
   offers,
-  productCode,
+  product_code,
 ) {
-  expect(this.lastResponse.data.offersByProduct[productCode]).not.to.be.undefined
-  expect(this.lastResponse.data.offersByProduct[productCode].offers).not.to.be.undefined
-  expect(this.lastResponse.data.offersByProduct[productCode].offers.length).to.equal(offers)
-  const offerId = this.lastResponse.data.offersByProduct[productCode].offers[0].id
+  expect(this.lastResponse.data.offersByProduct[product_code]).not.to.be.undefined
+  expect(this.lastResponse.data.offersByProduct[product_code].offers).not.to.be.undefined
+  expect(this.lastResponse.data.offersByProduct[product_code].offers.length).to.equal(offers)
+  const offerId = this.lastResponse.data.offersByProduct[product_code].offers[0].id
   expect(this.lastResponse.data.offersById[offerId]).not.to.be.undefined
 })
 
-Then('Customer should receive zero offers for product {string}', function(productCode) {
-  expect(this.lastResponse.data.offersByProduct[productCode]).to.be.undefined
+Then('Customer should receive zero offers for product {string}', function(product_code) {
+  expect(this.lastResponse.data.offersByProduct[product_code]).to.be.undefined
 })
 
 Then('Customer should see {int} offer\\(s) for product {string}', async function(
   offers,
-  productCode,
+  product_code,
 ) {
-  await this.awaitOn(() => this.state.customer.offersByProduct[productCode])
-  expect(this.state.customer.offersByProduct[productCode]).not.to.be.undefined
-  expect(this.state.customer.offersByProduct[productCode].offers).not.to.be.undefined
-  expect(this.state.customer.offersByProduct[productCode].offers.length).to.equal(offers)
-  const offerId = this.state.customer.offersByProduct[productCode].offers[0].id
+  await this.awaitOn(() => this.state.customer.offersByProduct[product_code])
+  expect(this.state.customer.offersByProduct[product_code]).not.to.be.undefined
+  expect(this.state.customer.offersByProduct[product_code].offers).not.to.be.undefined
+  expect(this.state.customer.offersByProduct[product_code].offers.length).to.equal(offers)
+  const offerId = this.state.customer.offersByProduct[product_code].offers[0].id
   expect(this.state.customer.offersById[offerId]).not.to.be.undefined
 })
 
-Then('Customer should see zero offers for product {string}', function(productCode) {
+Then('Customer should see zero offers for product {string}', function(product_code) {
   expect(
-    this.state.customer.offersByProduct[productCode] === undefined ||
-    this.state.customer.offersByProduct[productCode].offers.length === 0,
+    this.state.customer.offersByProduct[product_code] === undefined ||
+    this.state.customer.offersByProduct[product_code].offers.length === 0,
   ).to.be.true
 })
 
-Then('Customer should receive product {string} in first place', function(productCode) {
-  expect(this.lastResponse.data[0].code).to.equal(productCode)
+Then('Customer should receive product {string} in first place', function(product_code) {
+  expect(this.lastResponse.data[0].code).to.equal(product_code)
 })
 
 Then('Customer should receive lowest unit price of {string} for product {string}', function(
   estimatedPrice,
-  productCode,
+  product_code,
 ) {
-  expect(this.state.customer.offersByProduct[productCode].lowestUnitPrice).not.to.be.undefined
-  expect(this.state.customer.offersByProduct[productCode].lowestUnitPrice).to.equal(estimatedPrice)
+  expect(this.state.customer.offersByProduct[product_code].lowestUnitPrice).not.to.be.undefined
+  expect(this.state.customer.offersByProduct[product_code].lowestUnitPrice).to.equal(estimatedPrice)
 })
 
 Then('Customer should receive estimated time of arrival for product {string}', function(
-  productCode,
+  product_code,
 ) {
-  expect(this.state.customer.offersByProduct[productCode].estimatedTimeOfArrival).not.to.be
+  expect(this.state.customer.offersByProduct[product_code].estimatedTimeOfArrival).not.to.be
     .undefined
 })
 
 Then(
   'Customer should receive estimated time of arrival between {int} and {int} for product {string}',
-  function(min, max, productCode) {
-    expect(this.state.customer.offersByProduct[productCode].estimatedTimeOfArrival).not.to.be
+  function(min, max, product_code) {
+    expect(this.state.customer.offersByProduct[product_code].estimatedTimeOfArrival).not.to.be
       .undefined
     expect(
-      Number.parseInt(this.state.customer.offersByProduct[productCode].estimatedTimeOfArrival),
+      Number.parseInt(this.state.customer.offersByProduct[product_code].estimatedTimeOfArrival),
     ).to.be.within(min, max)
   },
 )
 
 Then('Deliverer {string} should get {int} offer for product {string} with price {string}',
-  function(deliverer, offers, productCode, price) {
-    expect(this.lastResponse.data[productCode]).not.to.be.undefined
-    expect(this.lastResponse.data[productCode].unitPrice).to.equal(price)
+  function(deliverer, offers, product_code, price) {
+    expect(this.lastResponse.data[product_code]).not.to.be.undefined
+    expect(this.lastResponse.data[product_code].unitPrice).to.equal(price)
   })
 
-Then('Deliverer {string} should get zero offers for product {string}', function(deliverer, productCode) {
-  expect(this.lastResponse.data[productCode]).to.be.undefined
+Then('Deliverer {string} should get zero offers for product {string}', function(deliverer, product_code) {
+  expect(this.lastResponse.data[product_code]).to.be.undefined
 })

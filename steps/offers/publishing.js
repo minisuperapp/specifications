@@ -3,17 +3,17 @@ const PublishOfferRequest = require('support/web/requests/deliverer-api/offers/p
 
 Given('Deliverer {string} publishes a new offer for product {string}', async function(
   deliverer,
-  productCode,
+  product_code,
 ) {
-  const request = new PublishOfferRequest.Builder(deliverer).withProductCode(productCode).build()
+  const request = new PublishOfferRequest.Builder(deliverer).withProductCode(product_code).build()
   await this.send(request)
 })
 
 Given(
   'Deliverer {string} publishes a new offer for product {string} with price {string}',
-  async function(deliverer, productCode, unitPrice) {
+  async function(deliverer, product_code, unitPrice) {
     const request = new PublishOfferRequest.Builder(deliverer)
-      .withProductCode(productCode)
+      .withProductCode(product_code)
       .withUnitPrice(unitPrice)
       .build()
     await this.send(request)
@@ -22,9 +22,9 @@ Given(
 
 Given(
   'Deliverer {string} publishes a new offer for product {string} with price {string} with location {string}, {string} and delivery radius of {int} KM',
-  async function(deliverer, productCode, unitPrice, latitude, longitude, delivererRadius) {
+  async function(deliverer, product_code, unitPrice, latitude, longitude, delivererRadius) {
     const request = new PublishOfferRequest.Builder(deliverer)
-      .withProductCode(productCode)
+      .withProductCode(product_code)
       .withUnitPrice(unitPrice)
       .withDelivererLocationLatitude(latitude)
       .withDelivererLocationLongitude(longitude)
@@ -36,9 +36,9 @@ Given(
 
 Given(
   'Deliverer {string} publishes a new offer for product {string} with location {string}, {string} and delivery radius of {int} KM',
-  async function(deliverer, productCode, latitude, longitude, deliveryRadius) {
+  async function(deliverer, product_code, latitude, longitude, deliveryRadius) {
     const request = new PublishOfferRequest.Builder(deliverer)
-      .withProductCode(productCode)
+      .withProductCode(product_code)
       .withDelivererLocationLatitude(latitude)
       .withDelivererLocationLongitude(longitude)
       .withDeliveryRadius(deliveryRadius)
@@ -49,9 +49,9 @@ Given(
 
 Given(
   'Deliverer {string} publishes a new offer for product {string} with price {string} and available quantity of {string}',
-  async function(deliverer, productCode, unitPrice, availableQuantity) {
+  async function(deliverer, product_code, unitPrice, availableQuantity) {
     const request = new PublishOfferRequest.Builder(deliverer)
-      .withProductCode(productCode)
+      .withProductCode(product_code)
       .withUnitPrice(unitPrice)
       .withAvailableQuantity(availableQuantity)
       .build()
@@ -61,9 +61,9 @@ Given(
 
 Given(
   'Deliverer {string} publishes a new offer for product {string} and available quantity of {string}',
-  async function(deliverer, productCode, availableQuantity) {
+  async function(deliverer, product_code, availableQuantity) {
     const request = new PublishOfferRequest.Builder(deliverer)
-      .withProductCode(productCode)
+      .withProductCode(product_code)
       .withAvailableQuantity(availableQuantity)
       .build()
     await this.send(request)

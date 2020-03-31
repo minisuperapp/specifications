@@ -16,7 +16,7 @@ class Request extends Base {
   }
   static get Builder() {
     class Builder {
-      constructor(customerCode) {
+      constructor(customer_code) {
       }
       build() {
         return new Request(this)

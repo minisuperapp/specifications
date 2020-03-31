@@ -3,21 +3,21 @@ const CustomerRegistrationRequest = require('support/web/requests/customer-api/r
 const CustomerLoginRequest = require('support/web/requests/customer-api/login')
 const { expect } = require('chai')
 
-When('Customer registers with phone number {string}', async function(phoneNumber) {
+When('Customer registers with phone number {string}', async function(phone_number) {
   const request = new CustomerRegistrationRequest.Builder()
-    .withPhoneNumber(phoneNumber)
+    .withPhoneNumber(phone_number)
     .build()
   await this.send(request)
 })
 
-When('Customer logs in with phone number {string}', async function(phoneNumber) {
+When('Customer logs in with phone number {string}', async function(phone_number) {
   const request = new CustomerLoginRequest.Builder()
-    .withPhoneNumber(phoneNumber)
+    .withPhoneNumber(phone_number)
     .build()
   await this.send(request)
 })
 
 Then('Customer should receive session token', function() {
-  expect(this.lastResponse.data.sessionToken).not.to.be.undefined
-  expect(this.lastResponse.data.sessionToken.length).to.be.at.least(1)
+  expect(this.lastResponse.data.session_token).not.to.be.undefined
+  expect(this.lastResponse.data.session_token.length).to.be.at.least(1)
 })

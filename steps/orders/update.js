@@ -5,17 +5,17 @@ const UpdateOrderToArrivedRequest = require('support/web/requests/deliverer-api/
 const { expect } = require('chai')
 
 When('Deliverer {string} updates last placed order to -in transit-', async function(deliverer) {
-  const orderId = this.lastPlacedOrder.id
+  const order_id = this.lastPlacedOrder.id
   const request = new UpdateOrderToInTransitRequest.Builder(deliverer)
-    .withOrderId(orderId)
+    .withOrderId(order_id)
     .build()
   await this.send(request)
 })
 
 When('Deliverer {string} updates last placed order to -arrived-', async function(deliverer) {
-  const orderId = this.lastPlacedOrder.id
+  const order_id = this.lastPlacedOrder.id
   const request = new UpdateOrderToArrivedRequest.Builder(deliverer)
-    .withOrderId(orderId)
+    .withOrderId(order_id)
     .build()
   await this.send(request)
 })

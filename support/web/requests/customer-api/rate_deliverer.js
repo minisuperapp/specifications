@@ -3,8 +3,8 @@ const Base = require('./$base')
 class Request extends Base {
   constructor(build) {
     super()
-    this.delivererId = build.delivererId
-    this.orderId = build.orderId
+    this.deliverer_id = build.deliverer_id
+    this.order_id = build.order_id
     this.concept = build.concept
     this.rating = build.rating
   }
@@ -16,8 +16,8 @@ class Request extends Base {
   }
   get payload() {
     return {
-      delivererId: this.delivererId,
-      orderId: this.orderId,
+      deliverer_id: this.deliverer_id,
+      order_id: this.order_id,
       concept: this.concept,
       rating: this.rating,
     }
@@ -25,17 +25,17 @@ class Request extends Base {
   static get Builder() {
     class Builder {
       constructor() {
-        this.delivererId = ''
-        this.orderId = ''
+        this.deliverer_id = ''
+        this.order_id = ''
         this.concept = ''
         this.rating = ''
       }
-      withDelivererId(delivererId) {
-        this.delivererId = delivererId
+      withDelivererId(deliverer_id) {
+        this.deliverer_id = deliverer_id
         return this
       }
-      withOrderId(orderId) {
-        this.orderId = orderId
+      withOrderId(order_id) {
+        this.order_id = order_id
         return this
       }
       withConcept(concept) {

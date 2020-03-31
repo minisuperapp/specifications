@@ -6,9 +6,9 @@ const R = require('ramda')
 
 Given(
   'Customer sends request to assign best offer for product {string} with quantity {string}',
-  async function(productCode, quantity) {
+  async function(product_code, quantity) {
     const request = new BestOfferAssigmentRequest.Builder()
-      .withProductCode(productCode)
+      .withProductCode(product_code)
       .withQuantity(quantity)
       .build()
     await this.send(request)
@@ -23,8 +23,8 @@ Given('Customer sends request to cancel last assigned offer', async function() {
 })
 
 When('Customer sends request to assign best offer for product {string}', async function(
-  productCode,
+  product_code,
 ) {
-  const request = new BestOfferAssigmentRequest.Builder().withProductCode(productCode).build()
+  const request = new BestOfferAssigmentRequest.Builder().withProductCode(product_code).build()
   await this.send(request)
 })

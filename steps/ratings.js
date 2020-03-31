@@ -14,10 +14,10 @@ When('Customer rates last order deliverer for {string} with rating {int}',
     await this.send(request)
   })
 
-Then('Deliverer publishing {string} should have reputation of {int}', async function (productCode, reputation) {
+Then('Deliverer publishing {string} should have reputation of {int}', async function (product_code, reputation) {
   const request = new OffersGroupedByProductRequest.Builder().build()
   const offers = await this.send(request)
 
-  const deliverer = offers.data.offersByProduct[productCode].offers[0].deliverer
+  const deliverer = offers.data.offersByProduct[product_code].offers[0].deliverer
   expect(deliverer.reputation).to.equal(reputation)
 });

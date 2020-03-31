@@ -4,7 +4,7 @@ class CustomerRegistrationRequest extends Base {
   constructor(build) {
     super('D1')
     this.name = build.name
-    this.phoneNumber = build.phoneNumber
+    this.phone_number = build.phone_number
     this.password = build.password
   }
   get method() {
@@ -16,7 +16,7 @@ class CustomerRegistrationRequest extends Base {
   get payload() {
     return {
       name: this.name,
-      phoneNumber: this.phoneNumber,
+      phone_number: this.phone_number,
       password: this.password
     }
   }
@@ -24,15 +24,15 @@ class CustomerRegistrationRequest extends Base {
     class Builder {
          constructor() {
            this.name = ''
-           this.phoneNumber = ''
+           this.phone_number = ''
            this.password = ''
          }
          withName(name) {
             this.name = name
             return this
          }
-         withPhoneNumber(phoneNumber) {
-            this.phoneNumber = phoneNumber
+         withPhoneNumber(phone_number) {
+            this.phone_number = phone_number
             return this
          }
          withPassword(password) {

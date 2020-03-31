@@ -14,7 +14,7 @@ When('Deliverer {string} sends request to receive started orders pending to deli
 When('Customer sends request to receive started orders pending to deliver', async function() {
   const request = new AsCustomerListPendingOrdersToDeliverRequest.Builder()
     .build()
-  await this.send(request, null, this.customerCode)
+  await this.send(request, null, this.customer_code)
 })
 
 Then('Deliverer should receive one order', function() {
@@ -27,9 +27,9 @@ Then('Customer should receive {int} orders', function(ordersNumber) {
   expect(this.lastResponse.data.orders.length).to.equal(ordersNumber)
 })
 
-Then('the order should be for product {string}', function(productCode) {
-  expect(this.lastResponse.data.orders[0].product_code).to.equal(productCode)
-  expect(this.lastResponse.data.productsByCode[productCode]).not.to.be.undefined
+Then('the order should be for product {string}', function(product_code) {
+  expect(this.lastResponse.data.orders[0].product_code).to.equal(product_code)
+  expect(this.lastResponse.data.productsByCode[product_code]).not.to.be.undefined
 })
 
 Then('the order should have quantity {string}', function(quantity) {

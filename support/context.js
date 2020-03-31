@@ -14,7 +14,7 @@ class Context {
     this.lastResponse = {}
     this.currentRequest = {}
     this.delivererSessionTokens = []
-    this.customerCode = null
+    this.customer_code = null
     this.delivererOfferMap = {}
     this.delivererSockets = {}
     this.customerSockets = []
@@ -43,11 +43,11 @@ class Context {
   _setCustomerSocketListeners(socket) {
     socket.on('published_offer', offer => {
       this._logSocketMessage('customer-api', 'published_offer', offer)
-      if (!this.state.customer.offersByProduct[offer.productCode]) {
-        this.state.customer.offersByProduct[offer.productCode] = {}
-        this.state.customer.offersByProduct[offer.productCode].offers = []
+      if (!this.state.customer.offersByProduct[offer.product_code]) {
+        this.state.customer.offersByProduct[offer.product_code] = {}
+        this.state.customer.offersByProduct[offer.product_code].offers = []
       }
-      this.state.customer.offersByProduct[offer.productCode].offers.push(offer)
+      this.state.customer.offersByProduct[offer.product_code].offers.push(offer)
       this.state.customer.offersById[offer.id] = {
         [offer.id]: offer,
       }
@@ -61,10 +61,10 @@ class Context {
     })
     socket.on('update_order_status', async order => {
       this._logSocketMessage('customer-api', 'update_order_status', order)
-      const currentOrder = this.state.customer.orders[order.orderId]
+      const currentOrder = this.state.customer.orders[order.order_id]
       this.state.customer.orders = {
         ...this.state.customer.orders,
-        [order.orderId]: {
+        [order.order_id]: {
           ...currentOrder,
           status: order.status,
         },
@@ -103,7 +103,7 @@ class Context {
     this.lastResponse = await apiRequester.send(
       request,
       this.delivererSessionTokens[request.deliverer],
-      this.customerCode,
+      this.customer_code,
     )
 
     this._logResponseInfo(this.lastResponse)
@@ -180,11 +180,11 @@ ${JSON.stringify(data)}`,
 
   _modifyLocalState(request) {
     if (this.lastResponse.cookies && this.lastResponse.cookies.setCustomerCode) {
-      this.customerCode = this.lastResponse.cookies.setCustomerCode
+      this.customer_code = this.lastResponse.cookies.setCustomerCode
     }
 
     if (request instanceof DelivererLoginRequest && this.lastResponse.success) {
-      this.delivererSessionTokens[request.deliverer] = this.lastResponse.data.sessionToken
+      this.delivererSessionTokens[request.deliverer] = this.lastResponse.data.session_token
     }
 
     if (request instanceof PublishOfferRequest && this.lastResponse.success) {

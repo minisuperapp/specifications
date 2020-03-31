@@ -3,7 +3,7 @@ const Base = require('./$base')
 class CustomerLoginRequest extends Base {
   constructor(build) {
     super()
-    this.phoneNumber = build.phoneNumber
+    this.phone_number = build.phone_number
   }
   get method() {
     return 'POST'
@@ -13,16 +13,16 @@ class CustomerLoginRequest extends Base {
   }
   get payload() {
     return {
-      phoneNumber: this.phoneNumber
+      phone_number: this.phone_number
     }
   }
   static get Builder() {
     class Builder {
          constructor() {
-           this.phoneNumber = ''
+           this.phone_number = ''
          }
-         withPhoneNumber(phoneNumber) {
-            this.phoneNumber = phoneNumber
+         withPhoneNumber(phone_number) {
+            this.phone_number = phone_number
             return this
          }
          build() {

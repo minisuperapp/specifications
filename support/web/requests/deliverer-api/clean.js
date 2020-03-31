@@ -3,7 +3,7 @@ const Base = require('./$base')
 class DelivererApiCleanRequest extends Base {
   constructor(build) {
     super(build.deliverer)
-    this.phoneNumber = build.phoneNumber
+    this.phone_number = build.phone_number
   }
   get method() {
     return 'POST'
