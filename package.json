@@ -4,7 +4,7 @@
   "description": "E2E Testing Framework",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_PATH=. cucumber-js -r support -r steps -f json:cucumber_report.json"
+    "test": "cross-env NODE_PATH=. node --inspect=5858 ./node_modules/cucumber/bin/cucumber-js -r support -r steps -f json:cucumber_report.json"
   },
   "repository": {
     "type": "git",
@@ -30,9 +30,9 @@
     "dotenv": "^6.0.0",
     "es6-promise": "^4.2.4",
     "isomorphic-fetch": "^2.2.1",
-    "knex": "^0.14.6",
+    "knex": "^0.21.1",
     "moment": "^2.22.1",
-    "pg": "^7.4.3",
+    "pg": "^8.0.3",
     "ramda": "^0.25.0",
     "socket.io-client": "^2.1.1",
     "thunk-redis": "^2.1.6"

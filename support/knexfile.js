@@ -3,9 +3,9 @@ module.exports = {
   searchPath: 'public',
   connection: {
     database: 'test',
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASS || 'root',
-    port: process.env.DB_PORT || 15432,
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    port: 15432,
   },
 }
