@@ -38,6 +38,7 @@ After(async function(testCase) {
   await knex('order_times').truncate()
   await knex('customers').truncate()
   await knex('deliverers').truncate()
+  await knex('offers').truncate()
 })
 
 AfterAll(async function() {
@@ -46,6 +47,7 @@ AfterAll(async function() {
   await knex('order_times').truncate()
   await knex('customers').truncate()
   await knex('deliverers').truncate()
+  await knex('offers').truncate()
   await knex.destroy()
   await redisClient.quit()
 })

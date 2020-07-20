@@ -3,16 +3,18 @@ const CustomerRegistrationRequest = require('support/web/requests/customer-api/r
 const CustomerLoginRequest = require('support/web/requests/customer-api/login')
 const { expect } = require('chai')
 
-When('Customer registers with phone number {string}', async function(phone_number) {
+When('Customer registers with email {string} and password {string}', async function(email, password) {
   const request = new CustomerRegistrationRequest.Builder()
-    .withPhoneNumber(phone_number)
+    .withEmail(email)
+    .withPassword(password)
     .build()
   await this.send(request)
 })
 
-When('Customer logs in with phone number {string}', async function(phone_number) {
+When('Customer logs in with email {string} and password {string}', async function(email, password) {
   const request = new CustomerLoginRequest.Builder()
-    .withPhoneNumber(phone_number)
+    .withEmail(email)
+    .withPassword(password)
     .build()
   await this.send(request)
 })
