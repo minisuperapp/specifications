@@ -78,14 +78,14 @@ Then('the offer should have the deliverer reputation, and last rating', function
 })
 
 Then('all offers should have an id, and price', function() {
-  const offersWithMissingDetails = R.filter(o => !o.id || !o.unitPrice, this.lastResponse.data)
+  const offersWithMissingDetails = R.filter(o => !o.id || !o.unit_price, this.lastResponse.data)
 
   expect(offersWithMissingDetails).to.be.empty
 })
 
-Then('all offers should have the deliverer reputation, and last rating', function() {
+Then('all offers should have the deliverer reputation', function() {
   const deliverersWithMissingDetails = R.filter(
-    o => o.deliverer.reputation === undefined || !o.deliverer.lastRating,
+    o => o.deliverer_reputation === undefined,
     this.lastResponse.data,
   )
 
@@ -94,10 +94,10 @@ Then('all offers should have the deliverer reputation, and last rating', functio
 
 Then('the deliverer name should be {string}', function(name) {
   const deliverer = this.lastResponse.data.length
-    ? this.lastResponse.data[0].deliverer
-    : this.lastResponse.data.deliverer
+    ? this.lastResponse.data[0].deliverer_name
+    : this.lastResponse.data.deliverer_name
 
-  expect(deliverer.name).to.equal(name)
+  expect(deliverer).to.equal(name)
 })
 
 Then('offers should be ordered by estimated arrival time', function() {
@@ -178,7 +178,7 @@ Then(
 Then('Deliverer {string} should get {int} offer for product {string} with price {string}',
   function(deliverer, offers, product_code, price) {
     expect(this.lastResponse.data[product_code]).not.to.be.undefined
-    expect(this.lastResponse.data[product_code].unitPrice).to.equal(price)
+    expect(this.lastResponse.data[product_code].unit_price).to.equal(price)
   })
 
 Then('Deliverer {string} should get zero offers for product {string}', function(deliverer, product_code) {

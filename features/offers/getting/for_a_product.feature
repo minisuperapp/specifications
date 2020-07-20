@@ -10,7 +10,7 @@ Feature: Get Offers List For A Specific Product
     Then Customer should receive successful response
     And Customer should receive one offer
     And all offers should have an id, and price
-    And all offers should have the deliverer reputation, and last rating
+    And all offers should have the deliverer reputation
     And the deliverer name should be 'Alonso Ayala'
 
   Scenario: Get No Offers For A Product Not Yet Offered
