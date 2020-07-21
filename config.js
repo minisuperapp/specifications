@@ -5,8 +5,8 @@ module.exports = {
   deliverer_api_host: `${process.env.DELIVERER_API_URL || 'http://localhost:3001'}`,
   mocks: {
     customerLocation: {
-      latitude: '28.1867048',
-      longitude: '-105.4600849',
+      latitude: '28.1867348',
+      longitude: '-105.4608849',
     },
   },
 }
