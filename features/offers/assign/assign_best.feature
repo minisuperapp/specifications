@@ -10,5 +10,5 @@ Feature: Assign Best Offer
     When Customer sends request to assign best offer for product 'CORN_TORTILLA'
     Then Customer should receive successful response
     And the offer unit price should be '19.99'
-    And the offer should have the deliverer reputation, and last rating
+    And the offer should have the deliverer reputation
     And the deliverer name should be 'Maria'

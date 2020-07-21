@@ -18,6 +18,6 @@ Then('Deliverer publishing {string} should have reputation of {int}', async func
   const request = new OffersGroupedByProductRequest.Builder().build()
   const offers = await this.send(request)
 
-  const deliverer = offers.data.offersByProduct[product_code].offers[0].deliverer
-  expect(deliverer.reputation).to.equal(reputation)
+  const offer = offers.data.offersByProduct[product_code].offers[0]
+  expect(offer.deliverer_reputation).to.equal(reputation)
 });
