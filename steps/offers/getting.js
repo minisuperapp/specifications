@@ -180,6 +180,12 @@ Then('Deliverer {string} should get {int} offer for product {string} with price 
     expect(this.lastResponse.data[product_code].unit_price).to.equal(price)
   })
 
+Then('Deliverer {string} should get {int} offer for product {string} with available quantity {int}',
+  function(deliverer, offers, product_code, available_quantity) {
+    expect(this.lastResponse.data[product_code]).not.to.be.undefined
+    expect(this.lastResponse.data[product_code].available_quantity).to.equal(available_quantity)
+  })
+
 Then('Deliverer {string} should get zero offers for product {string}', function(deliverer, product_code) {
   expect(this.lastResponse.data[product_code]).to.be.undefined
 })

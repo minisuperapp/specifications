@@ -12,6 +12,12 @@ Feature: Order Placement
     And Customer should receive an order with total '37'
     And Customer should receive an order with status 'PLACED'
 
+  Scenario: Place An Order Reduces Availability
+    Given Customer sends request to get offers for product 'CORN_TORTILLA'
+    And Customer places an order using offer from deliverer 'D1' with quantity '2' and location '27.670799', '105.1599679'
+    When Deliverer 'D1' sends request to get published offers
+    Then Deliverer 'D1' should get 1 offer for product 'CORN_TORTILLA' with available quantity 6
+
   Scenario: Notify Order Placing
     Given Customer sends request to get offers for product 'CORN_TORTILLA'
     And Deliverer 'D1' subscribes to get order placements notifications
