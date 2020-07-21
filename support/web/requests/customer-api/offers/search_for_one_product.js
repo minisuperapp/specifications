@@ -29,8 +29,8 @@ class Request extends Base {
       constructor() {
         this.product_code = 'CORN_TORTILLA'
         this.quantity = '1'
-        this.customerLocationLatitude = '28.1867048'
-        this.customerLocationLongitude = '-105.4600849'
+        this.customerLocationLatitude = '28.1867348'
+        this.customerLocationLongitude = '-105.4608849'
       }
       withProductCode(product_code) {
         this.product_code = product_code
