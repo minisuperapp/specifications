@@ -21,7 +21,7 @@ Given(
 )
 
 Given(
-  'Deliverer {string} publishes a new offer for product {string} with price {string} with location {string}, {string} and delivery radius of {int} KM',
+  'Deliverer {string} publishes a new offer for product {string} with price {string} with location {string}, {string} and delivery radius of {int} M',
   async function(deliverer, product_code, unitPrice, latitude, longitude, delivererRadius) {
     const request = new PublishOfferRequest.Builder(deliverer)
       .withProductCode(product_code)
@@ -35,7 +35,7 @@ Given(
 )
 
 Given(
-  'Deliverer {string} publishes a new offer for product {string} with location {string}, {string} and delivery radius of {int} KM',
+  'Deliverer {string} publishes a new offer for product {string} with location {string}, {string} and delivery radius of {int} M',
   async function(deliverer, product_code, latitude, longitude, deliveryRadius) {
     const request = new PublishOfferRequest.Builder(deliverer)
       .withProductCode(product_code)

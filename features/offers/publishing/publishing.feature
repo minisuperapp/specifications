@@ -29,5 +29,5 @@ Feature: Publish An Offer
   Scenario: Do Not Notify Offer Publishing If Offer Is Outside Deliverer's Radius
     Given Customer sends request to get offers grouped by product with location '28.1867348', '-105.4608849'
     And Customer subscribes to get offers updates with location '28.1867348', '-105.4608849'
-    When Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' with location '28.1924005', '-105.39' and delivery radius of 1 KM
+    When Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' with location '28.1924005', '-105.39' and delivery radius of 1000 M
     Then Customer should see zero offers for product 'CORN_TORTILLA'

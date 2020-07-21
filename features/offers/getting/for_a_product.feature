@@ -20,19 +20,19 @@ Feature: Get Offers List For A Specific Product
     And Customer should receive zero offers
 
   Scenario: Get No Offer From Deliverer Outside Geo-Radius
-    Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' with location '28.1924005', '-105.4676839' and delivery radius of 1 KM
+    Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' with location '28.1924005', '-105.4676839' and delivery radius of 1000 M
     When Customer sends request to get offers for product 'CORN_TORTILLA' with location '28.2007644', '-105.4870049'
     Then Customer should receive successful response
     And Customer should receive zero offers
 
   Scenario: Get Offer From Deliverer Within Geo-Radius
-    Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' with location '28.1924005', '-105.4676839' and delivery radius of 3 KM
+    Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' with location '28.1924005', '-105.4676839' and delivery radius of 3000 M
     When Customer sends request to get offers for product 'CORN_TORTILLA' with location '28.2007644', '-105.4870049'
     Then Customer should receive successful response
     And Customer should receive one offer
 
   Scenario: Get Offer From Deliverer Who Just Got Within Geo-Radius
-    Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' with location '28.1924005', '-105.4676839' and delivery radius of 2 KM
+    Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' with location '28.1924005', '-105.4676839' and delivery radius of 2000 M
     And Customer sends request to get offers for product 'CORN_TORTILLA' with location '28.2007644', '-105.4870049'
     Then Customer should receive zero offers
     When Deliverer 'D1' updates offer location to '28.1924005', '-105.4776839'
@@ -40,8 +40,8 @@ Feature: Get Offers List For A Specific Product
     Then Customer should receive one offer
 
   Scenario: Get Offers From Multiple Deliverers Within Geo-Radius
-    Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' with location '28.1924005', '-105.4676839' and delivery radius of 3 KM
-    And Deliverer 'D2' publishes a new offer for product 'CORN_TORTILLA' with location '28.1924005', '-105.4676839' and delivery radius of 3 KM
+    Given Deliverer 'D1' publishes a new offer for product 'CORN_TORTILLA' with location '28.1924005', '-105.4676839' and delivery radius of 3000 M
+    And Deliverer 'D2' publishes a new offer for product 'CORN_TORTILLA' with location '28.1924005', '-105.4676839' and delivery radius of 3000 M
     When Customer sends request to get offers for product 'CORN_TORTILLA' with location '28.1907644', '-105.4970049'
     Then Customer should receive successful response
     And Customer should receive 2 offers
