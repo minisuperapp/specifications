@@ -33,7 +33,7 @@ class PublishOfferRequest extends Base {
     class Builder {
       constructor(deliverer) {
         this.deliverer = deliverer
-        this.product_code = 'CORN_TORTILLA'
+        this.product_code = 'tortillas_de_maiz'
         this.availableQuantity = '8'
         this.locationLatitude = '28.1867348'
         this.locationLongitude = '-105.4608849'

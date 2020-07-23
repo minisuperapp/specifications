@@ -27,7 +27,7 @@ class Request extends Base {
   static get Builder() {
     class Builder {
       constructor() {
-        this.product_code = 'CORN_TORTILLA'
+        this.product_code = 'tortillas_de_maiz'
         this.quantity = '1'
         this.customerLocationLatitude = '28.1867348'
         this.customerLocationLongitude = '-105.4608849'
