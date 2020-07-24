@@ -41,7 +41,7 @@ When('Deliverer {string} updates offer location to {string}, {string}', async fu
 
 When('Deliverer {string} deletes the last published offer', async function(deliverer) {
   const request = new DeleteOfferRequest.Builder(deliverer)
-    .withOfferId(this.lastResponse.data.id)
+    .withOfferId(this.lastResponse.data.code)
     .build()
   await this.send(request)
 })
