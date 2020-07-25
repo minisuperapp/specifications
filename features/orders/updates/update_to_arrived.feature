@@ -15,7 +15,6 @@ Feature: Update Order To In Transit
     When Deliverer 'D1' updates last placed order to -arrived-
     Then Customer should see order status as 'ARRIVED'
 
-
   Scenario: Do Not Notify Order Status Updated To Arrived If Customer Disconnected Subscription
     Given Customer places an order using offer from deliverer 'D1' with quantity '2' and location '28.1867348', '-105.4608849'
     And Customer subscribes to get order updates
