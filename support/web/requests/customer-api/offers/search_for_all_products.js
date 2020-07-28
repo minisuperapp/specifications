@@ -15,7 +15,7 @@ class OffersGroupedByProductRequest extends Base {
   }
   get payload() {
     return {
-      customerLocation: {
+      location: {
         latitude: this.customerLocationLatitude,
         longitude: this.customerLocationLongitude,
       },

@@ -18,7 +18,7 @@ class Request extends Base {
     return {
       product_code: this.product_code,
       quantity: this.quantity,
-      customerLocation: {
+      location: {
         latitude: this.customerLocationLatitude,
         longitude: this.customerLocationLongitude,
       },
