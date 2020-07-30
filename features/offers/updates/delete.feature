@@ -1,8 +1,8 @@
 Feature: Delete An Offer
 
   Background:
-    Given Deliverer 'D1' registers with phone number '6483516383' and password 'secret1'
-    And Deliverer 'D1' logs in with phone number '6483516383' and password 'secret1'
+    Given Deliverer 'D1' registers with email 'd1@minisuper.app' and password 'secret1'
+    And Deliverer 'D1' logs in with email 'd1@minisuper.app' and password 'secret1'
     Given Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz' with price '20.00'
 
   Scenario: Delete An Offer

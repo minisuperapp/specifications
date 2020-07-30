@@ -1,7 +1,7 @@
 Feature: Change Deliverer Availability
 
   Background:
-    Given Deliverer 'D1' registers with phone number '6481095678' and logs in
+    Given Deliverer 'D1' registers with email 'd1@minisuper.app' and logs in
 
   Scenario: Deliverer Changes Availability True
     When Deliverer 'D1' changes availability to true

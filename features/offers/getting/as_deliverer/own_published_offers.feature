@@ -1,7 +1,7 @@
 Feature: Get Own Published Offers
 
   Background:
-    Given Deliverer 'D1' registers with phone number '6481095678' and logs in
+    Given Deliverer 'D1' registers with email 'd1@minisuper.app' and logs in
 
   Scenario: Get Published Offer
     Given Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz' with price '20.00'

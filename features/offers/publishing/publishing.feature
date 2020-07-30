@@ -1,7 +1,7 @@
 Feature: Publish An Offer
 
   Background:
-    Given Deliverer 'D1' registers with phone number '6481095678' and logs in
+    Given Deliverer 'D1' registers with email 'd1@minisuper.app' and logs in
 
   Scenario: Add Offer Successfully
     When Deliverer 'D1' publishes a new offer

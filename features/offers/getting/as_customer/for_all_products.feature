@@ -1,8 +1,8 @@
 Feature: Get Offers For All Products As Customer
 
   Background:
-    Given Deliverer 'D1' registers with phone number '6481095678' and logs in
-    And Deliverer 'D2' registers with phone number '6481107823' and logs in
+    Given Deliverer 'D1' registers and logs in
+    And Deliverer 'D2' registers and logs in
 
   Scenario: Get Offer For One Product
     Given Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz' with price '20.00'

@@ -1,9 +1,9 @@
 Feature: Get Orders Pending To Deliver As Customer
 
   Background:
-    Given Deliverer 'D1' registers with phone number '6483516383' and logs in
+    Given Deliverer 'D1' registers with email 'd1@minisuper.app' and logs in
     And Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz' with price '18.50'
-    And Deliverer 'D2' registers with phone number '6483516384' and logs in
+    And Deliverer 'D2' registers with email 'd2@minisuper.app' and logs in
     And Deliverer 'D2' publishes a new offer for product 'RED_APPLE' with price '20.50'
 
   Scenario: Get New Started Order

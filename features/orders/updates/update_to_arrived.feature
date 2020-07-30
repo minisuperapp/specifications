@@ -1,7 +1,7 @@
 Feature: Update Order To In Transit
 
   Background:
-    Given Deliverer 'D1' registers with phone number '6483516383' and logs in
+    Given Deliverer 'D1' registers with email 'd1@minisuper.app' and logs in
     And Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz' with price '18.50'
 
   Scenario: Update Order To Arrived
