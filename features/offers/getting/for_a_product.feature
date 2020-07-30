@@ -2,7 +2,7 @@ Feature: Get Offers List For A Specific Product
 
   Background:
     Given Deliverer 'D1' registers with email 'd1@minisuper.app', name 'Alonso Ayala', and then and logs in
-    And Deliverer 'D2' registers with email 'd2@minisuper.app' and logs in
+    And Deliverer 'D2' registers and logs in
 
   Scenario: Get Available Offer For 1 Product
     Given Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz'

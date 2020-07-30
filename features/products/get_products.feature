@@ -1,8 +1,8 @@
 Feature: Get Products
 
   Background:
-    Given Deliverer 'D1' registers with email 'd1@minisuper.app' and logs in
-    And Deliverer 'D2' registers with email 'd2@minisuper.app' and logs in
+    Given Deliverer 'D1' registers and logs in
+    And Deliverer 'D2' registers and logs in
 
   Scenario: Get Products As Customer
     When Customer sends request to get products
