@@ -1,7 +1,7 @@
 const Base = require('../$base')
 
 class Request extends Base {
-  constructor(build) {
+  constructor() {
     super()
   }
 
@@ -16,7 +16,7 @@ class Request extends Base {
   }
   static get Builder() {
     class Builder {
-      constructor(customer_code) {
+      constructor() {
       }
       build() {
         return new Request(this)

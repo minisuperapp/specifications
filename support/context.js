@@ -14,7 +14,7 @@ class Context {
     this.lastResponse = {}
     this.currentRequest = {}
     this.delivererSessionTokens = []
-    this.customer_code = null
+    this.customer_session_token = null
     this.delivererOfferMap = {}
     this.delivererSockets = {}
     this.customerSockets = []
@@ -103,7 +103,7 @@ class Context {
     this.lastResponse = await apiRequester.send(
       request,
       this.delivererSessionTokens[request.deliverer],
-      this.customer_code,
+      this.customer_session_token,
     )
 
     this._logResponseInfo(this.lastResponse)
@@ -179,8 +179,8 @@ ${JSON.stringify(data)}`,
   }
 
   _modifyLocalState(request) {
-    if (this.lastResponse.cookies && this.lastResponse.cookies.setCustomerCode) {
-      this.customer_code = this.lastResponse.cookies.setCustomerCode
+    if (this.lastResponse.cookies && this.lastResponse.cookies.setSessionToken) {
+      this.customer_session_token = this.lastResponse.cookies.setSessionToken
     }
 
     if (request instanceof DelivererLoginRequest && this.lastResponse.success) {

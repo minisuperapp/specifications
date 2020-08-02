@@ -1,7 +1,8 @@
 Feature: Get Orders Pending To Deliver As Deliverer
 
   Background:
-    Given Deliverer 'D1' registers and logs in
+    Given Customer is registered
+    And Deliverer 'D1' registers and logs in
     And Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz' with price '18.50'
 
   Scenario: Get New Started Order

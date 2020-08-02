@@ -3,14 +3,14 @@ const cookie = require('cookie')
 
 const api_requester = {}
 
-api_requester.send = async (request, delivererSessionToken, customer_code) => {
+api_requester.send = async (request, delivererSessionToken, session_token) => {
   const info = {
     method: request.method,
     body: request.method === 'GET' ? undefined : JSON.stringify(request.payload),
     headers: {
       'Content-Type': 'application/json',
-      'session-token': delivererSessionToken,
-      'Cookie': `customer-code=${customer_code}`,
+      'session_token': delivererSessionToken,
+      'Cookie': `session_token=${session_token}`,
       'is-test': 'true',
     },
   }
@@ -22,7 +22,7 @@ api_requester.send = async (request, delivererSessionToken, customer_code) => {
     return Promise.resolve({
       ...JSON.parse(responseText),
       cookies: {
-        setCustomerCode: getCustomerCodeCookie(res),
+        setSessionToken: getSessionTokenCookie(res),
       },
     })
   } catch (err) {
@@ -31,11 +31,11 @@ api_requester.send = async (request, delivererSessionToken, customer_code) => {
   }
 }
 
-function getCustomerCodeCookie(res) {
+function getSessionTokenCookie(res) {
   if (res.headers && res.headers._headers && res.headers._headers['set-cookie']) {
-    const foundCookie = res.headers._headers['set-cookie'].find(c => c.startsWith('customer-code'))
+    const foundCookie = res.headers._headers['set-cookie'].find(c => c.startsWith('session_token'))
     if (foundCookie) {
-      return cookie.parse(foundCookie)['customer-code']
+      return cookie.parse(foundCookie)['session_token']
     }
   }
 }
