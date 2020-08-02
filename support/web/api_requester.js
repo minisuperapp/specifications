@@ -3,13 +3,12 @@ const cookie = require('cookie')
 
 const api_requester = {}
 
-api_requester.send = async (request, delivererSessionToken, session_token) => {
+api_requester.send = async (request, session_token) => {
   const info = {
     method: request.method,
     body: request.method === 'GET' ? undefined : JSON.stringify(request.payload),
     headers: {
       'Content-Type': 'application/json',
-      'session_token': delivererSessionToken,
       'Cookie': `session_token=${session_token}`,
       'is-test': 'true',
     },

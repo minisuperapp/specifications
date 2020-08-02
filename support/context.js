@@ -100,11 +100,12 @@ class Context {
   async send(request) {
     this._logRequestInfo(request)
 
-    this.lastResponse = await apiRequester.send(
-      request,
-      this.delivererSessionTokens[request.deliverer],
-      this.customer_session_token,
-    )
+    const session_token =
+      request.apiServer === 'customer-api'
+        ? this.customer_session_token
+        : this.delivererSessionTokens[request.deliverer]
+
+    this.lastResponse = await apiRequester.send(request, session_token)
 
     this._logResponseInfo(this.lastResponse)
 
