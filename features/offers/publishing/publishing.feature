@@ -10,7 +10,7 @@ Feature: Publish An Offer
   Scenario: Unknown Deliverer Adds An Offer
     When Deliverer 'D2' publishes a new offer
     Then Deliverer should receive unsuccessful response
-    And Deliverer should receive single error message with property '' and message 'unknown.deliverer'
+    Then Deliverer should receive a 401 error response
 
   Scenario: Notify Offer Publishing
     Given Customer sends request to get offers grouped by product

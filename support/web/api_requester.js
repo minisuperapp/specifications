@@ -9,13 +9,19 @@ api_requester.send = async (request, session_token) => {
     body: request.method === 'GET' ? undefined : JSON.stringify(request.payload),
     headers: {
       'Content-Type': 'application/json',
-      'Cookie': `session_token=${session_token}`,
+      Cookie: `session_token=${session_token}`,
       'is-test': 'true',
     },
   }
   let responseText
   try {
     const res = await fetch(request.uri + '/' + request.path, info)
+    if (res.status === 401) {
+      return {
+        success: false,
+        status: 401,
+      }
+    }
     responseText = await res.text()
 
     return Promise.resolve({
@@ -25,7 +31,7 @@ api_requester.send = async (request, session_token) => {
       },
     })
   } catch (err) {
-    console.log(responseText, request.uri + '/' + request.path, info)
+    console.log(err.message, request.uri + '/' + request.path, info)
     throw err
   }
 }
