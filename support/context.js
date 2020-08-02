@@ -87,7 +87,7 @@ class Context {
       }
       this.state.deliverer[deliverer].pendingDeliveries.push({
         order: data.order,
-        product: data.product
+        product: data.product,
       })
       this.socketLocks.placedOrder--
     })
@@ -179,12 +179,16 @@ ${JSON.stringify(data)}`,
   }
 
   _modifyLocalState(request) {
-    if (this.lastResponse.cookies && this.lastResponse.cookies.setSessionToken) {
+    if (
+      request.apiServer === 'customer-api' &&
+      this.lastResponse.cookies &&
+      this.lastResponse.cookies.setSessionToken
+    ) {
       this.customer_session_token = this.lastResponse.cookies.setSessionToken
     }
 
     if (request instanceof DelivererLoginRequest && this.lastResponse.success) {
-      this.delivererSessionTokens[request.deliverer] =this.lastResponse.cookies.setSessionToken
+      this.delivererSessionTokens[request.deliverer] = this.lastResponse.cookies.setSessionToken
     }
 
     if (request instanceof PublishOfferRequest && this.lastResponse.success) {
