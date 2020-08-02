@@ -16,6 +16,7 @@ const redisClient = redis.createClient(config.redis_host, {
 })
 
 Before(async function(testCase) {
+  this.knex = knex
   this.currentProductOffers = {}
   this.delivererSockets = {}
   this.createCustomerSocket(config.mocks.customerLocation) // For socket exception detection

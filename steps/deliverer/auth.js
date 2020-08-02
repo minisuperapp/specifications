@@ -72,3 +72,11 @@ Given('Deliverer {string} logs out', async function (deliverer) {
   const logoutRequest = new DelivererLogoutRequest.Builder(deliverer).build()
   await this.send(logoutRequest)
 })
+
+Given('All deliverer tokens are expired', async function () {
+  await this.knex('tokens')
+    .where({ entity: 'DELIVERER' })
+    .update({
+      expires_at: this.knex.raw(`CURRENT_TIMESTAMP - INTERVAL '1 HOUR'`),
+    })
+})
