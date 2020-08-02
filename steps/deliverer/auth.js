@@ -1,8 +1,8 @@
 const _ = require('lodash')
-const { Given, When, Then } = require('cucumber')
+const { Given, When } = require('cucumber')
 const DelivererLoginRequest = require('support/web/requests/deliverer-api/login')
+const DelivererLogoutRequest = require('support/web/requests/deliverer-api/logout')
 const DelivererRegistrationRequest = require('support/web/requests/deliverer-api/registration')
-const { expect } = require('chai')
 
 Given('Deliverer {string} registers with email {string} and password {string}', async function (
   deliverer,
@@ -66,4 +66,9 @@ When('Deliverer {string} logs in with email {string} and password {string}', asy
     .withPassword(password)
     .build()
   await this.send(request)
+})
+
+Given('Deliverer {string} logs out', async function (deliverer) {
+  const logoutRequest = new DelivererLogoutRequest.Builder(deliverer).build()
+  await this.send(logoutRequest)
 })
