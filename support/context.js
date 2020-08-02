@@ -184,7 +184,7 @@ ${JSON.stringify(data)}`,
     }
 
     if (request instanceof DelivererLoginRequest && this.lastResponse.success) {
-      this.delivererSessionTokens[request.deliverer] = this.lastResponse.data.session_token
+      this.delivererSessionTokens[request.deliverer] =this.lastResponse.cookies.setSessionToken
     }
 
     if (request instanceof PublishOfferRequest && this.lastResponse.success) {

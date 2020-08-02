@@ -6,7 +6,6 @@ Feature: Deliverer Login
   Scenario: Successful login
     When Deliverer 'D1' logs in with email 'd1@minisuper.app' and password 'secret1'
     Then Deliverer should receive successful response
-    And Deliverer should receive session token
 
   Scenario: Wrong password
     When Deliverer 'D1' logs in with email 'd1@minisuper.app' and password 'secret2'

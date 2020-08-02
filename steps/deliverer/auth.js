@@ -67,8 +67,3 @@ When('Deliverer {string} logs in with email {string} and password {string}', asy
     .build()
   await this.send(request)
 })
-
-Then('Deliverer should receive session token', function () {
-  expect(this.lastResponse.data.session_token).not.to.be.undefined
-  expect(this.lastResponse.data.session_token.length).to.be.at.least(1)
-})
