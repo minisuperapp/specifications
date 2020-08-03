@@ -100,12 +100,11 @@ class Context {
   async send(request) {
     this._logRequestInfo(request)
 
-    const session_token =
-      request.apiServer === 'customer-api'
-        ? this.customer_session_token
-        : this.delivererSessionTokens[request.deliverer]
-
-    this.lastResponse = await apiRequester.send(request, session_token)
+    this.lastResponse = await apiRequester.send(
+      request,
+      this.customer_session_token,
+      this.delivererSessionTokens[request.deliverer],
+    )
 
     this._logResponseInfo(this.lastResponse)
 
@@ -183,13 +182,13 @@ ${JSON.stringify(data)}`,
     if (
       request.apiServer === 'customer-api' &&
       this.lastResponse.cookies &&
-      this.lastResponse.cookies.setSessionToken
+      this.lastResponse.cookies.customerSessionToken
     ) {
-      this.customer_session_token = this.lastResponse.cookies.setSessionToken
+      this.customer_session_token = this.lastResponse.cookies.customerSessionToken
     }
 
     if (request instanceof DelivererLoginRequest && this.lastResponse.success) {
-      this.delivererSessionTokens[request.deliverer] = this.lastResponse.cookies.setSessionToken
+      this.delivererSessionTokens[request.deliverer] = this.lastResponse.cookies.delivererSessionToken
     }
 
     if (request instanceof PublishOfferRequest && this.lastResponse.success) {
