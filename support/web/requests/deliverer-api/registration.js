@@ -23,7 +23,7 @@ class CustomerRegistrationRequest extends Base {
   static get Builder() {
     class Builder {
          constructor() {
-           this.name = ''
+           this.name = 'D1'
            this.email = ''
            this.password = ''
          }

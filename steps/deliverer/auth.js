@@ -18,9 +18,15 @@ Given('Deliverer {string} registers with email {string} and password {string}', 
 
 Given('Deliverer {string} registers and logs in', async function (deliverer) {
   const email = _.snakeCase(deliverer) + '@minisuper.app'
-  const registrationRequest = new DelivererRegistrationRequest.Builder().withEmail(email).build()
+  const registrationRequest = new DelivererRegistrationRequest.Builder()
+    .withEmail(email)
+    .withPassword('secret1')
+    .build()
   await this.send(registrationRequest)
-  const loginRequest = new DelivererLoginRequest.Builder(deliverer).withEmail(email).build()
+  const loginRequest = new DelivererLoginRequest.Builder(deliverer)
+    .withEmail(email)
+    .withPassword('secret1')
+    .build()
   await this.send(loginRequest)
 })
 
