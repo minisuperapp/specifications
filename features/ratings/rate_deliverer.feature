@@ -1,7 +1,7 @@
 Feature: Rate Deliverer
 
   Background:
-    Given Customer is registered
+    Given Customer access the application
     And Deliverer 'D1' registers and logs in
     And Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz'
     And Customer sends request to get offers for product 'tortillas_de_maiz'

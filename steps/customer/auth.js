@@ -14,7 +14,7 @@ When('Customer registers with email {string} and password {string}', async funct
   await this.send(request)
 })
 
-When('Customer is registered', async function () {
+When('Customer access the application', async function () {
   const request = new CustomerRegistrationRequest.Builder().build()
   await this.send(request)
 })
