@@ -15,7 +15,7 @@ const redisClient = redis.createClient(config.redis_host, {
   noDelay: true,
 })
 
-Before(async function(testCase) {
+Before(async function (testCase) {
   this.knex = knex
   this.currentProductOffers = {}
   this.delivererSockets = {}
@@ -23,7 +23,7 @@ Before(async function(testCase) {
   this.createDelivererSocket('') // For socket exception detection
 })
 
-After(async function(testCase) {
+After(async function (testCase) {
   await redisClient.flushall()
   this.customerSockets.map(s => s.disconnect())
   Object.keys(this.delivererSockets).map(d => this.delivererSockets[d].disconnect())
@@ -35,24 +35,26 @@ After(async function(testCase) {
   this.socketExceptions = []
   this.socketLocks = this.initSocketLocks
   this.state = this.initState
-  await knex('orders').truncate()
-  await knex('order_times').truncate()
-  await knex('customers').truncate()
-  await knex('deliverers').truncate()
-  await knex('offers').truncate()
-  await knex('offer_locations').truncate()
-  await knex('tokens').truncate()
+  await truncate_tables()
 })
 
-AfterAll(async function() {
+async function truncate_tables() {
+  await knex.raw(
+    `TRUNCATE TABLE 
+    orders, 
+    order_times, 
+    customer_locations, 
+    customers, 
+    deliverers,
+    offers,
+    offer_locations, 
+    tokens CASCADE`,
+  )
+}
+
+AfterAll(async function () {
   await redisClient.flushall()
-  await knex('orders').truncate()
-  await knex('order_times').truncate()
-  await knex('customers').truncate()
-  await knex('deliverers').truncate()
-  await knex('offers').truncate()
-  await knex('offer_locations').truncate()
-  await knex('tokens').truncate()
+  await truncate_tables()
   await knex.destroy()
   await redisClient.quit()
 })
