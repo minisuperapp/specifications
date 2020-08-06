@@ -8,7 +8,7 @@ class CustomerGetProfileRequest extends Base {
     return 'POST'
   }
   get path() {
-    return 'register'
+    return 'get_profile'
   }
   get payload() {
     return {}
