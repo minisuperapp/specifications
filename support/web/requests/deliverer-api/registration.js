@@ -1,6 +1,6 @@
 const Base = require('./$base')
 
-class CustomerRegistrationRequest extends Base {
+class DelivererRegistrationRequest extends Base {
   constructor(build) {
     super('D1')
     this.name = build.name
@@ -40,11 +40,11 @@ class CustomerRegistrationRequest extends Base {
             return this
          }
          build() {
-            return new CustomerRegistrationRequest(this)
+            return new DelivererRegistrationRequest(this)
          }
       }
       return Builder
   }
 }
 
-module.exports = CustomerRegistrationRequest
+module.exports = DelivererRegistrationRequest
