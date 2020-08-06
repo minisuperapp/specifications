@@ -1,6 +1,6 @@
 const Base = require('./$base')
 
-class CustomerRegistrationRequest extends Base {
+class CustomerGetProfileRequest extends Base {
   constructor() {
     super()
   }
@@ -17,11 +17,11 @@ class CustomerRegistrationRequest extends Base {
     class Builder {
       constructor() {}
       build() {
-        return new CustomerRegistrationRequest()
+        return new CustomerGetProfileRequest()
       }
     }
     return Builder
   }
 }
 
-module.exports = CustomerRegistrationRequest
+module.exports = CustomerGetProfileRequest
