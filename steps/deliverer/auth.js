@@ -44,9 +44,15 @@ Given(
   'Deliverer {string} registers with email {string}, name {string}, and then and logs in',
   async function (deliverer, email, name) {
     await this.send(
-      new DelivererRegistrationRequest.Builder().withEmail(email).withName(name).build(),
+      new DelivererRegistrationRequest.Builder()
+        .withEmail(email)
+        .withPassword('secret1')
+        .withName(name)
+        .build(),
     )
-    await this.send(new DelivererLoginRequest.Builder(deliverer).withEmail(email).build())
+    await this.send(
+      new DelivererLoginRequest.Builder(deliverer).withPassword('secret1').withEmail(email).build(),
+    )
   },
 )
 
