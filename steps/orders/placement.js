@@ -30,6 +30,7 @@ Given('Customer places an order using offer from deliverer {string}', async func
   const offerId = this.delivererOfferMap[deliverer]
   const request = new PlaceOrderRequest.Builder()
     .withOfferId(offerId)
+    .withCustomerLocationId(this.state.customer.lastCustomerLocationId)
     .build()
   await this.send(request)
 })
