@@ -20,6 +20,7 @@ Given(
     const request = new PlaceOrderRequest.Builder()
       .withOfferId(offerId)
       .withQuantity(quantity)
+      .withCustomerLocationId(this.state.customer.lastCustomerLocationId)
       .build()
     await this.send(request)
   },
