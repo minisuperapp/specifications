@@ -12,4 +12,3 @@ Feature: Get Orders Pending To Deliver As Deliverer
     And Deliverer should receive one order
     And the order should be for product 'tortillas_de_maiz'
     And the order should have quantity '2'
-    And the order should have customer location '28.1867348', '-105.4608849'
