@@ -1,4 +1,4 @@
-const { Given, When, Then } = require('cucumber')
+const { When, Then } = require('cucumber')
 const CustomerGetProfileRequest = require('support/web/requests/customer-api/registration')
 const CustomerLoginRequest = require('support/web/requests/customer-api/login')
 const { expect } = require('chai')
