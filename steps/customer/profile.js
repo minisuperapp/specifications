@@ -17,6 +17,21 @@ When(/^Customer adds a location with the following info$/, async function (table
   await this.send(request)
 })
 
+When(/^Customer adds a home location$/, async function () {
+  const request = new CustomerAddLocationRequest.Builder()
+    .withIsHome(true)
+    .withName('Casa')
+    .withStreet('Benito Juarez')
+    .withNumber('123')
+    .withNeighborhood('Centro')
+    .withCity('Delicias')
+    .withPostalCode('33700')
+    .withState('Chihuahua')
+    .build()
+  await this.send(request)
+})
+
+
 Then(/^Customer should receive profile locations$/, function () {
   expect(this.lastResponse.profile).not.to.be.undefined
   expect(this.lastResponse.profile.locations).not.to.be.undefined

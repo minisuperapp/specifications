@@ -35,13 +35,26 @@ Given('Customer places an order using offer from deliverer {string}', async func
 
 
 When(
-  'Customer places an order using offer from deliverer {string} with quantity {string} and location {string}, {string}',
-  async function(deliverer, quantity, latitude, longitude) {
+  'Customer places an order using offer from deliverer {string} with quantity {string} and home location',
+  async function(deliverer, quantity) {
     const offerId = this.delivererOfferMap[deliverer]
     const request = new PlaceOrderRequest.Builder()
       .withOfferId(offerId)
       .withQuantity(quantity)
       .withCustomerLocationId(this.state.customer.lastCustomerLocationId)
+      .build()
+    await this.send(request)
+  },
+)
+
+When(
+  'Customer places an order using offer from deliverer {string} with quantity {string} and no location',
+  async function(deliverer, quantity) {
+    const offerId = this.delivererOfferMap[deliverer]
+    const request = new PlaceOrderRequest.Builder()
+      .withOfferId(offerId)
+      .withQuantity(quantity)
+      .withCustomerLocationId(null)
       .build()
     await this.send(request)
   },
