@@ -4,6 +4,7 @@ const DelivererLoginRequest = require('./web/requests/deliverer-api/login')
 const PublishOfferRequest = require('./web/requests/deliverer-api/offers/publish')
 const OffersGroupedByProductRequest = require('./web/requests/customer-api/offers/search_for_all_products')
 const BestOfferAssigmentRequest = require('./web/requests/customer-api/offers/assign_best')
+const CustomerAddLocationRequest = require('./web/requests/customer-api/add_location')
 const PlaceOrderRequest = require('./web/requests/customer-api/place_order')
 const customerSocket = require('./web/sockets/customer_socket_client')
 const delivererSocket = require('./web/sockets/deliverer_socket_client')
@@ -24,6 +25,7 @@ class Context {
         offersByProduct: {},
         offersById: {},
         lastAssignedOfferId: '',
+        lastCustomerLocationId: null,
         orders: {},
       },
       deliverer: {
@@ -206,6 +208,10 @@ ${JSON.stringify(data)}`,
 
     if (request instanceof BestOfferAssigmentRequest && this.lastResponse.success) {
       this.state.customer.lastAssignedOfferId = this.lastResponse.data.id
+    }
+
+    if (request instanceof CustomerAddLocationRequest && this.lastResponse.success) {
+      this.state.customer.lastCustomerLocationId = this.lastResponse.location.id
     }
   }
 }

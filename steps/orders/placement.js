@@ -41,8 +41,7 @@ When(
     const request = new PlaceOrderRequest.Builder()
       .withOfferId(offerId)
       .withQuantity(quantity)
-      .withCustomerLocationLatitude(latitude)
-      .withCustomerLocationLongitude(longitude)
+      .withCustomerLocationId(this.state.customer.lastCustomerLocationId)
       .build()
     await this.send(request)
   },

@@ -5,8 +5,7 @@ class PlaceOrderRequest extends Base {
     super()
     this.offerId = build.offerId
     this.quantity = build.quantity
-    this.customerLocationLatitude = build.customerLocationLatitude
-    this.customerLocationLongitude = build.customerLocationLongitude
+    this.customer_location_id = build.customer_location_id
   }
   get method() {
     return 'POST'
@@ -18,10 +17,7 @@ class PlaceOrderRequest extends Base {
     return {
       offerId: this.offerId,
       quantity: this.quantity,
-      customerLocation: {
-        latitude: this.customerLocationLatitude,
-        longitude: this.customerLocationLongitude,
-      },
+      customer_location_id: this.customer_location_id,
     }
   }
   static get Builder() {
@@ -29,8 +25,7 @@ class PlaceOrderRequest extends Base {
       constructor() {
         this.offerId = ''
         this.quantity = '1'
-        this.customerLocationLatitude = '27.670799'
-        this.customerLocationLongitude = '105.1599679'
+        this.customer_location_id = null
       }
       withOfferId(offerId) {
         this.offerId = offerId
@@ -40,12 +35,8 @@ class PlaceOrderRequest extends Base {
         this.quantity = quantity
         return this
       }
-      withCustomerLocationLatitude(latitude) {
-        this.customerLocationLatitude = latitude
-        return this
-      }
-      withCustomerLocationLongitude(longitude) {
-        this.customerLocationLongitude = longitude
+      withCustomerLocationId(customer_location_id) {
+        this.customer_location_id = customer_location_id
         return this
       }
       build() {

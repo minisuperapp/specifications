@@ -52,3 +52,9 @@ Then('Customer should see order status as {string}', async function(orderStatus)
   await this.awaitForSocket('updateOrderStatus')
   expect(this.state.customer.orders[this.lastPlacedOrder.id].status).to.equal(orderStatus)
 })
+
+Then(/^Deliverer should receive an order with this customer location$/, function(table) {
+  const location = table.hashes()[0]
+  expect(this.lastResponse.data.orders[0].customer_location).not.to.be.undefined
+  expect(this.lastResponse.data.orders[0].customer_location.name).to.equal(location.name)
+});
