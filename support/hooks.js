@@ -42,6 +42,7 @@ async function truncate_tables() {
   await knex.raw(
     `TRUNCATE TABLE 
     orders, 
+    order_details, 
     order_times, 
     customer_locations, 
     customers, 

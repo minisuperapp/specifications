@@ -4,39 +4,39 @@ const AsDelivererListPendingOrdersToDeliverRequest = require('support/web/reques
 const AsCustomerListPendingOrdersToDeliverRequest = require('support/web/requests/customer-api/orders/list_pending_to_deliver')
 const { expect } = require('chai')
 
-When('Deliverer {string} sends request to receive started orders pending to deliver', async function(
-  deliverer,
-) {
-  const request = new AsDelivererListPendingOrdersToDeliverRequest.Builder(deliverer).build()
-  await this.send(request)
-})
+When(
+  'Deliverer {string} sends request to receive started orders pending to deliver',
+  async function (deliverer) {
+    const request = new AsDelivererListPendingOrdersToDeliverRequest.Builder(deliverer).build()
+    await this.send(request)
+  },
+)
 
-When('Customer sends request to receive started orders pending to deliver', async function() {
-  const request = new AsCustomerListPendingOrdersToDeliverRequest.Builder()
-    .build()
+When('Customer sends request to receive started orders pending to deliver', async function () {
+  const request = new AsCustomerListPendingOrdersToDeliverRequest.Builder().build()
   await this.send(request, null, this.customer_session_token)
 })
 
-Then('Deliverer should receive one order', function() {
+Then('Deliverer should receive one order', function () {
   expect(this.lastResponse.data.orders).not.to.be.undefined
   expect(this.lastResponse.data.orders.length).to.equal(1)
 })
 
-Then('Customer should receive {int} orders', function(ordersNumber) {
+Then('Customer should receive {int} orders', function (ordersNumber) {
   expect(this.lastResponse.data.orders).not.to.be.undefined
   expect(this.lastResponse.data.orders.length).to.equal(ordersNumber)
 })
 
-Then('the order should be for product {string}', function(product_code) {
+Then('the order should be for product {string}', function (product_code) {
   expect(this.lastResponse.data.orders[0].product_code).to.equal(product_code)
   expect(this.lastResponse.data.productsByCode[product_code]).not.to.be.undefined
 })
 
-Then('the order should have quantity {string}', function(quantity) {
+Then('the order should have quantity {string}', function (quantity) {
   expect(this.lastResponse.data.orders[0].product_quantity).to.equal(quantity)
 })
 
-Then('the order should have customer location {string}, {string}', function(
+Then('the order should have customer location {string}, {string}', function (
   customerLocationLatitude,
   customerLocationLongitude,
 ) {
@@ -48,13 +48,19 @@ Then('the order should have customer location {string}, {string}', function(
   )
 })
 
-Then('Customer should see order status as {string}', async function(orderStatus) {
+Then('Customer should see order status as {string}', async function (orderStatus) {
   await this.awaitForSocket('updateOrderStatus')
   expect(this.state.customer.orders[this.lastPlacedOrder.id].status).to.equal(orderStatus)
 })
 
-Then(/^Deliverer should receive an order with this customer location$/, function(table) {
+Then(/^Deliverer should receive an order with this customer location$/, function (table) {
   const location = table.hashes()[0]
-  expect(this.lastResponse.data.orders[0].customer_location).not.to.be.undefined
-  expect(this.lastResponse.data.orders[0].customer_location.name).to.equal(location.name)
-});
+  expect(this.lastResponse.data.orders[0].customer_location_street).to.equal(location.street)
+  expect(this.lastResponse.data.orders[0].customer_location_number).to.equal(location.number)
+  expect(this.lastResponse.data.orders[0].customer_location_apartment_number).to.equal(
+    location.apartment_number,
+  )
+  expect(this.lastResponse.data.orders[0].customer_location_neighborhood).to.equal(
+    location.neighborhood,
+  )
+})

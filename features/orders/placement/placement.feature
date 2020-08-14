@@ -38,13 +38,13 @@ Feature: Order Placement
     And Customer places an order using offer from deliverer 'D1' with quantity '2' and no location
     When Customer should receive unsuccessful response
 
-#  Scenario: Place An Order Using The Home Location
-#    Given Customer sends request to get offers for product 'tortillas_de_maiz'
-#    And Customer adds a location with the following info
-#      |name|is_home|street|number|city|neighborhood|postal_code|state|
-#      |Casa|true   |Benito Juarez|123|Delicias|Centro|33000    |Chihuahua|
-#    And Customer places an order using offer from deliverer 'D1' with quantity '2' and location '27.670799', '105.1599679'
-#    When Deliverer 'D1' sends request to receive started orders pending to deliver
-#    Then Deliverer should receive an order with this customer location
-#      |name|is_home|street|number|city|neighborhood|postal_code|state|
-#      |Casa|true   |Benito Juarez|123|Delicias|Centro|33000    |Chihuahua|
+  Scenario: Place An Order Using The Home Location
+    Given Customer sends request to get offers for product 'tortillas_de_maiz'
+    And Customer adds a location with the following info
+      |name|is_home|street|number|apartment_number|city|neighborhood|postal_code|state|
+      |Casa|true   |Benito Juarez|123|10           |Delicias|Centro|33000    |Chihuahua|
+    And Customer places an order using offer from deliverer 'D1' with quantity '2'
+    When Deliverer 'D1' sends request to receive started orders pending to deliver
+    Then Deliverer should receive an order with this customer location
+      |street|number|apartment_number|neighborhood|
+      |Benito Juarez|123|10           |Centro  |

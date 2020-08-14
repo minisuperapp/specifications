@@ -9,6 +9,7 @@ When(/^Customer adds a location with the following info$/, async function (table
     .withName(location.name)
     .withStreet(location.street)
     .withNumber(location.number)
+    .withApartmentNumber(location.apartment_number)
     .withNeighborhood(location.neighborhood)
     .withCity(location.city)
     .withPostalCode(location.postal_code)
