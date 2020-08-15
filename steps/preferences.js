@@ -1,6 +1,7 @@
 const _ = require('lodash')
 const { When } = require('cucumber')
-const GetPreferencesAsDelivererRequest = require('support/web/requests/deliverer-api/get_preferences')
+const GetPreferencesAsDelivererRequest = require('support/web/requests/deliverer-api/preferences/get_preferences')
+const ChangePreferencesAsDelivererRequest = require('support/web/requests/deliverer-api/preferences/change_preferences')
 const { Then } = require('cucumber')
 const { expect } = require('chai')
 
@@ -14,6 +15,18 @@ Then(/^Deliverer should receive preferences with these keys and values$/, functi
   const keyed_preferences = _.keyBy(this.lastResponse.preferences, 'key')
   expected_preferences.forEach(expected_preference => {
     expect(keyed_preferences[expected_preference.key]).not.to.be.undefined
-    expect(String(keyed_preferences[expected_preference.key].value)).to.equal(expected_preference.value)
+    expect(String(keyed_preferences[expected_preference.key].value)).to.equal(
+      expected_preference.value,
+    )
   })
+})
+
+When('Deliverer {string} sends request to change these preferences', async function (deliverer, table) {
+  const changes = table.hashes()
+  const request_builder = new ChangePreferencesAsDelivererRequest.Builder(deliverer)
+  changes.forEach(change => {
+    request_builder.withChange(change)
+  })
+  const request = request_builder.build()
+  await this.send(request)
 })

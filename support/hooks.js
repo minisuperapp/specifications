@@ -48,7 +48,8 @@ async function truncate_tables() {
     customers, 
     deliverers,
     offers,
-    tokens CASCADE`,
+    tokens,
+    deliverer_preferences CASCADE`,
   )
 }
 
