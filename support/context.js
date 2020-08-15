@@ -194,7 +194,7 @@ ${JSON.stringify(data)}`,
     }
 
     if (request instanceof PublishOfferRequest && this.lastResponse.success) {
-      this.delivererOfferMap[request.deliverer] = this.lastResponse.data.code
+      this.delivererOfferMap[request.deliverer] = this.lastResponse.data
     }
 
     if (request instanceof OffersGroupedByProductRequest && this.lastResponse.success) {

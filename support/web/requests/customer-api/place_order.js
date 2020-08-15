@@ -3,7 +3,7 @@ const Base = require('./$base')
 class PlaceOrderRequest extends Base {
   constructor(build) {
     super()
-    this.offerId = build.offerId
+    this.offer = build.offer
     this.quantity = build.quantity
     this.customer_location_id = build.customer_location_id
   }
@@ -15,7 +15,8 @@ class PlaceOrderRequest extends Base {
   }
   get payload() {
     return {
-      offerId: this.offerId,
+      deliverer_id: this.offer.deliverer_id,
+      offer_codes: [this.offer.code],
       quantity: this.quantity,
       customer_location_id: this.customer_location_id,
     }
@@ -23,12 +24,12 @@ class PlaceOrderRequest extends Base {
   static get Builder() {
     class Builder {
       constructor() {
-        this.offerId = ''
+        this.offer = {}
         this.quantity = '1'
         this.customer_location_id = null
       }
-      withOfferId(offerId) {
-        this.offerId = offerId
+      withOffer(offer) {
+        this.offer = offer
         return this
       }
       withQuantity(quantity) {

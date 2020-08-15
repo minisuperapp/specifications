@@ -16,9 +16,9 @@ Given('Deliverer {string} disconnects to get order placements notifications', as
 Given(
   'Customer places an order using offer from deliverer {string} with quantity {string}',
   async function(deliverer, quantity) {
-    const offerId = this.delivererOfferMap[deliverer]
+    const offer = this.delivererOfferMap[deliverer]
     const request = new PlaceOrderRequest.Builder()
-      .withOfferId(offerId)
+      .withOffer(offer)
       .withQuantity(quantity)
       .withCustomerLocationId(this.state.customer.lastCustomerLocationId)
       .build()
@@ -27,9 +27,9 @@ Given(
 )
 
 Given('Customer places an order using offer from deliverer {string}', async function(deliverer) {
-  const offerId = this.delivererOfferMap[deliverer]
+  const offer = this.delivererOfferMap[deliverer]
   const request = new PlaceOrderRequest.Builder()
-    .withOfferId(offerId)
+    .withOffer(offer)
     .withCustomerLocationId(this.state.customer.lastCustomerLocationId)
     .build()
   await this.send(request)
@@ -39,9 +39,9 @@ Given('Customer places an order using offer from deliverer {string}', async func
 When(
   'Customer places an order using offer from deliverer {string} with quantity {string} and home location',
   async function(deliverer, quantity) {
-    const offerId = this.delivererOfferMap[deliverer]
+    const offer = this.delivererOfferMap[deliverer]
     const request = new PlaceOrderRequest.Builder()
-      .withOfferId(offerId)
+      .withOffer(offer)
       .withQuantity(quantity)
       .withCustomerLocationId(this.state.customer.lastCustomerLocationId)
       .build()
@@ -52,9 +52,9 @@ When(
 When(
   'Customer places an order using offer from deliverer {string} with quantity {string} and no location',
   async function(deliverer, quantity) {
-    const offerId = this.delivererOfferMap[deliverer]
+    const offer = this.delivererOfferMap[deliverer]
     const request = new PlaceOrderRequest.Builder()
-      .withOfferId(offerId)
+      .withOffer(offer)
       .withQuantity(quantity)
       .withCustomerLocationId(null)
       .build()
@@ -80,22 +80,10 @@ Then('Customer should receive an order with status {string}', function(orderStat
 
 })
 
-Then(
-  'Deliverer {string} should receive a pending delivery with last placed order id',
-  async function(deliverer) {
-    await this.awaitForSocket('placedOrder')
-    expect(this.state.deliverer[deliverer].pendingDeliveries[0]).not.to.be.undefined
-    expect(this.state.deliverer[deliverer].pendingDeliveries[0].order.id).to.equal(this.lastPlacedOrder.id)
-    expect(this.state.deliverer[deliverer].pendingDeliveries[0].product.code).to.equal(this.lastPlacedOrder.id)
-  },
-)
-
-When('Deliverer {string} should receive a pending delivery for product {string} with last placed order id', async function(deliverer, product_code) {
+When('Deliverer {string} should receive a pending delivery with last placed order id', async function(deliverer) {
   await this.awaitForSocket('placedOrder')
   expect(this.state.deliverer[deliverer].pendingDeliveries[0]).not.to.be.undefined
   expect(this.state.deliverer[deliverer].pendingDeliveries[0].order.id).to.equal(this.lastPlacedOrder.id)
-  expect(this.state.deliverer[deliverer].pendingDeliveries[0].product).not.to.be.undefined
-  expect(this.state.deliverer[deliverer].pendingDeliveries[0].product.code).to.equal(product_code)
 })
 
 

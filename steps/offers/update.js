@@ -20,8 +20,8 @@ Given('Customer subscribes to get offers updates with location {string}, {string
 })
 
 When('Deliverer {string} updates offer location', async function(deliverer) {
-  const offerId = this.delivererOfferMap[deliverer]
-  const request = new UpdateOfferLocationRequest.Builder(deliverer).withOfferId(offerId).build()
+  const offer = this.delivererOfferMap[deliverer]
+  const request = new UpdateOfferLocationRequest.Builder(deliverer).withOfferId(offer.code).build()
   await this.send(request)
 })
 
@@ -30,9 +30,9 @@ When('Deliverer {string} updates offer location to {string}, {string}', async fu
   latitude,
   longitude,
 ) {
-  const offerId = this.delivererOfferMap[deliverer]
+  const offer = this.delivererOfferMap[deliverer]
   const request = new UpdateOfferLocationRequest.Builder(deliverer)
-    .withOfferId(offerId)
+    .withOfferId(offer.code)
     .withLocationLatitude(latitude)
     .withLocationLongitude(longitude)
     .build()
