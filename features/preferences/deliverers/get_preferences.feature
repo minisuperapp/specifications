@@ -8,5 +8,3 @@ Feature: Get Preferences
     Then Deliverer should receive preferences with these keys and values
       |key|value|
       |ask.location.before.publishing.offer|true|
-
-  Scenario: Change A Preference
