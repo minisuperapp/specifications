@@ -1,3 +1,4 @@
+const _ = require('lodash')
 const { When } = require('cucumber')
 const GetPreferencesAsDelivererRequest = require('support/web/requests/deliverer-api/get_preferences')
 const { Then } = require('cucumber')
@@ -8,10 +9,11 @@ When('Deliverer {string} sends request to get preferences', async function (deli
   await this.send(request)
 })
 
-Then(/^Deliverer should receive preferences with these keys$/, function (table) {
-  const expectedKeys = table.hashes().map(hash => hash.key)
-  const actualKeys = this.lastResponse.preferences.map(preference => preference.key)
-  actualKeys.forEach(key => {
-    expect(expectedKeys.includes(key)).to.be.true
+Then(/^Deliverer should receive preferences with these keys and values$/, function (table) {
+  const expected_preferences = table.hashes()
+  const keyed_preferences = _.keyBy(this.lastResponse.preferences, 'key')
+  expected_preferences.forEach(expected_preference => {
+    expect(keyed_preferences[expected_preference.key]).not.to.be.undefined
+    expect(String(keyed_preferences[expected_preference.key].value)).to.equal(expected_preference.value)
   })
 })
