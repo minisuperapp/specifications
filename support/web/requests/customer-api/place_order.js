@@ -16,8 +16,11 @@ class PlaceOrderRequest extends Base {
   get payload() {
     return {
       deliverer_id: this.offer.deliverer_id,
-      offer_codes: [this.offer.code],
-      quantity: this.quantity,
+      offers: {
+        [this.offer.code]: {
+          quantity: this.quantity,
+        },
+      },
       customer_location_id: this.customer_location_id,
     }
   }
