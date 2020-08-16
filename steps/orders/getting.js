@@ -28,12 +28,12 @@ Then('Customer should receive {int} orders', function (ordersNumber) {
 })
 
 Then('the order should be for product {string}', function (product_code) {
-  expect(this.lastResponse.data.orders[0].product_code).to.equal(product_code)
+  expect(this.lastResponse.data.orders[0].order_details[0].product_code).to.equal(product_code)
   expect(this.lastResponse.data.productsByCode[product_code]).not.to.be.undefined
 })
 
 Then('the order should have quantity {string}', function (quantity) {
-  expect(this.lastResponse.data.orders[0].product_quantity).to.equal(quantity)
+  expect(this.lastResponse.data.orders[0].order_details[0].product_quantity).to.equal(quantity)
 })
 
 Then('the order should have customer location {string}, {string}', function (
