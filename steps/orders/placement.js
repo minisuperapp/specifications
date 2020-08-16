@@ -3,8 +3,8 @@ const PlaceOrderRequest = require('support/web/requests/customer-api/place_order
 const { expect } = require('chai')
 
 Given('Deliverer {string} subscribes to get order placements notifications', async function(deliverer) {
-  const socket = this.createDelivererSocket(deliverer)
-  socket.emit('subscribe_for_order_placements', this.delivererSessionTokens[deliverer])
+  const socket = this.createDelivererSocket(deliverer, this.delivererSessionTokens[deliverer])
+  socket.emit('subscribe_for_order_placements')
   await this.sleep(500)
 })
 

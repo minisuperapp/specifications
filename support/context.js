@@ -122,8 +122,8 @@ class Context {
     return socket
   }
 
-  createDelivererSocket(deliverer) {
-    const socket = delivererSocket.create()
+  createDelivererSocket(deliverer, deliverer_session_token) {
+    const socket = delivererSocket.create(deliverer_session_token)
     this.delivererSockets[deliverer] = socket
     this._setDelivererSocketListeners(socket, deliverer)
     return socket
