@@ -97,6 +97,16 @@ When(
   },
 )
 
+Then(
+  'Deliverer {string} should receive an order with customer location street {string} number {string} and neighborhood {string}',
+  function (deliverer, street, number, neighborhood) {
+    const order = this.state.deliverer[deliverer].pendingDeliveries[0].order
+    expect(order.customer_location_street).to.equal(street)
+    expect(order.customer_location_number).to.equal(number)
+    expect(order.customer_location_neighborhood).to.equal(neighborhood)
+  },
+)
+
 When('Deliverer {string} should see zero pending deliveries', function (deliverer) {
   expect(this.state.deliverer[deliverer]).to.be.undefined
 })
