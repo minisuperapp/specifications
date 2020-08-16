@@ -89,6 +89,7 @@ class Context {
       }
       this.state.deliverer[deliverer].pendingDeliveries.push({
         order: data.order,
+        order_details: data.order_details,
         product: data.product,
       })
       this.socketLocks.placedOrder--
