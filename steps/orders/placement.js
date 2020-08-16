@@ -71,15 +71,15 @@ When('Customer send request to place an order', async function () {
 })
 
 Then('Customer should receive an order with non empty id', function () {
-  expect(this.lastResponse.data.id).not.to.be.undefined
+  expect(this.lastResponse.order.id).not.to.be.undefined
 })
 
 Then('Customer should receive an order with total {string}', function (total) {
-  expect(this.lastResponse.data.total).to.equal(Number.parseFloat(total))
+  expect(this.lastResponse.order.total).to.equal(Number.parseFloat(total))
 })
 
 Then('Customer should receive an order with status {string}', function (orderStatus) {
-  expect(this.lastResponse.data.status).to.equal(orderStatus)
+  expect(this.lastResponse.order.status).to.equal(orderStatus)
 })
 
 When(
@@ -90,9 +90,9 @@ When(
     expect(this.state.deliverer[deliverer].pendingDeliveries[0].order.id).to.equal(
       this.lastPlacedOrder.id,
     )
-    expect(this.state.deliverer[deliverer].pendingDeliveries[0].order_details).not.to.be.undefined
+    expect(this.state.deliverer[deliverer].pendingDeliveries[0].order.order_details).not.to.be.undefined
     expect(
-      this.state.deliverer[deliverer].pendingDeliveries[0].order_details[0].product_code,
+      this.state.deliverer[deliverer].pendingDeliveries[0].order.order_details[0].product_code,
     ).to.equal(product)
   },
 )

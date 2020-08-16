@@ -203,8 +203,8 @@ ${JSON.stringify(data)}`,
     }
 
     if (request instanceof PlaceOrderRequest && this.lastResponse.success) {
-      this.lastPlacedOrder = this.lastResponse.data
-      this.state.customer.orders[this.lastResponse.data.id] = this.lastResponse.data
+      this.lastPlacedOrder = this.lastResponse.order
+      this.state.customer.orders[this.lastResponse.order.id] = this.lastResponse.order
     }
 
     if (request instanceof BestOfferAssigmentRequest && this.lastResponse.success) {
