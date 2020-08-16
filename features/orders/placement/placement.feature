@@ -25,6 +25,7 @@ Feature: Order Placement
     And Deliverer 'D1' subscribes to get order placements notifications
     When Customer places an order using offer from deliverer 'D1' with quantity '2' and home location
     Then Deliverer 'D1' should receive a pending delivery with last placed order id for product 'tortillas_de_maiz'
+    And Deliverer 'D1' should receive an order with customer location street 'Benito Juarez' number '123' and neighborhood 'Centro'
 
   Scenario: Do Not Notify Order Placing If Deliverer Disconnected Subscription
     Given Customer sends request to get offers for product 'tortillas_de_maiz'
