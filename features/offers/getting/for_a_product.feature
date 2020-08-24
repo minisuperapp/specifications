@@ -46,7 +46,7 @@ Feature: Get Offers List For A Specific Product
     Then Customer should receive successful response
     And Customer should receive 2 offers
 
-  Scenario: Not Getting Offer That Does Not Have Enough Available Quantity
+  Scenario: Getting Offer Even When Does Not Have Enough Available Quantity
     Given Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz' and available quantity of '1'
     When Customer sends request to get offers for product 'tortillas_de_maiz' and quantity '2'
-    And Customer should receive zero offers
+    And Customer should receive one offer

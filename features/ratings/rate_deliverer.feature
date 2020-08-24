@@ -15,4 +15,4 @@ Feature: Rate Deliverer
   Scenario: Deliverer Gets Reputation Updated When Customers Rates Him
     Given Customer rates last order deliverer for 'SERVICE' with rating -1
     When Deliverer 'D1' publishes a new offer for product 'RED_APPLE'
-    Then Deliverer publishing 'RED_APPLE' should have reputation of -1
+    Then Deliverer publishing 'tortillas_de_maiz' should have reputation of -1
