@@ -3,7 +3,7 @@ const Base = require('../$base')
 class Request extends Base {
   constructor(build) {
     super()
-    this.product_code = build.product_code
+    this.products = build.products
     this.quantity = build.quantity
     this.customerLocationLatitude = build.customerLocationLatitude
     this.customerLocationLongitude = build.customerLocationLongitude
@@ -16,12 +16,7 @@ class Request extends Base {
   }
   get payload() {
     return {
-      products: [
-        {
-          code: this.product_code,
-          quantity: this.quantity,
-        },
-      ],
+      products: this.products,
       location: {
         latitude: this.customerLocationLatitude,
         longitude: this.customerLocationLongitude,
@@ -31,17 +26,19 @@ class Request extends Base {
   static get Builder() {
     class Builder {
       constructor() {
-        this.product_code = 'tortillas_de_maiz'
-        this.quantity = '1'
+        this.products = []
         this.customerLocationLatitude = '28.1867348'
         this.customerLocationLongitude = '-105.4608849'
       }
-      withProductCode(product_code) {
-        this.product_code = product_code
+      withProductCodeAndQuantity(code, quantity) {
+        this.products.push({
+          code,
+          quantity,
+        })
         return this
       }
-      withQuantity(quantity) {
-        this.quantity = quantity
+      withProductCode(code) {
+        this.withProductCodeAndQuantity(code, 1)
         return this
       }
       withCustomerLocationLatitude(customerLocationLatitude) {

@@ -29,4 +29,11 @@ When('Customer sends request to assign best offer for product {string}', async f
 
 When('Customer sends request to assign best offer these products', async function (table) {
   const products = table.hashes()
+  const builder = new BestOfferAssigmentRequest.Builder()
+  products.forEach(product => {
+    const { code, quantity } = product
+    builder.withProductCodeAndQuantity(code, quantity)
+  })
+  const request = builder.build()
+  await this.send(request)
 })

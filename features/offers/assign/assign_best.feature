@@ -13,13 +13,13 @@ Feature: Assign Best Offer
     And the offer should have the deliverer reputation
     And the deliverer name should be 'Maria'
 
-#  Scenario: Assign Multiple Offer For Multiple Products
-#    Given Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz'
-#    And Deliverer 'D2' publishes a new offer for product 'red_apple'
-#    When Customer sends request to assign best offer these products
-#    |product|
-#    |tortillas_de_maiz|
-#    |red_apple|
+  Scenario: Assign Multiple Offer For Multiple Products
+    Given Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz'
+    And Deliverer 'D2' publishes a new offer for product 'red_apple'
+    When Customer sends request to assign best offer these products
+      | code           | quantity |
+      | tortillas_de_maiz | 1        |
+      | red_apple         | 1        |
 
 
 
