@@ -16,8 +16,12 @@ class Request extends Base {
   }
   get payload() {
     return {
-      product_code: this.product_code,
-      quantity: this.quantity,
+      products: [
+        {
+          code: this.product_code,
+          quantity: this.quantity,
+        },
+      ],
       location: {
         latitude: this.customerLocationLatitude,
         longitude: this.customerLocationLongitude,
