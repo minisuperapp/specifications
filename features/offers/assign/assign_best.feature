@@ -9,6 +9,17 @@ Feature: Assign Best Offer
     And Deliverer 'D2' publishes a new offer for product 'tortillas_de_maiz' with price '19.99'
     When Customer sends request to assign best offer for product 'tortillas_de_maiz'
     Then Customer should receive successful response
-    And the offer unit price should be '19.99'
+    And the offer unit price for product 'tortillas_de_maiz' should be '19.99'
     And the offer should have the deliverer reputation
     And the deliverer name should be 'Maria'
+
+#  Scenario: Assign Multiple Offer For Multiple Products
+#    Given Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz'
+#    And Deliverer 'D2' publishes a new offer for product 'red_apple'
+#    When Customer sends request to assign best offer these products
+#    |product|
+#    |tortillas_de_maiz|
+#    |red_apple|
+
+
+
