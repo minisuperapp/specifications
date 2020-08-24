@@ -68,8 +68,8 @@ Then('the offer should have an id, and unit price', function() {
 })
 
 Then('the offer unit price for product {string} should be {string}', function(product_code, unit_price) {
-  const offers = this.lastResponse.data
-  expect(offers[product_code].unit_price).to.equal(unit_price)
+  const offer = this.lastResponse.data
+  expect(offer.unit_price).to.equal(unit_price)
 })
 
 Then('the offer should have the deliverer reputation', function() {
