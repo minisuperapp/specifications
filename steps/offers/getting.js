@@ -55,16 +55,16 @@ When('Deliverer {string} sends request to get published offers', async function(
 })
 
 Then('Customer should receive one offer', function() {
-  expect(this.lastResponse.data.length).to.equal(1)
+  expect(this.lastResponse.list.length).to.equal(1)
 })
 
 Then('Customer should receive {int} offers', function(offersNumber) {
-  expect(this.lastResponse.data.length).to.equal(offersNumber)
+  expect(this.lastResponse.list.length).to.equal(offersNumber)
 })
 
 Then('the offer should have an id, and unit price', function() {
-  expect(this.lastResponse.data.id).not.to.be.undefined
-  expect(this.lastResponse.data.unitPrice).not.to.be.undefined
+  expect(this.lastResponse.list.id).not.to.be.undefined
+  expect(this.lastResponse.list.unitPrice).not.to.be.undefined
 })
 
 Then('the offer unit price for product {string} should be {string}', function(product_code, unit_price) {
@@ -77,7 +77,7 @@ Then('the offer should have the deliverer reputation', function() {
 })
 
 Then('all offers should have an id, and price', function() {
-  const offersWithMissingDetails = R.filter(o => !o.id || !o.unit_price, this.lastResponse.data)
+  const offersWithMissingDetails = R.filter(o => !o.id || !o.unit_price, this.lastResponse.list)
 
   expect(offersWithMissingDetails).to.be.empty
 })
@@ -85,7 +85,7 @@ Then('all offers should have an id, and price', function() {
 Then('all offers should have the deliverer reputation', function() {
   const deliverersWithMissingDetails = R.filter(
     o => o.deliverer_reputation === undefined,
-    this.lastResponse.data,
+    this.lastResponse.list,
   )
 
   expect(deliverersWithMissingDetails).to.be.empty
@@ -98,14 +98,14 @@ Then('the deliverer name should be {string}', function(name) {
 })
 
 Then('offers should be ordered by estimated arrival time', function() {
-  const arrivalTimes = R.map(o => o.estimated_arrival_time, this.lastResponse.data)
+  const arrivalTimes = R.map(o => o.estimated_arrival_time, this.lastResponse.list)
   const sortedArrivalTimes = R.sort((a, b) => a - b, arrivalTimes)
 
   expect(arrivalTimes).to.deep.equal(sortedArrivalTimes)
 })
 
 Then('Customer should receive zero offers', function() {
-  expect(this.lastResponse.data.length).to.equal(0)
+  expect(this.lastResponse.list.length).to.equal(0)
 })
 
 Then('Customer should receive {int} offers for product {string}', function(
