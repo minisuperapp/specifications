@@ -97,8 +97,7 @@ Then('all offers should have the deliverer reputation', function() {
 })
 
 Then('the deliverer name should be {string}', function(name) {
-  const offers = Object.values(this.lastResponse.index)
-  const deliverer = offers[0].deliverer_name
+  const deliverer = this.lastResponse.list[0].deliverer_name
 
   expect(deliverer).to.equal(name)
 })
