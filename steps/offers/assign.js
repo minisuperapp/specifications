@@ -46,5 +46,20 @@ Then(
     const offer = offers.find(offer => offer.product_code === product_code)
     expect(offer).not.to.be.undefined
     expect(offer.deliverer_name).to.equal(deliverer_name)
+    expect(this.lastResponse.grouped_by_deliverer).not.to.be.undefined
+    expect(this.lastResponse.grouped_by_deliverer.length).to.equal(2)
+    expect(this.lastResponse.grouped_by_deliverer[0].length).to.equal(1)
+    expect(this.lastResponse.grouped_by_deliverer[1].length).to.equal(1)
+
+    expect(
+      this.lastResponse.grouped_by_deliverer.find(grouped =>
+        grouped.find(r => r.product_code === product_code),
+      ),
+    ).not.to.be.undefined
+    expect(
+      this.lastResponse.grouped_by_deliverer.find(grouped =>
+        grouped.find(r => r.deliverer_name === deliverer_name),
+      ),
+    ).not.to.be.undefined
   },
 )
