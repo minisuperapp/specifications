@@ -208,7 +208,7 @@ ${JSON.stringify(data)}`,
     }
 
     if (request instanceof BestOfferAssigmentRequest && this.lastResponse.success) {
-      this.state.customer.lastAssignedOfferId = this.lastResponse.data.id
+      this.state.customer.lastAssignedOfferId = this.lastResponse.list[0].id
     }
 
     if (request instanceof CustomerAddLocationRequest && this.lastResponse.success) {

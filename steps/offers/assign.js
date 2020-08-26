@@ -1,6 +1,7 @@
-const { Given, When } = require('cucumber')
+const { Given, When, Then } = require('cucumber')
 const BestOfferAssigmentRequest = require('support/web/requests/customer-api/offers/assign_best')
 const DiscardOfferAssigmentRequest = require('support/web/requests/customer-api/offers/discard_assigment')
+const { expect } = require('chai')
 
 Given(
   'Customer sends request to assign best offer for product {string} with quantity {string}',
@@ -37,3 +38,13 @@ When('Customer sends request to assign best offer these products', async functio
   const request = builder.build()
   await this.send(request)
 })
+
+Then(
+  'Customer should receive an offer for product {string} from deliverer {string}',
+  async function (product_code, deliverer_name) {
+    const offers = this.lastResponse.list
+    const offer = offers.find(offer => offer.product_code === product_code)
+    expect(offer).not.to.be.undefined
+    expect(offer.deliverer_name).to.equal(deliverer_name)
+  },
+)

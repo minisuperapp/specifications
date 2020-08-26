@@ -20,6 +20,7 @@ Feature: Assign Best Offer
       | code           | quantity |
       | tortillas_de_maiz | 1        |
       | red_apple         | 1        |
-
+    Then Customer should receive an offer for product 'tortillas_de_maiz' from deliverer 'Juan'
+    And Customer should receive an offer for product 'red_apple' from deliverer 'Maria'
 
 
