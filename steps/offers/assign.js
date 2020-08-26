@@ -42,7 +42,7 @@ When('Customer sends request to assign best offer these products', async functio
 Then(
   'Customer should receive an offer for product {string} from deliverer {string}',
   async function (product_code, deliverer_name) {
-    const offers = this.lastResponse.list
+    const offers = Object.values(this.lastResponse.index)
     const offer = offers.find(offer => offer.product_code === product_code)
     expect(offer).not.to.be.undefined
     expect(offer.deliverer_name).to.equal(deliverer_name)

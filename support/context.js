@@ -191,7 +191,9 @@ ${JSON.stringify(data)}`,
     }
 
     if (request instanceof DelivererLoginRequest && this.lastResponse.success) {
-      this.delivererSessionTokens[request.deliverer] = this.lastResponse.cookies.delivererSessionToken
+      this.delivererSessionTokens[
+        request.deliverer
+      ] = this.lastResponse.cookies.delivererSessionToken
     }
 
     if (request instanceof PublishOfferRequest && this.lastResponse.success) {
@@ -208,7 +210,8 @@ ${JSON.stringify(data)}`,
     }
 
     if (request instanceof BestOfferAssigmentRequest && this.lastResponse.success) {
-      this.state.customer.lastAssignedOfferId = this.lastResponse.list[0].id
+      const offers = Object.values(this.lastResponse.index)
+      this.state.customer.lastAssignedOfferId = offers[0].id
     }
 
     if (request instanceof CustomerAddLocationRequest && this.lastResponse.success) {
