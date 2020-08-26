@@ -102,6 +102,13 @@ Then('the deliverer name should be {string}', function(name) {
   expect(deliverer).to.equal(name)
 })
 
+Then('the best offer deliverer name should be {string}', function(name) {
+  const offers = Object.values(this.lastResponse.index)
+  const deliverer = offers[0].deliverer_name
+
+  expect(deliverer).to.equal(name)
+})
+
 Then('offers should be ordered by estimated arrival time', function () {
   const offers = Object.values(this.lastResponse.index)
   const arrivalTimes = R.map(o => o.estimated_arrival_time, offers)

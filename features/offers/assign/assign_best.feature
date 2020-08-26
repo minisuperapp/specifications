@@ -11,7 +11,7 @@ Feature: Assign Best Offer
     Then Customer should receive successful response
     And the offer unit price for product 'tortillas_de_maiz' should be '19.99'
     And the offer should have the deliverer reputation
-    And the deliverer name should be 'Maria'
+    And the best offer deliverer name should be 'Maria'
 
   Scenario: Assign Multiple Offer For Multiple Products
     Given Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz'
