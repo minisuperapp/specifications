@@ -6,7 +6,7 @@ Feature: Order Placement
     And Deliverer 'D1' registers and logs in
     And Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz' with price '18.50'
     And Deliverer 'D2' registers and logs in
-    And Deliverer 'D2' publishes a new offer for product 'red_apple' with price '18.50'
+    And Deliverer 'D2' publishes a new offer for product 'red_apple' with price '10.50'
 
   Scenario: Place An Order Successfully
     Given Customer sends request to get offers for product 'tortillas_de_maiz'
@@ -16,9 +16,10 @@ Feature: Order Placement
       |D1       |2       |
       |D2       |2       |
     Then Customer should receive successful response
-    And Customer should receive an order with non empty id
+    And Customer should receive 2 orders
     And Customer should receive an order with total '37'
-    And Customer should receive an order with status 'PLACED'
+    And Customer should receive an order with total '21'
+    And Customer should receive orders with status 'PLACED'
 
   Scenario: Place An Order Reduces Availability
     Given Customer sends request to get offers for product 'tortillas_de_maiz'

@@ -21,7 +21,7 @@ Given(
   'Customer places an order using offer from deliverer {string} with quantity {string}',
   async function (deliverer, quantity) {
     const offers = {
-      [this.delivererOfferMap[deliverer]]: quantity
+      [this.delivererOfferMap[deliverer]]: quantity,
     }
     const request = new PlaceOrderRequest.Builder()
       .withOffers(offers)
@@ -46,7 +46,7 @@ Given('Customer places an order with the following quantities', async function (
 
 Given('Customer places an order using offer from deliverer {string}', async function (deliverer) {
   const offers = {
-    [this.delivererOfferMap[deliverer]]: '1'
+    [this.delivererOfferMap[deliverer]]: '1',
   }
   const request = new PlaceOrderRequest.Builder()
     .withOffers(offers)
@@ -59,7 +59,7 @@ When(
   'Customer places an order using offer from deliverer {string} with quantity {string} and no location',
   async function (deliverer, quantity) {
     const offers = {
-      [this.delivererOfferMap[deliverer]]: quantity
+      [this.delivererOfferMap[deliverer]]: quantity,
     }
     const request = new PlaceOrderRequest.Builder()
       .withOffers(offers)
@@ -78,12 +78,20 @@ Then('Customer should receive an order with non empty id', function () {
   expect(this.lastResponse.order.id).not.to.be.undefined
 })
 
-Then('Customer should receive an order with total {string}', function (total) {
-  expect(this.lastResponse.order.total).to.equal(Number.parseFloat(total))
+Then('Customer should receive {int} orders with non empty id', function (orders_count) {
+  expect(this.lastResponse.orders).not.to.be.undefined
+  expect(this.lastResponse.orders.length).to.equal(orders_count)
 })
 
-Then('Customer should receive an order with status {string}', function (orderStatus) {
-  expect(this.lastResponse.order.status).to.equal(orderStatus)
+Then('Customer should receive an order with total {string}', function (total) {
+  const found = this.lastResponse.orders.find(order => order.total === Number.parseFloat(total))
+  expect(found).not.to.be.undefined
+})
+
+Then('Customer should receive orders with status {string}', function (orderStatus) {
+  this.lastResponse.orders.forEach(order => {
+    expect(order.status).to.equal(orderStatus)
+  })
 })
 
 When(
