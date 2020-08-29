@@ -9,7 +9,7 @@ When('Customer rates last order deliverer for {string} with rating {int}', async
 ) {
   const request = new RateDelivererRequest.Builder()
     .withDelivererId(this.lastPlacedOrder.deliverer_id)
-    .withOrderId(this.lastPlacedOrder.id)
+    .withOrderId(this.lastPlacedOrders[0].id)
     .withConcept(concept)
     .withRating(rating)
     .build()
