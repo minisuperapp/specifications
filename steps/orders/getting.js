@@ -27,6 +27,11 @@ Then('Customer should receive {int} orders', function (ordersNumber) {
   expect(this.lastResponse.orders.length).to.equal(ordersNumber)
 })
 
+Then('Customer should receive {int} pending orders', function (ordersNumber) {
+  expect(this.lastResponse.data.orders).not.to.be.undefined
+  expect(this.lastResponse.data.orders.length).to.equal(ordersNumber)
+})
+
 Then('the order should be for product {string}', function (product_code) {
   expect(this.lastResponse.data.orders[0].order_details[0].product_code).to.equal(product_code)
   expect(this.lastResponse.data.productsByCode[product_code]).not.to.be.undefined

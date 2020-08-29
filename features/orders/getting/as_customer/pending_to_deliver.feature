@@ -13,4 +13,4 @@ Feature: Get Orders Pending To Deliver As Customer
     And Customer places an order using offer from deliverer 'D2' with quantity '1'
     When Customer sends request to receive started orders pending to deliver
     Then Customer should receive successful response
-    And Customer should receive 2 orders
+    And Customer should receive 2 pending orders
