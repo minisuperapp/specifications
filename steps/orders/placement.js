@@ -21,7 +21,7 @@ Given(
   'Customer places an order using offer from deliverer {string} with quantity {string}',
   async function (deliverer, quantity) {
     const offers = {
-      [this.delivererOfferMap[deliverer]]: quantity,
+      [this.delivererOfferMap[deliverer].code]: quantity,
     }
     const request = new PlaceOrderRequest.Builder()
       .withOffers(offers)
@@ -46,7 +46,7 @@ Given('Customer places an order with the following quantities', async function (
 
 Given('Customer places an order using offer from deliverer {string}', async function (deliverer) {
   const offers = {
-    [this.delivererOfferMap[deliverer]]: '1',
+    [this.delivererOfferMap[deliverer].code]: '1',
   }
   const request = new PlaceOrderRequest.Builder()
     .withOffers(offers)
@@ -59,7 +59,7 @@ When(
   'Customer places an order using offer from deliverer {string} with quantity {string} and no location',
   async function (deliverer, quantity) {
     const offers = {
-      [this.delivererOfferMap[deliverer]]: quantity,
+      [this.delivererOfferMap[deliverer].code]: quantity,
     }
     const request = new PlaceOrderRequest.Builder()
       .withOffers(offers)
