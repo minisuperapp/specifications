@@ -100,7 +100,7 @@ When(
     await this.awaitForSocket('placedOrder')
     expect(this.state.deliverer[deliverer].pendingDeliveries[0]).not.to.be.undefined
     expect(this.state.deliverer[deliverer].pendingDeliveries[0].order.id).to.equal(
-      this.lastPlacedOrder.id,
+      this.lastPlacedOrders[0].id,
     )
     expect(this.state.deliverer[deliverer].pendingDeliveries[0].order.order_details).not.to.be
       .undefined
