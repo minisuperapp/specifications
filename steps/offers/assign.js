@@ -53,12 +53,12 @@ Then(
 
     expect(
       this.lastResponse.grouped_by_deliverer.find(grouped =>
-        grouped.find(r => r.product_code === product_code),
+        grouped.find(offer_code => this.lastResponse.index[offer_code].product_code === product_code),
       ),
     ).not.to.be.undefined
     expect(
       this.lastResponse.grouped_by_deliverer.find(grouped =>
-        grouped.find(r => r.deliverer_name === deliverer_name),
+        grouped.find(offer_code => this.lastResponse.index[offer_code].deliverer_name === deliverer_name),
       ),
     ).not.to.be.undefined
   },
