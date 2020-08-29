@@ -5,10 +5,16 @@ Feature: Order Placement
     And Customer adds a home location
     And Deliverer 'D1' registers and logs in
     And Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz' with price '18.50'
+    And Deliverer 'D2' registers and logs in
+    And Deliverer 'D2' publishes a new offer for product 'red_apple' with price '18.50'
 
   Scenario: Place An Order Successfully
     Given Customer sends request to get offers for product 'tortillas_de_maiz'
-    When Customer places an order using offer from deliverer 'D1' with quantity '2' and home location
+    And Customer sends request to get offers for product 'red_apple'
+    When Customer places an order with the following quantities
+      |deliverer|quantity|
+      |D1       |2       |
+      |D2       |2       |
     Then Customer should receive successful response
     And Customer should receive an order with non empty id
     And Customer should receive an order with total '37'
@@ -16,14 +22,14 @@ Feature: Order Placement
 
   Scenario: Place An Order Reduces Availability
     Given Customer sends request to get offers for product 'tortillas_de_maiz'
-    And Customer places an order using offer from deliverer 'D1' with quantity '2' and home location
+    And Customer places an order using offer from deliverer 'D1' with quantity '2'
     When Deliverer 'D1' sends request to get published offers
     Then Deliverer 'D1' should get 1 offer for product 'tortillas_de_maiz' with available quantity 6
 
   Scenario: Notify Order Placing
     Given Customer sends request to get offers for product 'tortillas_de_maiz'
     And Deliverer 'D1' subscribes to get order placements notifications
-    When Customer places an order using offer from deliverer 'D1' with quantity '2' and home location
+    When Customer places an order using offer from deliverer 'D1' with quantity '2'
     Then Deliverer 'D1' should receive a pending delivery with last placed order id for product 'tortillas_de_maiz'
     And Deliverer 'D1' should receive an order with customer location street 'Benito Juarez' number '123' and neighborhood 'Centro'
 
@@ -31,7 +37,7 @@ Feature: Order Placement
     Given Customer sends request to get offers for product 'tortillas_de_maiz'
     And Deliverer 'D1' subscribes to get order placements notifications
     And Deliverer 'D1' disconnects to get order placements notifications
-    When Customer places an order using offer from deliverer 'D1' with quantity '2' and home location
+    When Customer places an order using offer from deliverer 'D1' with quantity '2'
     Then Deliverer 'D1' should see zero pending deliveries
 
     Scenario: Place An Order Without Customer Location

@@ -20,45 +20,49 @@ Given('Deliverer {string} disconnects to get order placements notifications', as
 Given(
   'Customer places an order using offer from deliverer {string} with quantity {string}',
   async function (deliverer, quantity) {
-    const offer = this.delivererOfferMap[deliverer]
+    const offers = {
+      [this.delivererOfferMap[deliverer]]: quantity
+    }
     const request = new PlaceOrderRequest.Builder()
-      .withOffer(offer)
-      .withQuantity(quantity)
+      .withOffers(offers)
       .withCustomerLocationId(this.state.customer.lastCustomerLocationId)
       .build()
     await this.send(request)
   },
 )
 
-Given('Customer places an order using offer from deliverer {string}', async function (deliverer) {
-  const offer = this.delivererOfferMap[deliverer]
+Given('Customer places an order with the following quantities', async function (table) {
+  const rows = table.hashes()
+  const offers = rows.reduce((acc, val) => {
+    acc[this.delivererOfferMap[val.deliverer].code] = val.quantity
+    return acc
+  }, {})
   const request = new PlaceOrderRequest.Builder()
-    .withOffer(offer)
+    .withOffers(offers)
+    .withCustomerLocationId(this.state.customer.lastCustomerLocationId)
+    .build()
+  await this.send(request)
+})
+
+Given('Customer places an order using offer from deliverer {string}', async function (deliverer) {
+  const offers = {
+    [this.delivererOfferMap[deliverer]]: '1'
+  }
+  const request = new PlaceOrderRequest.Builder()
+    .withOffers(offers)
     .withCustomerLocationId(this.state.customer.lastCustomerLocationId)
     .build()
   await this.send(request)
 })
 
 When(
-  'Customer places an order using offer from deliverer {string} with quantity {string} and home location',
-  async function (deliverer, quantity) {
-    const offer = this.delivererOfferMap[deliverer]
-    const request = new PlaceOrderRequest.Builder()
-      .withOffer(offer)
-      .withQuantity(quantity)
-      .withCustomerLocationId(this.state.customer.lastCustomerLocationId)
-      .build()
-    await this.send(request)
-  },
-)
-
-When(
   'Customer places an order using offer from deliverer {string} with quantity {string} and no location',
   async function (deliverer, quantity) {
-    const offer = this.delivererOfferMap[deliverer]
+    const offers = {
+      [this.delivererOfferMap[deliverer]]: quantity
+    }
     const request = new PlaceOrderRequest.Builder()
-      .withOffer(offer)
-      .withQuantity(quantity)
+      .withOffers(offers)
       .withCustomerLocationId(null)
       .build()
     await this.send(request)
@@ -90,7 +94,8 @@ When(
     expect(this.state.deliverer[deliverer].pendingDeliveries[0].order.id).to.equal(
       this.lastPlacedOrder.id,
     )
-    expect(this.state.deliverer[deliverer].pendingDeliveries[0].order.order_details).not.to.be.undefined
+    expect(this.state.deliverer[deliverer].pendingDeliveries[0].order.order_details).not.to.be
+      .undefined
     expect(
       this.state.deliverer[deliverer].pendingDeliveries[0].order.order_details[0].product_code,
     ).to.equal(product)
