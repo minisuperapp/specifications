@@ -99,14 +99,10 @@ When(
   async function (deliverer, product) {
     await this.awaitForSocket('placedOrder')
     expect(this.state.deliverer[deliverer].pendingDeliveries[0]).not.to.be.undefined
-    expect(this.state.deliverer[deliverer].pendingDeliveries[0].order.id).to.equal(
-      this.lastPlacedOrders[0].id,
-    )
-    expect(this.state.deliverer[deliverer].pendingDeliveries[0].order.order_details).not.to.be
-      .undefined
-    expect(
-      this.state.deliverer[deliverer].pendingDeliveries[0].order.order_details[0].product_code,
-    ).to.equal(product)
+    const order = this.state.deliverer[deliverer].pendingDeliveries[0].order
+    expect(order).not.to.be.undefined
+    expect(order.id).to.equal(this.lastPlacedOrders[0].id)
+    expect(order.product_code).to.equal(product)
   },
 )
 
