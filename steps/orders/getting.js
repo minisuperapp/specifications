@@ -19,7 +19,7 @@ When('Customer sends request to receive started orders pending to deliver', asyn
 
 Then('Deliverer should receive one order', function () {
   expect(this.lastResponse.data.orders).not.to.be.undefined
-  expect(this.lastResponse.data.orders.length).to.equal(1)
+  expect(Object.keys(this.lastResponse.data.orders).length).to.equal(1)
 })
 
 Then('Customer should receive {int} orders', function (ordersNumber) {
@@ -29,16 +29,20 @@ Then('Customer should receive {int} orders', function (ordersNumber) {
 
 Then('Customer should receive {int} pending orders', function (ordersNumber) {
   expect(this.lastResponse.data.orders).not.to.be.undefined
-  expect(this.lastResponse.data.orders.length).to.equal(ordersNumber)
+  expect(Object.keys(this.lastResponse.data.orders).length).to.equal(ordersNumber)
 })
 
 Then('the order should be for product {string}', function (product_code) {
-  expect(this.lastResponse.data.orders[0].order_details[0].product_code).to.equal(product_code)
+  const first_order_id = Object.keys(this.lastResponse.data.orders)[0]
+  const orders = this.lastResponse.data.orders[first_order_id]
+  expect(orders[0].product_code).to.equal(product_code)
   expect(this.lastResponse.data.productsByCode[product_code]).not.to.be.undefined
 })
 
 Then('the order should have quantity {string}', function (quantity) {
-  expect(this.lastResponse.data.orders[0].order_details[0].product_quantity).to.equal(quantity)
+  const first_order_id = Object.keys(this.lastResponse.data.orders)[0]
+  const orders = this.lastResponse.data.orders[first_order_id]
+  expect(orders[0].product_quantity).to.equal(quantity)
 })
 
 Then('the order should have customer location {string}, {string}', function (
@@ -60,12 +64,10 @@ Then('Customer should see order status as {string}', async function (orderStatus
 
 Then(/^Deliverer should receive an order with this customer location$/, function (table) {
   const location = table.hashes()[0]
-  expect(this.lastResponse.data.orders[0].customer_location_street).to.equal(location.street)
-  expect(this.lastResponse.data.orders[0].customer_location_number).to.equal(location.number)
-  expect(this.lastResponse.data.orders[0].customer_location_apartment_number).to.equal(
-    location.apartment_number,
-  )
-  expect(this.lastResponse.data.orders[0].customer_location_neighborhood).to.equal(
-    location.neighborhood,
-  )
+  const first_order_id = Object.keys(this.lastResponse.data.orders)[0]
+  const orders = this.lastResponse.data.orders[first_order_id]
+  expect(orders[0].customer_location_street).to.equal(location.street)
+  expect(orders[0].customer_location_number).to.equal(location.number)
+  expect(orders[0].customer_location_apartment_number).to.equal(location.apartment_number)
+  expect(orders[0].customer_location_neighborhood).to.equal(location.neighborhood)
 })
