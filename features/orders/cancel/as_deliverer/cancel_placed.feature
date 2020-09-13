@@ -9,3 +9,4 @@ Feature: Order Placed Order
 
   Scenario: Deliverer Cancels A Placed Order
     When Deliverer 'D1' cancels last placed order
+    Then Deliverer should receive successful response
