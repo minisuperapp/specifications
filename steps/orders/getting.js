@@ -13,12 +13,12 @@ When(
 )
 
 When('Customer sends request to receive started orders pending to deliver', async function () {
-  const request = new GetOrdersForXdayAsCustomerRequest.Builder().build()
+  const request = new AsCustomerListPendingOrdersToDeliverRequest.Builder().build()
   await this.send(request, null, this.customer_session_token)
 })
 
 When('Customer sends request to get latest orders', async function () {
-  const request = new AsCustomerListPendingOrdersToDeliverRequest.Builder().build()
+  const request = new GetOrdersForXdayAsCustomerRequest.Builder().build()
   await this.send(request, null, this.customer_session_token)
 })
 
