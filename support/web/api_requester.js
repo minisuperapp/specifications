@@ -14,8 +14,9 @@ api_requester.send = async (request, customer_session_token, deliverer_session_t
     },
   }
   let responseText
+  let res
   try {
-    const res = await fetch(request.uri + '/' + request.path, info)
+    res = await fetch(request.uri + '/' + request.path, info)
     if (res.status === 401) {
       return {
         success: false,
@@ -32,7 +33,7 @@ api_requester.send = async (request, customer_session_token, deliverer_session_t
       },
     })
   } catch (err) {
-    console.log(err.message, request.uri + '/' + request.path, info)
+    console.log(res.status, res.statusText, err.message, request.uri + '/' + request.path, info)
     throw err
   }
 }

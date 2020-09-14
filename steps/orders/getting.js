@@ -1,7 +1,7 @@
-const R = require('ramda')
-const { Given, When, Then } = require('cucumber')
+const { When, Then } = require('cucumber')
 const AsDelivererListPendingOrdersToDeliverRequest = require('support/web/requests/deliverer-api/orders/list_pending_to_deliver')
 const AsCustomerListPendingOrdersToDeliverRequest = require('support/web/requests/customer-api/orders/list_pending_to_deliver')
+const GetOrdersForXdayAsCustomerRequest = require('support/web/requests/customer-api/orders/list_for_xday')
 const { expect } = require('chai')
 
 When(
@@ -13,6 +13,11 @@ When(
 )
 
 When('Customer sends request to receive started orders pending to deliver', async function () {
+  const request = new GetOrdersForXdayAsCustomerRequest.Builder().build()
+  await this.send(request, null, this.customer_session_token)
+})
+
+When('Customer sends request to get latest orders', async function () {
   const request = new AsCustomerListPendingOrdersToDeliverRequest.Builder().build()
   await this.send(request, null, this.customer_session_token)
 })

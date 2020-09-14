@@ -10,3 +10,7 @@ Feature: Order Placed Order
   Scenario: Deliverer Cancels A Placed Order
     When Deliverer 'D1' cancels last placed order
     Then Deliverer should receive successful response
+
+  Scenario: Customer Receives Latest Order As Canceled
+    Given Deliverer 'D1' cancels last placed order
+    When Customer sends request to get latest orders
