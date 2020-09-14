@@ -1,22 +1,30 @@
 const Base = require('../$base')
 
 class Request extends Base {
-  constructor() {
+  constructor(build) {
     super()
+    this.xday = build.xday
   }
 
   get method() {
     return 'POST'
   }
   get path() {
-    return 'orders/list_pending_to_deliver'
+    return 'orders/list_for_xday'
   }
   get payload() {
-    return { }
+    return {
+      xday: this.xday,
+    }
   }
   static get Builder() {
     class Builder {
       constructor() {
+        this.xday = 0
+      }
+      withXday(xday) {
+        this.xday = xday
+        return this
       }
       build() {
         return new Request(this)
