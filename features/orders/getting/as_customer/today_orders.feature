@@ -1,4 +1,4 @@
-Feature: Get Orders Pending To Deliver As Customer
+Feature: Get Today Orders As Customer
 
   Background:
     Given Customer access the application
@@ -10,13 +10,13 @@ Feature: Get Orders Pending To Deliver As Customer
 
   Scenario: Get An Orders From A Deliverer
     Given Customer places an order using offer from deliverer 'D1' with quantity '1'
-    When Customer sends request to receive started orders pending to deliver
+    When Customer sends request to get latest orders
     Then Customer should receive successful response
     And Customer should receive 1 pending order from deliverer 'D1'
 
   Scenario: Get Orders From 2 Deliverers
     Given Customer places an order using offer from deliverer 'D1' with quantity '1'
     And Customer places an order using offer from deliverer 'D2' with quantity '1'
-    When Customer sends request to receive started orders pending to deliver
+    When Customer sends request to get latest orders
     Then Customer should receive successful response
     And Customer should receive 2 pending orders
