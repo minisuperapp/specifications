@@ -14,3 +14,5 @@ Feature: Order Placed Order
   Scenario: Customer Receives Latest Order As Canceled
     Given Deliverer 'D1' cancels last placed order
     When Customer sends request to get latest orders
+    Then Customer should receive a canceled order
+
