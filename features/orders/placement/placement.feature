@@ -46,6 +46,11 @@ Feature: Order Placement
     And Customer places an order using offer from deliverer 'D1' with quantity '2' and no location
     When Customer should receive unsuccessful response
 
+  Scenario: Place An Order With Not Enough Product Available Quantity
+    Given Customer sends request to get offers for product 'tortillas_de_maiz'
+    And Customer places an order using offer from deliverer 'D1' with quantity '9'
+    When Customer should receive unsuccessful response
+
   Scenario: Place An Order Using The Home Location
     Given Customer sends request to get offers for product 'tortillas_de_maiz'
     And Customer adds a location with the following info
