@@ -25,7 +25,7 @@ Given(
     }
     const request = new PlaceOrderRequest.Builder()
       .withOffers(offers)
-      .withCustomerLocationId(this.state.customer.lastCustomerLocationId)
+      .withCustomerAddressId(this.state.customer.lastCustomerAddressId)
       .build()
     await this.send(request)
   },
@@ -39,7 +39,7 @@ Given('Customer places an order with the following quantities', async function (
   }, {})
   const request = new PlaceOrderRequest.Builder()
     .withOffers(offers)
-    .withCustomerLocationId(this.state.customer.lastCustomerLocationId)
+    .withCustomerAddressId(this.state.customer.lastCustomerAddressId)
     .build()
   await this.send(request)
 })
@@ -50,7 +50,7 @@ Given('Customer places an order using offer from deliverer {string}', async func
   }
   const request = new PlaceOrderRequest.Builder()
     .withOffers(offers)
-    .withCustomerLocationId(this.state.customer.lastCustomerLocationId)
+    .withCustomerAddressId(this.state.customer.lastCustomerAddressId)
     .build()
   await this.send(request)
 })
@@ -63,7 +63,7 @@ When(
     }
     const request = new PlaceOrderRequest.Builder()
       .withOffers(offers)
-      .withCustomerLocationId(null)
+      .withCustomerAddressId(null)
       .build()
     await this.send(request)
   },

@@ -9,7 +9,7 @@ class CustomerAddLocationRequest extends Base {
     return 'POST'
   }
   get path() {
-    return 'locations/add'
+    return 'addresses/add'
   }
   get payload() {
     return this.input

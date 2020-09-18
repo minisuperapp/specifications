@@ -25,7 +25,7 @@ class Context {
         offersByProduct: {},
         offersById: {},
         lastAssignedOfferId: '',
-        lastCustomerLocationId: null,
+        lastCustomerAddressId: null,
         orders: {},
       },
       deliverer: {
@@ -215,7 +215,7 @@ ${JSON.stringify(data)}`,
     }
 
     if (request instanceof CustomerAddLocationRequest && this.lastResponse.success) {
-      this.state.customer.lastCustomerLocationId = this.lastResponse.location.id
+      this.state.customer.lastCustomerAddressId = this.lastResponse.location.id
     }
   }
 }

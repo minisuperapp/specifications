@@ -33,7 +33,10 @@ api_requester.send = async (request, customer_session_token, deliverer_session_t
       },
     })
   } catch (err) {
-    console.log(res.status, res.statusText, err.message, request.uri + '/' + request.path, info)
+    if (res) {
+      console.log(res.status, res.statusText)
+    }
+    console.log(err.message, request.uri + '/' + request.path, info)
     throw err
   }
 }
