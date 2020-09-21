@@ -33,9 +33,9 @@ When(/^Customer adds a home location$/, async function () {
 })
 
 
-Then(/^Customer should receive profile locations$/, function () {
+Then(/^Customer should receive profile addresses$/, function () {
   expect(this.lastResponse.profile).not.to.be.undefined
-  expect(this.lastResponse.profile.locations).not.to.be.undefined
-  expect(this.lastResponse.profile.locations.length).to.equal(1)
-  expect(this.lastResponse.profile.locations[0].name).to.equal('Casa')
+  expect(this.lastResponse.profile.addresses).not.to.be.undefined
+  expect(this.lastResponse.profile.addresses.length).to.equal(1)
+  expect(this.lastResponse.profile.addresses[0].name).to.equal('Casa')
 })

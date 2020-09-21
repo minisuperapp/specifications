@@ -13,4 +13,4 @@ Feature: Customer Profile
       |name|is_home|street|number|city|neighborhood|postal_code|state|
       |Casa|true   |Benito Juarez|123|Delicias|Centro|33000    |Chihuahua|
     When Customer access the application
-    Then Customer should receive profile locations
+    Then Customer should receive profile addresses
