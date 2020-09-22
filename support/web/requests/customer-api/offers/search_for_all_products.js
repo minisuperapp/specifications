@@ -4,8 +4,6 @@ const config = require('config')
 class OffersGroupedByProductRequest extends Base {
   constructor(build) {
     super()
-    this.customerLocationLatitude = build.customerLocationLatitude
-    this.customerLocationLongitude = build.customerLocationLongitude
   }
   get method() {
     return 'POST'
@@ -14,27 +12,10 @@ class OffersGroupedByProductRequest extends Base {
     return 'offers/search_for_all_products'
   }
   get payload() {
-    return {
-      location: {
-        latitude: this.customerLocationLatitude,
-        longitude: this.customerLocationLongitude,
-      },
-    }
+    return {}
   }
   static get Builder() {
     class Builder {
-      constructor() {
-        this.customerLocationLatitude = config.mocks.customerLocation.latitude
-        this.customerLocationLongitude = config.mocks.customerLocation.longitude
-      }
-      withCustomerLocationLatitude(customerLocationLatitude) {
-        this.customerLocationLatitude = customerLocationLatitude
-        return this
-      }
-      withCustomerLocationLongitude(customerLocationLongitude) {
-        this.customerLocationLongitude = customerLocationLongitude
-        return this
-      }
       build() {
         return new OffersGroupedByProductRequest(this)
       }

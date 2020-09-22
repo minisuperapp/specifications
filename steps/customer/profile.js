@@ -1,10 +1,22 @@
-const { When, Then } = require('cucumber')
-const CustomerAddLocationRequest = require('support/web/requests/customer-api/add_location')
+const { Given, When, Then } = require('cucumber')
+const CustomerAddAddressRequest = require('support/web/requests/customer-api/add_address')
+const CustomerSetLocationRequest = require('support/web/requests/customer-api/set_location')
 const { expect } = require('chai')
+
+Given('Customer sends request to set location to {string}, {string}', async function (
+  latitude,
+  longitude,
+) {
+  const request = new CustomerSetLocationRequest.Builder()
+    .withLatitude(latitude)
+    .withLongitude(longitude)
+    .build()
+  await this.send(request)
+})
 
 When(/^Customer adds a location with the following info$/, async function (table) {
   const location = table.hashes()[0]
-  const request = new CustomerAddLocationRequest.Builder()
+  const request = new CustomerAddAddressRequest.Builder()
     .withIsHome(Boolean(location.is_home))
     .withName(location.name)
     .withStreet(location.street)
@@ -19,7 +31,7 @@ When(/^Customer adds a location with the following info$/, async function (table
 })
 
 When(/^Customer adds a home location$/, async function () {
-  const request = new CustomerAddLocationRequest.Builder()
+  const request = new CustomerAddAddressRequest.Builder()
     .withIsHome(true)
     .withName('Casa')
     .withStreet('Benito Juarez')
@@ -31,7 +43,6 @@ When(/^Customer adds a home location$/, async function () {
     .build()
   await this.send(request)
 })
-
 
 Then(/^Customer should receive profile addresses$/, function () {
   expect(this.lastResponse.addresses).not.to.be.undefined

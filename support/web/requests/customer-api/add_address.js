@@ -1,6 +1,6 @@
 const Base = require('./$base')
 
-class CustomerAddLocationRequest extends Base {
+class CustomerAddAddressRequest extends Base {
   constructor(build) {
     super()
     this.input = build
@@ -71,11 +71,11 @@ class CustomerAddLocationRequest extends Base {
         return this
       }
       build() {
-        return new CustomerAddLocationRequest(this)
+        return new CustomerAddAddressRequest(this)
       }
     }
     return Builder
   }
 }
 
-module.exports = CustomerAddLocationRequest
+module.exports = CustomerAddAddressRequest

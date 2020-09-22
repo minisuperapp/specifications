@@ -4,7 +4,7 @@ const DelivererLoginRequest = require('./web/requests/deliverer-api/login')
 const PublishOfferRequest = require('./web/requests/deliverer-api/offers/publish')
 const OffersGroupedByProductRequest = require('./web/requests/customer-api/offers/search_for_all_products')
 const BestOfferAssigmentRequest = require('./web/requests/customer-api/offers/assign_best')
-const CustomerAddLocationRequest = require('./web/requests/customer-api/add_location')
+const CustomerAddAddressRequest = require('./web/requests/customer-api/add_address')
 const PlaceOrderRequest = require('./web/requests/customer-api/place_order')
 const customerSocket = require('./web/sockets/customer_socket_client')
 const delivererSocket = require('./web/sockets/deliverer_socket_client')
@@ -214,7 +214,7 @@ ${JSON.stringify(data)}`,
       this.state.customer.lastAssignedOfferId = offers[0].id
     }
 
-    if (request instanceof CustomerAddLocationRequest && this.lastResponse.success) {
+    if (request instanceof CustomerAddAddressRequest && this.lastResponse.success) {
       this.state.customer.lastCustomerAddressId = this.lastResponse.location.id
     }
   }

@@ -3,6 +3,8 @@ Feature: Assign Best Offer
   Background:
     Given Deliverer 'D1' registers with email 'd1@minisuper.app', name 'Juan', and then and logs in
     And Deliverer 'D2' registers with email 'd2@minisuper.app', name 'Maria', and then and logs in
+    And Customer access the application
+    And Customer sends request to set location to '28.1867348', '-105.4608849'
 
   Scenario: Assign Lowest-Price Offer
     Given Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz' with price '20.99'

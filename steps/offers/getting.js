@@ -5,18 +5,7 @@ const OffersGroupedByProductRequest = require('support/web/requests/customer-api
 const GetDelivererOffersRequest = require('support/web/requests/deliverer-api/offers/offers')
 const { expect } = require('chai')
 
-Given(
-  'Customer sends request to get offers grouped by product with location {string}, {string}',
-  async function (latitude, longitude) {
-    const request = new OffersGroupedByProductRequest.Builder()
-      .withCustomerLocationLatitude(latitude)
-      .withCustomerLocationLongitude(longitude)
-      .build()
-    await this.send(request)
-  },
-)
-
-When('Customer sends request to get offers grouped by product', async function () {
+Given('Customer sends request to get offers grouped by product', async function () {
   const request = new OffersGroupedByProductRequest.Builder().build()
   await this.send(request)
 })
@@ -54,11 +43,11 @@ When('Deliverer {string} sends request to get published offers', async function 
   await this.send(request)
 })
 
-Then('Customer should receive one offer', function() {
+Then('Customer should receive one offer', function () {
   expect(this.lastResponse.list.length).to.equal(1)
 })
 
-Then('Customer should receive {int} offers', function(offersNumber) {
+Then('Customer should receive {int} offers', function (offersNumber) {
   expect(this.lastResponse.list.length).to.equal(offersNumber)
 })
 
@@ -81,13 +70,13 @@ Then('the offer should have the deliverer reputation', function () {
   expect(offers[0].deliverer_reputation).not.to.be.undefined
 })
 
-Then('all offers should have an id, and price', function() {
+Then('all offers should have an id, and price', function () {
   const offersWithMissingDetails = R.filter(o => !o.id || !o.unit_price, this.lastResponse.list)
 
   expect(offersWithMissingDetails).to.be.empty
 })
 
-Then('all offers should have the deliverer reputation', function() {
+Then('all offers should have the deliverer reputation', function () {
   const deliverersWithMissingDetails = R.filter(
     o => o.deliverer_reputation === undefined,
     this.lastResponse.list,
@@ -96,13 +85,13 @@ Then('all offers should have the deliverer reputation', function() {
   expect(deliverersWithMissingDetails).to.be.empty
 })
 
-Then('the deliverer name should be {string}', function(name) {
+Then('the deliverer name should be {string}', function (name) {
   const deliverer = this.lastResponse.list[0].deliverer_name
 
   expect(deliverer).to.equal(name)
 })
 
-Then('the best offer deliverer name should be {string}', function(name) {
+Then('the best offer deliverer name should be {string}', function (name) {
   const offers = Object.values(this.lastResponse.index)
   const deliverer = offers[0].deliverer_name
 
@@ -117,7 +106,7 @@ Then('offers should be ordered by estimated arrival time', function () {
   expect(arrivalTimes).to.deep.equal(sortedArrivalTimes)
 })
 
-Then('Customer should receive zero offers', function() {
+Then('Customer should receive zero offers', function () {
   expect(this.lastResponse.list.length).to.equal(0)
 })
 
@@ -131,6 +120,15 @@ Then('Customer should receive {int} offers for product {string}', function (offe
 
 Then('Customer should receive zero offers for product {string}', function (product_code) {
   expect(this.lastResponse.data.offersByProduct[product_code]).to.be.undefined
+})
+
+Then('Customer should see one offer for product {string}', async function (product_code) {
+  await this.awaitOn(() => this.state.customer.offersByProduct[product_code])
+  expect(this.state.customer.offersByProduct[product_code]).not.to.be.undefined
+  expect(this.state.customer.offersByProduct[product_code].offers).not.to.be.undefined
+  expect(this.state.customer.offersByProduct[product_code].offers.length).to.equal(1)
+  const offerId = this.state.customer.offersByProduct[product_code].offers[0].id
+  expect(this.state.customer.offersById[offerId]).not.to.be.undefined
 })
 
 Then('Customer should see {int} offer\\(s) for product {string}', async function (
