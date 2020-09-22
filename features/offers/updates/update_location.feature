@@ -1,7 +1,8 @@
 Feature: Update Offer Location
 
   Background:
-    Given Deliverer 'D1' registers with email 'd1@minisuper.app' and password 'secret1'
+    Given Customer access the application
+    And Deliverer 'D1' registers with email 'd1@minisuper.app' and password 'secret1'
     And Deliverer 'D1' logs in with email 'd1@minisuper.app' and password 'secret1'
 
   Scenario: Update Offer (Deliverer) Location
