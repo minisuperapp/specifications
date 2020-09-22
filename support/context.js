@@ -114,8 +114,8 @@ class Context {
     return this.lastResponse
   }
 
-  createCustomerSocket(location) {
-    const socket = customerSocket.create(location)
+  createCustomerSocket() {
+    const socket = customerSocket.create(this.customer_session_token)
     this.customerSockets.push(socket)
     this._setCustomerSocketListeners(socket)
     return socket

@@ -6,7 +6,7 @@ const DeleteOfferRequest = require('support/web/requests/deliverer-api/offers/de
 
 Given('Customer subscribes to get offers updates', async function() {
   const socket = this.createCustomerSocket()
-  socket.emit('subscribe_for_offers_updates', config.mocks.customerLocation)
+  socket.emit('subscribe_for_offers_updates')
   await this.sleep(300)
 })
 

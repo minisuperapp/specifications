@@ -3,6 +3,7 @@ Feature: Publish An Offer
   Background:
     Given Deliverer 'D1' registers and logs in
     And Customer access the application
+    And Customer sends request to set location to '28.1867348', '-105.4608849'
 
   Scenario: Add Offer Successfully
     When Deliverer 'D1' publishes a new offer
