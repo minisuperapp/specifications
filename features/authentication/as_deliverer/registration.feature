@@ -8,4 +8,4 @@ Feature: Deliverer Registration
     Given Deliverer 'D1' registers with email 'd1@minisuper.app' and password 'secret1'
     When Deliverer 'D1' registers with email 'd1@minisuper.app' and password 'secret2'
     Then Deliverer should receive unsuccessful response
-    And Deliverer should receive single error message with property 'email' and message 'existing'
+    And Deliverer should receive single error message with property 'email' and message 'existing.email'

@@ -9,3 +9,4 @@ Feature: Get Preferences
       |key|value|
       |ask.location.before.publishing.offer|true|
       |default.delivery.radius.in.meters|750|
+      |available|true|
