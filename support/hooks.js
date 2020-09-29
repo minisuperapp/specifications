@@ -46,6 +46,7 @@ async function truncate_tables() {
     order_times, 
     customer_addresses, 
     customer_locations, 
+    deliverer_locations, 
     customers, 
     deliverers,
     offers,
