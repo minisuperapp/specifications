@@ -1,5 +1,18 @@
-const { When } = require('cucumber')
+const { Given, When } = require('cucumber')
 const DelivererSetPostalAreaRequest = require('support/web/requests/deliverer-api/set_postal_area')
+const DelivererSetLocationRequest = require('support/web/requests/deliverer-api/set_location')
+
+Given('Deliverer {string} sends request to set location to {string}, {string}', async function (
+  deliverer,
+  latitude,
+  longitude,
+) {
+  const request = new DelivererSetLocationRequest.Builder(deliverer)
+    .withLatitude(latitude)
+    .withLongitude(longitude)
+    .build()
+  await this.send(request)
+})
 
 When('Deliverer {string} sets the postal area with the following info', async function (
   deliverer,

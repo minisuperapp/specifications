@@ -3,6 +3,8 @@ Feature: Get Offers For All Products As Customer
   Background:
     Given Deliverer 'D1' registers and logs in
     And Deliverer 'D2' registers and logs in
+    And Deliverer 'D1' sends request to set location to '28.1867348', '-105.4608849'
+    And Deliverer 'D2' sends request to set location to '28.1867348', '-105.4608849'
     And Customer access the application
     And Customer sends request to set location to '28.1867348', '-105.4608849'
 
