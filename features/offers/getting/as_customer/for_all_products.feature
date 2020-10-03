@@ -26,8 +26,10 @@ Feature: Get Offers For All Products As Customer
     And Customer should receive lowest unit price of '19.99' for product 'tortillas_de_maiz'
 
   Scenario: Get Only Offers Within Deliverer's Radius For One Product
-    Given Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz' with price '20.00' with location '28.1867348', '-105.4608849' and delivery radius of 100 M
-    And Deliverer 'D2' publishes a new offer for product 'tortillas_de_maiz' with price '19.99' with location '29.1867348', '-106.4708849' and delivery radius of 50 M
+    Given Deliverer 'D1' sends request to set location to '28.1867348', '-105.4608849', '100'
+    And Deliverer 'D2' sends request to set location to '29.1867348', '-106.4708849', '5'
+    And Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz' with price '20.00'
+    And Deliverer 'D2' publishes a new offer for product 'tortillas_de_maiz' with price '19.99'
     And Customer sends request to set location to '28.1867348', '-105.4608849'
     When Customer sends request to get offers grouped by product
     Then Customer should receive successful response
