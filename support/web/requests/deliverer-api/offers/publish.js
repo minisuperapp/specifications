@@ -22,11 +22,6 @@ class PublishOfferRequest extends Base {
       availableQuantity: this.availableQuantity,
       onHandQuantity: '10',
       unitPrice: this.unitPrice,
-      deliveryRadius: this.deliveryRadius,
-      location: {
-        latitude: this.locationLatitude,
-        longitude: this.locationLongitude,
-      },
     }
   }
   static get Builder() {
@@ -35,9 +30,6 @@ class PublishOfferRequest extends Base {
         this.deliverer = deliverer
         this.product_code = 'tortillas_de_maiz'
         this.availableQuantity = '8'
-        this.locationLatitude = '28.1867348'
-        this.locationLongitude = '-105.4608849'
-        this.deliveryRadius = '1'
         this.unitPrice = '18.00'
       }
       withProductCode(product_code) {
