@@ -4,8 +4,10 @@ Feature: Order Placement
     Given Customer access the application
     And Customer adds a home location
     And Deliverer 'D1' registers and logs in
+    And Deliverer 'D1' sends request to set location to '28.1867348', '-105.4608849', '50'
     And Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz' with price '18.50'
     And Deliverer 'D2' registers and logs in
+    And Deliverer 'D2' sends request to set location to '28.1867348', '-105.4608849', '50'
     And Deliverer 'D2' publishes a new offer for product 'red_apple' with price '10.50'
 
   Scenario: Place An Order Successfully

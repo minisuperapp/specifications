@@ -2,7 +2,9 @@ Feature: Assign Best Offer
 
   Background:
     Given Deliverer 'D1' registers with email 'd1@minisuper.app', name 'Juan', and then and logs in
+    And Deliverer 'D1' sends request to set location to '28.1867348', '-105.4608849', '50'
     And Deliverer 'D2' registers with email 'd2@minisuper.app', name 'Maria', and then and logs in
+    And Deliverer 'D2' sends request to set location to '28.1867348', '-105.4608849', '50'
     And Customer access the application
     And Customer sends request to set location to '28.1867348', '-105.4608849'
 

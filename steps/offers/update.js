@@ -1,7 +1,5 @@
-const config = require('config')
 const { Given, When, Then } = require('cucumber')
 const { expect } = require('chai')
-const UpdateOfferLocationRequest = require('support/web/requests/deliverer-api/offers/update_location')
 const DeleteOfferRequest = require('support/web/requests/deliverer-api/offers/delete')
 
 Given('Customer subscribes to get offers updates', async function() {
@@ -19,33 +17,12 @@ Given('Customer subscribes to get offers updates with location {string}, {string
   await this.sleep(300)
 })
 
-When('Deliverer {string} updates offer location', async function(deliverer) {
-  const offer = this.delivererOfferMap[deliverer]
-  const request = new UpdateOfferLocationRequest.Builder(deliverer).withOfferId(offer.code).build()
-  await this.send(request)
-})
-
-When('Deliverer {string} updates offer location to {string}, {string}', async function(
-  deliverer,
-  latitude,
-  longitude,
-) {
-  const offer = this.delivererOfferMap[deliverer]
-  const request = new UpdateOfferLocationRequest.Builder(deliverer)
-    .withOfferId(offer.code)
-    .withLocationLatitude(latitude)
-    .withLocationLongitude(longitude)
-    .build()
-  await this.send(request)
-})
-
 When('Deliverer {string} deletes the last published offer', async function(deliverer) {
   const request = new DeleteOfferRequest.Builder(deliverer)
     .withOfferId(this.lastResponse.data.code)
     .build()
   await this.send(request)
 })
-
 
 Then(
   'the offer location for product {string} should be updated to {string}, {string}',
