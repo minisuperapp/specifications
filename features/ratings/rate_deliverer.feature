@@ -5,7 +5,7 @@ Feature: Rate Deliverer
     And Customer sends request to set location to '28.1867348', '-105.4608849'
     And Customer adds a home location
     And Deliverer 'D1' registers and logs in
-    And Deliverer 'D1' sends request to set location to '28.1867348', '-105.4608849', '50'
+    And Deliverer 'D1' sends request to set location to '28.1867348', '-105.4608849'
     And Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz'
     And Customer sends request to get offers for product 'tortillas_de_maiz'
     And Customer places an order using offer from deliverer 'D1'

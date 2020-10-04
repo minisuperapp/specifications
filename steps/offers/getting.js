@@ -10,18 +10,11 @@ Given('Customer sends request to get offers grouped by product', async function 
   await this.send(request)
 })
 
-When('Customer sends request to get offers for product {string}', async function (product_code) {
-  const request = new OffersListRequest.Builder().withProductCode(product_code).build()
-  await this.send(request)
-})
-
 When(
-  'Customer sends request to get offers for product {string} with location {string}, {string}',
-  async function (product_code, latitude, longitude) {
+  'Customer sends request to get offers for product {string}',
+  async function (product_code) {
     const request = new OffersListRequest.Builder()
       .withProductCode(product_code)
-      .withCustomerLocationLatitude(latitude)
-      .withCustomerLocationLongitude(longitude)
       .build()
     await this.send(request)
   },

@@ -20,7 +20,7 @@ class CustomerSetLocationRequest extends Base {
         this.deliverer = deliverer
         this.latitude = ''
         this.longitude = ''
-        this.delivery_radius = ''
+        this.delivery_radius = 500
         this.zoom = 10
       }
       withLatitude(latitude) {

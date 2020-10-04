@@ -2,7 +2,7 @@ Feature: Publish An Offer
 
   Background:
     Given Deliverer 'D1' registers and logs in
-    And Deliverer 'D1' sends request to set location to '28.1867348', '-105.4608849', '50'
+    And Deliverer 'D1' sends request to set location to '28.1867348', '-105.4608849'
     And Customer access the application
     And Customer sends request to set location to '28.1867348', '-105.4608849'
 

@@ -40,18 +40,6 @@ class PublishOfferRequest extends Base {
         this.availableQuantity = availableQuantity
         return this
       }
-      withDelivererLocationLatitude(locationLatitude) {
-        this.locationLatitude = locationLatitude
-        return this
-      }
-      withDelivererLocationLongitude(locationLongitude) {
-        this.locationLongitude = locationLongitude
-        return this
-      }
-      withDeliveryRadius(deliveryRadius) {
-        this.deliveryRadius = deliveryRadius
-        return this
-      }
       withUnitPrice(unitPrice) {
         this.unitPrice = unitPrice
         return this

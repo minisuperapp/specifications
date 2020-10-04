@@ -5,8 +5,6 @@ class Request extends Base {
     super()
     this.product_code = build.product_code
     this.quantity = build.quantity
-    this.customerLocationLatitude = build.customerLocationLatitude
-    this.customerLocationLongitude = build.customerLocationLongitude
   }
   get method() {
     return 'POST'
@@ -18,10 +16,6 @@ class Request extends Base {
     return {
       product_code: this.product_code,
       quantity: this.quantity,
-      location: {
-        latitude: this.customerLocationLatitude,
-        longitude: this.customerLocationLongitude,
-      },
     }
   }
   static get Builder() {
@@ -29,8 +23,6 @@ class Request extends Base {
       constructor() {
         this.product_code = 'tortillas_de_maiz'
         this.quantity = '1'
-        this.customerLocationLatitude = '28.1867348'
-        this.customerLocationLongitude = '-105.4608849'
       }
       withProductCode(product_code) {
         this.product_code = product_code
@@ -38,14 +30,6 @@ class Request extends Base {
       }
       withQuantity(quantity) {
         this.quantity = quantity
-        return this
-      }
-      withCustomerLocationLatitude(customerLocationLatitude) {
-        this.customerLocationLatitude = customerLocationLatitude
-        return this
-      }
-      withCustomerLocationLongitude(customerLocationLongitude) {
-        this.customerLocationLongitude = customerLocationLongitude
         return this
       }
       build() {
