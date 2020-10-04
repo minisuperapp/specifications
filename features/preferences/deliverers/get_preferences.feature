@@ -7,5 +7,4 @@ Feature: Get Preferences
     When Deliverer 'D1' sends request to get preferences
     Then Deliverer should receive preferences with these keys and values
       |key|value|
-      |ask.location.before.publishing.offer|true|
       |available|true|
