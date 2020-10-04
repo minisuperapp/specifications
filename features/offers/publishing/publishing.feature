@@ -32,5 +32,6 @@ Feature: Publish An Offer
     Given Customer sends request to set location to '28.1867348', '-105.4608849'
     And Customer sends request to get offers grouped by product
     And Customer subscribes to get offers updates with location '28.1867348', '-105.4608849'
-    When Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz' with location '28.1924005', '-105.39' and delivery radius of 1000 M
+    Given Deliverer 'D1' sends request to set location to '28.1924005', '-105.39' and delivery radius of 1000 M
+    When Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz'
     Then Customer should see zero offers for product 'tortillas_de_maiz'
