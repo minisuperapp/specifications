@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/WeGoFoods/specifications/issues#readme",
   "dependencies": {
+    "aws-sdk": "^2.807.0",
     "bluebird": "^3.5.1",
     "chai": "^4.1.2",
     "cookie": "^0.3.1",

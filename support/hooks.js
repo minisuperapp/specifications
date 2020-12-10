@@ -14,6 +14,15 @@ const redisClient = redis.createClient(config.redis_host, {
   retryMaxDelay: 15 * 1000,
   noDelay: true,
 })
+const AWS = require('aws-sdk')
+
+AWS.config.update({
+  region: 'localhost',
+  accessKeyId: 'xxxx',
+  secretAccessKey: 'xxxx',
+  endpoint: 'http://localhost:8042',
+})
+const docClient = new AWS.DynamoDB.DocumentClient()
 
 Before(async function (testCase) {
   this.knex = knex
@@ -54,6 +63,22 @@ async function truncate_tables() {
     product_wishes,
     deliverer_preferences CASCADE`,
   )
+  await truncate_dynamoDB_table('offers')
+}
+
+async function truncate_dynamoDB_table(table_name) {
+  const data = await docClient.scan({ TableName: table_name }).promise()
+  await Bluebird.each(data.Items, async offer => {
+    await docClient
+      .delete({
+        TableName: table_name,
+        Key: {
+          id: offer.id,
+          product_id: offer.product_id,
+        },
+      })
+      .promise()
+  })
 }
 
 AfterAll(async function () {
