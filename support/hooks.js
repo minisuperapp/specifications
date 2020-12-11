@@ -18,8 +18,6 @@ const AWS = require('aws-sdk')
 
 AWS.config.update({
   region: 'localhost',
-  accessKeyId: 'xxxx',
-  secretAccessKey: 'xxxx',
   endpoint: 'http://localhost:8042',
 })
 const docClient = new AWS.DynamoDB.DocumentClient()
