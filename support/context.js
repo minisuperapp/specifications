@@ -1,4 +1,4 @@
-const { setWorldConstructor } = require('cucumber')
+const { setWorldConstructor, setDefaultTimeout } = require('cucumber')
 const apiRequester = require('./web/api_requester')
 const DelivererLoginRequest = require('./web/requests/deliverer-api/login')
 const PublishOfferRequest = require('./web/requests/deliverer-api/offers/publish')
@@ -8,6 +8,8 @@ const CustomerAddAddressRequest = require('./web/requests/customer-api/add_addre
 const PlaceOrderRequest = require('./web/requests/customer-api/place_order')
 const customerSocket = require('./web/sockets/customer_socket_client')
 const delivererSocket = require('./web/sockets/deliverer_socket_client')
+
+setDefaultTimeout(30000)
 
 class Context {
   constructor(params) {

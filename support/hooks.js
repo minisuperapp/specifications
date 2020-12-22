@@ -71,8 +71,8 @@ async function truncate_dynamoDB_table(table_name) {
       .delete({
         TableName: table_name,
         Key: {
-          id: offer.id,
-          product_id: offer.product_id,
+          hashKey: offer.hashKey,
+          rangeKey: offer.rangeKey,
         },
       })
       .promise()
