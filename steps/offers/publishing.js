@@ -1,5 +1,5 @@
 const { Given, When } = require('cucumber')
-const PublishOfferRequest = require('support/web/requests/deliverer-api/offers/publish')
+const PublishOfferRequest = require('support/web/requests/sam-api/deliverer/offers/publish')
 
 Given(
   'Deliverer {string} publishes a new offer for product {string} with price {string}',

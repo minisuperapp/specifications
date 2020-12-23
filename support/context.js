@@ -1,6 +1,6 @@
 const { setWorldConstructor, setDefaultTimeout } = require('cucumber')
 const apiRequester = require('./web/api_requester')
-const DelivererLoginRequest = require('./web/requests/sam-api/login')
+const DelivererLoginRequest = require('./web/requests/sam-api/deliverer/login')
 const PublishOfferRequest = require('./web/requests/deliverer-api/offers/publish')
 const OffersGroupedByProductRequest = require('./web/requests/customer-api/offers/search_for_all_products')
 const BestOfferAssigmentRequest = require('./web/requests/customer-api/offers/assign_best')
