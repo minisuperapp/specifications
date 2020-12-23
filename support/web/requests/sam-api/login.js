@@ -10,7 +10,7 @@ class DelivererLoginRequest extends Base {
     return 'POST'
   }
   get path() {
-    return '/auth/login'
+    return 'deliverer/auth/login'
   }
   get payload() {
     return {
