@@ -1,6 +1,7 @@
 const _ = require('lodash')
 const { Given, When } = require('cucumber')
-const DelivererLoginRequest = require('support/web/requests/sam-api/deliverer/login')
+// const DelivererLoginRequest = require('support/web/requests/sam-api/deliverer/login')
+const DelivererLoginRequest = require('support/web/requests/deliverer-api/login')
 const DelivererLogoutRequest = require('support/web/requests/deliverer-api/logout')
 const DelivererRegistrationRequest = require('support/web/requests/deliverer-api/registration')
 
