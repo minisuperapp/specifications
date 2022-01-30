@@ -54,7 +54,7 @@ Then('the order should be for product {string}', function (product_code) {
 Then('the order should have quantity {string}', function (quantity) {
   const first_order_id = Object.keys(this.lastResponse.data.orders)[0]
   const orders = this.lastResponse.data.orders[first_order_id]
-  expect(orders[0].product_quantity).to.equal(quantity)
+  expect(Math.trunc(orders[0].product_quantity)).to.equal(Math.trunc(quantity))
 })
 
 Then('the order should have customer location {string}, {string}', function (
