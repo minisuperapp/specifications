@@ -9,6 +9,7 @@ const CustomerAddAddressRequest = require('./web/requests/customer-api/add_addre
 const PlaceOrderRequest = require('./web/requests/customer-api/place_order')
 const customerSocket = require('./web/sockets/customer_socket_client')
 const delivererSocket = require('./web/sockets/deliverer_socket_client')
+const ApiFunctionRequest = require('./web/requests/$api_function_request')
 
 setDefaultTimeout(30000)
 
@@ -104,11 +105,12 @@ class Context {
   async send(request) {
     this._logRequestInfo(request)
 
-    this.lastResponse = await apiRequester.send(
+    const response = await apiRequester.send(
       request,
       this.customer_session_token,
       this.delivererSessionTokens[request.deliverer],
     )
+    this.lastResponse = request instanceof ApiFunctionRequest ? response.body : response
 
     this._logResponseInfo(this.lastResponse)
 
