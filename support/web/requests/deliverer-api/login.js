@@ -1,6 +1,6 @@
-const Base = require('./$base')
+const ApiFunctionRequest = require('../$api_function_request')
 
-class DelivererLoginRequest extends Base {
+class DelivererLoginRequest extends ApiFunctionRequest {
   constructor(build) {
     super(build.deliverer)
     this.email = build.email
@@ -10,7 +10,7 @@ class DelivererLoginRequest extends Base {
     return 'POST'
   }
   get path() {
-    return 'login'
+    return 'deliverer/auth/login'
   }
   get payload() {
     return {
