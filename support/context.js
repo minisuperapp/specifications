@@ -9,7 +9,6 @@ const CustomerAddAddressRequest = require('./web/requests/customer-api/add_addre
 const PlaceOrderRequest = require('./web/requests/customer-api/place_order')
 const customerSocket = require('./web/sockets/customer_socket_client')
 const delivererSocket = require('./web/sockets/deliverer_socket_client')
-const ApiFunctionRequest = require('./web/requests/$api_function_request')
 
 setDefaultTimeout(30000)
 

@@ -1,5 +1,6 @@
 require('isomorphic-fetch')
 const cookie = require('cookie')
+const ApiFunctionRequest = require('../web/requests/$api_function_request')
 
 const api_requester = {}
 
@@ -30,9 +31,11 @@ api_requester.send = async (request, customer_session_token, deliverer_session_t
       responseText,
       'deliverer_session_token',
     )
+    const parsedResponse = JSON.parse(responseText)
+    const body = request instanceof ApiFunctionRequest ? parsedResponse.body : parsedResponse
 
     return Promise.resolve({
-      ...JSON.parse(responseText).body,
+      ...body,
       cookies: {
         customerSessionToken,
         delivererSessionToken,
