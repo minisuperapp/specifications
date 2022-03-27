@@ -1,6 +1,7 @@
 const Base = require('./$base')
+const ApiFunctionRequest = require('../$api_function_request')
 
-class DelivererLogoutRequest extends Base {
+class DelivererLogoutRequest extends ApiFunctionRequest {
   constructor(build) {
     super(build.deliverer)
   }
@@ -8,7 +9,7 @@ class DelivererLogoutRequest extends Base {
     return 'POST'
   }
   get path() {
-    return 'logout'
+    return 'deliverer/auth/logout'
   }
   get payload() {
     return {}
