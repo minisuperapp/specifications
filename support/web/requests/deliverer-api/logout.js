@@ -1,4 +1,3 @@
-const Base = require('./$base')
 const ApiFunctionRequest = require('../$api_function_request')
 
 class DelivererLogoutRequest extends ApiFunctionRequest {
