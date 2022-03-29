@@ -1,3 +1,4 @@
+const AWS = require('aws-sdk')
 const { setWorldConstructor, setDefaultTimeout } = require('cucumber')
 const apiRequester = require('./web/api_requester')
 // const DelivererLoginRequest = require('./web/requests/sam-api/deliverer/login')
@@ -9,6 +10,9 @@ const CustomerAddAddressRequest = require('./web/requests/customer-api/add_addre
 const PlaceOrderRequest = require('./web/requests/customer-api/place_order')
 const customerSocket = require('./web/sockets/customer_socket_client')
 const delivererSocket = require('./web/sockets/deliverer_socket_client')
+
+const sqs = new AWS.SQS({ endpoint: 'http://localhost:4566', region: 'us-west-2' })
+const sns = new AWS.SNS({ endpoint: 'http://localhost:4566', region: 'us-west-2' })
 
 setDefaultTimeout(30000)
 
@@ -43,6 +47,10 @@ class Context {
     }
     this.socketLocks = this.initSocketLocks
     this.socketExceptions = []
+
+    this.subscriptionArns = {
+      offerUpdate: '',
+    }
   }
 
   _setCustomerSocketListeners(socket) {
@@ -121,11 +129,47 @@ class Context {
     return this.lastResponse
   }
 
+  //deprecated
   createCustomerSocket() {
     const socket = customerSocket.create(this.customer_session_token)
     this.customerSockets.push(socket)
     this._setCustomerSocketListeners(socket)
     return socket
+  }
+
+  async subscribeToTopic() {
+    const { SubscriptionArn } = await sns
+      .subscribe({
+        TopicArn: 'arn:aws:sns:us-west-2:000000000000:local_sns',
+        Protocol: 'sqs',
+        Endpoint: 'http://localstack:4576/queue/local_queue',
+      })
+      .promise()
+    this.subscriptionArns.offerUpdate = SubscriptionArn
+  }
+
+  async unsubscribeToTopic() {
+    await sns
+      .unsubscribe({
+        SubscriptionArn: this.subscriptionArns.offerUpdate,
+      })
+      .promise()
+  }
+
+  async listenToOfferUpdates() {
+    const { QueueUrl } = await sqs.getQueueUrl({ QueueName: 'local_queue' }).promise()
+    await sqs.receiveMessage({ QueueUrl }, async (err, data) => {
+      if (err) {
+        console.log(err, err.stack)
+        return
+      }
+      if (data.Messages) {
+        const message = JSON.parse(data.Messages[0].Body)
+        const offer = JSON.parse(message.Message)
+        this.setCustomerOfferByProduct(offer)
+      }
+      await sqs.purgeQueue({ QueueUrl }).promise()
+    })
   }
 
   createDelivererSocket(deliverer, deliverer_session_token) {

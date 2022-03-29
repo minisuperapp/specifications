@@ -3,27 +3,14 @@ const { Given, When, Then } = require('cucumber')
 const { expect } = require('chai')
 const DeleteOfferRequest = require('support/web/requests/deliverer-api/offers/delete')
 
-const sqs = new AWS.SQS({ endpoint: 'http://localhost:4566', region: 'us-west-2' })
-
 Given('Customer subscribes to get offers updates', async function () {
   //deprecated
   const socket = this.createCustomerSocket()
   socket.emit('subscribe_for_offers_updates')
 
   // SQS
-  const { QueueUrl } = await sqs.getQueueUrl({ QueueName: 'local_queue' }).promise()
-  await sqs.receiveMessage({ QueueUrl }, async (err, data) => {
-    if (err) {
-      console.log(err, err.stack)
-      return
-    }
-    if (data.Messages) {
-      const message = JSON.parse(data.Messages[0].Body)
-      const offer = JSON.parse(message.Message)
-      this.setCustomerOfferByProduct(offer)
-    }
-    await sqs.purgeQueue({ QueueUrl }).promise()
-  })
+  await this.subscribeToTopic()
+  await this.listenToOfferUpdates()
 
   await this.sleep(300)
 })

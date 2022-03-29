@@ -1,7 +1,10 @@
+const AWS = require('aws-sdk')
 const { Given, When } = require('cucumber')
 const UpdateOrderToInTransitRequest = require('support/web/requests/deliverer-api/orders/update_to_in_transit')
 const UpdateOrderToArrivedRequest = require('support/web/requests/deliverer-api/orders/update_to_arrived')
 const UpdateOrderToDeliveredRequest = require('support/web/requests/deliverer-api/orders/update_to_delivered')
+
+const sns = new AWS.SNS({ endpoint: 'http://localhost:4566', region: 'us-west-2' })
 
 When('Deliverer {string} updates last placed order to -in transit-', async function (deliverer) {
   const order_id = this.lastPlacedOrders[0].id
@@ -29,7 +32,13 @@ Given('Customer subscribes to get order updates', async function () {
 
 Given('Customer disconnects subscription for updates', async function () {
   await this.sleep(200)
+
+  //deprecated
   const lastCustomerSocket = this.customerSockets[this.customerSockets.length - 1]
   lastCustomerSocket.disconnect()
+
+  // SQS
+  await this.unsubscribeToTopic()
+
   await this.sleep(200)
 })
