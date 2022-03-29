@@ -1,4 +1,3 @@
-const AWS = require('aws-sdk')
 const { Given, When, Then } = require('cucumber')
 const { expect } = require('chai')
 const DeleteOfferRequest = require('support/web/requests/deliverer-api/offers/delete')
@@ -8,7 +7,7 @@ Given('Customer subscribes to get offers updates', async function () {
   const socket = this.createCustomerSocket()
   socket.emit('subscribe_for_offers_updates')
 
-  // SQS
+  // AWS
   await this.subscribeToTopic()
   await this.listenToOfferUpdates()
 
