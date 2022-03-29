@@ -48,14 +48,7 @@ class Context {
   _setCustomerSocketListeners(socket) {
     socket.on('published_offer', offer => {
       this._logSocketMessage('customer-api', 'published_offer', offer)
-      if (!this.state.customer.offersByProduct[offer.product_code]) {
-        this.state.customer.offersByProduct[offer.product_code] = {}
-        this.state.customer.offersByProduct[offer.product_code].offers = []
-      }
-      this.state.customer.offersByProduct[offer.product_code].offers.push(offer)
-      this.state.customer.offersById[offer.id] = {
-        [offer.id]: offer,
-      }
+      this.setCustomerOfferByProduct(offer)
     })
     socket.on('update_offer_location', async offer => {
       this._logSocketMessage('customer-api', 'update_offer_location', offer)
@@ -81,6 +74,17 @@ class Context {
       this._logSocketMessage('customer-api', 'warning', { message })
       this.socketExceptions.push(message)
     })
+  }
+
+  setCustomerOfferByProduct(offer) {
+    if (!this.state.customer.offersByProduct[offer.product_code]) {
+      this.state.customer.offersByProduct[offer.product_code] = {}
+      this.state.customer.offersByProduct[offer.product_code].offers = []
+    }
+    this.state.customer.offersByProduct[offer.product_code].offers.push(offer)
+    this.state.customer.offersById[offer.id] = {
+      [offer.id]: offer,
+    }
   }
 
   _setDelivererSocketListeners(socket, deliverer) {
@@ -192,9 +196,8 @@ ${JSON.stringify(data)}`,
     }
 
     if (request instanceof DelivererLoginRequest && this.lastResponse.success) {
-      this.delivererSessionTokens[
-        request.deliverer
-      ] = this.lastResponse.cookies.delivererSessionToken
+      this.delivererSessionTokens[request.deliverer] =
+        this.lastResponse.cookies.delivererSessionToken
     }
 
     if (request instanceof PublishOfferRequest && this.lastResponse.success) {
