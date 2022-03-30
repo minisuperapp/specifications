@@ -3,14 +3,7 @@ const { expect } = require('chai')
 const DeleteOfferRequest = require('support/web/requests/deliverer-api/offers/delete')
 
 Given('Customer subscribes to get offers updates', async function () {
-  //deprecated
-  const socket = this.createCustomerSocket()
-  socket.emit('subscribe_for_offers_updates')
-
-  // AWS
   await this.subscribeToTopic()
-
-  await this.sleep(300)
 })
 
 Given(

@@ -28,14 +28,5 @@ Given('Customer subscribes to get order updates', async function () {
 })
 
 Given('Customer disconnects subscription for updates', async function () {
-  await this.sleep(200)
-
-  //deprecated
-  const lastCustomerSocket = this.customerSockets[this.customerSockets.length - 1]
-  lastCustomerSocket.disconnect()
-
-  // AWS
   await this.unsubscribeFromTopic()
-
-  await this.sleep(200)
 })
