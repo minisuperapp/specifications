@@ -9,7 +9,6 @@ Given('Customer subscribes to get offers updates', async function () {
 
   // AWS
   await this.subscribeToTopic()
-  await this.listenToOfferUpdates()
 
   await this.sleep(300)
 })

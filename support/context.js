@@ -148,7 +148,7 @@ class Context {
     this.subscriptionArns.offerUpdate = SubscriptionArn
   }
 
-  async unsubscribeToTopic() {
+  async unsubscribeFromTopic() {
     await sns
       .unsubscribe({
         SubscriptionArn: this.subscriptionArns.offerUpdate,
@@ -156,20 +156,22 @@ class Context {
       .promise()
   }
 
-  async listenToOfferUpdates() {
+  async purgeSQS() {
     const { QueueUrl } = await sqs.getQueueUrl({ QueueName: 'local_queue' }).promise()
-    await sqs.receiveMessage({ QueueUrl }, async (err, data) => {
-      if (err) {
-        console.log(err, err.stack)
-        return
-      }
-      if (data.Messages) {
-        const message = JSON.parse(data.Messages[0].Body)
-        const offer = JSON.parse(message.Message)
-        this.setCustomerOfferByProduct(offer)
-      }
-      await sqs.purgeQueue({ QueueUrl }).promise()
-    })
+    await sqs.purgeQueue({ QueueUrl }).promise()
+  }
+
+  async pollOfferUpdates() {
+    const { QueueUrl } = await sqs.getQueueUrl({ QueueName: 'local_queue' }).promise()
+    const data = await sqs.receiveMessage({ QueueUrl }).promise()
+    if (data.Messages) {
+      const message = JSON.parse(data.Messages[0].Body)
+      const offer = JSON.parse(message.Message)
+      this.setCustomerOfferByProduct(offer)
+    }
+    for await (let m of data.Messages) {
+      await sqs.deleteMessage({ QueueUrl, ReceiptHandle: m.ReceiptHandle })
+    }
   }
 
   createDelivererSocket(deliverer, deliverer_session_token) {

@@ -35,7 +35,7 @@ Given('Customer disconnects subscription for updates', async function () {
   lastCustomerSocket.disconnect()
 
   // AWS
-  await this.unsubscribeToTopic()
+  await this.unsubscribeFromTopic()
 
   await this.sleep(200)
 })

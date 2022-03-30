@@ -42,6 +42,7 @@ After(async function (testCase) {
   this.socketExceptions = []
   this.socketLocks = this.initSocketLocks
   this.state = this.initState
+  await this.purgeSQS()
   await truncate_tables()
 })
 
