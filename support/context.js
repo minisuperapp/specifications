@@ -11,8 +11,8 @@ const PlaceOrderRequest = require('./web/requests/customer-api/place_order')
 const customerSocket = require('./web/sockets/customer_socket_client')
 const delivererSocket = require('./web/sockets/deliverer_socket_client')
 
-const sqs = new AWS.SQS({ endpoint: 'http://localhost:4566', region: 'us-west-2' })
-const sns = new AWS.SNS({ endpoint: 'http://localhost:4566', region: 'us-west-2' })
+const sqs = new AWS.SQS({ endpoint: 'http://localhost:4566', region: 'us-west-1' })
+const sns = new AWS.SNS({ endpoint: 'http://localhost:4566', region: 'us-west-1' })
 
 setDefaultTimeout(30000)
 
@@ -140,7 +140,7 @@ class Context {
   async subscribeToTopic() {
     const { SubscriptionArn } = await sns
       .subscribe({
-        TopicArn: 'arn:aws:sns:us-west-2:000000000000:local_sns',
+        TopicArn: 'arn:aws:sns:us-west-1:000000000000:local_sns',
         Protocol: 'sqs',
         Endpoint: 'http://localstack:4576/queue/local_queue',
       })
