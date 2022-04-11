@@ -1,7 +1,6 @@
-const Base = require('../$base')
-const config = require('config')
+const ApiFunctionRequest = require('../../$api_function_request')
 
-class OffersGroupedByProductRequest extends Base {
+class OffersGroupedByProductRequest extends ApiFunctionRequest {
   constructor(build) {
     super()
   }
@@ -9,7 +8,7 @@ class OffersGroupedByProductRequest extends Base {
     return 'POST'
   }
   get path() {
-    return 'offers/search_for_all_products'
+    return 'customer/offer/search_for_all_products'
   }
   get payload() {
     return {}
