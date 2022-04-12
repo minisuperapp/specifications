@@ -1,6 +1,6 @@
-const Base = require('./$base')
+const ApiFunctionRequest = require('../$api_function_request')
 
-class CustomerGetProfileRequest extends Base {
+class CustomerGetProfileRequest extends ApiFunctionRequest {
   constructor() {
     super()
   }
@@ -8,7 +8,7 @@ class CustomerGetProfileRequest extends Base {
     return 'POST'
   }
   get path() {
-    return 'get_profile'
+    return 'customer/auth/get_profile'
   }
   get payload() {
     return {}
