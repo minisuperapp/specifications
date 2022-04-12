@@ -233,11 +233,7 @@ ${JSON.stringify(data)}`,
   }
 
   _modifyLocalState(request) {
-    if (
-      request.apiServer === 'customer-api' &&
-      this.lastResponse.cookies &&
-      this.lastResponse.cookies.customerSessionToken
-    ) {
+    if (this.lastResponse.cookies && this.lastResponse.cookies.customerSessionToken) {
       this.customer_session_token = this.lastResponse.cookies.customerSessionToken
     }
 
