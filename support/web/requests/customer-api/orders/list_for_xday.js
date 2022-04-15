@@ -1,6 +1,6 @@
-const Base = require('../$base')
+const ApiFunctionRequest = require('../../$api_function_request')
 
-class Request extends Base {
+class Request extends ApiFunctionRequest {
   constructor(build) {
     super()
     this.xday = build.xday
@@ -10,7 +10,7 @@ class Request extends Base {
     return 'POST'
   }
   get path() {
-    return 'orders/list_for_xday'
+    return 'customer/order/list_for_xday'
   }
   get payload() {
     return {
