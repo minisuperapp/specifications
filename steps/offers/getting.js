@@ -147,7 +147,7 @@ Then('Customer should receive product {string} in first place', function (produc
   expect(this.lastResponse.data[0].code).to.equal(product_code)
 })
 
-Then('Customer should receive lowest unit price of {string} for product {string}', function (
+Then('Customer should receive lowest unit price of {float} for product {string}', function (
   estimatedPrice,
   product_code,
 ) {

@@ -13,7 +13,7 @@ Feature: Get Offers For All Products As Customer
     When Customer sends request to get offers grouped by product
     Then Customer should receive successful response
     And Customer should receive 1 offers for product 'tortillas_de_maiz'
-    And Customer should receive lowest unit price of '20.00' for product 'tortillas_de_maiz'
+    And Customer should receive lowest unit price of 20.00 for product 'tortillas_de_maiz'
     And Customer should receive estimated time of arrival between 0 and 120 for product 'tortillas_de_maiz'
     And Customer should receive zero offers for product 'RED_APPLE'
 
@@ -23,7 +23,7 @@ Feature: Get Offers For All Products As Customer
     When Customer sends request to get offers grouped by product
     Then Customer should receive successful response
     And Customer should receive 2 offers for product 'tortillas_de_maiz'
-    And Customer should receive lowest unit price of '19.99' for product 'tortillas_de_maiz'
+    And Customer should receive lowest unit price of 19.99 for product 'tortillas_de_maiz'
 
   Scenario: Get Only Offers Within Deliverer's Radius For One Product
     Given Deliverer 'D1' sends request to set location to '28.1867348', '-105.4608849'
@@ -34,7 +34,7 @@ Feature: Get Offers For All Products As Customer
     When Customer sends request to get offers grouped by product
     Then Customer should receive successful response
     And Customer should receive 1 offers for product 'tortillas_de_maiz'
-    And Customer should receive lowest unit price of '20.00' for product 'tortillas_de_maiz'
+    And Customer should receive lowest unit price of 20.00 for product 'tortillas_de_maiz'
 
   Scenario: Get Only Offers From Available Deliverers
     Given Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz' with price '20.00'
@@ -45,7 +45,7 @@ Feature: Get Offers For All Products As Customer
     When Customer sends request to get offers grouped by product
     Then Customer should receive successful response
     And Customer should receive 1 offers for product 'tortillas_de_maiz'
-    And Customer should receive lowest unit price of '20.00' for product 'tortillas_de_maiz'
+    And Customer should receive lowest unit price of 20.00 for product 'tortillas_de_maiz'
 
   Scenario: Get Offers From Deliverer That Just Got Available
     Given Deliverer 'D1' publishes a new offer for product 'tortillas_de_maiz' with price '20.00'
@@ -59,4 +59,4 @@ Feature: Get Offers For All Products As Customer
     When Customer sends request to get offers grouped by product
     Then Customer should receive successful response
     And Customer should receive 2 offers for product 'tortillas_de_maiz'
-    And Customer should receive lowest unit price of '19.99' for product 'tortillas_de_maiz'
+    And Customer should receive lowest unit price of 19.99 for product 'tortillas_de_maiz'
