@@ -1,6 +1,6 @@
-const Base = require('./$base')
+const ApiFunctionRequest = require('../$api_function_request')
 
-class CustomerAddProductWishRequest extends Base {
+class CustomerAddProductWishRequest extends ApiFunctionRequest {
   constructor(build) {
     super()
     this.input = build
@@ -9,7 +9,7 @@ class CustomerAddProductWishRequest extends Base {
     return 'POST'
   }
   get path() {
-    return 'product_wish/add'
+    return 'customer/product_wish/add'
   }
   get payload() {
     return this.input

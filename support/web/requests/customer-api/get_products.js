@@ -8,7 +8,7 @@ class GetProductsRequest extends ApiFunctionRequest {
     return 'POST'
   }
   get path() {
-    return 'customer/products/get_all'
+    return 'customer/product/get_all'
   }
   get payload() {
     return {}
