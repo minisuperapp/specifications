@@ -3,7 +3,7 @@ const { expect } = require('chai')
 const DeleteOfferRequest = require('support/web/requests/deliverer-api/offers/delete')
 
 Given('Customer subscribes to get offers updates', async function () {
-  await this.subscribeToTopic()
+  await this.subscribeClientToTopic('published_offer')
 })
 
 Given(

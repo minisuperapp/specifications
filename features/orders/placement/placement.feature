@@ -19,8 +19,8 @@ Feature: Order Placement
       |D2       |2       |
     Then Customer should receive successful response
     And Customer should receive 2 orders
-    And Customer should receive an order with total '37'
-    And Customer should receive an order with total '21'
+    And Customer should receive an order with total 37.00
+    And Customer should receive an order with total 21.00
     And Customer should receive orders with status 'PLACED'
 
   Scenario: Place An Order Reduces Availability

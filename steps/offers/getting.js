@@ -116,7 +116,7 @@ Then('Customer should receive zero offers for product {string}', function (produ
 })
 
 Then('Customer should see one offer for product {string}', async function (product_code) {
-  await this.pollOfferUpdates()
+  await this.pollPublishedOffers()
   expect(this.state.customer.offersByProduct[product_code]).not.to.be.undefined
   expect(this.state.customer.offersByProduct[product_code].offers).not.to.be.undefined
   expect(this.state.customer.offersByProduct[product_code].offers.length).to.equal(1)

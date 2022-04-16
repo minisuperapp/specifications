@@ -1,4 +1,5 @@
 const AWS = require('aws-sdk')
+const Bluebird = require('bluebird')
 const { setWorldConstructor, setDefaultTimeout } = require('cucumber')
 const apiRequester = require('./web/api_requester')
 // const DelivererLoginRequest = require('./web/requests/sam-api/deliverer/login')
@@ -48,9 +49,8 @@ class Context {
     this.socketLocks = this.initSocketLocks
     this.socketExceptions = []
 
-    this.subscriptionArns = {
-      offerUpdate: '',
-    }
+    this.clientSubscriptions = {}
+    this.delivererSubscriptions = {}
   }
 
   _setCustomerSocketListeners(socket) {
@@ -95,6 +95,16 @@ class Context {
     }
   }
 
+  setPendingDelivery(deliverer, orders) {
+    if (!this.state.deliverer[deliverer]) {
+      this.state.deliverer[deliverer] = {}
+      this.state.deliverer[deliverer].pendingDeliveries = []
+    }
+    this.state.deliverer[deliverer].pendingDeliveries.push({
+      order: orders[0],
+    })
+  }
+
   _setDelivererSocketListeners(socket, deliverer) {
     socket.on('placed_order', data => {
       this._logSocketMessage('deliverer-api', 'placed_order', data)
@@ -137,41 +147,75 @@ class Context {
     return socket
   }
 
-  async subscribeToTopic() {
-    const { SubscriptionArn } = await sns
-      .subscribe({
-        TopicArn: 'arn:aws:sns:us-west-1:000000000000:local_sns',
-        Protocol: 'sqs',
-        Endpoint: 'http://localstack:4576/queue/local_queue',
-      })
-      .promise()
-    this.subscriptionArns.offerUpdate = SubscriptionArn
+  async subscribeDelivererToTopic(deliverer, topic) {
+    if (!this.delivererSubscriptions[deliverer]) {
+      this.delivererSubscriptions[deliverer] = {}
+    }
+    this.delivererSubscriptions[deliverer][topic] = await this.subscribeToTopic(topic)
   }
 
-  async unsubscribeFromTopic() {
+  async subscribeClientToTopic(topic) {
+    this.clientSubscriptions[topic] = await this.subscribeToTopic(topic)
+  }
+
+  async subscribeToTopic(topic) {
+    const { SubscriptionArn } = await sns
+      .subscribe({
+        TopicArn: `arn:aws:sns:us-west-1:000000000000:${topic}`,
+        Protocol: 'sqs',
+        Endpoint: `http://localstack:4576/queue/${topic}`,
+      })
+      .promise()
+    return SubscriptionArn
+  }
+
+  async unsubscribeClientFromTopic(topic) {
+    await this.unsubscribeFromTopic(this.clientSubscriptions[topic])
+  }
+
+  async unsubscribeDelivererFromTopic(deliverer, topic) {
+    await this.unsubscribeFromTopic(this.delivererSubscriptions[deliverer][topic])
+  }
+
+  async unsubscribeFromTopic(arn) {
     await sns
       .unsubscribe({
-        SubscriptionArn: this.subscriptionArns.offerUpdate,
+        SubscriptionArn: arn,
       })
       .promise()
   }
 
   async purgeSQS() {
-    const { QueueUrl } = await sqs.getQueueUrl({ QueueName: 'local_queue' }).promise()
-    await sqs.purgeQueue({ QueueUrl }).promise()
+    await Bluebird.each(['published_offer', 'placed_order'], async queueName => {
+      const { QueueUrl } = await sqs.getQueueUrl({ QueueName: queueName }).promise()
+      await sqs.purgeQueue({ QueueUrl }).promise()
+    })
   }
 
-  async pollOfferUpdates() {
-    const { QueueUrl } = await sqs.getQueueUrl({ QueueName: 'local_queue' }).promise()
+  async pollQueue(queueName) {
+    let message
+    const { QueueUrl } = await sqs.getQueueUrl({ QueueName: queueName }).promise()
     const data = await sqs.receiveMessage({ QueueUrl }).promise()
     if (data.Messages) {
-      const message = JSON.parse(data.Messages[0].Body)
-      const offer = JSON.parse(message.Message)
-      this.setCustomerOfferByProduct(offer)
+      const event = JSON.parse(data.Messages[0].Body)
+      message = event.Message
     }
     for await (let m of data.Messages) {
       await sqs.deleteMessage({ QueueUrl, ReceiptHandle: m.ReceiptHandle })
     }
+    return message
+  }
+
+  async pollPublishedOffers() {
+    const message = await this.pollQueue('published_offer')
+    const offer = JSON.parse(message)
+    this.setCustomerOfferByProduct(offer)
+  }
+
+  async pollPlacedOrders(deliverer) {
+    const message = await this.pollQueue('placed_order')
+    const { orders } = JSON.parse(message)
+    this.setPendingDelivery(deliverer, orders)
   }
 
   createDelivererSocket(deliverer, deliverer_session_token) {

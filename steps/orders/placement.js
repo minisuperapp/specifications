@@ -5,16 +5,13 @@ const { expect } = require('chai')
 Given('Deliverer {string} subscribes to get order placements notifications', async function (
   deliverer,
 ) {
-  const socket = this.createDelivererSocket(deliverer, this.delivererSessionTokens[deliverer])
-  socket.emit('subscribe_for_order_placements')
-  await this.sleep(500)
+  await this.subscribeDelivererToTopic(deliverer, 'placed_order')
 })
 
 Given('Deliverer {string} disconnects to get order placements notifications', async function (
   deliverer,
 ) {
-  await this.sleep(200)
-  this.delivererSockets[deliverer].disconnect()
+  await this.unsubscribeDelivererFromTopic(deliverer, 'placed_order')
 })
 
 Given(
@@ -83,8 +80,8 @@ Then('Customer should receive {int} orders with non empty id', function (orders_
   expect(this.lastResponse.orders.length).to.equal(orders_count)
 })
 
-Then('Customer should receive an order with total {string}', function (total) {
-  const found = this.lastResponse.orders.find(order => order.total === Number.parseFloat(total))
+Then('Customer should receive an order with total {float}', function (total) {
+  const found = this.lastResponse.orders.find(order => order.total === total)
   expect(found).not.to.be.undefined
 })
 
@@ -97,7 +94,7 @@ Then('Customer should receive orders with status {string}', function (orderStatu
 When(
   'Deliverer {string} should receive a pending delivery with last placed order id for product {string}',
   async function (deliverer, product) {
-    await this.awaitForSocket('placedOrder')
+    await this.pollPlacedOrders(deliverer)
     expect(this.state.deliverer[deliverer].pendingDeliveries[0]).not.to.be.undefined
     const order = this.state.deliverer[deliverer].pendingDeliveries[0].order
     expect(order).not.to.be.undefined
