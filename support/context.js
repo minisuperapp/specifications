@@ -170,7 +170,10 @@ class Context {
   }
 
   async unsubscribeClientFromTopic(topic) {
-    await this.unsubscribeFromTopic(this.clientSubscriptions[topic])
+    const arn = this.clientSubscriptions[topic]
+    if (arn) {
+      await this.unsubscribeFromTopic(this.clientSubscriptions[topic])
+    }
   }
 
   async unsubscribeDelivererFromTopic(deliverer, topic) {
