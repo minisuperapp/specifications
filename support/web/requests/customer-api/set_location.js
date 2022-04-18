@@ -1,6 +1,6 @@
-const Base = require('./$base')
+const ApiFunctionRequest = require('../$api_function_request')
 
-class CustomerSetLocationRequest extends Base {
+class CustomerSetLocationRequest extends ApiFunctionRequest {
   constructor(build) {
     super()
     this.input = build
@@ -9,7 +9,7 @@ class CustomerSetLocationRequest extends Base {
     return 'POST'
   }
   get path() {
-    return 'location/set_location'
+    return 'customer/location/set_location'
   }
   get payload() {
     return this.input
