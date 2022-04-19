@@ -1,6 +1,6 @@
-const Base = require('../$base')
+const ApiFunctionRequest = require('../../$api_function_request')
 
-class Request extends Base {
+class Request extends ApiFunctionRequest {
   constructor(build) {
     super(build.deliverer)
   }
@@ -10,7 +10,7 @@ class Request extends Base {
   }
 
   get path() {
-    return 'offers'
+    return 'deliverer/offer/my_offers'
   }
 
   get payload() {
