@@ -1,6 +1,6 @@
-const Base = require('../$base')
+const ApiFunctionRequest = require('../../$api_function_request')
 
-class DeleteOfferRequest extends Base {
+class DeleteOfferRequest extends ApiFunctionRequest {
   constructor(build) {
     super(build.deliverer)
     this.offerId = build.offerId
@@ -9,7 +9,7 @@ class DeleteOfferRequest extends Base {
     return 'POST'
   }
   get path() {
-    return 'offer/delete'
+    return 'deliverer/offer/delete'
   }
   get payload() {
     return {
