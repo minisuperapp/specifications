@@ -203,15 +203,16 @@ class Context {
   }
 
   async pollQueue(queueName) {
-    let message
+    let message = '{}'
     const { QueueUrl } = await sqs.getQueueUrl({ QueueName: queueName }).promise()
     const data = await sqs.receiveMessage({ QueueUrl }).promise()
     if (data.Messages) {
       const event = JSON.parse(data.Messages[0].Body)
       message = event.Message
-    }
-    for await (let m of data.Messages) {
-      await sqs.deleteMessage({ QueueUrl, ReceiptHandle: m.ReceiptHandle })
+
+      for await (let m of data.Messages) {
+        await sqs.deleteMessage({ QueueUrl, ReceiptHandle: m.ReceiptHandle })
+      }
     }
     return message
   }
