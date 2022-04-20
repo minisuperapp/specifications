@@ -193,10 +193,13 @@ class Context {
   }
 
   async purgeSQS() {
-    await Bluebird.each(['published_offer', 'placed_order'], async queueName => {
-      const { QueueUrl } = await sqs.getQueueUrl({ QueueName: queueName }).promise()
-      await sqs.purgeQueue({ QueueUrl }).promise()
-    })
+    await Bluebird.each(
+      ['published_offer', 'placed_order', 'update_order_status'],
+      async queueName => {
+        const { QueueUrl } = await sqs.getQueueUrl({ QueueName: queueName }).promise()
+        await sqs.purgeQueue({ QueueUrl }).promise()
+      },
+    )
   }
 
   async pollQueue(queueName) {

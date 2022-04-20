@@ -34,6 +34,7 @@ Given('Customer disconnects subscription for updates', async function () {
 
   // AWS
   await this.unsubscribeClientFromTopic('published_offer')
+  await this.unsubscribeClientFromTopic('update_order_status')
 
   await this.sleep(200)
 })
