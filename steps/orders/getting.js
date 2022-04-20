@@ -70,7 +70,8 @@ Then('the order should have customer location {string}, {string}', function (
 })
 
 Then('Customer should see order status as {string}', async function (orderStatus) {
-  await this.awaitForSocket('updateOrderStatus')
+  await this.pollUpdatedOrderStatus()
+  // await this.awaitForSocket('updateOrderStatus')
   expect(this.state.customer.orders[this.lastPlacedOrders[0].id].status).to.equal(orderStatus)
 })
 

@@ -67,14 +67,7 @@ class Context {
     })
     socket.on('update_order_status', async order => {
       this._logSocketMessage('customer-api', 'update_order_status', order)
-      const currentOrder = this.state.customer.orders[order.order_id]
-      this.state.customer.orders = {
-        ...this.state.customer.orders,
-        [order.order_id]: {
-          ...currentOrder,
-          status: order.status,
-        },
-      }
+      this.updateOrderStatus(order)
 
       this.socketLocks.updateOrderStatus--
     })
@@ -82,6 +75,17 @@ class Context {
       this._logSocketMessage('customer-api', 'warning', { message })
       this.socketExceptions.push(message)
     })
+  }
+
+  updateOrderStatus(order) {
+    const currentOrder = this.state.customer.orders[order.order_id]
+    this.state.customer.orders = {
+      ...this.state.customer.orders,
+      [order.order_id]: {
+        ...currentOrder,
+        status: order.status,
+      },
+    }
   }
 
   setCustomerOfferByProduct(offer) {
@@ -213,6 +217,12 @@ class Context {
     const message = await this.pollQueue('published_offer')
     const offer = JSON.parse(message)
     this.setCustomerOfferByProduct(offer)
+  }
+
+  async pollUpdatedOrderStatus() {
+    const message = await this.pollQueue('update_order_status')
+    const order = JSON.parse(message)
+    this.updateOrderStatus(order)
   }
 
   async pollPlacedOrders(deliverer) {
