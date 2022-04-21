@@ -1,6 +1,6 @@
-const Base = require('../$base')
+const ApiFunctionRequest = require('../../$api_function_request')
 
-class GetPreferencesRequest extends Base {
+class GetPreferencesRequest extends ApiFunctionRequest {
   constructor(build) {
     super(build.deliverer)
   }
@@ -8,7 +8,7 @@ class GetPreferencesRequest extends Base {
     return 'POST'
   }
   get path() {
-    return 'preferences'
+    return 'deliverer/preferences/get'
   }
   get payload() {
     return {
