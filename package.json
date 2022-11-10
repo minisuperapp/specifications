@@ -36,7 +36,7 @@
     "moment": "^2.22.1",
     "pg": "^8.0.3",
     "ramda": "^0.25.0",
-    "socket.io-client": "^2.1.1",
+    "socket.io-client": "^2.5.0",
     "thunk-redis": "^2.1.6"
   },
   "devDependencies": {
